@@ -23,3 +23,8 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+$this->call([
+    AcademicYearSeeder::class,
+]);
+
+use Database\Seeders\AcademicYearSeeder;
