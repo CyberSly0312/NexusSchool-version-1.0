@@ -54,4 +54,4 @@ New tenant creation is fully automated after successful subscription payment.
 - Better security
 - Easier backups
 - Independent scaling
-- Easier maintenance
+- Easier maintenance        
