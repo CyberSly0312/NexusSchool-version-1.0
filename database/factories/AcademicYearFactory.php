@@ -12,7 +12,7 @@ class AcademicYearFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => 1,
+            'school_id' => \App\Models\School::factory(),
             'name' => '2025-2026',
             'start_date' => '2025-10-01',
             'end_date' => '2026-07-31',
