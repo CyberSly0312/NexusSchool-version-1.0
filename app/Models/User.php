@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, \Illuminate\Database\Eloquent\Concerns\HasUlids, \Illuminate\Database\Eloquent\SoftDeletes, Notifiable;
 
     /**
      * The attributes that are mass assignable.

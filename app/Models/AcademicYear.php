@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AcademicYear extends Model
 {
-    use HasFactory;
+    use HasFactory, \Illuminate\Database\Eloquent\Concerns\HasUlids, \Illuminate\Database\Eloquent\SoftDeletes;
 
     protected $fillable = [
         'school_id',

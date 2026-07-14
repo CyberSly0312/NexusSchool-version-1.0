@@ -18,8 +18,8 @@ class SchoolFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->company() . ' School',
-            'domain' => $this->faker->unique()->domainWord() . '.localhost',
+            'name' => $this->faker->company().' School',
+            'domain' => $this->faker->unique()->domainWord().'.localhost',
             'status' => 'active',
         ];
     }

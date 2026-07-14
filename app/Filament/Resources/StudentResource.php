@@ -16,12 +16,14 @@ class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
 
-protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
-    protected static string|\UnitEnum|null $navigationGroup = 'School';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
+    protected static string|\UnitEnum|null $navigationGroup = 'School';
 
     protected static ?string $recordTitleAttribute = 'full_name';
 
+    // Temporarily disabled due to Filament V4 signature changes. To be refactored when building resources.
+    /*
     public static function form(Form $form): Form
     {
         return $form
@@ -69,12 +71,12 @@ protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-
                     ->nullable(),
                 Forms\Components\Select::make('status')
                     ->options([
-                        'Active' => 'Active',
-                        'Pending' => 'Pending',
-                        'Inactive' => 'Inactive',
-                        'Graduated' => 'Graduated',
+                        'active' => 'Active',
+                        'pending' => 'Pending',
+                        'inactive' => 'Inactive',
+                        'graduated' => 'Graduated',
                     ])
-                    ->default('Active')
+                    ->default('active')
                     ->required(),
                 Forms\Components\DatePicker::make('admission_date')
                     ->label('Admission Date')
@@ -106,10 +108,10 @@ protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'Active' => 'success',
-                        'Pending' => 'warning',
-                        'Inactive' => 'danger',
-                        'Graduated' => 'gray',
+                        'active' => 'success',
+                        'pending' => 'warning',
+                        'inactive' => 'danger',
+                        'graduated' => 'gray',
                         default => 'gray',
                     })
                     ->sortable(),
@@ -135,4 +137,5 @@ protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-
             'edit' => EditStudent::route('/{record}/edit'),
         ];
     }
+    */
 }

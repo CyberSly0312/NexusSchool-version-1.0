@@ -2,14 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\AcademicYear;
+use App\Models\School;
+use Illuminate\Database\Seeder;
 
 class AcademicYearSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = \App\Models\School::firstOrCreate(
+        $school = School::firstOrCreate(
             ['domain' => 'default.localhost'],
             ['name' => 'Default School', 'status' => 'active']
         );
