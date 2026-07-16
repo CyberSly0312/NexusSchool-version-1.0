@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Domains\Role\DTOs;
+
+readonly class RoleData
+{
+    public function __construct(
+        public string $name,
+        public ?string $guardName = 'web',
+    ) {}
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            name: $data['name'],
+            guardName: $data['guard_name'] ?? 'web',
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'guard_name' => $this->guardName,
+        ];
+    }
+}

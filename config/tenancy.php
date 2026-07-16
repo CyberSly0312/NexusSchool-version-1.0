@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\School;
+use App\Domains\School\Models\School;
 use Stancl\Tenancy\Bootstrappers\CacheTenancyBootstrapper;
 use Stancl\Tenancy\Bootstrappers\DatabaseTenancyBootstrapper;
 use Stancl\Tenancy\Bootstrappers\FilesystemTenancyBootstrapper;
