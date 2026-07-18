@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Classroom\Listeners;
 
 use App\Domains\Classroom\Events\ClassroomArchived;

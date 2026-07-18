@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Role\DTOs;
 
 readonly class RoleData
@@ -7,7 +9,8 @@ readonly class RoleData
     public function __construct(
         public string $name,
         public ?string $guardName = 'web',
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

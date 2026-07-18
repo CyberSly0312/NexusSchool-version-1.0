@@ -4,11 +4,11 @@ namespace Database\Factories;
 
 use App\Domains\Gradebook\Enums\AssessmentResultStatus;
 use App\Domains\Gradebook\Enums\LetterGrade;
+use App\Domains\School\Models\School;
 use App\Models\AcademicTerm;
 use App\Models\AcademicYear;
 use App\Models\Assessment;
 use App\Models\AssessmentResult;
-use App\Domains\School\Models\School;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,10 +30,10 @@ class AssessmentResultFactory extends Factory
             'student_id' => Student::factory(),
             'student_enrollment_id' => null,
             'assessment_id' => Assessment::factory(),
-            'subject_id' => fn(array $attrs) => Assessment::find($attrs['assessment_id'])?->subject_id ?? Subject::factory(),
+            'subject_id' => fn (array $attrs) => Assessment::find($attrs['assessment_id'])?->subject_id ?? Subject::factory(),
             'user_id' => null,
-            'academic_year_id' => fn(array $attrs) => Assessment::find($attrs['assessment_id'])?->academic_year_id ?? AcademicYear::factory(),
-            'academic_term_id' => fn(array $attrs) => Assessment::find($attrs['assessment_id'])?->academic_term_id ?? AcademicTerm::factory(),
+            'academic_year_id' => fn (array $attrs) => Assessment::find($attrs['assessment_id'])?->academic_year_id ?? AcademicYear::factory(),
+            'academic_term_id' => fn (array $attrs) => Assessment::find($attrs['assessment_id'])?->academic_term_id ?? AcademicTerm::factory(),
             'raw_score' => $rawScore,
             'adjusted_score' => null,
             'maximum_score' => $maximumScore,
@@ -54,14 +54,14 @@ class AssessmentResultFactory extends Factory
 
     public function forSchool(mixed $school): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'school_id' => $school instanceof School ? $school->id : $school,
         ]);
     }
 
     public function absent(): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'raw_score' => 0,
             'adjusted_score' => null,
             'percentage' => 0,
@@ -74,7 +74,7 @@ class AssessmentResultFactory extends Factory
 
     public function status(AssessmentResultStatus $status): static
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'status' => $status->value,
             'is_published' => $status === AssessmentResultStatus::Published,
             'is_locked' => $status === AssessmentResultStatus::Locked,

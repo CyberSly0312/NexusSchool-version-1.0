@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicYear\Enums;
 
+use App\Domains\Shared\Enums\DraftActiveArchivedStatus;
+
+// This enum delegates to the shared DraftActiveArchivedStatus enum.
+// Use App\Domains\Shared\Enums\DraftActiveArchivedStatus in new code.
 enum AcademicYearStatus: string
 {
     case Draft = 'draft';
@@ -10,19 +16,11 @@ enum AcademicYearStatus: string
 
     public function label(): string
     {
-        return match ($this) {
-            self::Draft => 'Draft',
-            self::Active => 'Active',
-            self::Archived => 'Archived',
-        };
+        return DraftActiveArchivedStatus::from($this->value)->label();
     }
 
     public function color(): string
     {
-        return match ($this) {
-            self::Draft => 'gray',
-            self::Active => 'success',
-            self::Archived => 'danger',
-        };
+        return DraftActiveArchivedStatus::from($this->value)->color();
     }
 }

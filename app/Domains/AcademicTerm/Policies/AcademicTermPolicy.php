@@ -1,47 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicTerm\Policies;
 
+use App\Models\AcademicTerm;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AcademicTermPolicy
 {
+    use HandlesAuthorization;
+
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->hasRole('super_admin') || $user->hasPermissionTo('academic_term.view');
     }
 
-    public function view(User $user, mixed $academicTerm): bool
+    public function view(User $user, AcademicTerm $academicTerm): bool
     {
-        return true;
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+
+        return $user->school_id === $academicTerm->school_id && $user->hasPermissionTo('academic_term.view');
     }
 
     public function create(User $user): bool
     {
-        return $user->hasAnyRole(['super_admin', 'school_admin']);
+        return $user->hasRole('super_admin') || $user->hasPermissionTo('academic_term.create');
     }
 
-    public function update(User $user, mixed $academicTerm): bool
+    public function update(User $user, AcademicTerm $academicTerm): bool
     {
-        return $user->hasAnyRole(['super_admin', 'school_admin']);
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+
+        return $user->school_id === $academicTerm->school_id && $user->hasPermissionTo('academic_term.update');
     }
 
-    public function delete(User $user, mixed $academicTerm): bool
+    public function delete(User $user, AcademicTerm $academicTerm): bool
     {
-        return $user->hasRole('super_admin');
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+
+        return $user->school_id === $academicTerm->school_id && $user->hasPermissionTo('academic_term.delete');
     }
 
-    public function activate(User $user, mixed $academicTerm): bool
+    public function activate(User $user, AcademicTerm $academicTerm): bool
     {
-        return $user->hasAnyRole(['super_admin', 'school_admin']);
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+
+        return $user->school_id === $academicTerm->school_id && $user->hasPermissionTo('academic_term.update');
     }
 
-    public function restore(User $user, mixed $academicTerm): bool
+    public function restore(User $user, AcademicTerm $academicTerm): bool
     {
         return false;
     }
 
-    public function forceDelete(User $user, mixed $academicTerm): bool
+    public function forceDelete(User $user, AcademicTerm $academicTerm): bool
     {
         return false;
     }

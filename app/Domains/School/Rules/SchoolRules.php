@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\School\Rules;
 
 use App\Domains\School\Enums\SchoolStatus;

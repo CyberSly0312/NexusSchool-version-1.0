@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\Role\Services\RoleService;
@@ -72,7 +74,7 @@ class RoleResource extends Resource
                 EditAction::make(),
                 DeleteAction::make()
                     ->before(function (Role $record, DeleteAction $action) {
-                        $service = new RoleService;
+                        $service = new RoleService();
                         if ($service->isSystemRole($record)) {
                             $action->label('System Role');
                             $action->disabled();

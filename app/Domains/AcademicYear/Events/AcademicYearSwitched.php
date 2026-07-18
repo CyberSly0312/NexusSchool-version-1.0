@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicYear\Events;
 
 use App\Domains\School\Models\School;
@@ -9,11 +11,13 @@ use Illuminate\Queue\SerializesModels;
 
 class AcademicYearSwitched
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly School $school,
         public readonly ?AcademicYear $previousYear,
         public readonly AcademicYear $newYear,
-    ) {}
+    ) {
+    }
 }

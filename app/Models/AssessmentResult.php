@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Domains\Gradebook\Enums\AssessmentResultStatus;
@@ -12,7 +14,8 @@ use Illuminate\Support\Str;
 
 class AssessmentResult extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'uuid',

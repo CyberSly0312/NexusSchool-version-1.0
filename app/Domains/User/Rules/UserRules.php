@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\User\Rules;
 
 use App\Domains\User\Enums\UserStatus;

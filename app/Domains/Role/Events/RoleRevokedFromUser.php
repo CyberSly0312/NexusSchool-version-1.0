@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Role\Events;
 
 use App\Models\User;
@@ -9,10 +11,12 @@ use Spatie\Permission\Models\Role;
 
 class RoleRevokedFromUser
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly User $user,
         public readonly Role $role,
-    ) {}
+    ) {
+    }
 }

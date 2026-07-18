@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\User\DTOs;
 
 use App\Domains\User\Enums\UserStatus;
@@ -15,7 +17,8 @@ readonly class UserData
         public ?string $avatar = null,
         public ?string $schoolId = null,
         public UserStatus $status = UserStatus::Pending,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {
@@ -26,7 +29,7 @@ readonly class UserData
             password: $data['password'] ?? null,
             phone: $data['phone'] ?? null,
             avatar: $data['avatar'] ?? null,
-            schoolId: $data['school_id'] ?? null,
+            schoolId: isset($data['school_id']) ? (string) $data['school_id'] : null,
             status: isset($data['status'])
                 ? UserStatus::from($data['status'])
                 : UserStatus::Pending,

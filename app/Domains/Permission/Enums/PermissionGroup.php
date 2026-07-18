@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Permission\Enums;
 
 enum PermissionGroup: string

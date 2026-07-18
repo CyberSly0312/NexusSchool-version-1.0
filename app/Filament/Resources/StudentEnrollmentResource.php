@@ -1,24 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\StudentEnrollment\Enums\EnrollmentStatus;
 use App\Domains\StudentEnrollment\Enums\EnrollmentType;
 use App\Filament\Resources\StudentEnrollmentResource\Pages;
-use App\Models\AcademicClass;
-use App\Models\AcademicYear;
-use App\Models\GradeLevel;
-use App\Models\Program;
-use App\Models\Section;
 use App\Models\Student;
 use App\Models\StudentEnrollment;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section as SectionComponent;
 use Filament\Schemas\Schema;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use Filament\Tables;
 use Filament\Tables\Table;
 

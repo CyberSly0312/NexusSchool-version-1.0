@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Domains\Section\Enums\SectionStatus;
@@ -8,13 +10,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Domains\School\Models\School;
 use Illuminate\Support\Str;
 
 class Section extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
+        'school_id',
         'grade_level_id',
         'name',
         'code',
@@ -47,6 +52,11 @@ class Section extends Model
     | Relationships
     |--------------------------------------------------------------------------
     */
+
+    public function school(): BelongsTo
+    {
+        return $this->belongsTo(School::class);
+    }
 
     public function gradeLevel(): BelongsTo
     {

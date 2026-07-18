@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicTerm\Services;
 
 use App\Domains\AcademicTerm\DTOs\AcademicTermData;
@@ -20,8 +22,9 @@ use Illuminate\Validation\ValidationException;
 class AcademicTermService
 {
     public function __construct(
-        protected AcademicTerm $model = new AcademicTerm,
-    ) {}
+        protected AcademicTerm $model = new AcademicTerm(),
+    ) {
+    }
 
     public function create(AcademicTermData $data): AcademicTerm
     {

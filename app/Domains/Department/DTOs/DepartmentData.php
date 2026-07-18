@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Department\DTOs;
 
 readonly class DepartmentData
@@ -12,7 +14,8 @@ readonly class DepartmentData
         public ?string $color = null,
         public int $order = 0,
         public ?int $headId = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

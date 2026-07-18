@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Subject\Services;
 
 use App\Domains\Subject\DTOs\SubjectData;
@@ -17,8 +19,9 @@ use Illuminate\Validation\ValidationException;
 class SubjectService
 {
     public function __construct(
-        protected Subject $model = new Subject,
-    ) {}
+        protected Subject $model = new Subject(),
+    ) {
+    }
 
     public function create(SubjectData $data): Subject
     {

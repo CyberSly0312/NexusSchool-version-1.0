@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicYear\Services;
 
 use App\Domains\AcademicYear\DTOs\AcademicYearData;
@@ -21,8 +23,9 @@ use Illuminate\Support\Facades\DB;
 class AcademicYearService
 {
     public function __construct(
-        protected AcademicYear $model = new AcademicYear,
-    ) {}
+        protected AcademicYear $model = new AcademicYear(),
+    ) {
+    }
 
     public function create(AcademicYearData $data): AcademicYear
     {

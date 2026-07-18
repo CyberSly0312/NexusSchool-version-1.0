@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Subject\DTOs;
 
 readonly class SubjectData
@@ -18,7 +20,8 @@ readonly class SubjectData
         public int $weeklyHours = 1,
         public ?int $departmentId = null,
         public ?int $programId = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Domains\AcademicClass\Enums\AcademicClassStatus;
@@ -7,13 +9,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Domains\School\Models\School;
 use Illuminate\Support\Str;
 
 class AcademicClass extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
+        'school_id',
         'academic_year_id',
         'program_id',
         'grade_level_id',
@@ -56,6 +61,11 @@ class AcademicClass extends Model
     | Relationships
     |--------------------------------------------------------------------------
     */
+
+    public function school(): BelongsTo
+    {
+        return $this->belongsTo(School::class);
+    }
 
     public function academicYear(): BelongsTo
     {

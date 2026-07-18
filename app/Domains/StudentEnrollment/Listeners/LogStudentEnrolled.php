@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\StudentEnrollment\Listeners;
 
 use App\Domains\StudentEnrollment\Events\StudentEnrolled;

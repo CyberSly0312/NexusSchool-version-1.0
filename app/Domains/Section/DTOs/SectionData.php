@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Section\DTOs;
 
 readonly class SectionData
@@ -10,7 +12,8 @@ readonly class SectionData
         public string $code,
         public ?string $description = null,
         public int $order = 0,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

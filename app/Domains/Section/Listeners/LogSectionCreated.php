@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Section\Listeners;
 
 use App\Domains\Section\Events\SectionCreated;

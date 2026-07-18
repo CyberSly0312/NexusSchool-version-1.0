@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\School\Models;
 
 use App\Domains\School\Enums\SchoolStatus;
@@ -19,7 +21,11 @@ use Stancl\Tenancy\Database\Models\Tenant;
 
 class School extends Tenant implements TenantWithDatabase
 {
-    use HasDatabase, HasDomains, HasFactory, HasUlids, SoftDeletes;
+    use HasDatabase;
+    use HasDomains;
+    use HasFactory;
+    use HasUlids;
+    use SoftDeletes;
 
     protected static function newFactory(): SchoolFactory
     {
@@ -27,6 +33,7 @@ class School extends Tenant implements TenantWithDatabase
     }
 
     protected $fillable = [
+        'uuid',
         'name',
         'slug',
         'database',

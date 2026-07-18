@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Program\Services;
 
 use App\Domains\Program\DTOs\ProgramData;
@@ -16,8 +18,9 @@ use Illuminate\Validation\ValidationException;
 class ProgramService
 {
     public function __construct(
-        protected Program $model = new Program,
-    ) {}
+        protected Program $model = new Program(),
+    ) {
+    }
 
     public function create(ProgramData $data): Program
     {

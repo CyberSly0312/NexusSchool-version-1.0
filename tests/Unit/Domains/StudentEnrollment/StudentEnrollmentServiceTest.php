@@ -18,7 +18,6 @@ use App\Models\Program;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\StudentEnrollment;
-use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;

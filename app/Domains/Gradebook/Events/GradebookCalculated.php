@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Gradebook\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
@@ -14,5 +16,6 @@ class GradebookCalculated
         public readonly int $academicYearId,
         public readonly ?float $termAverage,
         public readonly ?float $weightedAverage,
-    ) {}
+    ) {
+    }
 }

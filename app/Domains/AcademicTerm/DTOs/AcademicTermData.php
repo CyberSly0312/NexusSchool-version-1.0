@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicTerm\DTOs;
 
 readonly class AcademicTermData
@@ -13,7 +15,8 @@ readonly class AcademicTermData
         public int $order = 0,
         public ?string $code = null,
         public ?string $description = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

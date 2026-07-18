@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicClass\DTOs;
 
 readonly class AcademicClassData
@@ -18,7 +20,8 @@ readonly class AcademicClassData
         public ?int $homeroomTeacherId = null,
         public ?string $classroom = null,
         public ?int $classroomId = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

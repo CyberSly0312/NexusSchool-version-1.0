@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\Permission\Enums\PermissionGroup;
@@ -107,7 +109,7 @@ class PermissionResource extends Resource
                 EditAction::make(),
                 DeleteAction::make()
                     ->before(function (Permission $record, DeleteAction $action) {
-                        $service = new PermissionService;
+                        $service = new PermissionService();
                         if ($service->isSystemPermission($record)) {
                             $action->label('System Permission');
                             $action->disabled();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicClass\Listeners;
 
 use App\Domains\AcademicClass\Events\AcademicClassUpdated;

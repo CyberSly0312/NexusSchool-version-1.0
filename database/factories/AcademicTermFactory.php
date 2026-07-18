@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Domains\AcademicTerm\Enums\AcademicTermStatus;
+use App\Domains\School\Models\School;
 use App\Models\AcademicTerm;
 use App\Models\AcademicYear;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -57,7 +58,7 @@ class AcademicTermFactory extends Factory
     public function forSchool(mixed $school): static
     {
         return $this->state(fn () => [
-            'school_id' => $school instanceof \App\Domains\School\Models\School ? $school->id : $school,
+            'school_id' => $school instanceof School ? $school->id : $school,
         ]);
     }
 

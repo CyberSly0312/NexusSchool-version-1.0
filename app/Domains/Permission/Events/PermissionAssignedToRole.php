@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Permission\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
@@ -9,10 +11,12 @@ use Spatie\Permission\Models\Role;
 
 class PermissionAssignedToRole
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly Permission $permission,
         public readonly Role $role,
-    ) {}
+    ) {
+    }
 }

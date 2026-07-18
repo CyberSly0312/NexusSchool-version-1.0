@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Domains\School\Models\School;
@@ -19,7 +21,10 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser, HasName
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, HasRoles, \Illuminate\Database\Eloquent\SoftDeletes, Notifiable;
+    use HasFactory;
+    use HasRoles;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use Notifiable;
 
     protected $fillable = [
         'school_id',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\User\Services;
 
 use App\Domains\User\DTOs\UserData;
@@ -15,8 +17,9 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
     public function __construct(
-        protected User $model = new User,
-    ) {}
+        protected User $model = new User(),
+    ) {
+    }
 
     public function create(UserData $data): User
     {
@@ -39,7 +42,7 @@ class UserService
 
     public function update(User $user, array $data): User
     {
-        $validated = UserRules::validate($data, 'update', $user->getRouteKey());
+        $validated = UserRules::validate($data, 'update', (string) $user->getRouteKey());
 
         if (isset($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);

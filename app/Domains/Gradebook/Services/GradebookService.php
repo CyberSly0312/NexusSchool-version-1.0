@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Gradebook\Services;
 
 use App\Domains\Gradebook\DTOs\AssessmentResultData;
 use App\Domains\Gradebook\Enums\AssessmentResultStatus;
 use App\Domains\Gradebook\Enums\LetterGrade;
 use App\Domains\Gradebook\Events\AssessmentResultRecorded;
-use App\Domains\Gradebook\Events\AssessmentResultVerified;
 use App\Domains\Gradebook\Events\AssessmentResultsPublished;
+use App\Domains\Gradebook\Events\AssessmentResultVerified;
 use App\Domains\Gradebook\Events\GradebookCalculated;
 use App\Domains\Gradebook\Events\RankingsCalculated;
 use App\Domains\Gradebook\Rules\AssessmentResultRules;
-use App\Models\Assessment;
 use App\Models\AssessmentResult;
 use App\Models\StudentEnrollment;
 use App\Models\SubjectCoefficient;
@@ -23,8 +24,9 @@ use Illuminate\Validation\ValidationException;
 class GradebookService
 {
     public function __construct(
-        protected AssessmentResult $model = new AssessmentResult,
-    ) {}
+        protected AssessmentResult $model = new AssessmentResult(),
+    ) {
+    }
 
     public function record(AssessmentResultData $data): AssessmentResult
     {
@@ -83,20 +85,20 @@ class GradebookService
         $validated = AssessmentResultRules::validate($data, 'update', $id);
 
         if (isset($validated['raw_score'])) {
-            $maxScore = $validated['maximum_score'] ?? $result->maximum_score;
+            $maxScore = $validated['maximum_score'] ?? (float) $result->maximum_score;
             $this->validateScoreAgainstMax($validated['raw_score'], $maxScore);
         }
 
         if (isset($validated['adjusted_score']) && $validated['adjusted_score'] !== null) {
-            $maxScore = $validated['maximum_score'] ?? $result->maximum_score;
+            $maxScore = $validated['maximum_score'] ?? (float) $result->maximum_score;
             $this->validateScoreAgainstMax($validated['adjusted_score'], $maxScore);
         }
 
         $rawScore = $validated['raw_score'] ?? $result->raw_score;
-        $maxScore = $validated['maximum_score'] ?? $result->maximum_score;
+        $maxScore = $validated['maximum_score'] ?? (float) $result->maximum_score;
         $isAbsent = $validated['is_absent'] ?? $result->is_absent;
 
-        if (!$isAbsent) {
+        if (! $isAbsent) {
             $validated['percentage'] = round(($rawScore / max($maxScore, 1)) * 100, 2);
             $validated['letter_grade'] = LetterGrade::fromPercentage($validated['percentage'])->value;
             $validated['grade_point'] = LetterGrade::gradePointFromPercentage($validated['percentage']);
@@ -111,7 +113,7 @@ class GradebookService
     {
         $result = $this->findById($id);
 
-        if (!$result->status->isDeletable()) {
+        if (! $result->status->isDeletable()) {
             throw ValidationException::withMessages([
                 'status' => 'Only draft or entered results can be deleted.',
             ]);
@@ -387,7 +389,7 @@ class GradebookService
             ->active()
             ->first();
 
-        if (!$enrollment) {
+        if (! $enrollment) {
             throw ValidationException::withMessages([
                 'student_id' => 'Student does not have an active enrollment for this academic year.',
             ]);
@@ -410,7 +412,7 @@ class GradebookService
 
     private function validateTransition(AssessmentResult $result, AssessmentResultStatus $target): void
     {
-        if (!$result->canTransitionTo($target)) {
+        if (! $result->canTransitionTo($target)) {
             throw ValidationException::withMessages([
                 'status' => "Cannot transition from '{$result->status->label()}' to '{$target->label()}'.",
             ]);

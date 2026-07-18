@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Section\Services;
 
 use App\Domains\Section\DTOs\SectionData;
@@ -16,8 +18,9 @@ use Illuminate\Validation\ValidationException;
 class SectionService
 {
     public function __construct(
-        protected Section $model = new Section,
-    ) {}
+        protected Section $model = new Section(),
+    ) {
+    }
 
     public function create(SectionData $data): Section
     {

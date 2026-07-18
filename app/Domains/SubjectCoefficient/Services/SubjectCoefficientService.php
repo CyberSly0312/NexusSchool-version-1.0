@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\SubjectCoefficient\Services;
 
 use App\Domains\SubjectCoefficient\DTOs\SubjectCoefficientData;
@@ -17,8 +19,9 @@ use Illuminate\Validation\ValidationException;
 class SubjectCoefficientService
 {
     public function __construct(
-        protected SubjectCoefficient $model = new SubjectCoefficient,
-    ) {}
+        protected SubjectCoefficient $model = new SubjectCoefficient(),
+    ) {
+    }
 
     public function create(SubjectCoefficientData $data): SubjectCoefficient
     {
@@ -72,6 +75,13 @@ class SubjectCoefficientService
 
         $effectiveFrom = $validated['effective_from'] ?? $subjectCoefficient->effective_from;
         $effectiveTo = $validated['effective_to'] ?? $subjectCoefficient->effective_to;
+
+        if ($effectiveFrom instanceof \Carbon\Carbon) {
+            $effectiveFrom = $effectiveFrom->format('Y-m-d');
+        }
+        if ($effectiveTo instanceof \Carbon\Carbon) {
+            $effectiveTo = $effectiveTo->format('Y-m-d');
+        }
 
         $this->validateOverlappingDates(
             $schoolId,

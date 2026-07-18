@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\SubjectCoefficient\Rules;
 
 use Illuminate\Support\Facades\Validator;

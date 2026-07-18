@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Department\Events;
 
 use App\Models\Department;
@@ -8,9 +10,11 @@ use Illuminate\Queue\SerializesModels;
 
 class DepartmentCreated
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly Department $department,
-    ) {}
+    ) {
+    }
 }

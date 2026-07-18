@@ -2,9 +2,16 @@
 
 namespace Tests\Feature\Filament;
 
+use App\Filament\Resources\UserResource;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
+use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Models\User;
+use Filament\Actions\DeleteAction;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class UserResourceTest extends TestCase
@@ -12,13 +19,28 @@ class UserResourceTest extends TestCase
     use RefreshDatabase;
 
     protected User $admin;
+    protected string $schoolId;
 
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->schoolId = (string) Str::ulid();
+        DB::table('tenants')->insert([
+            'id' => $this->schoolId,
+            'uuid' => Str::ulid(),
+            'name' => 'Test School',
+            'slug' => 'test-school',
+            'database' => 'test-school-db',
+            'domain' => 'test.nexus.school',
+            'status' => 'active',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $this->admin = User::factory()->create([
             'status' => 'active',
+            'school_id' => $this->schoolId,
         ]);
 
         $this->actingAs($this->admin);
@@ -60,5 +82,56 @@ class UserResourceTest extends TestCase
         $this->actingAs($this->admin)
             ->get('/admin/users/'.$user->getRouteKey().'/edit')
             ->assertSuccessful();
+    }
+
+    public function test_can_create_user(): void
+    {
+        Livewire::test(CreateUser::class)
+            ->fillForm([
+                'school_id' => $this->schoolId,
+                'first_name' => 'Test',
+                'last_name' => 'User',
+                'email' => 'test-user-unique@example.com',
+                'password' => 'password123',
+                'password_confirmation' => 'password123',
+                'status' => 'active',
+            ])
+            ->call('create');
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'test-user-unique@example.com',
+            'first_name' => 'Test',
+        ]);
+    }
+
+    public function test_can_update_user(): void
+    {
+        $user = User::factory()->create([
+            'first_name' => 'Original',
+            'last_name' => 'Name',
+        ]);
+
+        Livewire::test(EditUser::class, ['record' => $user->getRouteKey()])
+            ->fillForm([
+                'first_name' => 'Updated',
+            ])
+            ->call('save');
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'first_name' => 'Updated',
+        ]);
+    }
+
+    public function test_can_delete_user(): void
+    {
+        $user = User::factory()->create();
+
+        Livewire::test(EditUser::class, ['record' => $user->getRouteKey()])
+            ->callAction(DeleteAction::class);
+
+        $this->assertSoftDeleted('users', [
+            'id' => $user->id,
+        ]);
     }
 }

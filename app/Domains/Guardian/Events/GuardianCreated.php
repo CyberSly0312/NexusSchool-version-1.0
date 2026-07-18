@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Guardian\Events;
 
 use App\Models\Guardian;
@@ -8,9 +10,11 @@ use Illuminate\Queue\SerializesModels;
 
 class GuardianCreated
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly Guardian $guardian,
-    ) {}
+    ) {
+    }
 }

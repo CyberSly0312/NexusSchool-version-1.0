@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Filament;
 
-use App\Domains\Gradebook\Enums\AssessmentResultStatus;
 use App\Domains\School\Models\School;
 use App\Models\AcademicClass;
 use App\Models\AcademicTerm;
@@ -99,15 +98,17 @@ class AssessmentResultResourceTest extends TestCase
             'school_id' => $this->school->id,
             'student_id' => $this->student->id,
             'academic_year_id' => $year->id,
-            'enrollment_status' => 'active',
+            'status' => 'active',
         ]);
     }
 
     public function test_can_list_assessment_results(): void
     {
-        AssessmentResult::factory()->forSchool($this->school)->count(3)->create([
+        AssessmentResult::factory()->forSchool($this->school)->create([
             'assessment_id' => $this->assessment->id,
             'student_id' => $this->student->id,
+            'subject_id' => $this->assessment->subject_id,
+            'user_id' => $this->assessment->user_id,
             'academic_year_id' => $this->assessment->academic_year_id,
             'academic_term_id' => $this->assessment->academic_term_id,
         ]);
@@ -127,6 +128,8 @@ class AssessmentResultResourceTest extends TestCase
         $result = AssessmentResult::factory()->forSchool($this->school)->create([
             'assessment_id' => $this->assessment->id,
             'student_id' => $this->student->id,
+            'subject_id' => $this->assessment->subject_id,
+            'user_id' => $this->assessment->user_id,
             'academic_year_id' => $this->assessment->academic_year_id,
             'academic_term_id' => $this->assessment->academic_term_id,
         ]);

@@ -1,42 +1,60 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Guardian\Policies;
 
+use App\Models\Guardian;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GuardianPolicy
 {
+    use HandlesAuthorization;
+
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->hasRole('super_admin') || $user->hasPermissionTo('guardian.view');
     }
 
-    public function view(User $user, mixed $guardian): bool
+    public function view(User $user, Guardian $guardian): bool
     {
-        return true;
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+
+        return $user->school_id === $guardian->school_id && $user->hasPermissionTo('guardian.view');
     }
 
     public function create(User $user): bool
     {
-        return $user->hasAnyRole(['super_admin', 'school_admin']);
+        return $user->hasRole('super_admin') || $user->hasPermissionTo('guardian.create');
     }
 
-    public function update(User $user, mixed $guardian): bool
+    public function update(User $user, Guardian $guardian): bool
     {
-        return $user->hasAnyRole(['super_admin', 'school_admin']);
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+
+        return $user->school_id === $guardian->school_id && $user->hasPermissionTo('guardian.update');
     }
 
-    public function delete(User $user, mixed $guardian): bool
+    public function delete(User $user, Guardian $guardian): bool
     {
-        return $user->hasRole('super_admin');
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+
+        return $user->school_id === $guardian->school_id && $user->hasPermissionTo('guardian.delete');
     }
 
-    public function restore(User $user, mixed $guardian): bool
+    public function restore(User $user, Guardian $guardian): bool
     {
         return false;
     }
 
-    public function forceDelete(User $user, mixed $guardian): bool
+    public function forceDelete(User $user, Guardian $guardian): bool
     {
         return false;
     }

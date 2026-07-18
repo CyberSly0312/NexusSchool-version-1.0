@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\GradeLevel\DTOs;
 
 readonly class GradeLevelData
@@ -12,7 +14,8 @@ readonly class GradeLevelData
         public string $educationalCycle,
         public ?string $shortName = null,
         public ?string $description = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\SubjectCategory\Services;
 
 use App\Domains\SubjectCategory\DTOs\SubjectCategoryData;
@@ -16,8 +18,9 @@ use Illuminate\Validation\ValidationException;
 class SubjectCategoryService
 {
     public function __construct(
-        protected SubjectCategory $model = new SubjectCategory,
-    ) {}
+        protected SubjectCategory $model = new SubjectCategory(),
+    ) {
+    }
 
     public function create(SubjectCategoryData $data): SubjectCategory
     {

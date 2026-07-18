@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicClass\Services;
 
 use App\Domains\AcademicClass\DTOs\AcademicClassData;
@@ -18,8 +20,9 @@ use Illuminate\Validation\ValidationException;
 class AcademicClassService
 {
     public function __construct(
-        protected AcademicClass $model = new AcademicClass,
-    ) {}
+        protected AcademicClass $model = new AcademicClass(),
+    ) {
+    }
 
     public function create(AcademicClassData $data): AcademicClass
     {

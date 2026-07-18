@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Guardian\DTOs;
 
 readonly class GuardianData
@@ -28,7 +30,8 @@ readonly class GuardianData
         public bool $isPrimaryGuardian = false,
         public ?int $userId = null,
         public ?string $notes = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

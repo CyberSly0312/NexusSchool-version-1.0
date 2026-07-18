@@ -1,0 +1,1 @@
+{"name":"plugin-b","display_name":"Plugin B","version":"1.0.0","minimum_nexus_version":"1.0.0","dependencies":[{"name":"plugin-a","version":"1.0.0","required":true}]}

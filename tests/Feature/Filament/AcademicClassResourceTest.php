@@ -63,8 +63,7 @@ class AcademicClassResourceTest extends TestCase
         ]);
 
         $academicYear = AcademicYear::factory()
-            ->forSchool($schoolId)
-            ->create();
+            ->create(['school_id' => $schoolId]);
 
         $program = Program::factory()
             ->forSchool($schoolId)

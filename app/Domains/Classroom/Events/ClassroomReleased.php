@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Classroom\Events;
 
 use App\Models\AcademicClass;
@@ -9,10 +11,12 @@ use Illuminate\Queue\SerializesModels;
 
 class ClassroomReleased
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly Classroom $classroom,
         public readonly AcademicClass $academicClass,
-    ) {}
+    ) {
+    }
 }

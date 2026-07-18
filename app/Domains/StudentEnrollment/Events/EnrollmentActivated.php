@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\StudentEnrollment\Events;
 
 use App\Models\StudentEnrollment;
@@ -8,9 +10,11 @@ use Illuminate\Queue\SerializesModels;
 
 class EnrollmentActivated
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly StudentEnrollment $enrollment,
-    ) {}
+    ) {
+    }
 }

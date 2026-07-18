@@ -1,10 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\Gradebook\Enums\AssessmentResultStatus;
+use App\Domains\Gradebook\Services\GradebookService;
 use App\Filament\Resources\AssessmentResultResource\Pages;
 use App\Models\AssessmentResult;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction as DeleteActionAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section as SectionComponent;
@@ -20,7 +27,7 @@ class AssessmentResultResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Gradebook';
 
-    protected static ?string $recordTitleAttribute = 'id';
+    protected static ?string $recordTitleAttribute = 'raw_score';
 
     protected static ?int $navigationSort = 10;
 
@@ -42,7 +49,7 @@ class AssessmentResultResource extends Resource
                             ->searchable()
                             ->preload()
                             ->native(false)
-                            ->getOptionLabelFromRecordUsing(fn($record) => "{$record->first_name} {$record->last_name} ({$record->student_number})"),
+                            ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->first_name} {$record->last_name} ({$record->student_number})"),
                         Forms\Components\Select::make('subject_id')
                             ->relationship('subject', 'name')
                             ->required()
@@ -86,7 +93,7 @@ class AssessmentResultResource extends Resource
                 SectionComponent::make('Status & Flags')
                     ->schema([
                         Forms\Components\Select::make('status')
-                            ->options(collect(AssessmentResultStatus::cases())->mapWithKeys(fn($c) => [$c->value => $c->label()]))
+                            ->options(collect(AssessmentResultStatus::cases())->mapWithKeys(fn ($c) => [$c->value => $c->label()]))
                             ->required()
                             ->native(false),
                         Forms\Components\Toggle::make('is_absent')
@@ -113,7 +120,7 @@ class AssessmentResultResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('student.first_name')
                     ->label('Student')
-                    ->formatStateUsing(fn($record) => "{$record->student?->first_name} {$record->student?->last_name}")
+                    ->formatStateUsing(fn ($record) => "{$record->student?->first_name} {$record->student?->last_name}")
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('student.student_number')
@@ -137,7 +144,7 @@ class AssessmentResultResource extends Resource
                 Tables\Columns\TextColumn::make('percentage')
                     ->numeric(decimalPlaces: 2)
                     ->sortable()
-                    ->color(fn($state) => $state < 50 ? 'danger' : ($state < 75 ? 'warning' : 'success')),
+                    ->color(fn ($state) => $state < 50 ? 'danger' : ($state < 75 ? 'warning' : 'success')),
                 Tables\Columns\TextColumn::make('letter_grade')
                     ->badge()
                     ->sortable(),
@@ -155,7 +162,7 @@ class AssessmentResultResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn($state) => match ($state) {
+                    ->color(fn ($state) => match ($state) {
                         AssessmentResultStatus::Draft->value => 'gray',
                         AssessmentResultStatus::Entered->value => 'info',
                         AssessmentResultStatus::Verified->value => 'success',
@@ -179,7 +186,7 @@ class AssessmentResultResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
-                    ->options(collect(AssessmentResultStatus::cases())->mapWithKeys(fn($c) => [$c->value => $c->label()])),
+                    ->options(collect(AssessmentResultStatus::cases())->mapWithKeys(fn ($c) => [$c->value => $c->label()])),
                 Tables\Filters\SelectFilter::make('is_absent')
                     ->label('Absent')
                     ->options([
@@ -198,18 +205,18 @@ class AssessmentResultResource extends Resource
                     ->preload(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('verify')
+                EditAction::make(),
+                Action::make('verify')
                     ->label('Verify')
                     ->icon('heroicon-o-check-badge')
                     ->color('success')
-                    ->action(fn(AssessmentResult $record) => app(\App\Domains\Gradebook\Services\GradebookService::class)->verify($record->id))
-                    ->visible(fn(AssessmentResult $record) => $record->canTransitionTo(AssessmentResultStatus::Verified)),
-                Tables\Actions\DeleteAction::make()
-                    ->visible(fn(AssessmentResult $record) => $record->status->isDeletable()),
+                    ->action(fn (AssessmentResult $record) => app(GradebookService::class)->verify($record->id))
+                    ->visible(fn (AssessmentResult $record) => $record->canTransitionTo(AssessmentResultStatus::Verified)),
+                DeleteActionAction::make()
+                    ->visible(fn (AssessmentResult $record) => $record->status->isDeletable()),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ]);
     }
 

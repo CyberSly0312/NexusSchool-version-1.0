@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Student\Services;
 
 use App\Domains\Student\DTOs\StudentData;
@@ -17,8 +19,9 @@ use Illuminate\Validation\ValidationException;
 class StudentService
 {
     public function __construct(
-        protected Student $model = new Student,
-    ) {}
+        protected Student $model = new Student(),
+    ) {
+    }
 
     public function create(StudentData $data): Student
     {

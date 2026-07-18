@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Gradebook\Listeners;
 
 use App\Domains\Gradebook\Events\AssessmentResultVerified;

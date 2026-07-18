@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\GradeLevel\Services;
 
 use App\Domains\GradeLevel\DTOs\GradeLevelData;
@@ -16,8 +18,9 @@ use Illuminate\Validation\ValidationException;
 class GradeLevelService
 {
     public function __construct(
-        protected GradeLevel $model = new GradeLevel,
-    ) {}
+        protected GradeLevel $model = new GradeLevel(),
+    ) {
+    }
 
     public function create(GradeLevelData $data): GradeLevel
     {

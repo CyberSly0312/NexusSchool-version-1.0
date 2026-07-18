@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\StudentEnrollment\DTOs;
 
 readonly class StudentEnrollmentData
@@ -24,7 +26,8 @@ readonly class StudentEnrollmentData
         public ?string $exitDate = null,
         public ?string $exitReason = null,
         public ?string $notes = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

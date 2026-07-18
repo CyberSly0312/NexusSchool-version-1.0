@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Gradebook\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
@@ -11,5 +13,6 @@ class AssessmentResultsPublished
     public function __construct(
         public readonly array $resultIds,
         public readonly int $assessmentId,
-    ) {}
+    ) {
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Domains\School\Models\School;
 use App\Models\Assessment;
 use App\Models\AssessmentResult;
-use App\Domains\School\Models\School;
 use App\Models\Student;
 use Illuminate\Database\Seeder;
 

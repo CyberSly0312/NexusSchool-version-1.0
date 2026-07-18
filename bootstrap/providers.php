@@ -8,4 +8,5 @@ return [
     AppServiceProvider::class,
     AdminPanelProvider::class,
     TenancyServiceProvider::class,
+    \App\Domains\Plugin\PluginServiceProvider::class,
 ];

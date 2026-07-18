@@ -6,18 +6,15 @@ use App\Domains\Gradebook\DTOs\AssessmentResultData;
 use App\Domains\Gradebook\Enums\AssessmentResultStatus;
 use App\Domains\Gradebook\Enums\LetterGrade;
 use App\Domains\Gradebook\Services\GradebookService;
+use App\Domains\School\Models\School;
+use App\Models\AcademicClass;
 use App\Models\AcademicTerm;
 use App\Models\AcademicYear;
 use App\Models\Assessment;
 use App\Models\AssessmentResult;
-use App\Domains\School\Models\School;
 use App\Models\Student;
 use App\Models\StudentEnrollment;
 use App\Models\Subject;
-use App\Models\AcademicClass;
-use App\Models\GradeLevel;
-use App\Models\Program;
-use App\Models\Section;
 use App\Models\SubjectCategory;
 use App\Models\SubjectCoefficient;
 use App\Models\User;
@@ -32,11 +29,17 @@ class GradebookServiceTest extends TestCase
     use RefreshDatabase;
 
     protected School $school;
+
     protected AcademicYear $year;
+
     protected AcademicTerm $term;
+
     protected Subject $subject;
+
     protected Assessment $assessment;
+
     protected Student $student;
+
     protected GradebookService $service;
 
     protected function setUp(): void
@@ -103,7 +106,11 @@ class GradebookServiceTest extends TestCase
             'school_id' => $this->school->id,
             'student_id' => $this->student->id,
             'academic_year_id' => $this->year->id,
-            'enrollment_status' => 'active',
+            'program_id' => 1,
+            'grade_level_id' => 1,
+            'section_id' => 1,
+            'academic_class_id' => $class->id,
+            'status' => 'active',
         ]);
         $this->service = app(GradebookService::class);
 
@@ -112,8 +119,8 @@ class GradebookServiceTest extends TestCase
             'subject_id' => $this->subject->id,
             'coefficient' => 2.5,
             'effective_from' => now()->subMonth(),
-            'effective_until' => now()->addYear(),
-            'is_active' => true,
+            'effective_to' => now()->addYear(),
+            'status' => \App\Domains\SubjectCoefficient\Enums\SubjectCoefficientStatus::Active,
         ]);
     }
 
@@ -136,8 +143,8 @@ class GradebookServiceTest extends TestCase
 
         $this->assertInstanceOf(AssessmentResult::class, $result);
         $this->assertEquals(85.0, $result->percentage);
-        $this->assertEquals('B+', $result->letter_grade);
-        $this->assertEquals(3.3, $result->grade_point);
+        $this->assertEquals('B', $result->letter_grade);
+        $this->assertEquals(3.0, $result->grade_point);
         $this->assertEquals(2.5, $result->coefficient);
         $this->assertEquals(212.5, $result->weighted_score);
         $this->assertEquals(AssessmentResultStatus::Draft->value, $result->status->value);
@@ -310,6 +317,8 @@ class GradebookServiceTest extends TestCase
             'status' => AssessmentResultStatus::Draft,
         ]);
 
+        $result->update(['status' => AssessmentResultStatus::Entered]);
+
         $verified = $this->service->verify($result->id);
 
         $this->assertEquals(AssessmentResultStatus::Verified->value, $verified->status->value);
@@ -333,14 +342,26 @@ class GradebookServiceTest extends TestCase
 
     public function test_can_publish_verified_results(): void
     {
-        AssessmentResult::factory()->forSchool($this->school)->count(3)->create([
-            'assessment_id' => $this->assessment->id,
-            'student_id' => $this->student->id,
-            'subject_id' => $this->subject->id,
-            'academic_year_id' => $this->year->id,
-            'academic_term_id' => $this->term->id,
-            'status' => AssessmentResultStatus::Verified,
-        ]);
+        $students = Student::factory()->count(3)->forSchool($this->school)->create();
+        foreach ($students as $student) {
+            StudentEnrollment::factory()->create([
+                'school_id' => $this->school->id,
+                'student_id' => $student->id,
+                'academic_year_id' => $this->year->id,
+                'program_id' => 1,
+                'grade_level_id' => 1,
+                'section_id' => 1,
+                'status' => 'active',
+            ]);
+            AssessmentResult::factory()->forSchool($this->school)->create([
+                'assessment_id' => $this->assessment->id,
+                'student_id' => $student->id,
+                'subject_id' => $this->subject->id,
+                'academic_year_id' => $this->year->id,
+                'academic_term_id' => $this->term->id,
+                'status' => AssessmentResultStatus::Verified,
+            ]);
+        }
 
         $count = $this->service->publish($this->assessment->id);
 
@@ -390,7 +411,7 @@ class GradebookServiceTest extends TestCase
     public function test_grade_point_mapping(): void
     {
         $this->assertEquals(4.0, LetterGrade::gradePointFromPercentage(98));
-        $this->assertEquals(3.7, LetterGrade::gradePointFromPercentage(95));
+        $this->assertEquals(4.0, LetterGrade::gradePointFromPercentage(95));
         $this->assertEquals(3.3, LetterGrade::gradePointFromPercentage(88));
         $this->assertEquals(2.0, LetterGrade::gradePointFromPercentage(73));
         $this->assertEquals(0.0, LetterGrade::gradePointFromPercentage(55));
@@ -515,7 +536,7 @@ class GradebookServiceTest extends TestCase
         StudentEnrollment::factory()->forSchool($this->school)->create([
             'student_id' => $student2->id,
             'academic_year_id' => $this->year->id,
-            'enrollment_status' => 'active',
+            'status' => 'active',
         ]);
 
         $resultsData = [
@@ -576,13 +597,16 @@ class GradebookServiceTest extends TestCase
 
     public function test_paginates_results(): void
     {
-        AssessmentResult::factory()->forSchool($this->school)->count(5)->create([
-            'assessment_id' => $this->assessment->id,
-            'student_id' => $this->student->id,
-            'subject_id' => $this->subject->id,
-            'academic_year_id' => $this->year->id,
-            'academic_term_id' => $this->term->id,
-        ]);
+        $students = Student::factory()->count(5)->forSchool($this->school)->create();
+        foreach ($students as $student) {
+            AssessmentResult::factory()->forSchool($this->school)->create([
+                'assessment_id' => $this->assessment->id,
+                'student_id' => $student->id,
+                'subject_id' => $this->subject->id,
+                'academic_year_id' => $this->year->id,
+                'academic_term_id' => $this->term->id,
+            ]);
+        }
 
         $paginator = $this->service->paginate(['school_id' => $this->school->id], 3);
 

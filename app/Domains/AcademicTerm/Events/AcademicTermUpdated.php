@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicTerm\Events;
 
 use App\Models\AcademicTerm;
@@ -8,9 +10,11 @@ use Illuminate\Queue\SerializesModels;
 
 class AcademicTermUpdated
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly AcademicTerm $academicTerm,
-    ) {}
+    ) {
+    }
 }

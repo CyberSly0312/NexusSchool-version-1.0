@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\AcademicYear\Enums\AcademicYearStatus;
@@ -100,7 +102,7 @@ class AcademicYearResource extends Resource
                     ->color('success')
                     ->visible(fn (AcademicYear $record): bool => ! $record->isActive())
                     ->action(function (AcademicYear $record): void {
-                        $service = new AcademicYearService;
+                        $service = new AcademicYearService();
                         $service->activate($record);
                     }),
                 DeleteAction::make(),

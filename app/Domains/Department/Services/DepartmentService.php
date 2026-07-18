@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Department\Services;
 
 use App\Domains\Department\DTOs\DepartmentData;
@@ -16,8 +18,9 @@ use Illuminate\Validation\ValidationException;
 class DepartmentService
 {
     public function __construct(
-        protected Department $model = new Department,
-    ) {}
+        protected Department $model = new Department(),
+    ) {
+    }
 
     public function create(DepartmentData $data): Department
     {

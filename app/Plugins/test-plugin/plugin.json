@@ -1,0 +1,1 @@
+{"name":"test-plugin","display_name":"Test Plugin","description":"A test plugin for lifecycle testing","version":"1.0.0","minimum_nexus_version":"1.0.0","author":"Test Author","license":"MIT","permissions":["test-plugin.view","test-plugin.manage"],"settings":[{"key":"api_key","label":"API Key","type":"text","default":""}]}

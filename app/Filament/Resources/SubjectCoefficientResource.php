@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\SubjectCoefficient\Enums\SubjectCoefficientStatus;
@@ -23,7 +25,7 @@ class SubjectCoefficientResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Academics';
 
-    protected static ?string $recordTitleAttribute = 'id';
+    protected static ?string $recordTitleAttribute = 'coefficient';
 
     protected static ?int $navigationSort = 19;
 

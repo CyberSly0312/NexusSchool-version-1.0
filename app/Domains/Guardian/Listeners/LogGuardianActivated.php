@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Guardian\Listeners;
 
 use App\Domains\Guardian\Events\GuardianActivated;

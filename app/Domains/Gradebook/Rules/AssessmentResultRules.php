@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Gradebook\Rules;
 
 use App\Domains\Gradebook\Enums\AssessmentResultStatus;
@@ -32,7 +34,7 @@ class AssessmentResultRules
             'is_excused' => ['boolean'],
             'is_published' => ['boolean'],
             'is_locked' => ['boolean'],
-            'status' => ['sometimes', 'string', 'in:' . implode(',', array_map(fn($case) => $case->value, AssessmentResultStatus::cases()))],
+            'status' => ['sometimes', 'string', 'in:'.implode(',', array_map(fn ($case) => $case->value, AssessmentResultStatus::cases()))],
             'remarks' => ['nullable', 'string'],
         ];
     }

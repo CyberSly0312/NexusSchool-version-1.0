@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\Department\Enums\DepartmentStatus;
@@ -25,7 +27,7 @@ class DepartmentResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?int $navigationSort = 20;
+    protected static ?int $navigationSort = 22;
 
     public static function form(Schema $schema): Schema
     {

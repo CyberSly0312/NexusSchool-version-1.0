@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\School\DTOs;
 
 use App\Domains\School\Enums\SchoolStatus;
@@ -29,7 +31,8 @@ readonly class SchoolData
         public SchoolStatus $status = SchoolStatus::Pending,
         public ?array $settings = null,
         public ?array $metadata = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

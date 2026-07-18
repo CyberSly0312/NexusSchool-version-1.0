@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\SubjectCategory\DTOs;
 
 readonly class SubjectCategoryData
@@ -12,7 +14,8 @@ readonly class SubjectCategoryData
         public int $displayOrder = 0,
         public ?string $color = null,
         public ?string $icon = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

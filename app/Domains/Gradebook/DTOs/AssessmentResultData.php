@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Gradebook\DTOs;
 
 readonly class AssessmentResultData
@@ -28,7 +30,8 @@ readonly class AssessmentResultData
         public bool $isLocked = false,
         public string $status = 'draft',
         public ?string $remarks = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

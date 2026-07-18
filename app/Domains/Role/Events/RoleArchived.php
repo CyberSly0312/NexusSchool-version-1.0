@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Role\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
@@ -8,9 +10,11 @@ use Spatie\Permission\Models\Role;
 
 class RoleArchived
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         public readonly Role $role,
-    ) {}
+    ) {
+    }
 }

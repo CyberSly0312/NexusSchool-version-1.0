@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Department\Rules;
 
 use Illuminate\Support\Facades\Validator;

@@ -20,6 +20,7 @@ class SchoolFactory extends Factory
         $name = fake()->unique()->company().' School';
 
         return [
+            'uuid' => Str::ulid(),
             'name' => $name,
             'slug' => Str::slug($name),
             'database' => 'school_'.Str::slug($name),

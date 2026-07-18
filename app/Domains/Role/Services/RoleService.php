@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Role\Services;
 
 use App\Domains\Role\DTOs\RoleData;
@@ -16,8 +18,9 @@ use Spatie\Permission\Models\Role;
 class RoleService
 {
     public function __construct(
-        protected Role $model = new Role,
-    ) {}
+        protected Role $model = new Role(),
+    ) {
+    }
 
     /**
      * System roles that cannot be deleted or renamed.

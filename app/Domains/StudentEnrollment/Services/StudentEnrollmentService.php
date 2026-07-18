@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\StudentEnrollment\Services;
 
 use App\Domains\StudentEnrollment\DTOs\StudentEnrollmentData;
@@ -11,6 +13,7 @@ use App\Domains\StudentEnrollment\Events\EnrollmentSuspended;
 use App\Domains\StudentEnrollment\Events\EnrollmentWithdrawn;
 use App\Domains\StudentEnrollment\Events\StudentEnrolled;
 use App\Domains\StudentEnrollment\Rules\StudentEnrollmentRules;
+use App\Models\Student;
 use App\Models\StudentEnrollment;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -19,8 +22,9 @@ use Illuminate\Validation\ValidationException;
 class StudentEnrollmentService
 {
     public function __construct(
-        protected StudentEnrollment $model = new StudentEnrollment,
-    ) {}
+        protected StudentEnrollment $model = new StudentEnrollment(),
+    ) {
+    }
 
     public function create(StudentEnrollmentData $data): StudentEnrollment
     {
@@ -192,7 +196,7 @@ class StudentEnrollmentService
 
     private function validateStudentActive(int $studentId): void
     {
-        $student = \App\Models\Student::find($studentId);
+        $student = Student::find($studentId);
 
         if (! $student) {
             throw ValidationException::withMessages([

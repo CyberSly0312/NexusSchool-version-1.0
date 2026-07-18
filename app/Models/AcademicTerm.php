@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Domains\AcademicTerm\Enums\AcademicTermStatus;
@@ -11,7 +13,8 @@ use Illuminate\Support\Str;
 
 class AcademicTerm extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'academic_year_id',

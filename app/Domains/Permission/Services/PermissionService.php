@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Permission\Services;
 
 use App\Domains\Permission\DTOs\PermissionData;
@@ -18,8 +20,9 @@ use Spatie\Permission\Models\Role;
 class PermissionService
 {
     public function __construct(
-        protected Permission $model = new Permission,
-    ) {}
+        protected Permission $model = new Permission(),
+    ) {
+    }
 
     public const SYSTEM_PERMISSIONS = [
         'permission.view',

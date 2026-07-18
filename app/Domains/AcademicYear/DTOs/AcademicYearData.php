@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\AcademicYear\DTOs;
 
 readonly class AcademicYearData
@@ -11,7 +13,8 @@ readonly class AcademicYearData
         public string $endDate,
         public ?string $code = null,
         public ?string $description = null,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

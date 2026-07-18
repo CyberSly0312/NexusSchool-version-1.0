@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Domains\AcademicTerm\Enums\AcademicTermStatus;
@@ -121,7 +123,7 @@ class AcademicTermResource extends Resource
                     ->color('success')
                     ->visible(fn (AcademicTerm $record): bool => ! $record->isActive())
                     ->action(function (AcademicTerm $record): void {
-                        $service = new AcademicTermService;
+                        $service = new AcademicTermService();
                         $service->activate($record);
                     }),
                 DeleteAction::make(),

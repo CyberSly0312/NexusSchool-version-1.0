@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\School\Services;
 
 use App\Domains\School\DTOs\SchoolData;
@@ -15,8 +17,9 @@ use Illuminate\Support\Facades\DB;
 class SchoolService
 {
     public function __construct(
-        protected School $model = new School,
-    ) {}
+        protected School $model = new School(),
+    ) {
+    }
 
     /**
      * Create a new school with full tenant provisioning.

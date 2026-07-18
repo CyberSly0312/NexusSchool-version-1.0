@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Classroom\Services;
 
 use App\Domains\Classroom\DTOs\ClassroomData;
@@ -19,8 +21,9 @@ use Illuminate\Validation\ValidationException;
 class ClassroomService
 {
     public function __construct(
-        protected Classroom $model = new Classroom,
-    ) {}
+        protected Classroom $model = new Classroom(),
+    ) {
+    }
 
     public function create(ClassroomData $data): Classroom
     {

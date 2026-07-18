@@ -1,7 +1,5 @@
 <?php
 
-use App\Domains\StudentEnrollment\Enums\EnrollmentStatus;
-use App\Domains\StudentEnrollment\Enums\EnrollmentType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

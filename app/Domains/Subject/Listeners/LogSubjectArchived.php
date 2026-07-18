@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Subject\Listeners;
 
 use App\Domains\Subject\Events\SubjectArchived;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Guardian\Services;
 
 use App\Domains\Guardian\DTOs\GuardianData;
@@ -17,8 +19,9 @@ use Illuminate\Validation\ValidationException;
 class GuardianService
 {
     public function __construct(
-        protected Guardian $model = new Guardian,
-    ) {}
+        protected Guardian $model = new Guardian(),
+    ) {
+    }
 
     public function create(GuardianData $data): Guardian
     {

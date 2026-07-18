@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\SubjectCoefficient\DTOs;
 
 readonly class SubjectCoefficientData
@@ -14,7 +16,8 @@ readonly class SubjectCoefficientData
         public string $effectiveFrom,
         public ?string $effectiveTo,
         public ?string $notes,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {
