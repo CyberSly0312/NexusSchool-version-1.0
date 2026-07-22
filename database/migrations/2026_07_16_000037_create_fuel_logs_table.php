@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('fuel_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
-            $table->foreignId('driver_id')->nullable()->constrained('drivers')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
+            $table->foreignUuid('driver_id')->nullable()->constrained('drivers')->cascadeOnDelete();
             $table->decimal('liters', 8, 2);
             $table->decimal('cost_per_liter', 8, 2);
             $table->decimal('total_cost', 10, 2);

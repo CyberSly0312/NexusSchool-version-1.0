@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('message_recipients', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('message_id')->constrained()->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('message_id')->constrained()->cascadeOnDelete();
             $table->foreignId('recipient_id')->constrained('users')->cascadeOnDelete();
             $table->string('status', 36)->default('pending');
             $table->timestamp('read_at')->nullable();

@@ -27,7 +27,13 @@ class KpiResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Analytics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Analytiques';
+
+    protected static ?string $navigationLabel = 'KPI';
+
+    protected static ?string $modelLabel = 'KPI';
+
+    protected static ?string $pluralModelLabel = 'KPI';
 
     protected static ?int $navigationSort = 72;
 

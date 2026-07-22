@@ -27,7 +27,13 @@ class MaintenanceWindowResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-wrench-screwdriver';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'System Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration système';
+
+    protected static ?string $navigationLabel = 'Fenêtres de maintenance';
+
+    protected static ?string $modelLabel = 'Fenêtre de maintenance';
+
+    protected static ?string $pluralModelLabel = 'Fenêtres de maintenance';
 
     protected static ?int $navigationSort = 93;
 

@@ -12,8 +12,8 @@ return new class extends Migration
     {
         Schema::create('ai_conversations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('ai_provider_id')->nullable()->constrained('ai_providers')->nullOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('ai_provider_id')->nullable()->constrained('ai_providers')->nullOnDelete();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('title', 255)->nullable();
             $table->string('status', 36)->default('active');
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->unsignedInteger('message_count')->default(0);
             $table->unsignedBigInteger('total_input_tokens')->default(0);
             $table->unsignedBigInteger('total_output_tokens')->default(0);
-            $table->unsignedSmallInteger('context_window_used')->default(0);
-            $table->unsignedSmallInteger('context_window_limit')->default(128000);
+            $table->unsignedInteger('context_window_used')->default(0);
+            $table->unsignedInteger('context_window_limit')->default(128000);
             $table->json('metadata')->nullable();
             $table->timestamps();
             $table->softDeletes();

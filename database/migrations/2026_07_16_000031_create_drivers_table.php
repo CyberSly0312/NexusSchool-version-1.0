@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->string('first_name', 100);
             $table->string('last_name', 100);
             $table->string('email', 255)->nullable();

@@ -21,11 +21,15 @@ class WorkflowExecutionResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-play';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Workflow Engine';
+    protected static string|\UnitEnum|null $navigationGroup = 'Moteur de workflow';
 
     protected static ?int $navigationSort = 81;
 
-    protected static ?string $navigationLabel = 'Executions';
+    protected static ?string $navigationLabel = 'Exécutions';
+
+    protected static ?string $modelLabel = 'Exécution';
+
+    protected static ?string $pluralModelLabel = 'Exécutions';
 
     public static function form(Schema $schema): Schema
     {

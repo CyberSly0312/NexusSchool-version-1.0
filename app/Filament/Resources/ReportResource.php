@@ -28,7 +28,13 @@ class ReportResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-chart-bar';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Analytics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Analytiques';
+
+    protected static ?string $navigationLabel = 'Rapports';
+
+    protected static ?string $modelLabel = 'Rapport';
+
+    protected static ?string $pluralModelLabel = 'Rapports';
 
     protected static ?int $navigationSort = 71;
 

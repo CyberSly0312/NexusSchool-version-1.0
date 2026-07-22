@@ -26,11 +26,15 @@ class NotificationChannelResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-bell';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'System Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration système';
 
     protected static ?int $navigationSort = 95;
 
-    protected static ?string $navigationLabel = 'Notification Channels';
+    protected static ?string $navigationLabel = 'Canaux de notification';
+
+    protected static ?string $modelLabel = 'Canal de notification';
+
+    protected static ?string $pluralModelLabel = 'Canaux de notification';
 
     public static function form(Schema $schema): Schema
     {

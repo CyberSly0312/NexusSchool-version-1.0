@@ -29,6 +29,12 @@ class MessageResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Communication';
 
+    protected static ?string $navigationLabel = 'Messages';
+
+    protected static ?string $modelLabel = 'Message';
+
+    protected static ?string $pluralModelLabel = 'Messages';
+
     protected static ?int $navigationSort = 63;
 
     public static function form(Schema $schema): Schema

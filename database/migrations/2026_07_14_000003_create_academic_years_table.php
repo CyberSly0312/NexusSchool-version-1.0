@@ -12,7 +12,7 @@ return new class extends Migration
             // ── Identity ──────────────────────────────────────────────
             $table->id();
             $table->ulid('uuid')->unique();
-            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->nullable()->constrained('tenants')->cascadeOnDelete();
 
             // ── Core Data ─────────────────────────────────────────────
             $table->string('name', 100);

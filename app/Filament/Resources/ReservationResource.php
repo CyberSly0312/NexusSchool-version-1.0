@@ -27,7 +27,13 @@ class ReservationResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clock';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Library';
+    protected static string|\UnitEnum|null $navigationGroup = 'Bibliothèque';
+
+    protected static ?string $navigationLabel = 'Réservations';
+
+    protected static ?string $modelLabel = 'Réservation';
+
+    protected static ?string $pluralModelLabel = 'Réservations';
 
     protected static ?int $navigationSort = 36;
 

@@ -26,7 +26,13 @@ class AiConversationResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'AI Platform';
+    protected static string|\UnitEnum|null $navigationGroup = 'Plateforme IA';
+
+    protected static ?string $navigationLabel = 'Conversations IA';
+
+    protected static ?string $modelLabel = 'Conversation IA';
+
+    protected static ?string $pluralModelLabel = 'Conversations IA';
 
     protected static ?int $navigationSort = 71;
 

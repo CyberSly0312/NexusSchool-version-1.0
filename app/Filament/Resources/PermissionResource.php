@@ -26,6 +26,12 @@ class PermissionResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
+    protected static ?string $navigationLabel = 'Permissions';
+
+    protected static ?string $modelLabel = 'Permission';
+
+    protected static ?string $pluralModelLabel = 'Permissions';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 25;

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->string('name', 255);
             $table->text('description')->nullable();
             $table->decimal('distance_km', 8, 2)->nullable();

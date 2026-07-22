@@ -21,7 +21,13 @@ class AuditLogResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'System Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration système';
+
+    protected static ?string $navigationLabel = 'Journaux d\'audit';
+
+    protected static ?string $modelLabel = 'Journal d\'audit';
+
+    protected static ?string $pluralModelLabel = 'Journaux d\'audit';
 
     protected static ?int $navigationSort = 91;
 

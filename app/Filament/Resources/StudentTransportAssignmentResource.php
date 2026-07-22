@@ -33,6 +33,12 @@ class StudentTransportAssignmentResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Affectations transport';
+
+    protected static ?string $modelLabel = 'Affectation transport';
+
+    protected static ?string $pluralModelLabel = 'Affectations transport';
+
     protected static ?int $navigationSort = 55;
 
     public static function form(Schema $schema): Schema

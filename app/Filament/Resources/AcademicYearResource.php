@@ -25,7 +25,13 @@ class AcademicYearResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-calendar-days';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Academics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+
+    protected static ?string $navigationLabel = 'Années scolaires';
+
+    protected static ?string $modelLabel = 'Année scolaire';
+
+    protected static ?string $pluralModelLabel = 'Années scolaires';
 
     protected static ?string $recordTitleAttribute = 'name';
 

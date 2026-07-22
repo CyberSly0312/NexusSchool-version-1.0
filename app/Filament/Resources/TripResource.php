@@ -31,6 +31,12 @@ class TripResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Trajets';
+
+    protected static ?string $modelLabel = 'Trajet';
+
+    protected static ?string $pluralModelLabel = 'Trajets';
+
     protected static ?int $navigationSort = 54;
 
     public static function form(Schema $schema): Schema

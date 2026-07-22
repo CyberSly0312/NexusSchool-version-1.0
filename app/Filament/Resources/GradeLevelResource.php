@@ -25,7 +25,13 @@ class GradeLevelResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-list-bullet';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Academics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+
+    protected static ?string $navigationLabel = 'Niveaux';
+
+    protected static ?string $modelLabel = 'Niveau';
+
+    protected static ?string $pluralModelLabel = 'Niveaux';
 
     protected static ?string $recordTitleAttribute = 'name';
 

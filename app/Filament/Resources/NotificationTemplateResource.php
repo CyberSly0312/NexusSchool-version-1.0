@@ -30,6 +30,12 @@ class NotificationTemplateResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Communication';
 
+    protected static ?string $navigationLabel = 'Modèles de notification';
+
+    protected static ?string $modelLabel = 'Modèle de notification';
+
+    protected static ?string $pluralModelLabel = 'Modèles de notification';
+
     protected static ?int $navigationSort = 61;
 
     public static function form(Schema $schema): Schema

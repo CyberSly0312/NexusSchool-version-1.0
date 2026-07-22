@@ -23,7 +23,13 @@ class StudentResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'School';
+    protected static string|\UnitEnum|null $navigationGroup = 'École';
+
+    protected static ?string $navigationLabel = 'Élèves';
+
+    protected static ?string $modelLabel = 'Élève';
+
+    protected static ?string $pluralModelLabel = 'Élèves';
 
     protected static ?string $recordTitleAttribute = 'full_name';
 

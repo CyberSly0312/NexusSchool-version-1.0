@@ -27,11 +27,15 @@ class AutomationRuleResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-bolt';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Workflow Engine';
+    protected static string|\UnitEnum|null $navigationGroup = 'Moteur de workflow';
+
+    protected static ?string $navigationLabel = 'Règles d\'automatisation';
+
+    protected static ?string $modelLabel = 'Règle d\'automatisation';
+
+    protected static ?string $pluralModelLabel = 'Règles d\'automatisation';
 
     protected static ?int $navigationSort = 82;
-
-    protected static ?string $navigationLabel = 'Automation Rules';
 
     public static function form(Schema $schema): Schema
     {

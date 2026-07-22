@@ -29,6 +29,12 @@ class CommunicationChannelResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Communication';
 
+    protected static ?string $navigationLabel = 'Canaux de communication';
+
+    protected static ?string $modelLabel = 'Canal de communication';
+
+    protected static ?string $pluralModelLabel = 'Canaux de communication';
+
     protected static ?int $navigationSort = 64;
 
     public static function form(Schema $schema): Schema

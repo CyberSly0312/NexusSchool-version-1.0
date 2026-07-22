@@ -27,7 +27,13 @@ class DashboardResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Analytics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Analytiques';
+
+    protected static ?string $navigationLabel = 'Tableaux de bord';
+
+    protected static ?string $modelLabel = 'Tableau de bord';
+
+    protected static ?string $pluralModelLabel = 'Tableaux de bord';
 
     protected static ?int $navigationSort = 70;
 

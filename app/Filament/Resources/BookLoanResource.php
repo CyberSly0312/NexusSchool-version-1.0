@@ -28,7 +28,13 @@ class BookLoanResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-arrow-path-rounded-square';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Library';
+    protected static string|\UnitEnum|null $navigationGroup = 'Bibliothèque';
+
+    protected static ?string $navigationLabel = 'Emprunts';
+
+    protected static ?string $modelLabel = 'Emprunt';
+
+    protected static ?string $pluralModelLabel = 'Emprunts';
 
     protected static ?int $navigationSort = 35;
 

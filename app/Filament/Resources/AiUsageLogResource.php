@@ -26,11 +26,15 @@ class AiUsageLogResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'AI Platform';
+    protected static string|\UnitEnum|null $navigationGroup = 'Plateforme IA';
 
     protected static ?int $navigationSort = 75;
 
-    protected static ?string $navigationLabel = 'AI Usage Logs';
+    protected static ?string $navigationLabel = 'Journaux d\'utilisation IA';
+
+    protected static ?string $modelLabel = 'Journal d\'utilisation IA';
+
+    protected static ?string $pluralModelLabel = 'Journaux d\'utilisation IA';
 
     protected static bool $recordIsGloballySearchable = false;
 

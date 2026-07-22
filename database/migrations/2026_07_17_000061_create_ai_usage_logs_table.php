@@ -12,9 +12,9 @@ return new class extends Migration
     {
         Schema::create('ai_usage_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('ai_provider_id')->nullable()->constrained('ai_providers')->nullOnDelete();
-            $table->foreignId('ai_conversation_id')->nullable()->constrained('ai_conversations')->nullOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('ai_provider_id')->nullable()->constrained('ai_providers')->nullOnDelete();
+            $table->foreignUuid('ai_conversation_id')->nullable()->constrained('ai_conversations')->nullOnDelete();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('action', 100);
             $table->string('model', 255)->nullable();

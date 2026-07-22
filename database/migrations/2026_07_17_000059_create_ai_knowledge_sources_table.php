@@ -12,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('ai_knowledge_sources', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->string('name', 255);
             $table->string('slug', 255);
             $table->string('type', 50);

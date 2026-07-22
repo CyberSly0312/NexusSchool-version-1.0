@@ -28,6 +28,12 @@ class RouteResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Itinéraires';
+
+    protected static ?string $modelLabel = 'Itinéraire';
+
+    protected static ?string $pluralModelLabel = 'Itinéraires';
+
     protected static ?int $navigationSort = 52;
 
     public static function form(Schema $schema): Schema

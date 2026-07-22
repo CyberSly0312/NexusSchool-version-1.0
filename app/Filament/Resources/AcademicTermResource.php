@@ -26,7 +26,13 @@ class AcademicTermResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clock';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Academics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+
+    protected static ?string $navigationLabel = 'Périodes';
+
+    protected static ?string $modelLabel = 'Période';
+
+    protected static ?string $pluralModelLabel = 'Périodes';
 
     protected static ?string $recordTitleAttribute = 'name';
 

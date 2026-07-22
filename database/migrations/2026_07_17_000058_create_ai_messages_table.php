@@ -12,8 +12,8 @@ return new class extends Migration
     {
         Schema::create('ai_messages', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('ai_conversation_id')->constrained('ai_conversations')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('ai_conversation_id')->constrained('ai_conversations')->cascadeOnDelete();
             $table->string('role', 36);
             $table->text('content');
             $table->unsignedInteger('input_tokens')->default(0);

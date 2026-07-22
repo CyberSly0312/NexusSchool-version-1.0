@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('dashboard_widgets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->uuid('dashboard_id');
             $table->string('title', 255);
             $table->string('widget_type', 36);

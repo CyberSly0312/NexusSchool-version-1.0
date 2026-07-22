@@ -25,6 +25,12 @@ class DepartmentResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
+    protected static ?string $navigationLabel = 'Départements';
+
+    protected static ?string $modelLabel = 'Département';
+
+    protected static ?string $pluralModelLabel = 'Départements';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 22;

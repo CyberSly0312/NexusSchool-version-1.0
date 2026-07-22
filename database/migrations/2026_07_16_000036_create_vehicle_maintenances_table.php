@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('vehicle_maintenances', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
             $table->string('type', 36);
             $table->text('description');
             $table->decimal('cost', 10, 2)->nullable();

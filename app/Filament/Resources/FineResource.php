@@ -27,7 +27,13 @@ class FineResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-exclamation-circle';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Library';
+    protected static string|\UnitEnum|null $navigationGroup = 'Bibliothèque';
+
+    protected static ?string $navigationLabel = 'Amendes';
+
+    protected static ?string $modelLabel = 'Amende';
+
+    protected static ?string $pluralModelLabel = 'Amendes';
 
     protected static ?int $navigationSort = 37;
 

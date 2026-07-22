@@ -25,7 +25,13 @@ class PublisherResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Library';
+    protected static string|\UnitEnum|null $navigationGroup = 'Bibliothèque';
+
+    protected static ?string $navigationLabel = 'Éditeurs';
+
+    protected static ?string $modelLabel = 'Éditeur';
+
+    protected static ?string $pluralModelLabel = 'Éditeurs';
 
     protected static ?int $navigationSort = 31;
 

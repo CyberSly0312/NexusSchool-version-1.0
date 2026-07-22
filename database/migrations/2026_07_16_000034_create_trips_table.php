@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
-            $table->foreignId('driver_id')->constrained('drivers')->cascadeOnDelete();
-            $table->foreignId('route_id')->constrained('routes')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
+            $table->foreignUuid('driver_id')->constrained('drivers')->cascadeOnDelete();
+            $table->foreignUuid('route_id')->constrained('routes')->cascadeOnDelete();
             $table->string('direction', 20);
             $table->date('academic_date');
             $table->time('departure_time')->nullable();

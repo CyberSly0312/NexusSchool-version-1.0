@@ -29,6 +29,12 @@ class AnnouncementResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Communication';
 
+    protected static ?string $navigationLabel = 'Annonces';
+
+    protected static ?string $modelLabel = 'Annonce';
+
+    protected static ?string $pluralModelLabel = 'Annonces';
+
     protected static ?int $navigationSort = 62;
 
     public static function form(Schema $schema): Schema

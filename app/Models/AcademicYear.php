@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Domains\AcademicYear\Enums\AcademicYearStatus;
 use App\Domains\School\Models\School;
+use App\Traits\HasSchoolId;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ use Illuminate\Support\Str;
 class AcademicYear extends Model
 {
     use HasFactory;
+    use HasSchoolId;
     use SoftDeletes;
 
     protected $fillable = [

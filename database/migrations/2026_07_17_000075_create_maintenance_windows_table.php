@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('status', 30)->default('pending');
             $table->boolean('is_readonly')->default(false);
 
-            $table->timestamp('starts_at');
-            $table->timestamp('ends_at');
+            $table->timestamp('starts_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
             $table->timestamp('actual_start_at')->nullable();
             $table->timestamp('actual_end_at')->nullable();
 

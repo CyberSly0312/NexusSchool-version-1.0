@@ -24,7 +24,13 @@ class ClassroomResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Facilities';
+    protected static string|\UnitEnum|null $navigationGroup = 'Installations';
+
+    protected static ?string $navigationLabel = 'Salles';
+
+    protected static ?string $modelLabel = 'Salle';
+
+    protected static ?string $pluralModelLabel = 'Salles';
 
     protected static ?string $recordTitleAttribute = 'name';
 

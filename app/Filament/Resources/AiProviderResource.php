@@ -27,7 +27,13 @@ class AiProviderResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cpu-chip';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'AI Platform';
+    protected static string|\UnitEnum|null $navigationGroup = 'Plateforme IA';
+
+    protected static ?string $navigationLabel = 'Fournisseurs IA';
+
+    protected static ?string $modelLabel = 'Fournisseur IA';
+
+    protected static ?string $pluralModelLabel = 'Fournisseurs IA';
 
     protected static ?int $navigationSort = 70;
 

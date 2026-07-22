@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('analytics_snapshots', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->string('snapshot_type', 100);
             $table->json('data');
             $table->timestamp('period_start')->nullable();
             $table->timestamp('period_end')->nullable();
-            $table->timestamp('generated_at');
+            $table->timestamp('generated_at')->useCurrent();
             $table->boolean('is_immutable')->default(true);
             $table->timestamps();
 

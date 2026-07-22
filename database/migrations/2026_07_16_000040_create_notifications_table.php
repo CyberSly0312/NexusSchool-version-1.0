@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->foreignId('sender_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('template_id')->nullable()->constrained('notification_templates')->nullOnDelete();
+            $table->foreignUuid('template_id')->nullable()->constrained('notification_templates')->nullOnDelete();
             $table->string('type', 100);
             $table->string('title', 255);
             $table->text('body');

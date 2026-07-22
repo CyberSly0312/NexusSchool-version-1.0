@@ -28,6 +28,12 @@ class VehicleResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Véhicules';
+
+    protected static ?string $modelLabel = 'Véhicule';
+
+    protected static ?string $pluralModelLabel = 'Véhicules';
+
     protected static ?int $navigationSort = 50;
 
     public static function form(Schema $schema): Schema

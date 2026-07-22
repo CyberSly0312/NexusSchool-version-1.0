@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('notification_deliveries', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('notification_id')->constrained()->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->foreignUuid('notification_id')->constrained()->cascadeOnDelete();
             $table->foreignId('recipient_id')->constrained('users')->cascadeOnDelete();
             $table->string('channel', 36);
             $table->string('status', 36)->default('pending');

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('webhook_id');
             $table->foreign('webhook_id')->references('id')->on('webhooks')->cascadeOnDelete();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->string('event', 255);
             $table->json('payload');
             $table->integer('response_status')->nullable();

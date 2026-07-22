@@ -28,7 +28,13 @@ class BookResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-book-open';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Library';
+    protected static string|\UnitEnum|null $navigationGroup = 'Bibliothèque';
+
+    protected static ?string $navigationLabel = 'Livres';
+
+    protected static ?string $modelLabel = 'Livre';
+
+    protected static ?string $pluralModelLabel = 'Livres';
 
     protected static ?int $navigationSort = 33;
 

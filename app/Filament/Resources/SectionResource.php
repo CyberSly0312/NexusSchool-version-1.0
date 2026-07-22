@@ -24,7 +24,13 @@ class SectionResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Academics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+
+    protected static ?string $navigationLabel = 'Sections';
+
+    protected static ?string $modelLabel = 'Section';
+
+    protected static ?string $pluralModelLabel = 'Sections';
 
     protected static ?string $recordTitleAttribute = 'name';
 

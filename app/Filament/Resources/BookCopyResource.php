@@ -28,7 +28,13 @@ class BookCopyResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cube';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Library';
+    protected static string|\UnitEnum|null $navigationGroup = 'Bibliothèque';
+
+    protected static ?string $navigationLabel = 'Exemplaires';
+
+    protected static ?string $modelLabel = 'Exemplaire';
+
+    protected static ?string $pluralModelLabel = 'Exemplaires';
 
     protected static ?int $navigationSort = 34;
 

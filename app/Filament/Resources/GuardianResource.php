@@ -25,7 +25,13 @@ class GuardianResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'School';
+    protected static string|\UnitEnum|null $navigationGroup = 'École';
+
+    protected static ?string $navigationLabel = 'Tuteurs';
+
+    protected static ?string $modelLabel = 'Tuteur';
+
+    protected static ?string $pluralModelLabel = 'Tuteurs';
 
     protected static ?string $recordTitleAttribute = 'full_name';
 

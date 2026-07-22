@@ -27,7 +27,13 @@ class WorkflowResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-arrows-right-left';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Workflow Engine';
+    protected static string|\UnitEnum|null $navigationGroup = 'Moteur de workflow';
+
+    protected static ?string $navigationLabel = 'Flux de travail';
+
+    protected static ?string $modelLabel = 'Flux de travail';
+
+    protected static ?string $pluralModelLabel = 'Flux de travail';
 
     protected static ?int $navigationSort = 80;
 

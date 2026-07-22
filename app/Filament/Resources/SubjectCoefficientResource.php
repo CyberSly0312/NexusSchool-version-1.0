@@ -23,7 +23,13 @@ class SubjectCoefficientResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-scale';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Academics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+
+    protected static ?string $navigationLabel = 'Coefficients';
+
+    protected static ?string $modelLabel = 'Coefficient';
+
+    protected static ?string $pluralModelLabel = 'Coefficients';
 
     protected static ?string $recordTitleAttribute = 'coefficient';
 

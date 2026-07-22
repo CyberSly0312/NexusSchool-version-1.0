@@ -10,11 +10,11 @@ return new class extends Migration
     {
         Schema::create('student_transport_assignments', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
-            $table->foreignId('route_id')->constrained('routes')->cascadeOnDelete();
-            $table->foreignId('pickup_stop_id')->nullable()->constrained('route_stops')->cascadeOnDelete();
-            $table->foreignId('dropoff_stop_id')->nullable()->constrained('route_stops')->cascadeOnDelete();
+            $table->foreignUuid('route_id')->constrained('routes')->cascadeOnDelete();
+            $table->foreignUuid('pickup_stop_id')->nullable()->constrained('route_stops')->cascadeOnDelete();
+            $table->foreignUuid('dropoff_stop_id')->nullable()->constrained('route_stops')->cascadeOnDelete();
             $table->foreignId('academic_year_id')->constrained('academic_years')->cascadeOnDelete();
             $table->foreignId('academic_term_id')->nullable()->constrained('academic_terms')->cascadeOnDelete();
             $table->decimal('monthly_fee', 10, 2)->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->index('school_id');
             $table->index('student_id');
             $table->index('academic_year_id');
-            $table->unique(['student_id', 'route_id', 'academic_year_id']);
+            $table->unique(['student_id', 'route_id', 'academic_year_id'], 'sta_student_route_year_uniq');
         });
     }
 

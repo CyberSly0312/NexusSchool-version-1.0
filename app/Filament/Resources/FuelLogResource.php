@@ -29,6 +29,12 @@ class FuelLogResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Journaux de carburant';
+
+    protected static ?string $modelLabel = 'Journal de carburant';
+
+    protected static ?string $pluralModelLabel = 'Journaux de carburant';
+
     protected static ?int $navigationSort = 57;
 
     public static function form(Schema $schema): Schema

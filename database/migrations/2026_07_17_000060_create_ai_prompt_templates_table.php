@@ -12,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('ai_prompt_templates', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->string('name', 255);
             $table->string('slug', 255);
             $table->string('category', 100);

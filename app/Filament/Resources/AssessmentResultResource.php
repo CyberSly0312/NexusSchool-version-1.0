@@ -25,7 +25,13 @@ class AssessmentResultResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Gradebook';
+    protected static string|\UnitEnum|null $navigationGroup = 'Carnet de notes';
+
+    protected static ?string $navigationLabel = 'Résultats d\'évaluation';
+
+    protected static ?string $modelLabel = 'Résultat d\'évaluation';
+
+    protected static ?string $pluralModelLabel = 'Résultats d\'évaluation';
 
     protected static ?string $recordTitleAttribute = 'raw_score';
 

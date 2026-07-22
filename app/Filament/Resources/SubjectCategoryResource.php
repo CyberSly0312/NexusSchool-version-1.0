@@ -23,7 +23,13 @@ class SubjectCategoryResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-tag';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Academics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+
+    protected static ?string $navigationLabel = 'Catégories de matière';
+
+    protected static ?string $modelLabel = 'Catégorie de matière';
+
+    protected static ?string $pluralModelLabel = 'Catégories de matière';
 
     protected static ?string $recordTitleAttribute = 'name';
 

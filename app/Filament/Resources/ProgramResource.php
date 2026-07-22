@@ -25,7 +25,13 @@ class ProgramResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Academics';
+    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+
+    protected static ?string $navigationLabel = 'Programmes';
+
+    protected static ?string $modelLabel = 'Programme';
+
+    protected static ?string $pluralModelLabel = 'Programmes';
 
     protected static ?string $recordTitleAttribute = 'name';
 

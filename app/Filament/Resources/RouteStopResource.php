@@ -28,6 +28,12 @@ class RouteStopResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Arrêts';
+
+    protected static ?string $modelLabel = 'Arrêt';
+
+    protected static ?string $pluralModelLabel = 'Arrêts';
+
     protected static ?int $navigationSort = 53;
 
     public static function form(Schema $schema): Schema

@@ -27,7 +27,13 @@ class BackupResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-archive-box';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'System Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration système';
+
+    protected static ?string $navigationLabel = 'Sauvegardes';
+
+    protected static ?string $modelLabel = 'Sauvegarde';
+
+    protected static ?string $pluralModelLabel = 'Sauvegardes';
 
     protected static ?int $navigationSort = 92;
 

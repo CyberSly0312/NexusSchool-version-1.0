@@ -25,7 +25,13 @@ class StudentEnrollmentResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'School';
+    protected static string|\UnitEnum|null $navigationGroup = 'École';
+
+    protected static ?string $navigationLabel = 'Inscriptions';
+
+    protected static ?string $modelLabel = 'Inscription';
+
+    protected static ?string $pluralModelLabel = 'Inscriptions';
 
     protected static ?string $recordTitleAttribute = 'enrollment_number';
 

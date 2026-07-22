@@ -21,11 +21,15 @@ class SystemHealthResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-heart';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'System Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration système';
 
     protected static ?int $navigationSort = 94;
 
-    protected static ?string $navigationLabel = 'System Health';
+    protected static ?string $navigationLabel = 'États du système';
+
+    protected static ?string $modelLabel = 'État du système';
+
+    protected static ?string $pluralModelLabel = 'États du système';
 
     public static function form(Schema $schema): Schema
     {

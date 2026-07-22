@@ -30,6 +30,12 @@ class VehicleMaintenanceResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Maintenances véhicule';
+
+    protected static ?string $modelLabel = 'Maintenance véhicule';
+
+    protected static ?string $pluralModelLabel = 'Maintenances véhicule';
+
     protected static ?int $navigationSort = 56;
 
     public static function form(Schema $schema): Schema

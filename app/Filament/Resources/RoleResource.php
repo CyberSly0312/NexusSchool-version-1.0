@@ -26,6 +26,12 @@ class RoleResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
+    protected static ?string $navigationLabel = 'Rôles';
+
+    protected static ?string $modelLabel = 'Rôle';
+
+    protected static ?string $pluralModelLabel = 'Rôles';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 20;

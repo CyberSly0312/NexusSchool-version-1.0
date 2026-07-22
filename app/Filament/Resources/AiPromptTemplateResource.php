@@ -27,7 +27,13 @@ class AiPromptTemplateResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'AI Platform';
+    protected static string|\UnitEnum|null $navigationGroup = 'Plateforme IA';
+
+    protected static ?string $navigationLabel = 'Modèles de prompt IA';
+
+    protected static ?string $modelLabel = 'Modèle de prompt IA';
+
+    protected static ?string $pluralModelLabel = 'Modèles de prompt IA';
 
     protected static ?int $navigationSort = 74;
 

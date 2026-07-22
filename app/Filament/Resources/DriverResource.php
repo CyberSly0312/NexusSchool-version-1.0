@@ -28,6 +28,12 @@ class DriverResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Transport';
 
+    protected static ?string $navigationLabel = 'Chauffeurs';
+
+    protected static ?string $modelLabel = 'Chauffeur';
+
+    protected static ?string $pluralModelLabel = 'Chauffeurs';
+
     protected static ?int $navigationSort = 51;
 
     public static function form(Schema $schema): Schema

@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('NexusSchool')
             ->colors([
                 'primary' => Color::hex('#00a2ff'),
             ])

@@ -27,7 +27,13 @@ class SystemSettingResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'System Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration système';
+
+    protected static ?string $navigationLabel = 'Paramètres système';
+
+    protected static ?string $modelLabel = 'Paramètre système';
+
+    protected static ?string $pluralModelLabel = 'Paramètres système';
 
     protected static ?int $navigationSort = 90;
 

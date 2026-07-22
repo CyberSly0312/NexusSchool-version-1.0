@@ -14,7 +14,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('api_client_id');
             $table->foreign('api_client_id')->references('id')->on('api_clients')->cascadeOnDelete();
-            $table->foreignId('school_id')->constrained('tenants')->cascadeOnDelete();
+            $table->string('school_id')->constrained('tenants')->cascadeOnDelete();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name', 255);
             $table->string('token', 255)->unique();

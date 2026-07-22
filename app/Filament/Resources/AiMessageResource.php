@@ -23,11 +23,15 @@ class AiMessageResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-paper-airplane';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'AI Platform';
+    protected static string|\UnitEnum|null $navigationGroup = 'Plateforme IA';
 
     protected static ?int $navigationSort = 72;
 
-    protected static ?string $navigationLabel = 'AI Messages';
+    protected static ?string $navigationLabel = 'Messages IA';
+
+    protected static ?string $modelLabel = 'Message IA';
+
+    protected static ?string $pluralModelLabel = 'Messages IA';
 
     protected static bool $shouldRegisterNavigation = false;
 

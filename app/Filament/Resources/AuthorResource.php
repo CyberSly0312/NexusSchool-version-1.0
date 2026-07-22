@@ -25,7 +25,13 @@ class AuthorResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-pencil-square';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Library';
+    protected static string|\UnitEnum|null $navigationGroup = 'Bibliothèque';
+
+    protected static ?string $navigationLabel = 'Auteurs';
+
+    protected static ?string $modelLabel = 'Auteur';
+
+    protected static ?string $pluralModelLabel = 'Auteurs';
 
     protected static ?int $navigationSort = 30;
 
