@@ -19,15 +19,15 @@ enum TemplateCategory: string
     public static function labels(): array
     {
         return [
-            self::FeeReminder->value => 'Fee Reminder',
-            self::AttendanceAlert->value => 'Attendance Alert',
-            self::GradePublication->value => 'Grade Publication',
-            self::LibraryReminder->value => 'Library Reminder',
-            self::TransportUpdate->value => 'Transport Update',
-            self::PayrollNotice->value => 'Payroll Notice',
-            self::PasswordReset->value => 'Password Reset',
-            self::Welcome->value => 'Welcome',
-            self::General->value => 'General',
+            self::FeeReminder->value => 'Rappel de frais',
+            self::AttendanceAlert->value => 'Alerte de présence',
+            self::GradePublication->value => 'Publication de notes',
+            self::LibraryReminder->value => 'Rappel de bibliothèque',
+            self::TransportUpdate->value => 'Mise à jour transport',
+            self::PayrollNotice->value => 'Avis de paie',
+            self::PasswordReset->value => 'Réinitialisation de mot de passe',
+            self::Welcome->value => 'Bienvenue',
+            self::General->value => 'Général',
         ];
     }
 

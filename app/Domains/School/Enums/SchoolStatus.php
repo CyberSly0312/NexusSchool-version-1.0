@@ -14,10 +14,10 @@ enum SchoolStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending Setup',
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Suspended => 'Suspended',
+            self::Pending => 'Configuration en attente',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
+            self::Suspended => 'Suspendu',
         };
     }
 

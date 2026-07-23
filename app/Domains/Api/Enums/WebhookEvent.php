@@ -18,14 +18,14 @@ enum WebhookEvent: string
     public function label(): string
     {
         return match ($this) {
-            self::StudentCreated => 'Student Created',
-            self::StudentUpdated => 'Student Updated',
-            self::EnrollmentCreated => 'Enrollment Created',
-            self::AttendanceRecorded => 'Attendance Recorded',
-            self::GradePublished => 'Grade Published',
-            self::PaymentReceived => 'Payment Received',
-            self::NotificationSent => 'Notification Sent',
-            self::ReportGenerated => 'Report Generated',
+            self::StudentCreated => 'Élève créé',
+            self::StudentUpdated => 'Élève mis à jour',
+            self::EnrollmentCreated => 'Inscription créée',
+            self::AttendanceRecorded => 'Présence enregistrée',
+            self::GradePublished => 'Note publiée',
+            self::PaymentReceived => 'Paiement reçu',
+            self::NotificationSent => 'Notification envoyée',
+            self::ReportGenerated => 'Rapport généré',
         };
     }
 

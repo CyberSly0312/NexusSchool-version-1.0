@@ -42,7 +42,7 @@ class AiUsageLogResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Usage Details')
+                SectionComponent::make('Détails d\'utilisation')
                     ->schema([
                         Forms\Components\TextInput::make('action')
                             ->required()
@@ -55,7 +55,7 @@ class AiUsageLogResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Token Usage')
+                SectionComponent::make('Utilisation des jetons')
                     ->schema([
                         Forms\Components\TextInput::make('input_tokens')
                             ->numeric()
@@ -92,28 +92,28 @@ class AiUsageLogResource extends Resource
                 TextColumn::make('total_tokens')
                     ->sortable(),
                 TextColumn::make('estimated_cost')
-                    ->money('USD')
+                    ->money('FCFA', locale: 'fr_FR')
                     ->sortable(),
                 TextColumn::make('latency_ms')
-                    ->label('Latency')
+                    ->label('Latence')
                     ->suffix('ms')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 IconColumn::make('was_cached')
                     ->boolean()
-                    ->label('Cached')
+                    ->label('En cache')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('user.name')
-                    ->label('User')
+                    ->label('Utilisateur')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('provider.name')
-                    ->label('Provider')
+                    ->label('Fournisseur')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->filters([
@@ -121,9 +121,9 @@ class AiUsageLogResource extends Resource
                     ->options(AiUsageLogStatus::labels()),
                 SelectFilter::make('action')
                     ->options([
-                        'conversation_started' => 'Conversation Started',
-                        'message_generated' => 'Message Generated',
-                        'knowledge_indexed' => 'Knowledge Indexed',
+                        'conversation_started' => 'Conversation démarrée',
+                        'message_generated' => 'Message généré',
+                        'knowledge_indexed' => 'Connaissances indexées',
                     ]),
             ])
             ->actions([

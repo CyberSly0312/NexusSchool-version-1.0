@@ -41,7 +41,7 @@ class SystemSettingResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Setting Details')
+                SectionComponent::make('Détails du paramètre')
                     ->schema([
                         Forms\Components\TextInput::make('group')
                             ->required()
@@ -56,7 +56,7 @@ class SystemSettingResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Value')
+                SectionComponent::make('Valeur')
                     ->schema([
                         Forms\Components\Textarea::make('value')
                             ->rows(3),
@@ -100,7 +100,7 @@ class SystemSettingResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

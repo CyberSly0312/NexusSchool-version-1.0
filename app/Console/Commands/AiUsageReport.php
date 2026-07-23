@@ -9,9 +9,9 @@ use Illuminate\Console\Command;
 
 class AiUsageReport extends Command
 {
-    protected $signature = 'ai:usage-report {--school= : School ID} {--period=day : Report period (day|week|month)}';
+    protected $signature = 'ai:usage-report {--school= : ID de l\'école} {--period=day : Période du rapport (day|week|month)}';
 
-    protected $description = 'Generate AI usage report for a school';
+    protected $description = 'Générer le rapport d\'utilisation IA pour une école';
 
     public function handle(): int
     {
@@ -38,14 +38,14 @@ class AiUsageReport extends Command
             SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) as failed
         ', ['failed'])->first();
 
-        $this->info('AI Usage Report');
-        $this->info('===============');
-        $this->info("Period: {$period}");
-        $this->info("Total Requests: {$stats->total_requests}");
-        $this->info("Total Tokens: {$stats->total_tokens}");
-        $this->info('Total Cost: $' . number_format((float) $stats->total_cost, 4));
-        $this->info('Average Latency: ' . number_format((float) $stats->avg_latency, 0) . 'ms');
-        $this->info("Failed Requests: {$stats->failed}");
+        $this->info('Rapport d\'utilisation IA');
+        $this->info('========================');
+        $this->info("Période : {$period}");
+        $this->info("Requêtes totales : {$stats->total_requests}");
+        $this->info("Jetons totaux : {$stats->total_tokens}");
+        $this->info('Coût total : ' . number_format((float) $stats->total_cost, 0, ',', ' ') . ' FCFA');
+        $this->info('Latence moyenne : ' . number_format((float) $stats->avg_latency, 0) . ' ms');
+        $this->info("Requêtes échouées : {$stats->failed}");
 
         return Command::SUCCESS;
     }

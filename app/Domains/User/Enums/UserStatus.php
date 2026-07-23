@@ -14,10 +14,10 @@ enum UserStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Pending => 'Pending',
-            self::Suspended => 'Suspended',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
+            self::Pending => 'En attente',
+            self::Suspended => 'Suspendu',
         };
     }
 

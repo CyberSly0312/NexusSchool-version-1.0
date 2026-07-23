@@ -13,9 +13,9 @@ enum RouteStatus: string
     public static function labels(): array
     {
         return [
-            self::Active->value => 'Active',
-            self::Inactive->value => 'Inactive',
-            self::Archived->value => 'Archived',
+            self::Active->value => 'Actif',
+            self::Inactive->value => 'Inactif',
+            self::Archived->value => 'Archivé',
         ];
     }
 

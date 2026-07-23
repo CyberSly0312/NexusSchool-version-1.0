@@ -41,10 +41,10 @@ class GradeLevelResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Grade Level Details')
+                Section::make('Détails du niveau scolaire')
                     ->schema([
                         Forms\Components\Select::make('program_id')
-                            ->label('Program')
+                            ->label('Programme')
                             ->options(Program::pluck('name', 'id'))
                             ->required()
                             ->searchable()
@@ -55,23 +55,23 @@ class GradeLevelResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Short unique code (e.g., 6E, SEC)'),
+                            ->helperText('Code court unique (ex. 6E, SEC)'),
                         Forms\Components\TextInput::make('short_name')
                             ->maxLength(20)
-                            ->helperText('Abbreviation (e.g., 6ème)'),
+                            ->helperText('Abréviation (ex. 6ème)'),
                         Forms\Components\TextInput::make('level_order')
                             ->numeric()
                             ->required()
                             ->minValue(1)
-                            ->helperText('Position within program'),
+                            ->helperText('Position dans le programme'),
                         Forms\Components\Select::make('educational_cycle')
-                            ->label('Educational Cycle')
+                            ->label('Cycle éducatif')
                             ->options(EducationalCycle::class)
                             ->required(),
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                     ])->columns(2),
-                Section::make('Status')
+                Section::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(GradeLevelStatus::class)
@@ -86,11 +86,11 @@ class GradeLevelResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('program.name')
-                    ->label('Program')
+                    ->label('Programme')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('level_order')
-                    ->label('Order')
+                    ->label('Ordre')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
@@ -109,7 +109,7 @@ class GradeLevelResource extends Resource
                     ->badge()
                     ->color(fn (GradeLevelStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -119,7 +119,7 @@ class GradeLevelResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(GradeLevelStatus::class),
                 Tables\Filters\SelectFilter::make('program_id')
-                    ->label('Program')
+                    ->label('Programme')
                     ->options(Program::pluck('name', 'id')),
             ])
             ->actions([

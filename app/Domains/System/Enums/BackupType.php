@@ -13,9 +13,9 @@ enum BackupType: string
     public function label(): string
     {
         return match ($this) {
-            self::Manual => 'Manual',
-            self::Scheduled => 'Scheduled',
-            self::PreUpdate => 'Pre-Update',
+            self::Manual => 'Manuel',
+            self::Scheduled => 'Planifié',
+            self::PreUpdate => 'Pré-mise à jour',
         };
     }
 

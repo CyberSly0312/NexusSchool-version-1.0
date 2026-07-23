@@ -39,7 +39,7 @@ class AuthorResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Author Information')
+                SectionComponent::make('Informations sur l\'auteur')
                     ->schema([
                         Forms\Components\TextInput::make('first_name')
                             ->required()
@@ -60,8 +60,8 @@ class AuthorResource extends Resource
                             ->directory('author-photos'),
                         Forms\Components\Select::make('status')
                             ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
+                                'active' => 'Actif',
+                                'inactive' => 'Inactif',
                             ])
                             ->required(),
                     ])
@@ -74,14 +74,14 @@ class AuthorResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('full_name')
-                    ->label('Full Name')
+                    ->label('Nom complet')
                     ->getStateUsing(fn (Author $record): string => trim($record->first_name.' '.$record->middle_name.' '.$record->last_name))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('nationality')
                     ->searchable(),
                 TextColumn::make('date_of_birth')
-                    ->date()
+                    ->date('d/m/Y')
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
@@ -91,15 +91,15 @@ class AuthorResource extends Resource
                         default => 'gray',
                     }),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
+                        'active' => 'Actif',
+                        'inactive' => 'Inactif',
                     ]),
             ])
             ->actions([

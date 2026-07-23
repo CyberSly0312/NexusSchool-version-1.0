@@ -18,14 +18,14 @@ enum TaskType: string
     public function label(): string
     {
         return match ($this) {
-            self::Approval => 'Approval',
-            self::Review => 'Review',
+            self::Approval => 'Approbation',
+            self::Review => 'Révision',
             self::Notification => 'Notification',
-            self::DataEntry => 'Data Entry',
-            self::ApiCall => 'API Call',
-            self::AiAction => 'AI Action',
-            self::DatabaseAction => 'Database Action',
-            self::ScriptPlaceholder => 'Script Placeholder',
+            self::DataEntry => 'Saisie de données',
+            self::ApiCall => 'Appel API',
+            self::AiAction => 'Action IA',
+            self::DatabaseAction => 'Action base de données',
+            self::ScriptPlaceholder => 'Placeholder de script',
         };
     }
 

@@ -40,7 +40,7 @@ class RouteResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Route Information')
+                SectionComponent::make('Informations de l\'itinéraire')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -52,7 +52,7 @@ class RouteResource extends Resource
                             ->numeric()
                             ->minValue(0),
                         Forms\Components\TextInput::make('estimated_duration_minutes')
-                            ->label('Estimated Duration (min)')
+                            ->label('Durée estimée (min)')
                             ->numeric()
                             ->minValue(0),
                         Forms\Components\TextInput::make('fare')
@@ -61,7 +61,7 @@ class RouteResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Status')
+                SectionComponent::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(RouteStatus::labels())
@@ -86,7 +86,7 @@ class RouteResource extends Resource
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('estimated_duration_minutes')
-                    ->label('Duration (min)')
+                    ->label('Durée (min)')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('fare')
@@ -98,7 +98,7 @@ class RouteResource extends Resource
                     ->color(fn (RouteStatus $state): string => RouteStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (RouteStatus $state): string => RouteStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])

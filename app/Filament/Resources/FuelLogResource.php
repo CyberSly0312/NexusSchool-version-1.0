@@ -41,16 +41,16 @@ class FuelLogResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Vehicle & Driver')
+                SectionComponent::make('Véhicule et chauffeur')
                     ->schema([
                         Forms\Components\Select::make('vehicle_id')
-                            ->label('Vehicle')
+                            ->label('Véhicule')
                             ->options(fn () => Vehicle::pluck('registration_number', 'id'))
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('driver_id')
-                            ->label('Driver')
+                            ->label('Chauffeur')
                             ->options(fn () => Driver::all()->map(fn (Driver $driver) => [
                                 'value' => $driver->id,
                                 'label' => trim($driver->first_name.' '.$driver->last_name),
@@ -61,28 +61,28 @@ class FuelLogResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Fuel Details')
+                SectionComponent::make('Détails du carburant')
                     ->schema([
                         Forms\Components\TextInput::make('liters')
                             ->numeric()
                             ->minValue(0)
                             ->required(),
                         Forms\Components\TextInput::make('cost_per_liter')
-                            ->label('Cost per Liter')
+                            ->label('Coût par litre')
                             ->numeric()
                             ->minValue(0)
                             ->required(),
                         Forms\Components\TextInput::make('total_cost')
-                            ->label('Total Cost')
+                            ->label('Coût total')
                             ->numeric()
                             ->minValue(0),
                         Forms\Components\Select::make('fuel_type')
                             ->options([
                                 'diesel' => 'Diesel',
-                                'petrol' => 'Petrol',
-                                'electric' => 'Electric',
-                                'hybrid' => 'Hybrid',
-                                'cng' => 'CNG',
+                                'petrol' => 'Essence',
+                                'electric' => 'Électrique',
+                                'hybrid' => 'Hybride',
+                                'cng' => 'GNC',
                             ])
                             ->required(),
                     ])
@@ -93,7 +93,7 @@ class FuelLogResource extends Resource
                         Forms\Components\TextInput::make('fuel_station')
                             ->maxLength(255),
                         Forms\Components\TextInput::make('odometer_reading')
-                            ->label('Odometer Reading (km)')
+                            ->label('Compteur kilométrique (km)')
                             ->numeric()
                             ->minValue(0),
                         Forms\Components\DatePicker::make('fuel_date')
@@ -114,15 +114,15 @@ class FuelLogResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('vehicle.registration_number')
-                    ->label('Vehicle')
+                    ->label('Véhicule')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('driver')
-                    ->label('Driver')
+                    ->label('Chauffeur')
                     ->getStateUsing(fn (FuelLog $record): string => trim($record->driver->first_name.' '.$record->driver->last_name))
                     ->searchable(),
                 TextColumn::make('fuel_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('liters')
                     ->numeric(2)
@@ -143,24 +143,24 @@ class FuelLogResource extends Resource
                     })
                     ->toggleable(),
                 TextColumn::make('odometer_reading')
-                    ->label('Odometer')
+                    ->label('Compteur')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('fuel_type')
-                    ->label('Fuel Type')
+                    ->label('Type de carburant')
                     ->options([
                         'diesel' => 'Diesel',
-                        'petrol' => 'Petrol',
-                        'electric' => 'Electric',
-                        'hybrid' => 'Hybrid',
-                        'cng' => 'CNG',
+                        'petrol' => 'Essence',
+                        'electric' => 'Électrique',
+                        'hybrid' => 'Hybride',
+                        'cng' => 'GNC',
                     ]),
             ])
             ->actions([

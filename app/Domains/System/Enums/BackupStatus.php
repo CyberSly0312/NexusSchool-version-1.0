@@ -15,11 +15,11 @@ enum BackupStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Running => 'Running',
-            self::Completed => 'Completed',
-            self::Failed => 'Failed',
-            self::Verified => 'Verified',
+            self::Pending => 'En attente',
+            self::Running => 'En cours d\'exécution',
+            self::Completed => 'Terminé',
+            self::Failed => 'Échoué',
+            self::Verified => 'Vérifié',
         };
     }
 

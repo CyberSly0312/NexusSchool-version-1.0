@@ -18,39 +18,39 @@ class ViewWorkflowExecution extends ViewRecord
     {
         return $schema
             ->schema([
-                Section::make('Execution Details')
+                Section::make('Détails de l\'exécution')
                     ->schema([
                         TextEntry::make('workflow.name')
-                            ->label('Workflow'),
+                            ->label('Flux de travail'),
                         TextEntry::make('status')
                             ->badge(),
                         TextEntry::make('current_node_id')
-                            ->label('Current Node'),
+                            ->label('Nœud actuel'),
                         TextEntry::make('retry_count')
-                            ->label('Retries'),
+                            ->label('Tentatives'),
                         TextEntry::make('started_at')
-                            ->dateTime(),
+                            ->dateTime('d/m/Y H:i'),
                         TextEntry::make('completed_at')
-                            ->dateTime(),
+                            ->dateTime('d/m/Y H:i'),
                         TextEntry::make('duration_ms')
-                            ->label('Duration (ms)'),
+                            ->label('Durée (ms)'),
                     ])
                     ->columns(3),
 
-                Section::make('Context')
+                Section::make('Contexte')
                     ->schema([
                         TextEntry::make('context')
-                            ->label('Execution Context')
+                            ->label('Contexte d\'exécution')
                             ->formatStateUsing(fn ($state) => $state ? json_encode($state, JSON_PRETTY_PRINT) : '-'),
                         TextEntry::make('variables')
                             ->label('Variables')
                             ->formatStateUsing(fn ($state) => $state ? json_encode($state, JSON_PRETTY_PRINT) : '-'),
                     ]),
 
-                Section::make('Error')
+                Section::make('Erreur')
                     ->schema([
                         TextEntry::make('error')
-                            ->placeholder('No errors'),
+                            ->placeholder('Aucune erreur'),
                     ])
                     ->visible(fn ($record) => ! empty($record->error)),
             ]);

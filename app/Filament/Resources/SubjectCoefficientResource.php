@@ -39,35 +39,35 @@ class SubjectCoefficientResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Academic Context')
+                SectionComponent::make('Contexte académique')
                     ->schema([
                         Forms\Components\Select::make('subject_id')
-                            ->label('Subject')
+                            ->label('Matière')
                             ->relationship('subject', 'name')
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('program_id')
-                            ->label('Program')
+                            ->label('Programme')
                             ->relationship('program', 'name')
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('grade_level_id')
-                            ->label('Grade Level')
+                            ->label('Niveau scolaire')
                             ->relationship('gradeLevel', 'name')
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('academic_year_id')
-                            ->label('Academic Year')
+                            ->label('Année académique')
                             ->relationship('academicYear', 'name')
                             ->searchable()
                             ->preload()
                             ->nullable()
-                            ->helperText('Leave blank for curriculum-wide coefficient'),
+                            ->helperText('Laisser vide pour un coefficient pour tout le programme'),
                     ])->columns(2),
-                SectionComponent::make('Coefficient Details')
+                SectionComponent::make('Détails du coefficient')
                     ->schema([
                         Forms\Components\TextInput::make('coefficient')
                             ->numeric()
@@ -76,18 +76,18 @@ class SubjectCoefficientResource extends Resource
                             ->maxValue(99.99)
                             ->default(1.00)
                             ->step(0.01)
-                            ->helperText('Weighting value (e.g. 1.5)'),
+                            ->helperText('Valeur de pondération (ex. 1.5)'),
                         Forms\Components\DatePicker::make('effective_from')
                             ->required()
                             ->default(now()),
                         Forms\Components\DatePicker::make('effective_to')
                             ->nullable()
-                            ->helperText('Leave blank for ongoing coefficient'),
+                            ->helperText('Laisser vide pour un coefficient permanent'),
                         Forms\Components\Textarea::make('notes')
                             ->rows(3)
                             ->columnSpanFull(),
                     ])->columns(2),
-                SectionComponent::make('Status')
+                SectionComponent::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(SubjectCoefficientStatus::class)
@@ -120,11 +120,11 @@ class SubjectCoefficientResource extends Resource
                     ->toggleable()
                     ->formatStateUsing(fn ($state) => number_format($state, 2)),
                 Tables\Columns\TextColumn::make('effective_from')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('effective_to')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable()
                     ->default('—'),
@@ -132,7 +132,7 @@ class SubjectCoefficientResource extends Resource
                     ->badge()
                     ->color(fn (SubjectCoefficientStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -142,16 +142,16 @@ class SubjectCoefficientResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(SubjectCoefficientStatus::class),
                 Tables\Filters\SelectFilter::make('subject_id')
-                    ->label('Subject')
+                    ->label('Matière')
                     ->relationship('subject', 'name'),
                 Tables\Filters\SelectFilter::make('program_id')
-                    ->label('Program')
+                    ->label('Programme')
                     ->relationship('program', 'name'),
                 Tables\Filters\SelectFilter::make('grade_level_id')
-                    ->label('Grade Level')
+                    ->label('Niveau scolaire')
                     ->relationship('gradeLevel', 'name'),
                 Tables\Filters\SelectFilter::make('academic_year_id')
-                    ->label('Academic Year')
+                    ->label('Année académique')
                     ->relationship('academicYear', 'name'),
             ])
             ->actions([

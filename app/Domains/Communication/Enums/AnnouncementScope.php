@@ -17,13 +17,13 @@ enum AnnouncementScope: string
     public static function labels(): array
     {
         return [
-            self::SchoolWide->value => 'School-Wide',
-            self::Department->value => 'Department',
-            self::GradeLevel->value => 'Grade Level',
-            self::ClassLevel->value => 'Class',
-            self::Staff->value => 'Staff',
+            self::SchoolWide->value => 'Toute l\'école',
+            self::Department->value => 'Département',
+            self::GradeLevel->value => 'Niveau',
+            self::ClassLevel->value => 'Classe',
+            self::Staff->value => 'Personnel',
             self::Parents->value => 'Parents',
-            self::Individual->value => 'Individual',
+            self::Individual->value => 'Individuel',
         ];
     }
 

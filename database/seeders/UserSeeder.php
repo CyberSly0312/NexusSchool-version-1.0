@@ -19,41 +19,49 @@ class UserSeeder extends Seeder
                 'name' => 'Nexus Demo Academy',
                 'database' => 'school_nexus_demo',
                 'email' => 'admin@nexusdemo.edu',
-                'phone' => '+233 24 000 0000',
-                'address' => '123 Education Lane',
-                'city' => 'Accra',
-                'state' => 'Greater Accra',
-                'country' => 'Ghana',
-                'timezone' => 'Africa/Accra',
-                'currency' => 'GHS',
-                'locale' => 'en',
+                'phone' => '+225 01 00 00 00',
+                'address' => '123 Avenue de l\'Éducation',
+                'city' => 'Ouagadougou',
+                'state' => 'Centre',
+                'country' => 'Burkina Faso',
+                'timezone' => 'Africa/Ouagadougou',
+                'currency' => 'XOF',
+                'locale' => 'fr',
                 'school_type' => 'secondary',
                 'status' => SchoolStatus::Active,
             ]
         );
 
-        User::updateOrCreate(
+        $admin = User::updateOrCreate(
             ['email' => 'admin@nexusdemo.edu'],
             [
                 'school_id' => $school->id,
                 'first_name' => 'Admin',
-                'last_name' => 'User',
+                'last_name' => 'Système',
                 'password' => Hash::make('password'),
                 'status' => UserStatus::Active,
                 'email_verified_at' => now(),
             ]
         );
 
-        User::updateOrCreate(
+        if (!$admin->hasRole('super_admin')) {
+            $admin->assignRole('super_admin');
+        }
+
+        $teacher = User::updateOrCreate(
             ['email' => 'teacher@nexusdemo.edu'],
             [
                 'school_id' => $school->id,
-                'first_name' => 'John',
-                'last_name' => 'Doe',
+                'first_name' => 'Jean',
+                'last_name' => 'Dupont',
                 'password' => Hash::make('password'),
                 'status' => UserStatus::Active,
                 'email_verified_at' => now(),
             ]
         );
+
+        if (!$teacher->hasRole('teacher')) {
+            $teacher->assignRole('teacher');
+        }
     }
 }

@@ -15,11 +15,11 @@ enum VehicleStatus: string
     public static function labels(): array
     {
         return [
-            self::Available->value => 'Available',
-            self::Assigned->value => 'Assigned',
-            self::InService->value => 'In Service',
+            self::Available->value => 'Disponible',
+            self::Assigned->value => 'Assigné',
+            self::InService->value => 'En service',
             self::Maintenance->value => 'Maintenance',
-            self::Retired->value => 'Retired',
+            self::Retired->value => 'Retiré',
         ];
     }
 

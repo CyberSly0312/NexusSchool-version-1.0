@@ -40,7 +40,7 @@ class ClassroomResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Classroom Details')
+                SectionComponent::make('Détails de la salle')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -48,18 +48,18 @@ class ClassroomResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Unique code within the school'),
+                            ->helperText('Code unique dans l\'établissement'),
                         Forms\Components\TextInput::make('building')
                             ->maxLength(100)
-                            ->helperText('Building name'),
+                            ->helperText('Nom du bâtiment'),
                         Forms\Components\TextInput::make('floor')
                             ->maxLength(50)
-                            ->helperText('Floor number or name'),
+                            ->helperText('Numéro ou nom de l\'étage'),
                         Forms\Components\TextInput::make('capacity')
                             ->numeric()
                             ->required()
                             ->minValue(1)
-                            ->helperText('Maximum number of students'),
+                            ->helperText('Nombre maximum d\'élèves'),
                         Forms\Components\Select::make('room_type')
                             ->options(RoomType::class)
                             ->required()
@@ -106,7 +106,7 @@ class ClassroomResource extends Resource
                     ->badge()
                     ->color(fn (ClassroomStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -116,7 +116,7 @@ class ClassroomResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(ClassroomStatus::class),
                 Tables\Filters\SelectFilter::make('room_type')
-                    ->label('Room Type')
+                    ->label('Type de salle')
                     ->options(RoomType::class),
             ])
             ->actions([

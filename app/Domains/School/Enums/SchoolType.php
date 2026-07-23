@@ -17,13 +17,13 @@ enum SchoolType: string
     public function label(): string
     {
         return match ($this) {
-            self::Primary => 'Primary School',
-            self::JuniorHigh => 'Junior High School',
-            self::SeniorHigh => 'Senior High School',
-            self::Secondary => 'Secondary School',
-            self::Combined => 'Combined School',
-            self::Technical => 'Technical School',
-            self::Vocational => 'Vocational Institute',
+            self::Primary => 'École primaire',
+            self::JuniorHigh => 'Collège',
+            self::SeniorHigh => 'Lycée',
+            self::Secondary => 'École secondaire',
+            self::Combined => 'École mixte',
+            self::Technical => 'École technique',
+            self::Vocational => 'Institut professionnel',
         };
     }
 }

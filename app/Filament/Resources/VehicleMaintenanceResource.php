@@ -42,17 +42,17 @@ class VehicleMaintenanceResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Vehicle')
+                SectionComponent::make('Véhicule')
                     ->schema([
                         Forms\Components\Select::make('vehicle_id')
-                            ->label('Vehicle')
+                            ->label('Véhicule')
                             ->options(fn () => Vehicle::pluck('registration_number', 'id'))
                             ->searchable()
                             ->preload()
                             ->required(),
                     ]),
 
-                SectionComponent::make('Maintenance Details')
+                SectionComponent::make('Détails de la maintenance')
                     ->schema([
                         Forms\Components\Select::make('type')
                             ->options(MaintenanceType::labels())
@@ -65,7 +65,7 @@ class VehicleMaintenanceResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Dates & Cost')
+                SectionComponent::make('Dates et coût')
                     ->schema([
                         Forms\Components\DatePicker::make('service_date')
                             ->required(),
@@ -74,13 +74,13 @@ class VehicleMaintenanceResource extends Resource
                             ->numeric()
                             ->minValue(0),
                         Forms\Components\TextInput::make('odometer_reading')
-                            ->label('Odometer Reading (km)')
+                            ->label('Lecture du compteur (km)')
                             ->numeric()
                             ->minValue(0),
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Status & Notes')
+                SectionComponent::make('Statut et notes')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(MaintenanceStatus::labels())
@@ -97,7 +97,7 @@ class VehicleMaintenanceResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('vehicle.registration_number')
-                    ->label('Vehicle')
+                    ->label('Véhicule')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('type')
@@ -105,14 +105,14 @@ class VehicleMaintenanceResource extends Resource
                     ->color(fn (MaintenanceType $state): string => MaintenanceType::colors()[$state] ?? 'gray')
                     ->icon(fn (MaintenanceType $state): string => MaintenanceType::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('service_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('cost')
                     ->numeric(2)
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('next_service_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('service_provider')
@@ -123,7 +123,7 @@ class VehicleMaintenanceResource extends Resource
                     ->color(fn (MaintenanceStatus $state): string => MaintenanceStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (MaintenanceStatus $state): string => MaintenanceStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])

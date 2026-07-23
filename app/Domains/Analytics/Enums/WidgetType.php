@@ -16,12 +16,12 @@ enum WidgetType: string
     public function label(): string
     {
         return match ($this) {
-            self::Chart => 'Chart',
-            self::Metric => 'Metric Card',
-            self::Table => 'Data Table',
-            self::Progress => 'Progress Bar',
-            self::List => 'List',
-            self::Custom => 'Custom Widget',
+            self::Chart => 'Graphique',
+            self::Metric => 'Carte métrique',
+            self::Table => 'Tableau de données',
+            self::Progress => 'Barre de progression',
+            self::List => 'Liste',
+            self::Custom => 'Widget personnalisé',
         };
     }
 

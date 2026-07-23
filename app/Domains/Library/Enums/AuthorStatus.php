@@ -12,8 +12,8 @@ enum AuthorStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
         };
     }
 

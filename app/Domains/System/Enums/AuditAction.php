@@ -19,15 +19,15 @@ enum AuditAction: string
     public function label(): string
     {
         return match ($this) {
-            self::Created => 'Created',
-            self::Updated => 'Updated',
-            self::Deleted => 'Deleted',
-            self::Restored => 'Restored',
-            self::Viewed => 'Viewed',
-            self::Exported => 'Exported',
-            self::Login => 'Login',
-            self::Logout => 'Logout',
-            self::FailedLogin => 'Failed Login',
+            self::Created => 'Créé',
+            self::Updated => 'Mis à jour',
+            self::Deleted => 'Supprimé',
+            self::Restored => 'Restauré',
+            self::Viewed => 'Consulté',
+            self::Exported => 'Exporté',
+            self::Login => 'Connexion',
+            self::Logout => 'Déconnexion',
+            self::FailedLogin => 'Échec de connexion',
         };
     }
 

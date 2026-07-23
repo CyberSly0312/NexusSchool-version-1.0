@@ -41,7 +41,7 @@ class NotificationResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Notification Details')
+                SectionComponent::make('Détails de la notification')
                     ->schema([
                         Forms\Components\TextInput::make('type')
                             ->required()
@@ -55,7 +55,7 @@ class NotificationResource extends Resource
                     ])
                     ->columns(1),
 
-                SectionComponent::make('Channel & Status')
+                SectionComponent::make('Canal et statut')
                     ->schema([
                         Forms\Components\Select::make('channel')
                             ->options(NotificationChannel::labels())
@@ -70,7 +70,7 @@ class NotificationResource extends Resource
                 SectionComponent::make('Metadata')
                     ->schema([
                         Forms\Components\KeyValue::make('data')
-                            ->label('Extra Data'),
+                            ->label('Données supplémentaires'),
                     ]),
             ]);
     }
@@ -94,14 +94,14 @@ class NotificationResource extends Resource
                     ->color(fn (NotificationStatus $state): string => NotificationStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (NotificationStatus $state): string => NotificationStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('sender.first_name')
-                    ->label('Sender')
+                    ->label('Expéditeur')
                     ->toggleable(),
                 TextColumn::make('sent_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])

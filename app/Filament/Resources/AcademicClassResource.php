@@ -44,22 +44,22 @@ class AcademicClassResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Class Details')
+                SectionComponent::make('Détails de la classe')
                     ->schema([
                         Forms\Components\Select::make('academic_year_id')
-                            ->label('Academic Year')
+                            ->label('Année scolaire')
                             ->options(AcademicYear::pluck('name', 'id'))
                             ->required()
                             ->searchable()
                             ->preload(),
                         Forms\Components\Select::make('program_id')
-                            ->label('Program')
+                            ->label('Programme')
                             ->options(Program::pluck('name', 'id'))
                             ->required()
                             ->searchable()
                             ->preload(),
                         Forms\Components\Select::make('grade_level_id')
-                            ->label('Grade Level')
+                            ->label('Niveau')
                             ->options(GradeLevel::pluck('name', 'id'))
                             ->required()
                             ->searchable()
@@ -76,12 +76,12 @@ class AcademicClassResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Unique code across the school (e.g., 6EA, PRE-A)'),
+                            ->helperText('Code unique dans l\'établissement (ex., 6EA, PRE-A)'),
                         Forms\Components\TextInput::make('capacity')
                             ->numeric()
                             ->required()
                             ->minValue(1)
-                            ->helperText('Maximum number of students'),
+                            ->helperText('Nombre maximum d\'élèves'),
                         Forms\Components\TextInput::make('display_order')
                             ->numeric()
                             ->default(0)
@@ -89,22 +89,22 @@ class AcademicClassResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                     ])->columns(2),
-                SectionComponent::make('Status & Configuration')
+                SectionComponent::make('Statut et configuration')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(AcademicClassStatus::class)
                             ->default(AcademicClassStatus::Active)
                             ->required(),
                         Forms\Components\Toggle::make('is_active')
-                            ->label('Enabled for Enrollments')
+                            ->label('Activé pour inscriptions')
                             ->default(true),
                         Forms\Components\Select::make('classroom_id')
-                            ->label('Classroom')
+                            ->label('Salle')
                             ->options(Classroom::pluck('name', 'id'))
                             ->nullable()
                             ->searchable()
                             ->preload()
-                            ->helperText('Physical classroom (optional)'),
+                            ->helperText('Salle de classe (optionnel)'),
                     ])->columns(2),
             ]);
     }
@@ -114,15 +114,15 @@ class AcademicClassResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('academicYear.name')
-                    ->label('Year')
+                    ->label('Année')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('program.name')
-                    ->label('Program')
+                    ->label('Programme')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('gradeLevel.name')
-                    ->label('Grade Level')
+                    ->label('Niveau')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('section.name')
@@ -140,12 +140,12 @@ class AcademicClassResource extends Resource
                     ->toggleable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean()
-                    ->label('Enabled'),
+                    ->label('Activé'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (AcademicClassStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -155,13 +155,13 @@ class AcademicClassResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(AcademicClassStatus::class),
                 Tables\Filters\SelectFilter::make('academic_year_id')
-                    ->label('Academic Year')
+                    ->label('Année scolaire')
                     ->options(AcademicYear::pluck('name', 'id')),
                 Tables\Filters\SelectFilter::make('program_id')
-                    ->label('Program')
+                    ->label('Programme')
                     ->options(Program::pluck('name', 'id')),
                 Tables\Filters\SelectFilter::make('grade_level_id')
-                    ->label('Grade Level')
+                    ->label('Niveau')
                     ->options(GradeLevel::pluck('name', 'id')),
             ])
             ->actions([

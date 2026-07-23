@@ -41,7 +41,7 @@ class ProgramResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Program Details')
+                Section::make('Détails du programme')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -49,21 +49,21 @@ class ProgramResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Short unique code (e.g., JHS, SHS)'),
+                            ->helperText('Code court unique (ex. : JHS, SHS)'),
                         Forms\Components\Select::make('department_id')
-                            ->label('Department')
+                            ->label('Département')
                             ->options(Department::pluck('name', 'id'))
                             ->searchable()
                             ->preload()
                             ->nullable(),
                         Forms\Components\Select::make('educational_level')
-                            ->label('Educational Level')
+                            ->label('Niveau éducatif')
                             ->options(EducationalLevel::class)
                             ->required(),
                         Forms\Components\TextInput::make('duration')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('e.g., 3 years, 6 months'),
+                            ->helperText('ex. : 3 ans, 6 mois'),
                         Forms\Components\TextInput::make('order')
                             ->numeric()
                             ->default(0)
@@ -71,7 +71,7 @@ class ProgramResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                     ])->columns(2),
-                Section::make('Status')
+                Section::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(ProgramStatus::class)
@@ -92,12 +92,12 @@ class ProgramResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('department.name')
-                    ->label('Department')
+                    ->label('Département')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('educational_level')
-                    ->label('Level')
+                    ->label('Niveau')
                     ->formatStateUsing(fn (EducationalLevel $state): string => $state->label())
                     ->sortable(),
                 Tables\Columns\TextColumn::make('duration')
@@ -112,7 +112,7 @@ class ProgramResource extends Resource
                     ->badge()
                     ->color(fn (ProgramStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -121,7 +121,7 @@ class ProgramResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(ProgramStatus::class),
                 Tables\Filters\SelectFilter::make('department_id')
-                    ->label('Department')
+                    ->label('Département')
                     ->options(Department::pluck('name', 'id')),
             ])
             ->actions([

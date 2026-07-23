@@ -20,16 +20,16 @@ enum RelationshipType: string
     public function label(): string
     {
         return match ($this) {
-            self::Father => 'Father',
-            self::Mother => 'Mother',
-            self::LegalGuardian => 'Legal Guardian',
-            self::Grandparent => 'Grandparent',
-            self::Uncle => 'Uncle',
-            self::Aunt => 'Aunt',
-            self::Brother => 'Brother',
-            self::Sister => 'Sister',
-            self::FosterParent => 'Foster Parent',
-            self::Other => 'Other',
+            self::Father => 'Père',
+            self::Mother => 'Mère',
+            self::LegalGuardian => 'Tuteur légal',
+            self::Grandparent => 'Grand-parent',
+            self::Uncle => 'Oncle',
+            self::Aunt => 'Tante',
+            self::Brother => 'Frère',
+            self::Sister => 'Sœur',
+            self::FosterParent => 'Parent adoptif',
+            self::Other => 'Autre',
         };
     }
 }

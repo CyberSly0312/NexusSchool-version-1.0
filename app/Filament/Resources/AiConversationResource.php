@@ -40,7 +40,7 @@ class AiConversationResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Conversation Details')
+                SectionComponent::make('Détails de la conversation')
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->maxLength(255),
@@ -52,7 +52,7 @@ class AiConversationResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Context')
+                SectionComponent::make('Contexte')
                     ->schema([
                         Forms\Components\TextInput::make('context_type')
                             ->maxLength(100),
@@ -63,7 +63,7 @@ class AiConversationResource extends Resource
                     ])
                     ->columns(1),
 
-                SectionComponent::make('Summary')
+                SectionComponent::make('Résumé')
                     ->schema([
                         Forms\Components\Textarea::make('summary')
                             ->rows(4),
@@ -83,10 +83,10 @@ class AiConversationResource extends Resource
                     ->badge()
                     ->color(fn (AiConversationStatus $state): string => $state->color()),
                 TextColumn::make('user.first_name')
-                    ->label('User')
+                    ->label('Utilisateur')
                     ->toggleable(),
                 TextColumn::make('provider.name')
-                    ->label('Provider')
+                    ->label('Fournisseur')
                     ->toggleable(),
                 TextColumn::make('model')
                     ->searchable()
@@ -95,17 +95,17 @@ class AiConversationResource extends Resource
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('total_input_tokens')
-                    ->label('Input Tokens')
+                    ->label('Jetons d\'entrée')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('total_output_tokens')
-                    ->label('Output Tokens')
+                    ->label('Jetons de sortie')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->filters([

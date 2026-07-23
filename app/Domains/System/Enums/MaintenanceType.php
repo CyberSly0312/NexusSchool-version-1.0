@@ -13,9 +13,9 @@ enum MaintenanceType: string
     public function label(): string
     {
         return match ($this) {
-            self::Scheduled => 'Scheduled',
-            self::Emergency => 'Emergency',
-            self::Rolling => 'Rolling',
+            self::Scheduled => 'Planifiée',
+            self::Emergency => 'Urgence',
+            self::Rolling => 'Roulement',
         };
     }
 

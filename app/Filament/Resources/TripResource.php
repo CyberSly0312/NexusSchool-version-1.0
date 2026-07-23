@@ -43,16 +43,16 @@ class TripResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Trip Details')
+                SectionComponent::make('Détails du trajet')
                     ->schema([
                         Forms\Components\Select::make('vehicle_id')
-                            ->label('Vehicle')
+                            ->label('Véhicule')
                             ->options(fn () => Vehicle::pluck('registration_number', 'id'))
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('driver_id')
-                            ->label('Driver')
+                            ->label('Chauffeur')
                             ->options(fn () => Driver::all()->map(fn (Driver $driver) => [
                                 'value' => $driver->id,
                                 'label' => trim($driver->first_name.' '.$driver->last_name),
@@ -61,34 +61,34 @@ class TripResource extends Resource
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('route_id')
-                            ->label('Route')
+                            ->label('Itinéraire')
                             ->options(fn () => Route::pluck('name', 'id'))
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('direction')
                             ->options([
-                                'to_school' => 'To School',
-                                'from_school' => 'From School',
+                                'to_school' => 'Vers l\'école',
+                                'from_school' => 'De l\'école',
                             ])
                             ->required(),
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Schedule')
+                SectionComponent::make('Horaire')
                     ->schema([
                         Forms\Components\DatePicker::make('academic_date')
                             ->required(),
                         Forms\Components\TextInput::make('departure_time')
-                            ->label('Departure Time')
+                            ->label('Heure de départ')
                             ->placeholder('HH:MM'),
                         Forms\Components\TextInput::make('arrival_time')
-                            ->label('Arrival Time')
+                            ->label('Heure d\'arrivée')
                             ->placeholder('HH:MM'),
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Status & Notes')
+                SectionComponent::make('Statut et notes')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(TripStatus::labels())
@@ -105,7 +105,7 @@ class TripResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('academic_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('direction')
@@ -117,15 +117,15 @@ class TripResource extends Resource
                     })
                     ->label('Direction'),
                 TextColumn::make('vehicle.registration_number')
-                    ->label('Vehicle')
+                    ->label('Véhicule')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('driver')
-                    ->label('Driver')
+                    ->label('Chauffeur')
                     ->getStateUsing(fn (Trip $record): string => trim($record->driver->first_name.' '.$record->driver->last_name))
                     ->searchable(),
                 TextColumn::make('route.name')
-                    ->label('Route')
+                    ->label('Itinéraire')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
@@ -138,7 +138,7 @@ class TripResource extends Resource
                     ->color(fn (TripStatus $state): string => TripStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (TripStatus $state): string => TripStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
@@ -147,8 +147,8 @@ class TripResource extends Resource
                     ->options(TripStatus::labels()),
                 SelectFilter::make('direction')
                     ->options([
-                        'to_school' => 'To School',
-                        'from_school' => 'From School',
+                        'to_school' => 'Vers l\'école',
+                        'from_school' => 'De l\'école',
                     ]),
             ])
             ->actions([

@@ -13,9 +13,9 @@ enum WorkflowVersionStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Draft => 'Draft',
-            self::Published => 'Published',
-            self::Archived => 'Archived',
+            self::Draft => 'Brouillon',
+            self::Published => 'Publié',
+            self::Archived => 'Archivé',
         };
     }
 

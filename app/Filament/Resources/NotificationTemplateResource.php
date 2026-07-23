@@ -42,7 +42,7 @@ class NotificationTemplateResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Template Details')
+                SectionComponent::make('Détails du modèle')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -58,7 +58,7 @@ class NotificationTemplateResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Content')
+                SectionComponent::make('Contenu')
                     ->schema([
                         Forms\Components\TextInput::make('subject')
                             ->maxLength(255),
@@ -67,10 +67,10 @@ class NotificationTemplateResource extends Resource
                             ->rows(6),
                     ]),
 
-                SectionComponent::make('Variables & Status')
+                SectionComponent::make('Variables et statut')
                     ->schema([
                         Forms\Components\TagsInput::make('variables')
-                            ->label('Available Variables'),
+                            ->label('Variables disponibles'),
                         Forms\Components\Toggle::make('is_active')
                             ->default(true),
                     ])
@@ -99,7 +99,7 @@ class NotificationTemplateResource extends Resource
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])

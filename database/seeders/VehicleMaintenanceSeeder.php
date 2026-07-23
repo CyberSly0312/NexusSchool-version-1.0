@@ -25,27 +25,30 @@ class VehicleMaintenanceSeeder extends Seeder
         $maintenanceData = [
             [
                 'type' => 'preventive',
-                'description' => 'Regular oil change and filter replacement',
-                'cost' => 150.00,
+                'description' => 'Vidange et remplacement du filtre',
+                'cost' => 75000.00,
                 'status' => 'completed',
-                'scheduled_date' => now()->subMonth(),
-                'completed_date' => now()->subMonth(),
+                'service_date' => now()->subMonth(),
+                'completed_at' => now()->subMonth(),
+                'service_provider' => 'Garage Central',
             ],
             [
                 'type' => 'inspection',
-                'description' => 'Annual safety inspection',
-                'cost' => 75.00,
+                'description' => 'Inspection annuelle de sécurité',
+                'cost' => 35000.00,
                 'status' => 'completed',
-                'scheduled_date' => now()->subWeeks(2),
-                'completed_date' => now()->subWeeks(2),
+                'service_date' => now()->subWeeks(2),
+                'completed_at' => now()->subWeeks(2),
+                'service_provider' => 'Centre Technique Auto',
             ],
             [
                 'type' => 'corrective',
-                'description' => 'Brake pad replacement',
-                'cost' => 450.00,
+                'description' => 'Remplacement des plaquettes de frein',
+                'cost' => 120000.00,
                 'status' => 'scheduled',
-                'scheduled_date' => now()->addWeek(),
-                'completed_date' => null,
+                'service_date' => now()->addWeek(),
+                'completed_at' => null,
+                'service_provider' => 'Garage Central',
             ],
         ];
 
@@ -58,8 +61,9 @@ class VehicleMaintenanceSeeder extends Seeder
                     'type' => $maintenance['type'],
                     'cost' => $maintenance['cost'],
                     'status' => $maintenance['status'],
-                    'scheduled_date' => $maintenance['scheduled_date'],
-                    'completed_date' => $maintenance['completed_date'],
+                    'service_date' => $maintenance['service_date'],
+                    'completed_at' => $maintenance['completed_at'],
+                    'service_provider' => $maintenance['service_provider'],
                 ]
             );
         }

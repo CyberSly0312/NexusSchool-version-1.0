@@ -16,10 +16,10 @@ enum ActivityType: string
     public function label(): string
     {
         return match ($this) {
-            self::System => 'System',
-            self::User => 'User',
-            self::Auth => 'Authentication',
-            self::Data => 'Data',
+            self::System => 'Système',
+            self::User => 'Utilisateur',
+            self::Auth => 'Authentification',
+            self::Data => 'Données',
             self::Notification => 'Notification',
             self::Api => 'API',
         };

@@ -15,11 +15,11 @@ enum ScheduleFrequency: string
     public function label(): string
     {
         return match ($this) {
-            self::Daily => 'Daily',
-            self::Weekly => 'Weekly',
-            self::Monthly => 'Monthly',
-            self::Quarterly => 'Quarterly',
-            self::Yearly => 'Yearly',
+            self::Daily => 'Quotidien',
+            self::Weekly => 'Hebdomadaire',
+            self::Monthly => 'Mensuel',
+            self::Quarterly => 'Trimestriel',
+            self::Yearly => 'Annuel',
         };
     }
 

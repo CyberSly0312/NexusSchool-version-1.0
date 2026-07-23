@@ -15,8 +15,8 @@ enum BorrowerType: string
     public function label(): string
     {
         return match ($this) {
-            self::Student => 'Student',
-            self::Teacher => 'Teacher',
+            self::Student => 'Élève',
+            self::Teacher => 'Enseignant',
         };
     }
 

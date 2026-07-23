@@ -42,10 +42,10 @@ class BookLoanResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Loan Details')
+                SectionComponent::make('Détails du prêt')
                     ->schema([
                         Forms\Components\Select::make('book_copy_id')
-                            ->label('Book Copy')
+                            ->label('Exemplaire')
                             ->relationship('bookCopy', 'barcode')
                             ->getOptionLabelFromRecordUsing(fn ($record): string => $record->barcode.' - '.$record->book->title)
                             ->searchable()
@@ -68,7 +68,7 @@ class BookLoanResource extends Resource
                         Forms\Components\DatePicker::make('return_date')
                             ->nullable(),
                     ])->columns(3),
-                SectionComponent::make('Status & Staff')
+                SectionComponent::make('Statut et personnel')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(BookLoanStatus::class)
@@ -98,7 +98,7 @@ class BookLoanResource extends Resource
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('bookCopy.book.title')
-                    ->label('Book Title')
+                    ->label('Titre du livre')
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('borrower_id')
@@ -107,19 +107,19 @@ class BookLoanResource extends Resource
                     ->badge()
                     ->color(fn (BorrowerType $state): string => $state === BorrowerType::Student ? 'info' : 'success'),
                 TextColumn::make('loan_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('due_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->color(fn (BookLoan $record): string => $record->status === BookLoanStatus::Active && $record->due_date->isPast() ? 'danger' : null),
                 TextColumn::make('return_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (BookLoanStatus $state): string => $state->color()),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -130,10 +130,10 @@ class BookLoanResource extends Resource
                 SelectFilter::make('borrower_type')
                     ->options(BorrowerType::class),
                 SelectFilter::make('is_overdue')
-                    ->label('Overdue')
+                    ->label('En retard')
                     ->query(fn (Builder $query): Builder => $query->where('status', BookLoanStatus::Active)->where('due_date', '<', now()))
                     ->options([
-                        1 => 'Yes',
+                        1 => 'Oui',
                     ]),
             ])
             ->actions([

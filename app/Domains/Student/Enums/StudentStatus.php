@@ -16,12 +16,12 @@ enum StudentStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Graduated => 'Graduated',
-            self::Suspended => 'Suspended',
-            self::Withdrawn => 'Withdrawn',
-            self::Archived => 'Archived',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
+            self::Graduated => 'Diplômé',
+            self::Suspended => 'Suspendu',
+            self::Withdrawn => 'Retiré',
+            self::Archived => 'Archivé',
         };
     }
 

@@ -13,9 +13,9 @@ enum ApiTokenType: string
     public function label(): string
     {
         return match ($this) {
-            self::Personal => 'Personal Access Token',
-            self::Client => 'Client Token',
-            self::Integration => 'Integration Token',
+            self::Personal => 'Jeton d\'accès personnel',
+            self::Client => 'Jeton client',
+            self::Integration => 'Jeton d\'intégration',
         };
     }
 

@@ -14,10 +14,10 @@ enum HealthStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Healthy => 'Healthy',
-            self::Degraded => 'Degraded',
-            self::Unhealthy => 'Unhealthy',
-            self::Unknown => 'Unknown',
+            self::Healthy => 'Sain',
+            self::Degraded => 'Dégradé',
+            self::Unhealthy => 'Défaillant',
+            self::Unknown => 'Inconnu',
         };
     }
 

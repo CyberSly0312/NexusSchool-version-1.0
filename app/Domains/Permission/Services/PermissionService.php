@@ -144,6 +144,10 @@ class PermissionService
         return $parts[0] ?? $permissionName;
     }
 
+    public const EXTRA_ACTIONS = [
+        'workflow' => ['execute', 'manage', 'publish'],
+    ];
+
     public function getDefaultPermissions(): array
     {
         $permissions = [];
@@ -154,6 +158,15 @@ class PermissionService
                     'name' => "{$group->value}.{$action}",
                     'guard_name' => 'web',
                 ];
+            }
+
+            if (isset(self::EXTRA_ACTIONS[$group->value])) {
+                foreach (self::EXTRA_ACTIONS[$group->value] as $action) {
+                    $permissions[] = [
+                        'name' => "{$group->value}.{$action}",
+                        'guard_name' => 'web',
+                    ];
+                }
             }
         }
 

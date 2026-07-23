@@ -17,13 +17,13 @@ enum DashboardType: string
     public function label(): string
     {
         return match ($this) {
-            self::School => 'School Overview',
-            self::Academic => 'Academic Dashboard',
-            self::Finance => 'Finance Dashboard',
-            self::HR => 'HR Dashboard',
-            self::Library => 'Library Dashboard',
-            self::Transport => 'Transport Dashboard',
-            self::Custom => 'Custom Dashboard',
+            self::School => 'Vue d\'ensemble de l\'école',
+            self::Academic => 'Tableau de bord académique',
+            self::Finance => 'Tableau de bord financier',
+            self::HR => 'Tableau de bord RH',
+            self::Library => 'Tableau de bord bibliothèque',
+            self::Transport => 'Tableau de bord transport',
+            self::Custom => 'Tableau de bord personnalisé',
         };
     }
 

@@ -15,11 +15,11 @@ enum AssessmentResultStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Draft => 'Draft',
-            self::Entered => 'Entered',
-            self::Verified => 'Verified',
-            self::Published => 'Published',
-            self::Locked => 'Locked',
+            self::Draft => 'Brouillon',
+            self::Entered => 'Saisi',
+            self::Verified => 'Vérifié',
+            self::Published => 'Publié',
+            self::Locked => 'Verrouillé',
         };
     }
 

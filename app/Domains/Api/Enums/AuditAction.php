@@ -17,13 +17,13 @@ enum AuditAction: string
     public function label(): string
     {
         return match ($this) {
-            self::TokenCreated => 'Token Created',
-            self::TokenRevoked => 'Token Revoked',
-            self::ClientCreated => 'Client Created',
-            self::ClientDisabled => 'Client Disabled',
-            self::WebhookRegistered => 'Webhook Registered',
-            self::WebhookDelivered => 'Webhook Delivered',
-            self::WebhookFailed => 'Webhook Failed',
+            self::TokenCreated => 'Jeton créé',
+            self::TokenRevoked => 'Jeton révoqué',
+            self::ClientCreated => 'Client créé',
+            self::ClientDisabled => 'Client désactivé',
+            self::WebhookRegistered => 'Webhook enregistré',
+            self::WebhookDelivered => 'Webhook livré',
+            self::WebhookFailed => 'Webhook échoué',
         };
     }
 

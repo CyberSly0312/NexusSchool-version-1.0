@@ -14,10 +14,10 @@ enum MaintenanceStatus: string
     public static function labels(): array
     {
         return [
-            self::Scheduled->value => 'Scheduled',
-            self::InProgress->value => 'In Progress',
-            self::Completed->value => 'Completed',
-            self::Cancelled->value => 'Cancelled',
+            self::Scheduled->value => 'Planifié',
+            self::InProgress->value => 'En cours',
+            self::Completed->value => 'Terminé',
+            self::Cancelled->value => 'Annulé',
         ];
     }
 

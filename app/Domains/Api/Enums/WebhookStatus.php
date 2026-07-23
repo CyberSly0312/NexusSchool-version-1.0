@@ -14,10 +14,10 @@ enum WebhookStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Failed => 'Failed',
-            self::Pending => 'Pending',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
+            self::Failed => 'Échoué',
+            self::Pending => 'En attente',
         };
     }
 

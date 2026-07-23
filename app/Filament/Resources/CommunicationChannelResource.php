@@ -41,7 +41,7 @@ class CommunicationChannelResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Channel Details')
+                SectionComponent::make('Détails du canal')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -57,14 +57,14 @@ class CommunicationChannelResource extends Resource
                 SectionComponent::make('Configuration')
                     ->schema([
                         Forms\Components\TextInput::make('from_address')
-                            ->label('From Address')
+                            ->label('Adresse d\'expéditeur')
                             ->email()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('from_name')
-                            ->label('From Name')
+                            ->label('Nom de l\'expéditeur')
                             ->maxLength(255),
                         Forms\Components\KeyValue::make('config')
-                            ->label('Channel Config'),
+                            ->label('Configuration du canal'),
                     ]),
             ]);
     }
@@ -89,7 +89,7 @@ class CommunicationChannelResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])

@@ -13,9 +13,9 @@ enum DraftActiveArchivedStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Draft => 'Draft',
-            self::Active => 'Active',
-            self::Archived => 'Archived',
+            self::Draft => 'Brouillon',
+            self::Active => 'Actif',
+            self::Archived => 'Archivé',
         };
     }
 

@@ -14,9 +14,9 @@ enum PreferredContactMethod: string
     public function label(): string
     {
         return match ($this) {
-            self::Phone => 'Phone',
+            self::Phone => 'Téléphone',
             self::SMS => 'SMS',
-            self::Email => 'Email',
+            self::Email => 'E-mail',
             self::WhatsApp => 'WhatsApp',
         };
     }

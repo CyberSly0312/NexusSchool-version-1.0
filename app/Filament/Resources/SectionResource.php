@@ -40,10 +40,10 @@ class SectionResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Section Details')
+                SectionComponent::make('Détails de la section')
                     ->schema([
                         Forms\Components\Select::make('grade_level_id')
-                            ->label('Grade Level')
+                            ->label('Niveau')
                             ->options(GradeLevel::pluck('name', 'id'))
                             ->required()
                             ->searchable()
@@ -54,7 +54,7 @@ class SectionResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Short unique code (e.g., A, SCI)'),
+                            ->helperText('Code court unique (ex. : A, SCI)'),
                         Forms\Components\TextInput::make('order')
                             ->numeric()
                             ->default(0)
@@ -62,7 +62,7 @@ class SectionResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                     ])->columns(2),
-                SectionComponent::make('Status')
+                SectionComponent::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(SectionStatus::class)
@@ -77,7 +77,7 @@ class SectionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('gradeLevel.name')
-                    ->label('Grade Level')
+                    ->label('Niveau')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
@@ -94,7 +94,7 @@ class SectionResource extends Resource
                     ->badge()
                     ->color(fn (SectionStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -103,7 +103,7 @@ class SectionResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(SectionStatus::class),
                 Tables\Filters\SelectFilter::make('grade_level_id')
-                    ->label('Grade Level')
+                    ->label('Niveau')
                     ->options(GradeLevel::pluck('name', 'id')),
             ])
             ->actions([

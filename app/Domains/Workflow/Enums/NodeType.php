@@ -21,17 +21,17 @@ enum NodeType: string
     public function label(): string
     {
         return match ($this) {
-            self::Start => 'Start',
-            self::End => 'End',
-            self::Decision => 'Decision',
+            self::Start => 'Début',
+            self::End => 'Fin',
+            self::Decision => 'Décision',
             self::Condition => 'Condition',
-            self::Approval => 'Approval',
+            self::Approval => 'Approbation',
             self::Notification => 'Notification',
-            self::Delay => 'Delay',
-            self::ApiCall => 'API Call',
-            self::AiAction => 'AI Action',
-            self::DatabaseAction => 'Database Action',
-            self::ScriptPlaceholder => 'Script Placeholder',
+            self::Delay => 'Retard',
+            self::ApiCall => 'Appel API',
+            self::AiAction => 'Action IA',
+            self::DatabaseAction => 'Action base de données',
+            self::ScriptPlaceholder => 'Placeholder de script',
         };
     }
 

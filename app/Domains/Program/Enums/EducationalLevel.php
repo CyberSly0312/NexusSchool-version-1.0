@@ -16,12 +16,12 @@ enum EducationalLevel: string
     public function label(): string
     {
         return match ($this) {
-            self::Nursery => 'Nursery',
-            self::Primary => 'Primary',
-            self::JuniorSecondary => 'Junior Secondary',
-            self::SeniorSecondary => 'Senior Secondary',
-            self::Tertiary => 'Tertiary',
-            self::Vocational => 'Vocational',
+            self::Nursery => 'Maternelle',
+            self::Primary => 'Primaire',
+            self::JuniorSecondary => 'Collège',
+            self::SeniorSecondary => 'Lycée',
+            self::Tertiary => 'Supérieur',
+            self::Vocational => 'Professionnel',
         };
     }
 }

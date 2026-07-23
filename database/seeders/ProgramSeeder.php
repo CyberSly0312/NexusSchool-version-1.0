@@ -6,14 +6,14 @@ use App\Domains\Program\Enums\EducationalLevel;
 use App\Domains\Program\Enums\ProgramStatus;
 use App\Models\Department;
 use App\Models\Program;
-use App\Models\School;
+use App\Domains\School\Models\School;
 use Illuminate\Database\Seeder;
 
 class ProgramSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = School::where('slug', 'demo-school')->first();
+        $school = School::where('slug', 'nexus-demo')->first();
 
         if (! $school) {
             return;

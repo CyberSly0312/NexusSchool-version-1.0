@@ -19,14 +19,14 @@ enum RoomType: string
     public function label(): string
     {
         return match ($this) {
-            self::StandardClassroom => 'Standard Classroom',
-            self::ScienceLaboratory => 'Science Laboratory',
-            self::ComputerLaboratory => 'Computer Laboratory',
-            self::Library => 'Library',
-            self::ExaminationHall => 'Examination Hall',
-            self::ConferenceRoom => 'Conference Room',
-            self::MultipurposeRoom => 'Multipurpose Room',
-            self::Workshop => 'Workshop',
+            self::StandardClassroom => 'Salle de classe standard',
+            self::ScienceLaboratory => 'Laboratoire de sciences',
+            self::ComputerLaboratory => 'Laboratoire d\'informatique',
+            self::Library => 'Bibliothèque',
+            self::ExaminationHall => 'Salle d\'examen',
+            self::ConferenceRoom => 'Salle de conférence',
+            self::MultipurposeRoom => 'Salle polyvalente',
+            self::Workshop => 'Atelier',
             self::Auditorium => 'Auditorium',
         };
     }

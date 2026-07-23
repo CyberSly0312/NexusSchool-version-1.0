@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->ulid('uuid')->unique();
+            $table->ulid('uuid')->unique()->nullable();
             $table->string('school_id', 36);
 
             // ── Author Information ────────────────────────────────────

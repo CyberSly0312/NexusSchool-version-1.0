@@ -18,14 +18,14 @@ enum PromptCategory: string
     public function label(): string
     {
         return match ($this) {
-            self::StudentAssistant => 'Student Assistant',
-            self::TeacherAssistant => 'Teacher Assistant',
-            self::ParentAssistant => 'Parent Assistant',
-            self::FinanceAssistant => 'Finance Assistant',
-            self::HrAssistant => 'HR Assistant',
-            self::AnalyticsAssistant => 'Analytics Assistant',
-            self::TechSupportAssistant => 'Technical Support Assistant',
-            self::AdministratorAssistant => 'Administrator Assistant',
+            self::StudentAssistant => 'Assistant élève',
+            self::TeacherAssistant => 'Assistant enseignant',
+            self::ParentAssistant => 'Assistant parent',
+            self::FinanceAssistant => 'Assistant finance',
+            self::HrAssistant => 'Assistant RH',
+            self::AnalyticsAssistant => 'Assistant analytique',
+            self::TechSupportAssistant => 'Assistant support technique',
+            self::AdministratorAssistant => 'Assistant administrateur',
         };
     }
 

@@ -39,7 +39,7 @@ class PublisherResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Publisher Information')
+                SectionComponent::make('Informations de l\'éditeur')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -65,8 +65,8 @@ class PublisherResource extends Resource
                             ->rows(3),
                         Forms\Components\Select::make('status')
                             ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
+                                'active' => 'Actif',
+                                'inactive' => 'Inactif',
                             ])
                             ->required(),
                     ])
@@ -96,15 +96,15 @@ class PublisherResource extends Resource
                         default => 'gray',
                     }),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
+                        'active' => 'Actif',
+                        'inactive' => 'Inactif',
                     ]),
             ])
             ->actions([

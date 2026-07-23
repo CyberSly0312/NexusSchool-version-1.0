@@ -41,7 +41,7 @@ class AiPromptTemplateResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Template Details')
+                SectionComponent::make('Détails du modèle')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -59,17 +59,17 @@ class AiPromptTemplateResource extends Resource
                         Forms\Components\Textarea::make('system_prompt')
                             ->required()
                             ->rows(4)
-                            ->label('System Prompt'),
+                            ->label('Prompt système'),
                         Forms\Components\Textarea::make('user_prompt_template')
                             ->required()
                             ->rows(4)
-                            ->label('User Prompt Template'),
+                            ->label('Modèle de prompt utilisateur'),
                         Forms\Components\KeyValue::make('variables')
-                            ->label('Template Variables'),
+                            ->label('Variables du modèle'),
                     ])
                     ->columns(1),
 
-                SectionComponent::make('Model Configuration')
+                SectionComponent::make('Configuration du modèle')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(AiPromptTemplateStatus::labels())
@@ -118,7 +118,7 @@ class AiPromptTemplateResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

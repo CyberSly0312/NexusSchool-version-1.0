@@ -47,13 +47,13 @@ class SystemHealthResource extends Resource
                     ->badge()
                     ->color(fn (string $state): string => HealthStatus::tryFrom($state)?->color() ?? 'gray'),
                 TextColumn::make('response_time_ms')
-                    ->label('Response (ms)')
+                    ->label('Temps de réponse (ms)')
                     ->sortable(),
                 TextColumn::make('message')
                     ->limit(60)
                     ->toggleable(),
                 TextColumn::make('checked_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->defaultSort('checked_at', 'desc')
@@ -62,12 +62,12 @@ class SystemHealthResource extends Resource
                     ->options(HealthStatus::labels()),
                 SelectFilter::make('service')
                     ->options([
-                        'database' => 'Database',
+                        'database' => 'Base de données',
                         'cache' => 'Cache',
-                        'queue' => 'Queue',
-                        'storage' => 'Storage',
-                        'mail' => 'Mail',
-                        'scheduler' => 'Scheduler',
+                        'queue' => 'File d\'attente',
+                        'storage' => 'Stockage',
+                        'mail' => 'Messagerie',
+                        'scheduler' => 'Planificateur',
                     ]),
             ]);
     }

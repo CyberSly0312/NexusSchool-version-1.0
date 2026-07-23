@@ -41,7 +41,7 @@ class UserResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Personal Information')
+                Section::make('Informations personnelles')
                     ->schema([
                         Forms\Components\TextInput::make('first_name')
                             ->required()
@@ -65,7 +65,7 @@ class UserResource extends Resource
                             ->nullable(),
                     ])->columns(2),
 
-                Section::make('Account')
+                Section::make('Compte')
                     ->schema([
                         Forms\Components\Select::make('school_id')
                             ->relationship('school', 'name')
@@ -74,19 +74,19 @@ class UserResource extends Resource
                             ->nullable(),
                         Forms\Components\Select::make('status')
                             ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
-                                'pending' => 'Pending',
-                                'suspended' => 'Suspended',
+                                'active' => 'Actif',
+                                'inactive' => 'Inactif',
+                                'pending' => 'En attente',
+                                'suspended' => 'Suspendu',
                             ])
                             ->default('active')
                             ->required(),
                         Forms\Components\DateTimePicker::make('last_login_at')
-                            ->label('Last Login')
+                            ->label('Dernière connexion')
                             ->disabled(),
                     ])->columns(2),
 
-                Section::make('Password')
+                Section::make('Mot de passe')
                     ->schema([
                         Forms\Components\TextInput::make('password')
                             ->password()
@@ -122,7 +122,7 @@ class UserResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('school.name')
-                    ->label('School')
+                    ->label('École')
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('status')
@@ -136,13 +136,13 @@ class UserResource extends Resource
                     })
                     ->sortable(),
                 Tables\Columns\TextColumn::make('last_login_at')
-                    ->label('Last Login')
-                    ->dateTime()
+                    ->label('Dernière connexion')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -150,16 +150,16 @@ class UserResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
-                        'pending' => 'Pending',
-                        'suspended' => 'Suspended',
+                        'active' => 'Actif',
+                        'inactive' => 'Inactif',
+                        'pending' => 'En attente',
+                        'suspended' => 'Suspendu',
                     ]),
                 Tables\Filters\SelectFilter::make('school_id')
                     ->relationship('school', 'name')
                     ->searchable()
                     ->preload()
-                    ->label('School'),
+                    ->label('École'),
             ])
             ->actions([
                 EditAction::make(),

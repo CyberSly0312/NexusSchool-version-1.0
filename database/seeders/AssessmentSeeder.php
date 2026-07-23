@@ -19,7 +19,7 @@ class AssessmentSeeder extends Seeder
         $year = AcademicYear::where('school_id', $school->id)->first() ?? AcademicYear::factory()->forSchool($school)->create();
         $term = AcademicTerm::where('academic_year_id', $year->id)->first() ?? AcademicTerm::factory()->forSchool($school)->for('academicYear', fn () => $year)->create();
         $subjects = Subject::where('school_id', $school->id)->get();
-        $classes = AcademicClass::where('school_id', $school->id)->get();
+        $classes = AcademicClass::where('academic_year_id', $year->id)->get();
         $user = User::where('school_id', $school->id)->first() ?? User::factory()->forSchool($school)->create();
 
         if ($subjects->isEmpty()) {

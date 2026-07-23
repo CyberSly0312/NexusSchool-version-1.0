@@ -42,7 +42,7 @@ class BookResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Book Information')
+                SectionComponent::make('Informations sur le livre')
                     ->schema([
                         Forms\Components\TextInput::make('isbn')
                             ->required()
@@ -67,19 +67,19 @@ class BookResource extends Resource
                 SectionComponent::make('Classification')
                     ->schema([
                         Forms\Components\Select::make('publisher_id')
-                            ->label('Publisher')
+                            ->label('Éditeur')
                             ->options(fn () => Publisher::pluck('name', 'id'))
                             ->searchable()
                             ->preload(),
                         Forms\Components\Select::make('book_category_id')
-                            ->label('Category')
+                            ->label('Catégorie')
                             ->options(fn () => BookCategory::pluck('name', 'id'))
                             ->searchable()
                             ->preload(),
                         Forms\Components\TextInput::make('shelf_location')
                             ->maxLength(255),
                         Forms\Components\Select::make('author_ids')
-                            ->label('Authors')
+                            ->label('Auteurs')
                             ->relationship('authors', 'id')
                             ->multiple()
                             ->options(fn () => Author::all()->map(fn (Author $author) => [
@@ -90,9 +90,9 @@ class BookResource extends Resource
                             ->preload(),
                         Forms\Components\Select::make('status')
                             ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
-                                'archived' => 'Archived',
+                                'active' => 'Actif',
+                                'inactive' => 'Inactif',
+                                'archived' => 'Archivé',
                             ])
                             ->required(),
                     ])
@@ -117,14 +117,14 @@ class BookResource extends Resource
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('authors.first_name')
-                    ->label('Authors')
+                    ->label('Auteurs')
                     ->getStateUsing(fn (Book $record): string => $record->authors->pluck('first_name')->implode(', '))
                     ->toggleable(),
                 TextColumn::make('publisher.name')
-                    ->label('Publisher')
+                    ->label('Éditeur')
                     ->toggleable(),
                 TextColumn::make('bookCategory.name')
-                    ->label('Category')
+                    ->label('Catégorie')
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
@@ -135,22 +135,22 @@ class BookResource extends Resource
                         default => 'gray',
                     }),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
-                        'archived' => 'Archived',
+                        'active' => 'Actif',
+                        'inactive' => 'Inactif',
+                        'archived' => 'Archivé',
                     ]),
                 SelectFilter::make('book_category_id')
-                    ->label('Category')
+                    ->label('Catégorie')
                     ->options(fn () => BookCategory::pluck('name', 'id')),
                 SelectFilter::make('publisher_id')
-                    ->label('Publisher')
+                    ->label('Éditeur')
                     ->options(fn () => Publisher::pluck('name', 'id')),
             ])
             ->actions([

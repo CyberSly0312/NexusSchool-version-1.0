@@ -3,48 +3,48 @@
 namespace Database\Seeders;
 
 use App\Domains\Subject\Enums\SubjectStatus;
-use App\Models\School;
+use App\Domains\School\Models\School;
 use App\Models\Subject;
+use App\Models\SubjectCategory;
 use Illuminate\Database\Seeder;
 
 class SubjectSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = School::where('slug', 'demo-school')->first();
+        $school = School::where('slug', 'nexus-demo')->first();
 
         if (! $school) {
             return;
         }
 
         $categories = [
-            'LANG' => 'Languages',
+            'LANG' => 'Langues',
             'SCI' => 'Sciences',
-            'HUM' => 'Humanities',
-            'TECH' => 'Technical',
-            'BIZ' => 'Business',
+            'HUM' => 'Humanités',
+            'TECH' => 'Technique',
+            'BIZ' => 'Commerce',
             'ARTS' => 'Arts',
             'SPT' => 'Sports',
         ];
 
         $subjects = [
-            ['name' => 'Mathematics', 'code' => 'MATH', 'short_name' => 'Math', 'category' => 'SCI', 'description' => 'Mathematics and algebra', 'display_order' => 1, 'color' => '#3B82F6', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 5],
-            ['name' => 'Physics', 'code' => 'PHY', 'short_name' => 'Phys', 'category' => 'SCI', 'description' => 'Physical sciences', 'display_order' => 2, 'color' => '#10B981', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
-            ['name' => 'Chemistry', 'code' => 'CHEM', 'short_name' => 'Chem', 'category' => 'SCI', 'description' => 'Chemical sciences', 'display_order' => 3, 'color' => '#8B5CF6', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
-            ['name' => 'Biology', 'code' => 'BIO', 'short_name' => 'Bio', 'category' => 'SCI', 'description' => 'Life sciences', 'display_order' => 4, 'color' => '#06B6D4', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 3],
-            ['name' => 'French', 'code' => 'FRE', 'short_name' => 'Fr', 'category' => 'LANG', 'description' => 'French language studies', 'display_order' => 5, 'color' => '#EC4899', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
-            ['name' => 'English', 'code' => 'ENG', 'short_name' => 'En', 'category' => 'LANG', 'description' => 'English language studies', 'display_order' => 6, 'color' => '#F59E0B', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
-            ['name' => 'History', 'code' => 'HIST', 'short_name' => 'Hist', 'category' => 'HUM', 'description' => 'Historical studies', 'display_order' => 7, 'color' => '#F97316', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 3],
-            ['name' => 'Geography', 'code' => 'GEO', 'short_name' => 'Geo', 'category' => 'HUM', 'description' => 'Geographical studies', 'display_order' => 8, 'color' => '#64748B', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 3],
-            ['name' => 'Computer Science', 'code' => 'CS', 'short_name' => 'CS', 'category' => 'TECH', 'description' => 'Computer science and programming', 'display_order' => 9, 'color' => '#14B8A6', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 3],
-            ['name' => 'Economics', 'code' => 'ECON', 'short_name' => 'Eco', 'category' => 'BIZ', 'description' => 'Economic studies', 'display_order' => 10, 'color' => '#A855F7', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 3],
-            ['name' => 'Accounting', 'code' => 'ACC', 'short_name' => 'Acc', 'category' => 'BIZ', 'description' => 'Accounting principles', 'display_order' => 11, 'color' => '#EF4444', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 3],
-            ['name' => 'Technical Drawing', 'code' => 'TD', 'short_name' => 'TD', 'category' => 'TECH', 'description' => 'Technical drawing and design', 'display_order' => 12, 'color' => '#0EA5E9', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 2],
+            ['name' => 'Mathématiques', 'code' => 'MATH', 'short_name' => 'Math', 'category' => 'SCI', 'description' => 'Mathématiques et algèbre', 'display_order' => 1, 'color' => '#3B82F6', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 5],
+            ['name' => 'Physique', 'code' => 'PHY', 'short_name' => 'Phys', 'category' => 'SCI', 'description' => 'Sciences physiques', 'display_order' => 2, 'color' => '#10B981', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
+            ['name' => 'Chimie', 'code' => 'CHEM', 'short_name' => 'Chim', 'category' => 'SCI', 'description' => 'Sciences chimiques', 'display_order' => 3, 'color' => '#8B5CF6', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
+            ['name' => 'Biologie', 'code' => 'BIO', 'short_name' => 'Bio', 'category' => 'SCI', 'description' => 'Sciences du vivant', 'display_order' => 4, 'color' => '#06B6D4', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 3],
+            ['name' => 'Français', 'code' => 'FRE', 'short_name' => 'Fr', 'category' => 'LANG', 'description' => 'Études de la langue française', 'display_order' => 5, 'color' => '#EC4899', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
+            ['name' => 'Anglais', 'code' => 'ENG', 'short_name' => 'En', 'category' => 'LANG', 'description' => 'Études de la langue anglaise', 'display_order' => 6, 'color' => '#F59E0B', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 4],
+            ['name' => 'Histoire-Géographie', 'code' => 'HIST', 'short_name' => 'H/G', 'category' => 'HUM', 'description' => 'Études historiques et géographiques', 'display_order' => 7, 'color' => '#F97316', 'is_core_subject' => true, 'is_elective' => false, 'weekly_hours' => 3],
+            ['name' => 'Informatique', 'code' => 'CS', 'short_name' => 'Info', 'category' => 'TECH', 'description' => 'Informatique et programmation', 'display_order' => 8, 'color' => '#14B8A6', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 3],
+            ['name' => 'Économie', 'code' => 'ECON', 'short_name' => 'Éco', 'category' => 'BIZ', 'description' => 'Études économiques', 'display_order' => 9, 'color' => '#A855F7', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 3],
+            ['name' => 'Comptabilité', 'code' => 'ACC', 'short_name' => 'Compta', 'category' => 'BIZ', 'description' => 'Principes de comptabilité', 'display_order' => 10, 'color' => '#EF4444', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 3],
+            ['name' => 'Dessin Technique', 'code' => 'TD', 'short_name' => 'DT', 'category' => 'TECH', 'description' => 'Dessin et conception technique', 'display_order' => 11, 'color' => '#0EA5E9', 'is_core_subject' => false, 'is_elective' => true, 'weekly_hours' => 2],
         ];
 
         foreach ($subjects as $subjectData) {
             $categoryCode = $subjectData['category'];
-            $category = $school->subjectCategories()->where('code', $categoryCode)->first();
+            $category = SubjectCategory::where('school_id', $school->id)->where('code', $categoryCode)->first();
 
             if (! $category) {
                 continue;

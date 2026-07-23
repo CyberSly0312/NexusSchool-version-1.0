@@ -39,7 +39,7 @@ class SubjectCategoryResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Subject Category Details')
+                SectionComponent::make('Détails de la catégorie de matière')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -47,7 +47,7 @@ class SubjectCategoryResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Unique code within the school'),
+                            ->helperText('Code unique au sein de l\'école'),
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                         Forms\Components\TextInput::make('display_order')
@@ -56,12 +56,12 @@ class SubjectCategoryResource extends Resource
                             ->minValue(0),
                         Forms\Components\TextInput::make('color')
                             ->maxLength(20)
-                            ->helperText('Hex color code, e.g. #3B82F6'),
+                            ->helperText('Code couleur hexadécimal, ex. #3B82F6'),
                         Forms\Components\TextInput::make('icon')
                             ->maxLength(100)
-                            ->helperText('Icon identifier'),
+                            ->helperText('Identifiant d\'icône'),
                     ])->columns(2),
-                SectionComponent::make('Status')
+                SectionComponent::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(SubjectCategoryStatus::class)
@@ -88,17 +88,17 @@ class SubjectCategoryResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('color')
                     ->toggleable()
-                    ->label('Color')
+                    ->label('Couleur')
                     ->formatStateUsing(fn (?string $state): string => $state ?? '—'),
                 Tables\Columns\TextColumn::make('icon')
                     ->toggleable()
-                    ->label('Icon')
+                    ->label('Icône')
                     ->formatStateUsing(fn (?string $state): string => $state ?? '—'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (SubjectCategoryStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

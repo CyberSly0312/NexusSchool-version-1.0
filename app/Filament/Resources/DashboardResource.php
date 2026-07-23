@@ -40,7 +40,7 @@ class DashboardResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([
-            SectionComponent::make('Dashboard Details')->schema([
+            SectionComponent::make('Détails du tableau de bord')->schema([
                 Forms\Components\TextInput::make('name')->required()->maxLength(255),
                 Forms\Components\Textarea::make('description')->rows(3),
             ]),
@@ -63,11 +63,11 @@ class DashboardResource extends Resource
                 IconColumn::make('is_default')->boolean(),
                 IconColumn::make('is_active')->boolean(),
                 TextColumn::make('widgets_count')->counts('widgets')->label('Widgets')->sortable(),
-                TextColumn::make('created_at')->dateTime()->sortable()->toggledHiddenByDefault(),
+                TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable()->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('type')->options(DashboardType::labels()),
-                SelectFilter::make('is_active')->options([1 => 'Active', 0 => 'Inactive']),
+                SelectFilter::make('is_active')->options([1 => 'Actif', 0 => 'Inactif']),
             ])
             ->actions([EditAction::make(), DeleteAction::make()])
             ->bulkActions([DeleteBulkAction::make()]);

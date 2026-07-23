@@ -39,7 +39,7 @@ class BookCategoryResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Category Information')
+                SectionComponent::make('Informations sur la catégorie')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -47,14 +47,14 @@ class BookCategoryResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                         Forms\Components\Select::make('parent_id')
-                            ->label('Parent Category')
+                            ->label('Catégorie parente')
                             ->options(fn () => BookCategory::pluck('name', 'id'))
                             ->searchable()
                             ->preload(),
                         Forms\Components\Select::make('status')
                             ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
+                                'active' => 'Actif',
+                                'inactive' => 'Inactif',
                             ])
                             ->required(),
                     ])
@@ -70,7 +70,7 @@ class BookCategoryResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('parent.name')
-                    ->label('Parent Category')
+                    ->label('Catégorie parente')
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
@@ -80,15 +80,15 @@ class BookCategoryResource extends Resource
                         default => 'gray',
                     }),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
+                        'active' => 'Actif',
+                        'inactive' => 'Inactif',
                     ]),
             ])
             ->actions([

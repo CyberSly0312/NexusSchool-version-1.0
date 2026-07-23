@@ -41,7 +41,7 @@ class AnnouncementResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Announcement Details')
+                SectionComponent::make("Détails de l'annonce")
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->required()
@@ -51,20 +51,20 @@ class AnnouncementResource extends Resource
                             ->rows(6),
                     ]),
 
-                SectionComponent::make('Targeting')
+                SectionComponent::make('Ciblage')
                     ->schema([
                         Forms\Components\Select::make('scope')
                             ->options(AnnouncementScope::labels())
                             ->required()
                             ->default('school_wide'),
                         Forms\Components\TextInput::make('target_id')
-                            ->label('Target ID')
+                            ->label('ID cible')
                             ->maxLength(36),
                         Forms\Components\Select::make('priority')
                             ->options([
-                                'low' => 'Low',
+                                'low' => 'Faible',
                                 'normal' => 'Normal',
-                                'high' => 'High',
+                                'high' => 'Élevé',
                                 'urgent' => 'Urgent',
                             ])
                             ->default('normal')
@@ -72,14 +72,14 @@ class AnnouncementResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Publishing')
+                SectionComponent::make('Publication')
                     ->schema([
                         Forms\Components\Toggle::make('is_pinned'),
                         Forms\Components\Select::make('status')
                             ->options([
-                                'draft' => 'Draft',
-                                'published' => 'Published',
-                                'archived' => 'Archived',
+                                'draft' => 'Brouillon',
+                                'published' => 'Publié',
+                                'archived' => 'Archivé',
                             ])
                             ->required()
                             ->default('draft'),
@@ -115,18 +115,18 @@ class AnnouncementResource extends Resource
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('author.first_name')
-                    ->label('Author')
+                    ->label('Auteur')
                     ->toggleable(),
                 TextColumn::make('published_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('expires_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
@@ -135,9 +135,9 @@ class AnnouncementResource extends Resource
                     ->options(AnnouncementScope::labels()),
                 SelectFilter::make('status')
                     ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
-                        'archived' => 'Archived',
+                        'draft' => 'Brouillon',
+                        'published' => 'Publié',
+                        'archived' => 'Archivé',
                     ]),
             ])
             ->actions([

@@ -15,11 +15,11 @@ enum TripStatus: string
     public static function labels(): array
     {
         return [
-            self::Scheduled->value => 'Scheduled',
-            self::Started->value => 'Started',
-            self::Completed->value => 'Completed',
-            self::Cancelled->value => 'Cancelled',
-            self::Archived->value => 'Archived',
+            self::Scheduled->value => 'Planifié',
+            self::Started->value => 'Commencé',
+            self::Completed->value => 'Terminé',
+            self::Cancelled->value => 'Annulé',
+            self::Archived->value => 'Archivé',
         ];
     }
 

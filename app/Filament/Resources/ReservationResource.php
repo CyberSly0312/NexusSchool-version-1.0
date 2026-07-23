@@ -41,10 +41,10 @@ class ReservationResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Reservation Details')
+                SectionComponent::make('Détails de la réservation')
                     ->schema([
                         Forms\Components\Select::make('book_id')
-                            ->label('Book')
+                            ->label('Livre')
                             ->relationship('book', 'title')
                             ->searchable()
                             ->preload()
@@ -66,7 +66,7 @@ class ReservationResource extends Resource
                         Forms\Components\DatePicker::make('fulfilled_date')
                             ->nullable(),
                     ])->columns(3),
-                SectionComponent::make('Status')
+                SectionComponent::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(ReservationStatus::class)
@@ -83,7 +83,7 @@ class ReservationResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('book.title')
-                    ->label('Book Title')
+                    ->label('Titre du livre')
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('borrower_id')
@@ -92,16 +92,16 @@ class ReservationResource extends Resource
                     ->badge()
                     ->color(fn (BorrowerType $state): string => $state === BorrowerType::Student ? 'info' : 'success'),
                 TextColumn::make('reservation_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('expiry_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (ReservationStatus $state): string => $state->color()),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

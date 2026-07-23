@@ -41,7 +41,7 @@ class AssessmentResultResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Assessment Information')
+                SectionComponent::make('Informations d\'évaluation')
                     ->schema([
                         Forms\Components\Select::make('assessment_id')
                             ->relationship('assessment', 'title')
@@ -63,7 +63,7 @@ class AssessmentResultResource extends Resource
                             ->preload()
                             ->native(false),
                     ])->columns(3),
-                SectionComponent::make('Scores')
+                SectionComponent::make('Notes')
                     ->schema([
                         Forms\Components\TextInput::make('raw_score')
                             ->required()
@@ -96,7 +96,7 @@ class AssessmentResultResource extends Resource
                             ->step(0.01)
                             ->default(1.00),
                     ])->columns(3),
-                SectionComponent::make('Status & Flags')
+                SectionComponent::make('Statut et indicateurs')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(collect(AssessmentResultStatus::cases())->mapWithKeys(fn ($c) => [$c->value => $c->label()]))
@@ -105,11 +105,11 @@ class AssessmentResultResource extends Resource
                         Forms\Components\Toggle::make('is_absent')
                             ->label('Absent'),
                         Forms\Components\Toggle::make('is_excused')
-                            ->label('Excused'),
+                            ->label('Excusé'),
                         Forms\Components\Toggle::make('is_published')
-                            ->label('Published'),
+                            ->label('Publié'),
                         Forms\Components\Toggle::make('is_locked')
-                            ->label('Locked'),
+                            ->label('Verrouillé'),
                         Forms\Components\Textarea::make('remarks')
                             ->rows(3)
                             ->columnSpanFull(),
@@ -125,22 +125,22 @@ class AssessmentResultResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('student.first_name')
-                    ->label('Student')
+                    ->label('Élève')
                     ->formatStateUsing(fn ($record) => "{$record->student?->first_name} {$record->student?->last_name}")
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('student.student_number')
-                    ->label('Student #')
+                    ->label('N° élève')
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('assessment.title')
-                    ->label('Assessment')
+                    ->label('Évaluation')
                     ->searchable()
                     ->sortable()
                     ->limit(30),
                 Tables\Columns\TextColumn::make('subject.name')
-                    ->label('Subject')
+                    ->label('Matière')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
@@ -182,11 +182,11 @@ class AssessmentResultResource extends Resource
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -196,16 +196,16 @@ class AssessmentResultResource extends Resource
                 Tables\Filters\SelectFilter::make('is_absent')
                     ->label('Absent')
                     ->options([
-                        true => 'Yes',
-                        false => 'No',
+                        true => 'Oui',
+                        false => 'Non',
                     ]),
                 Tables\Filters\SelectFilter::make('assessment_id')
-                    ->label('Assessment')
+                    ->label('Évaluation')
                     ->relationship('assessment', 'title')
                     ->searchable()
                     ->preload(),
                 Tables\Filters\SelectFilter::make('subject_id')
-                    ->label('Subject')
+                    ->label('Matière')
                     ->relationship('subject', 'name')
                     ->searchable()
                     ->preload(),
@@ -213,7 +213,7 @@ class AssessmentResultResource extends Resource
             ->actions([
                 EditAction::make(),
                 Action::make('verify')
-                    ->label('Verify')
+                    ->label('Vérifier')
                     ->icon('heroicon-o-check-badge')
                     ->color('success')
                     ->action(fn (AssessmentResult $record) => app(GradebookService::class)->verify($record->id))

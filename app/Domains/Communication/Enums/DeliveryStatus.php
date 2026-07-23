@@ -15,11 +15,11 @@ enum DeliveryStatus: string
     public static function labels(): array
     {
         return [
-            self::Pending->value => 'Pending',
-            self::Sent->value => 'Sent',
-            self::Delivered->value => 'Delivered',
-            self::Failed->value => 'Failed',
-            self::Bounced->value => 'Bounced',
+            self::Pending->value => 'En attente',
+            self::Sent->value => 'Envoyé',
+            self::Delivered->value => 'Livré',
+            self::Failed->value => 'Échoué',
+            self::Bounced->value => 'Rebondi',
         ];
     }
 

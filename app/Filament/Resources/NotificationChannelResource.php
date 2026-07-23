@@ -40,7 +40,7 @@ class NotificationChannelResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Channel Details')
+                SectionComponent::make('Détails du canal')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -49,9 +49,9 @@ class NotificationChannelResource extends Resource
                             ->options([
                                 'email' => 'Email',
                                 'sms' => 'SMS',
-                                'push' => 'Push Notification',
+                                'push' => 'Notification push',
                                 'webhook' => 'Webhook',
-                                'database' => 'Database',
+                                'database' => 'Base de données',
                             ])
                             ->required(),
                         Forms\Components\Toggle::make('is_active')
@@ -62,7 +62,7 @@ class NotificationChannelResource extends Resource
                 SectionComponent::make('Configuration')
                     ->schema([
                         Forms\Components\KeyValue::make('configuration')
-                            ->label('Channel Configuration')
+                            ->label('Configuration du canal')
                             ->reorderable(),
                         Forms\Components\KeyValue::make('conditions')
                             ->label('Conditions')
@@ -95,12 +95,12 @@ class NotificationChannelResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('last_used_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -112,7 +112,7 @@ class NotificationChannelResource extends Resource
                         'sms' => 'SMS',
                         'push' => 'Push',
                         'webhook' => 'Webhook',
-                        'database' => 'Database',
+                        'database' => 'Base de données',
                     ]),
             ])
             ->actions([

@@ -40,10 +40,10 @@ class RouteStopResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Route & Stop Information')
+                SectionComponent::make('Informations de l\'itinéraire et de l\'arrêt')
                     ->schema([
                         Forms\Components\Select::make('route_id')
-                            ->label('Route')
+                            ->label('Itinéraire')
                             ->options(fn () => Route::pluck('name', 'id'))
                             ->searchable()
                             ->preload()
@@ -58,7 +58,7 @@ class RouteStopResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Location')
+                SectionComponent::make('Emplacement')
                     ->schema([
                         Forms\Components\TextInput::make('latitude')
                             ->numeric()
@@ -73,10 +73,10 @@ class RouteStopResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Timing & Notes')
+                SectionComponent::make('Horaire et notes')
                     ->schema([
                         Forms\Components\TextInput::make('estimated_time_minutes')
-                            ->label('Estimated Time (min)')
+                            ->label('Temps estimé (min)')
                             ->numeric()
                             ->minValue(0),
                         Forms\Components\Textarea::make('notes')
@@ -91,7 +91,7 @@ class RouteStopResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('route.name')
-                    ->label('Route')
+                    ->label('Itinéraire')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('name')
@@ -101,20 +101,20 @@ class RouteStopResource extends Resource
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('estimated_time_minutes')
-                    ->label('Time (min)')
+                    ->label('Temps (min)')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('address')
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('route_id')
-                    ->label('Route')
+                    ->label('Itinéraire')
                     ->options(fn () => Route::pluck('name', 'id')),
             ])
             ->actions([

@@ -15,11 +15,11 @@ enum MessageStatus: string
     public static function labels(): array
     {
         return [
-            self::Draft->value => 'Draft',
-            self::Sent->value => 'Sent',
-            self::Delivered->value => 'Delivered',
-            self::Read->value => 'Read',
-            self::Archived->value => 'Archived',
+            self::Draft->value => 'Brouillon',
+            self::Sent->value => 'Envoyé',
+            self::Delivered->value => 'Livré',
+            self::Read->value => 'Lu',
+            self::Archived->value => 'Archivé',
         ];
     }
 

@@ -15,11 +15,11 @@ enum NotificationChannel: string
     public static function labels(): array
     {
         return [
-            self::Email->value => 'Email',
+            self::Email->value => 'E-mail',
             self::SMS->value => 'SMS',
             self::WhatsApp->value => 'WhatsApp',
-            self::Push->value => 'Push',
-            self::InApp->value => 'In-App',
+            self::Push->value => 'Notification push',
+            self::InApp->value => 'Dans l\'application',
         ];
     }
 

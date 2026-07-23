@@ -14,10 +14,10 @@ enum AiPromptTemplateStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Draft => 'Draft',
-            self::Archived => 'Archived',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
+            self::Draft => 'Brouillon',
+            self::Archived => 'Archivé',
         };
     }
 

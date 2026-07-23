@@ -14,10 +14,10 @@ enum AiMessageRole: string
     public function label(): string
     {
         return match ($this) {
-            self::System => 'System',
-            self::User => 'User',
+            self::System => 'Système',
+            self::User => 'Utilisateur',
             self::Assistant => 'Assistant',
-            self::Function => 'Function',
+            self::Function => 'Fonction',
         };
     }
 

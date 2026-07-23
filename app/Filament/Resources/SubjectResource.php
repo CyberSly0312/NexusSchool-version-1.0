@@ -39,7 +39,7 @@ class SubjectResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Subject Details')
+                SectionComponent::make('Détails de la matière')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -47,24 +47,24 @@ class SubjectResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Unique code within the school'),
+                            ->helperText('Code unique au sein de l\'école'),
                         Forms\Components\TextInput::make('short_name')
                             ->maxLength(20)
-                            ->helperText('Abbreviation (e.g. Math, Phy)'),
+                            ->helperText('Abréviation (ex. Math, Phy)'),
                         Forms\Components\Select::make('subject_category_id')
-                            ->label('Subject Category')
+                            ->label('Catégorie de matière')
                             ->relationship('subjectCategory', 'name')
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('department_id')
-                            ->label('Department')
+                            ->label('Département')
                             ->relationship('department', 'name')
                             ->searchable()
                             ->preload()
                             ->nullable(),
                         Forms\Components\Select::make('program_id')
-                            ->label('Program')
+                            ->label('Programme')
                             ->relationship('program', 'name')
                             ->searchable()
                             ->preload()
@@ -77,24 +77,24 @@ class SubjectResource extends Resource
                             ->minValue(0),
                         Forms\Components\TextInput::make('color')
                             ->maxLength(20)
-                            ->helperText('Hex color code, e.g. #3B82F6'),
+                            ->helperText('Code couleur hexadécimal, ex. #3B82F6'),
                     ])->columns(2),
                 SectionComponent::make('Classification')
                     ->schema([
                         Forms\Components\Toggle::make('is_core_subject')
-                            ->label('Core Subject')
+                            ->label('Matière principale')
                             ->default(true),
                         Forms\Components\Toggle::make('is_elective')
-                            ->label('Elective Subject')
+                            ->label('Matière optionnelle')
                             ->default(false),
                         Forms\Components\TextInput::make('weekly_hours')
-                            ->label('Weekly Hours')
+                            ->label('Heures hebdomadaires')
                             ->numeric()
                             ->required()
                             ->default(1)
                             ->minValue(1),
                     ])->columns(3),
-                SectionComponent::make('Status')
+                SectionComponent::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(SubjectStatus::class)
@@ -122,20 +122,20 @@ class SubjectResource extends Resource
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('weekly_hours')
                     ->sortable()
-                    ->label('Hours'),
+                    ->label('Heures'),
                 Tables\Columns\IconColumn::make('is_core_subject')
                     ->boolean()
-                    ->label('Core')
+                    ->label('Principal')
                     ->toggleable(),
                 Tables\Columns\IconColumn::make('is_elective')
                     ->boolean()
-                    ->label('Elective')
+                    ->label('Optionnel')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (SubjectStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -145,19 +145,19 @@ class SubjectResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(SubjectStatus::class),
                 Tables\Filters\SelectFilter::make('subject_category_id')
-                    ->label('Subject Category')
+                    ->label('Catégorie de matière')
                     ->relationship('subjectCategory', 'name'),
                 Tables\Filters\SelectFilter::make('is_core_subject')
-                    ->label('Core Subject')
+                    ->label('Matière principale')
                     ->options([
-                        1 => 'Yes',
-                        0 => 'No',
+                        1 => 'Oui',
+                        0 => 'Non',
                     ]),
                 Tables\Filters\SelectFilter::make('is_elective')
-                    ->label('Elective')
+                    ->label('Optionnel')
                     ->options([
-                        1 => 'Yes',
-                        0 => 'No',
+                        1 => 'Oui',
+                        0 => 'Non',
                     ]),
             ])
             ->actions([

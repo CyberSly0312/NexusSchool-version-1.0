@@ -40,7 +40,7 @@ class VehicleResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Vehicle Information')
+                SectionComponent::make('Informations du véhicule')
                     ->schema([
                         Forms\Components\TextInput::make('registration_number')
                             ->required()
@@ -63,22 +63,22 @@ class VehicleResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Fuel & Compliance')
+                SectionComponent::make('Carburant et conformité')
                     ->schema([
                         Forms\Components\Select::make('fuel_type')
                             ->options([
                                 'diesel' => 'Diesel',
-                                'petrol' => 'Petrol',
-                                'electric' => 'Electric',
-                                'hybrid' => 'Hybrid',
-                                'cng' => 'CNG',
+                                'petrol' => 'Essence',
+                                'electric' => 'Électrique',
+                                'hybrid' => 'Hybride',
+                                'cng' => 'GNC',
                             ]),
                         Forms\Components\DatePicker::make('insurance_expiry'),
                         Forms\Components\DatePicker::make('inspection_expiry'),
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Status & Notes')
+                SectionComponent::make('Statut et notes')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(VehicleStatus::labels())
@@ -113,7 +113,7 @@ class VehicleResource extends Resource
                     ->color(fn (VehicleStatus $state): string => VehicleStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (VehicleStatus $state): string => VehicleStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
@@ -121,13 +121,13 @@ class VehicleResource extends Resource
                 SelectFilter::make('status')
                     ->options(VehicleStatus::labels()),
                 SelectFilter::make('fuel_type')
-                    ->label('Fuel Type')
+                    ->label('Type de carburant')
                     ->options([
                         'diesel' => 'Diesel',
-                        'petrol' => 'Petrol',
-                        'electric' => 'Electric',
-                        'hybrid' => 'Hybrid',
-                        'cng' => 'CNG',
+                        'petrol' => 'Essence',
+                        'electric' => 'Électrique',
+                        'hybrid' => 'Hybride',
+                        'cng' => 'GNC',
                     ]),
             ])
             ->actions([

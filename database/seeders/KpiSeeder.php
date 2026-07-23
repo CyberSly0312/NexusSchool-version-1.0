@@ -67,7 +67,7 @@ class KpiSeeder extends Seeder
         foreach ($kpis as $data) {
             Kpi::firstOrCreate(
                 ['school_id' => $school->id, 'slug' => $data['slug']],
-                array_merge($data, ['school_id' => $school->id]),
+                array_merge($data, ['school_id' => $school->id, 'status' => 'active']),
             );
         }
     }

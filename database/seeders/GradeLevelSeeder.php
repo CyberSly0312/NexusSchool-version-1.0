@@ -6,14 +6,14 @@ use App\Domains\GradeLevel\Enums\EducationalCycle;
 use App\Domains\GradeLevel\Enums\GradeLevelStatus;
 use App\Models\GradeLevel;
 use App\Models\Program;
-use App\Models\School;
+use App\Domains\School\Models\School;
 use Illuminate\Database\Seeder;
 
 class GradeLevelSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = School::where('slug', 'demo-school')->first();
+        $school = School::where('slug', 'nexus-demo')->first();
 
         if (! $school) {
             return;

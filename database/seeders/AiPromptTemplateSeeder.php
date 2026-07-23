@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\AiPromptTemplate;
-use App\Models\School;
+use App\Domains\School\Models\School;
 use Illuminate\Database\Seeder;
 
 class AiPromptTemplateSeeder extends Seeder

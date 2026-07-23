@@ -25,12 +25,19 @@ class StudentEnrollmentSeeder extends Seeder
         }
 
         $academicYear = AcademicYear::where('school_id', $school->id)->first();
-        $academicClass = AcademicClass::where('school_id', $school->id)->first();
         $program = Program::where('school_id', $school->id)->first();
-        $gradeLevel = GradeLevel::where('school_id', $school->id)->first();
-        $section = Section::where('school_id', $school->id)->first();
 
-        if (! $academicYear || ! $academicClass || ! $program || ! $gradeLevel || ! $section) {
+        if (! $academicYear || ! $program) {
+            return;
+        }
+
+        $gradeLevel = GradeLevel::where('program_id', $program->id)->first();
+        $section = $gradeLevel ? Section::where('grade_level_id', $gradeLevel->id)->first() : null;
+        $academicClass = AcademicClass::where('academic_year_id', $academicYear->id)
+            ->where('program_id', $program->id)
+            ->first();
+
+        if (! $academicClass || ! $gradeLevel || ! $section) {
             return;
         }
 

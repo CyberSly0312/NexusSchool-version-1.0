@@ -16,12 +16,12 @@ enum EnrollmentStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Active => 'Active',
-            self::Suspended => 'Suspended',
-            self::Completed => 'Completed',
-            self::Cancelled => 'Cancelled',
-            self::Withdrawn => 'Withdrawn',
+            self::Pending => 'En attente',
+            self::Active => 'Actif',
+            self::Suspended => 'Suspendu',
+            self::Completed => 'Terminé',
+            self::Cancelled => 'Annulé',
+            self::Withdrawn => 'Retiré',
         };
     }
 

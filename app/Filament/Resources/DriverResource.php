@@ -40,7 +40,7 @@ class DriverResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Personal Information')
+                SectionComponent::make('Informations personnelles')
                     ->schema([
                         Forms\Components\TextInput::make('first_name')
                             ->required()
@@ -62,7 +62,7 @@ class DriverResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('License Details')
+                SectionComponent::make('Détails du permis')
                     ->schema([
                         Forms\Components\TextInput::make('license_number')
                             ->required()
@@ -71,17 +71,17 @@ class DriverResource extends Resource
                             ->required(),
                         Forms\Components\Select::make('license_category')
                             ->options([
-                                'A' => 'A - Motorcycle',
-                                'B' => 'B - Light Vehicle',
-                                'C' => 'C - Heavy Vehicle',
-                                'D' => 'D - Passenger Vehicle',
-                                'E' => 'E - Trailer',
+                                'A' => 'A - Moto',
+                                'B' => 'B - Véhicule léger',
+                                'C' => 'C - Véhicule lourd',
+                                'D' => 'D - Véhicule de transport en commun',
+                                'E' => 'E - Remorque',
                             ])
                             ->required(),
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Emergency Contact')
+                SectionComponent::make('Contact d\'urgence')
                     ->schema([
                         Forms\Components\TextInput::make('emergency_contact_name')
                             ->maxLength(255),
@@ -90,7 +90,7 @@ class DriverResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Status & Notes')
+                SectionComponent::make('Statut et notes')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(DriverStatus::labels())
@@ -122,7 +122,7 @@ class DriverResource extends Resource
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('license_expiry')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('status')
@@ -130,7 +130,7 @@ class DriverResource extends Resource
                     ->color(fn (DriverStatus $state): string => DriverStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (DriverStatus $state): string => DriverStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])

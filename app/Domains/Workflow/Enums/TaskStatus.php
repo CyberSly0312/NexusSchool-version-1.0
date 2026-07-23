@@ -17,13 +17,13 @@ enum TaskStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Assigned => 'Assigned',
-            self::InProgress => 'In Progress',
-            self::Completed => 'Completed',
-            self::Failed => 'Failed',
-            self::Skipped => 'Skipped',
-            self::Cancelled => 'Cancelled',
+            self::Pending => 'En attente',
+            self::Assigned => 'Assigné',
+            self::InProgress => 'En cours',
+            self::Completed => 'Terminé',
+            self::Failed => 'Échoué',
+            self::Skipped => 'Ignoré',
+            self::Cancelled => 'Annulé',
         };
     }
 

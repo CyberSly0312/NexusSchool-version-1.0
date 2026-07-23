@@ -39,7 +39,7 @@ class DepartmentResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Department Details')
+                Section::make('Détails du département')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -47,10 +47,10 @@ class DepartmentResource extends Resource
                         Forms\Components\TextInput::make('code')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Short unique code (e.g., SCI)'),
+                            ->helperText('Code court unique (ex., SCI)'),
                         Forms\Components\ColorPicker::make('color')
-                            ->label('Color')
-                            ->helperText('Optional color for visual identification'),
+                            ->label('Couleur')
+                            ->helperText('Couleur optionnelle pour l\'identification visuelle'),
                         Forms\Components\TextInput::make('order')
                             ->numeric()
                             ->default(0)
@@ -58,7 +58,7 @@ class DepartmentResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                     ])->columns(2),
-                Section::make('Status')
+                Section::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(DepartmentStatus::class)
@@ -89,7 +89,7 @@ class DepartmentResource extends Resource
                     ->badge()
                     ->color(fn (DepartmentStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

@@ -15,11 +15,11 @@ enum BookCopyStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Available => 'Available',
-            self::Reserved => 'Reserved',
-            self::Borrowed => 'Borrowed',
-            self::Returned => 'Returned',
-            self::Archived => 'Archived',
+            self::Available => 'Disponible',
+            self::Reserved => 'Réservé',
+            self::Borrowed => 'Emprunté',
+            self::Returned => 'Retourné',
+            self::Archived => 'Archivé',
         };
     }
 

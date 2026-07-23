@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('academic_classes', function (Blueprint $table) {
             // ── Identity ──────────────────────────────────────────────
             $table->id();
-            $table->ulid('uuid')->unique();
+            $table->ulid('uuid')->unique()->nullable();
             $table->unsignedBigInteger('academic_year_id');
             $table->unsignedBigInteger('program_id');
             $table->unsignedBigInteger('grade_level_id');

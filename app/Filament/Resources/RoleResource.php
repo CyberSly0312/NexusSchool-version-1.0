@@ -40,13 +40,13 @@ class RoleResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Role Details')
+                Section::make('Détails du rôle')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(100)
                             ->unique(ignoreRecord: true)
-                            ->helperText('Use snake_case for role names (e.g., school_admin)'),
+                            ->helperText('Utiliser snake_case pour les noms de rôles (ex. : school_admin)'),
                     ]),
             ]);
     }
@@ -61,14 +61,14 @@ class RoleResource extends Resource
                     ->badge(),
                 Tables\Columns\TextColumn::make('users_count')
                     ->counts('users')
-                    ->label('Users')
+                    ->label('Utilisateurs')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('guard_name')
-                    ->label('Guard')
+                    ->label('Garde')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -82,7 +82,7 @@ class RoleResource extends Resource
                     ->before(function (Role $record, DeleteAction $action) {
                         $service = new RoleService();
                         if ($service->isSystemRole($record)) {
-                            $action->label('System Role');
+                            $action->label('Rôle système');
                             $action->disabled();
                         }
                     }),

@@ -36,9 +36,9 @@ class StudentTransportAssignmentSeeder extends Seeder
                 [
                     'school_id' => $school->id,
                     'academic_year_id' => $academicYear->id,
-                    'stop_name' => $stopNames[$index % count($stopNames)],
-                    'fare' => $route->fare,
+                    'monthly_fee' => 25000.00,
                     'status' => 'active',
+                    'notes' => 'Transport scolaire',
                 ]
             );
         }

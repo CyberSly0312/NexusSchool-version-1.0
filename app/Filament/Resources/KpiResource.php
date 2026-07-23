@@ -40,7 +40,7 @@ class KpiResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([
-            SectionComponent::make('KPI Details')->schema([
+            SectionComponent::make('Détails du KPI')->schema([
                 Forms\Components\TextInput::make('name')->required()->maxLength(255),
                 Forms\Components\Textarea::make('description')->rows(3),
                 Forms\Components\TextInput::make('category')->required()->maxLength(100)->default('general'),
@@ -62,23 +62,23 @@ class KpiResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('category')->searchable(),
-                TextColumn::make('cached_value')->label('Value')->numeric()->sortable(),
-                TextColumn::make('target_value')->label('Target')->numeric()->toggleable(),
+                TextColumn::make('cached_value')->label('Valeur')->numeric()->sortable(),
+                TextColumn::make('target_value')->label('Objectif')->numeric()->toggleable(),
                 TextColumn::make('unit')->toggleable(),
                 TextColumn::make('status')->badge()
                     ->color(fn (KpiStatus $state): string => KpiStatus::colors()[$state] ?? 'gray'),
-                TextColumn::make('last_calculated_at')->dateTime()->sortable()->toggleable()->toggledHiddenByDefault(),
-                TextColumn::make('created_at')->dateTime()->sortable()->toggledHiddenByDefault(),
+                TextColumn::make('last_calculated_at')->dateTime('d/m/Y H:i')->sortable()->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable()->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('status')->options(KpiStatus::labels()),
                 SelectFilter::make('category')->options([
-                    'enrollment' => 'Enrollment',
-                    'attendance' => 'Attendance',
+                    'enrollment' => 'Inscription',
+                    'attendance' => 'Présence',
                     'finance' => 'Finance',
-                    'library' => 'Library',
+                    'library' => 'Bibliothèque',
                     'transport' => 'Transport',
-                    'general' => 'General',
+                    'general' => 'Général',
                 ]),
             ])
             ->actions([EditAction::make(), DeleteAction::make()])

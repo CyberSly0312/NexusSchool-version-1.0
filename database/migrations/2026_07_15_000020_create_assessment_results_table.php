@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('assessment_results', function (Blueprint $table) {
             $table->id();
-            $table->ulid('uuid')->unique();
+            $table->ulid('uuid')->unique()->nullable();
             $table->string('school_id');
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('student_enrollment_id')->nullable();

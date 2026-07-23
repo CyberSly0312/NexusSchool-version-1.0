@@ -41,7 +41,7 @@ class BackupResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Backup Details')
+                SectionComponent::make('Détails de la sauvegarde')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -58,7 +58,7 @@ class BackupResource extends Resource
                                     ->label('Table'),
                             ])
                             ->defaultItems(0)
-                            ->addActionLabel('Add Table'),
+                            ->addActionLabel('Ajouter une table'),
                         Forms\Components\Textarea::make('notes')
                             ->rows(2),
                     ])
@@ -82,21 +82,21 @@ class BackupResource extends Resource
                 TextColumn::make('disk')
                     ->toggleable(),
                 TextColumn::make('size_bytes')
-                    ->label('Size')
-                    ->formatStateUsing(fn ($state) => $state ? number_format($state / 1024, 1) . ' KB' : '-')
+                    ->label('Taille')
+                    ->formatStateUsing(fn ($state) => $state ? number_format($state / 1024, 1) . ' Ko' : '-')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('duration_ms')
-                    ->label('Duration')
+                    ->label('Durée')
                     ->formatStateUsing(fn ($state) => $state ? round($state / 1000, 1) . 's' : '-')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('completed_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

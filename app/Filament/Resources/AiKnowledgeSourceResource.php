@@ -40,7 +40,7 @@ class AiKnowledgeSourceResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Knowledge Source Details')
+                SectionComponent::make('Détails de la source de connaissances')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -48,9 +48,9 @@ class AiKnowledgeSourceResource extends Resource
                         Forms\Components\Select::make('type')
                             ->options([
                                 'markdown' => 'Markdown',
-                                'pdf_metadata' => 'PDF Metadata',
-                                'database' => 'Database',
-                                'text' => 'Plain Text',
+                                'pdf_metadata' => 'Métadonnées PDF',
+                                'database' => 'Base de données',
+                                'text' => 'Texte brut',
                             ])
                             ->required(),
                         Forms\Components\Textarea::make('description')
@@ -58,7 +58,7 @@ class AiKnowledgeSourceResource extends Resource
                     ])
                     ->columns(1),
 
-                SectionComponent::make('Source Configuration')
+                SectionComponent::make('Configuration de la source')
                     ->schema([
                         Forms\Components\TextInput::make('source_path')
                             ->maxLength(500),
@@ -71,7 +71,7 @@ class AiKnowledgeSourceResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Status')
+                SectionComponent::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(AiKnowledgeSourceStatus::labels())
@@ -96,31 +96,31 @@ class AiKnowledgeSourceResource extends Resource
                 TextColumn::make('version')
                     ->sortable(),
                 TextColumn::make('chunk_count')
-                    ->label('Chunks')
+                    ->label('Segments')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('total_tokens')
-                    ->label('Tokens')
+                    ->label('Jetons')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('indexed_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('type')
                     ->options([
                         'markdown' => 'Markdown',
-                        'pdf_metadata' => 'PDF Metadata',
-                        'database' => 'Database',
-                        'text' => 'Plain Text',
+                        'pdf_metadata' => 'Métadonnées PDF',
+                        'database' => 'Base de données',
+                        'text' => 'Texte brut',
                     ]),
                 SelectFilter::make('status')
                     ->options(AiKnowledgeSourceStatus::labels()),

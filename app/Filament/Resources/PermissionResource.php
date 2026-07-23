@@ -40,10 +40,10 @@ class PermissionResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Permission Details')
+                Section::make('Détails de la permission')
                     ->schema([
                         Forms\Components\Select::make('group')
-                            ->label('Group')
+                            ->label('Groupe')
                             ->options(PermissionGroup::options())
                             ->required()
                             ->reactive()
@@ -53,12 +53,12 @@ class PermissionResource extends Resource
                                     $set('name', $group->value.'.');
                                 }
                             })
-                            ->helperText('Select a module group'),
+                            ->helperText('Sélectionner un groupe de module'),
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(100)
                             ->unique(ignoreRecord: true)
-                            ->helperText('Format: module.action (e.g., school.view)')
+                            ->helperText('Format : module.action (ex. : school.view)')
                             ->suffix('web'),
                     ])->columns(2),
             ]);
@@ -80,7 +80,7 @@ class PermissionResource extends Resource
                         default => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('group')
-                    ->label('Group')
+                    ->label('Groupe')
                     ->state(function (Permission $record): string {
                         $parts = explode('.', $record->name);
 
@@ -89,21 +89,21 @@ class PermissionResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('roles_count')
                     ->counts('roles')
-                    ->label('Roles')
+                    ->label('Rôles')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('guard_name')
-                    ->label('Guard')
+                    ->label('Garde')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('group')
-                    ->label('Group')
+                    ->label('Groupe')
                     ->options(PermissionGroup::options())
                     ->query(function ($query, array $data): void {
                         if ($data['value']) {
@@ -117,7 +117,7 @@ class PermissionResource extends Resource
                     ->before(function (Permission $record, DeleteAction $action) {
                         $service = new PermissionService();
                         if ($service->isSystemPermission($record)) {
-                            $action->label('System Permission');
+                            $action->label('Permission système');
                             $action->disabled();
                         }
                     }),

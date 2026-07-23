@@ -42,10 +42,10 @@ class BookCopyResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Copy Details')
+                SectionComponent::make('Détails de l\'exemplaire')
                     ->schema([
                         Forms\Components\Select::make('book_id')
-                            ->label('Book')
+                            ->label('Livre')
                             ->relationship('book', 'title')
                             ->searchable()
                             ->preload()
@@ -104,7 +104,7 @@ class BookCopyResource extends Resource
                     ->badge()
                     ->color(fn (BookCopyStatus $state): string => $state->color()),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -113,13 +113,13 @@ class BookCopyResource extends Resource
                 SelectFilter::make('status')
                     ->options(BookCopyStatus::class),
                 SelectFilter::make('book_id')
-                    ->label('Book')
+                    ->label('Livre')
                     ->relationship('book', 'title'),
                 SelectFilter::make('is_available')
-                    ->label('Available')
+                    ->label('Disponible')
                     ->options([
-                        1 => 'Yes',
-                        0 => 'No',
+                        1 => 'Oui',
+                        0 => 'Non',
                     ]),
             ])
             ->actions([

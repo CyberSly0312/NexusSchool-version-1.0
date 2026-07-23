@@ -41,7 +41,7 @@ class WorkflowResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Workflow Details')
+                SectionComponent::make('Détails du flux de travail')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -51,10 +51,10 @@ class WorkflowResource extends Resource
                             ->default('draft'),
                         Forms\Components\Select::make('category')
                             ->options([
-                                'approval' => 'Approval',
+                                'approval' => 'Approbation',
                                 'notification' => 'Notification',
-                                'automation' => 'Automation',
-                                'integration' => 'Integration',
+                                'automation' => 'Automatisation',
+                                'integration' => 'Intégration',
                             ])
                             ->searchable()
                             ->nullable(),
@@ -75,13 +75,13 @@ class WorkflowResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Settings')
+                SectionComponent::make('Paramètres')
                     ->schema([
                         Forms\Components\KeyValue::make('settings')
-                            ->label('Workflow Settings')
+                            ->label('Paramètres du flux')
                             ->reorderable(),
                         Forms\Components\KeyValue::make('metadata')
-                            ->label('Metadata')
+                            ->label('Métadonnées')
                             ->reorderable(),
                     ])
                     ->columns(2),
@@ -110,12 +110,12 @@ class WorkflowResource extends Resource
                     ->sortable(),
                 TextColumn::make('executions_count')
                     ->counts('executions')
-                    ->label('Executions')
+                    ->label('Exécutions')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -125,15 +125,15 @@ class WorkflowResource extends Resource
                     ->options(WorkflowStatus::labels()),
                 SelectFilter::make('category')
                     ->options([
-                        'approval' => 'Approval',
+                        'approval' => 'Approbation',
                         'notification' => 'Notification',
-                        'automation' => 'Automation',
-                        'integration' => 'Integration',
+                        'automation' => 'Automatisation',
+                        'integration' => 'Intégration',
                     ]),
                 SelectFilter::make('is_active')
                     ->options([
-                        '1' => 'Active',
-                        '0' => 'Inactive',
+                        '1' => 'Actif',
+                        '0' => 'Inactif',
                     ]),
             ])
             ->actions([

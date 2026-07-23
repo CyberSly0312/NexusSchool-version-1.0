@@ -18,14 +18,14 @@ enum ExecutionStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Running => 'Running',
-            self::Paused => 'Paused',
-            self::WaitingApproval => 'Waiting Approval',
-            self::Completed => 'Completed',
-            self::Failed => 'Failed',
-            self::Cancelled => 'Cancelled',
-            self::TimedOut => 'Timed Out',
+            self::Pending => 'En attente',
+            self::Running => 'En cours d\'exécution',
+            self::Paused => 'En pause',
+            self::WaitingApproval => 'En attente d\'approbation',
+            self::Completed => 'Terminé',
+            self::Failed => 'Échoué',
+            self::Cancelled => 'Annulé',
+            self::TimedOut => 'Expiré',
         };
     }
 

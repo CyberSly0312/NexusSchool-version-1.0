@@ -41,36 +41,36 @@ class WorkflowExecutionResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('workflow.name')
-                    ->label('Workflow')
+                    ->label('Flux de travail')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => ExecutionStatus::tryFrom($state)?->color() ?? 'gray'),
                 TextColumn::make('retry_count')
-                    ->label('Retries')
+                    ->label('Tentatives')
                     ->sortable(),
                 TextColumn::make('current_node_id')
-                    ->label('Current Node')
+                    ->label('Nœud actuel')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('initiated_by')
-                    ->label('Initiated By')
+                    ->label('Initié par')
                     ->toggleable(),
                 TextColumn::make('started_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
                 TextColumn::make('completed_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('duration_ms')
-                    ->label('Duration (ms)')
+                    ->label('Durée (ms)')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

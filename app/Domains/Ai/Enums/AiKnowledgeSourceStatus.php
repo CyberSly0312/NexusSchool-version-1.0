@@ -15,11 +15,11 @@ enum AiKnowledgeSourceStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Indexing => 'Indexing',
-            self::Indexed => 'Indexed',
-            self::Failed => 'Failed',
-            self::Outdated => 'Outdated',
+            self::Pending => 'En attente',
+            self::Indexing => 'Indexation en cours',
+            self::Indexed => 'Indexé',
+            self::Failed => 'Échoué',
+            self::Outdated => 'Obsolète',
         };
     }
 

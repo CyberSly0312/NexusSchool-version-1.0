@@ -45,10 +45,10 @@ class StudentTransportAssignmentResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Student & Route')
+                SectionComponent::make('Élève et itinéraire')
                     ->schema([
                         Forms\Components\Select::make('student_id')
-                            ->label('Student')
+                            ->label('Élève')
                             ->options(fn () => Student::all()->map(fn (Student $student) => [
                                 'value' => $student->id,
                                 'label' => trim($student->first_name.' '.$student->last_name).' ('.$student->student_number.')',
@@ -57,7 +57,7 @@ class StudentTransportAssignmentResource extends Resource
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('route_id')
-                            ->label('Route')
+                            ->label('Itinéraire')
                             ->options(fn () => Route::pluck('name', 'id'))
                             ->searchable()
                             ->preload()
@@ -65,38 +65,38 @@ class StudentTransportAssignmentResource extends Resource
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Stops')
+                SectionComponent::make('Arrêts')
                     ->schema([
                         Forms\Components\Select::make('pickup_stop_id')
-                            ->label('Pickup Stop')
+                            ->label('Arrêt de prise en charge')
                             ->options(fn () => RouteStop::pluck('name', 'id'))
                             ->searchable()
                             ->preload(),
                         Forms\Components\Select::make('dropoff_stop_id')
-                            ->label('Drop-off Stop')
+                            ->label('Arrêt de dépôt')
                             ->options(fn () => RouteStop::pluck('name', 'id'))
                             ->searchable()
                             ->preload(),
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Academic Period')
+                SectionComponent::make('Période académique')
                     ->schema([
                         Forms\Components\Select::make('academic_year_id')
-                            ->label('Academic Year')
+                            ->label('Année académique')
                             ->options(fn () => AcademicYear::pluck('name', 'id'))
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('academic_term_id')
-                            ->label('Academic Term')
+                            ->label('Trimestre académique')
                             ->options(fn () => AcademicTerm::pluck('name', 'id'))
                             ->searchable()
                             ->preload(),
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Fee & Status')
+                SectionComponent::make('Frais et statut')
                     ->schema([
                         Forms\Components\TextInput::make('monthly_fee')
                             ->numeric()
@@ -116,32 +116,32 @@ class StudentTransportAssignmentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('student')
-                    ->label('Student')
+                    ->label('Élève')
                     ->getStateUsing(fn (StudentTransportAssignment $record): string => trim($record->student->first_name.' '.$record->student->last_name))
                     ->searchable(),
                 TextColumn::make('route.name')
-                    ->label('Route')
+                    ->label('Itinéraire')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('pickupStop.name')
-                    ->label('Pickup Stop')
+                    ->label('Arrêt de prise en charge')
                     ->toggleable(),
                 TextColumn::make('dropoffStop.name')
-                    ->label('Drop-off Stop')
+                    ->label('Arrêt de dépôt')
                     ->toggleable(),
                 TextColumn::make('monthly_fee')
                     ->numeric(2)
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('academicYear.name')
-                    ->label('Academic Year')
+                    ->label('Année académique')
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (AssignmentStatus $state): string => AssignmentStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (AssignmentStatus $state): string => AssignmentStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
@@ -149,7 +149,7 @@ class StudentTransportAssignmentResource extends Resource
                 SelectFilter::make('status')
                     ->options(AssignmentStatus::labels()),
                 SelectFilter::make('route_id')
-                    ->label('Route')
+                    ->label('Itinéraire')
                     ->options(fn () => Route::pluck('name', 'id')),
             ])
             ->actions([

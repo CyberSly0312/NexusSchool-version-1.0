@@ -41,7 +41,7 @@ class AutomationRuleResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Rule Details')
+                SectionComponent::make('Détails de la règle')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -51,8 +51,8 @@ class AutomationRuleResource extends Resource
                         Forms\Components\Select::make('category')
                             ->options([
                                 'notification' => 'Notification',
-                                'data_sync' => 'Data Sync',
-                                'integration' => 'Integration',
+                                'data_sync' => 'Synchronisation des données',
+                                'integration' => 'Intégration',
                                 'maintenance' => 'Maintenance',
                             ])
                             ->searchable()
@@ -60,7 +60,7 @@ class AutomationRuleResource extends Resource
                     ])
                     ->columns(1),
 
-                SectionComponent::make('Trigger Configuration')
+                SectionComponent::make('Configuration du déclencheur')
                     ->schema([
                         Forms\Components\Select::make('trigger_type')
                             ->options(TriggerType::labels())
@@ -70,8 +70,7 @@ class AutomationRuleResource extends Resource
                             ->maxLength(255)
                             ->visible(fn (Forms\Get $get) => $get('trigger_type') === 'event'),
                         Forms\Components\KeyValue::make('conditions')
-                            ->label('Conditions')
-                            ->reorderable(),
+                            ->label('Conditions')                            ->reorderable(),
                     ])
                     ->columns(2),
 
@@ -81,18 +80,18 @@ class AutomationRuleResource extends Resource
                             ->schema([
                                 Forms\Components\Select::make('type')
                                     ->options([
-                                        'notify' => 'Send Notification',
-                                        'execute_workflow' => 'Execute Workflow',
-                                        'update_record' => 'Update Record',
-                                        'log' => 'Log Event',
+                                        'notify' => 'Envoyer notification',
+                                        'execute_workflow' => 'Exécuter le flux',
+                                        'update_record' => 'Mettre à jour',
+                                        'log' => 'Journaliser',
                                     ])
                                     ->required(),
                                 Forms\Components\KeyValue::make('parameters')
-                                    ->label('Parameters')
+                                    ->label('Paramètres')
                                     ->reorderable(),
                             ])
                             ->defaultItems(1)
-                            ->addActionLabel('Add Action'),
+                            ->addActionLabel('Ajouter une action'),
                     ]),
 
                 SectionComponent::make('Configuration')
@@ -137,12 +136,12 @@ class AutomationRuleResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('last_executed_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -152,8 +151,8 @@ class AutomationRuleResource extends Resource
                     ->options(TriggerType::labels()),
                 SelectFilter::make('is_active')
                     ->options([
-                        '1' => 'Active',
-                        '0' => 'Inactive',
+                        '1' => 'Actif',
+                        '0' => 'Inactif',
                     ]),
             ])
             ->actions([

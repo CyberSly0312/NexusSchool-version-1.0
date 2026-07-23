@@ -41,7 +41,7 @@ class AiProviderResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Provider Details')
+                SectionComponent::make('Détails du fournisseur')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -68,15 +68,15 @@ class AiProviderResource extends Resource
                                 : []
                             ),
                         Forms\Components\KeyValue::make('supported_models')
-                            ->label('Supported Models')
+                            ->label('Modèles supportés')
                             ->reorderable(),
                         Forms\Components\KeyValue::make('configuration')
-                            ->label('Provider Configuration')
+                            ->label('Configuration du fournisseur')
                             ->reorderable(),
                     ])
                     ->columns(2),
 
-                SectionComponent::make('Rate Limits')
+                SectionComponent::make('Limites de débit')
                     ->schema([
                         Forms\Components\TextInput::make('rate_limit_per_minute')
                             ->numeric()
@@ -117,12 +117,12 @@ class AiProviderResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('rate_limit_per_minute')
-                    ->label('Rate Limit')
+                    ->label('Limite de débit')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -132,8 +132,8 @@ class AiProviderResource extends Resource
                     ->options(AiProvider::labels()),
                 SelectFilter::make('is_active')
                     ->options([
-                        '1' => 'Active',
-                        '0' => 'Inactive',
+                        '1' => 'Actif',
+                        '0' => 'Inactif',
                     ]),
             ])
             ->actions([

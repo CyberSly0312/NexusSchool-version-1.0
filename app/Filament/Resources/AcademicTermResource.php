@@ -42,10 +42,10 @@ class AcademicTermResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Academic Term Details')
+                Section::make('Détails de la période')
                     ->schema([
                         Forms\Components\Select::make('academic_year_id')
-                            ->label('Academic Year')
+                            ->label('Année scolaire')
                             ->options(AcademicYear::pluck('name', 'id'))
                             ->required()
                             ->searchable()
@@ -55,7 +55,7 @@ class AcademicTermResource extends Resource
                             ->maxLength(100),
                         Forms\Components\TextInput::make('code')
                             ->maxLength(50)
-                            ->helperText('Optional short code (e.g., S1)'),
+                            ->helperText('Code court optionnel (ex., S1)'),
                         Forms\Components\DatePicker::make('start_date')
                             ->required(),
                         Forms\Components\DatePicker::make('end_date')
@@ -68,7 +68,7 @@ class AcademicTermResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                     ])->columns(2),
-                Section::make('Status')
+                Section::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(AcademicTermStatus::class)
@@ -83,7 +83,7 @@ class AcademicTermResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('academicYear.name')
-                    ->label('Year')
+                    ->label('Année')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
@@ -94,10 +94,10 @@ class AcademicTermResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('start_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -109,7 +109,7 @@ class AcademicTermResource extends Resource
                     ->badge()
                     ->color(fn (AcademicTermStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -118,13 +118,13 @@ class AcademicTermResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(AcademicTermStatus::class),
                 Tables\Filters\SelectFilter::make('academic_year_id')
-                    ->label('Academic Year')
+                    ->label('Année scolaire')
                     ->options(AcademicYear::pluck('name', 'id')),
             ])
             ->actions([
                 EditAction::make(),
                 Action::make('activate')
-                    ->label('Activate')
+                    ->label('Activer')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->visible(fn (AcademicTerm $record): bool => ! $record->isActive())

@@ -41,7 +41,7 @@ class AuditLogResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
                 TextColumn::make('action')
                     ->badge()
@@ -62,7 +62,7 @@ class AuditLogResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('user_id')
-                    ->label('User')
+                    ->label('Utilisateur')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])

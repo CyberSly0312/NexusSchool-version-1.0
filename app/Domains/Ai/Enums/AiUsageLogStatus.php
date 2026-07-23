@@ -15,11 +15,11 @@ enum AiUsageLogStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Success => 'Success',
-            self::Failed => 'Failed',
-            self::RateLimited => 'Rate Limited',
-            self::QuotaExceeded => 'Quota Exceeded',
-            self::Cached => 'Cached',
+            self::Success => 'Succès',
+            self::Failed => 'Échoué',
+            self::RateLimited => 'Limite de débit atteinte',
+            self::QuotaExceeded => 'Quota dépassé',
+            self::Cached => 'Mis en cache',
         };
     }
 

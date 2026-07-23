@@ -39,7 +39,7 @@ class AiMessageResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Message Details')
+                SectionComponent::make('Détails du message')
                     ->schema([
                         Forms\Components\Select::make('role')
                             ->options(AiMessageRole::labels())
@@ -52,7 +52,7 @@ class AiMessageResource extends Resource
                     ])
                     ->columns(1),
 
-                SectionComponent::make('Token Usage')
+                SectionComponent::make('Utilisation des jetons')
                     ->schema([
                         Forms\Components\TextInput::make('input_tokens')
                             ->numeric()
@@ -84,17 +84,17 @@ class AiMessageResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('input_tokens')
-                    ->label('In')
+                    ->label('Entrée')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('output_tokens')
-                    ->label('Out')
+                    ->label('Sortie')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->filters([

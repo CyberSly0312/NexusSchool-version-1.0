@@ -17,13 +17,13 @@ enum EnrollmentType: string
     public function label(): string
     {
         return match ($this) {
-            self::NewAdmission => 'New Admission',
-            self::ReEnrollment => 'Re-enrollment',
-            self::TransferIn => 'Transfer In',
-            self::TransferOut => 'Transfer Out',
+            self::NewAdmission => 'Nouvelle admission',
+            self::ReEnrollment => 'Réinscription',
+            self::TransferIn => 'Transfert entrant',
+            self::TransferOut => 'Transfert sortant',
             self::Promotion => 'Promotion',
-            self::Repeat => 'Repeat',
-            self::Exchange => 'Exchange',
+            self::Repeat => 'Redoublement',
+            self::Exchange => 'Échange',
         };
     }
 }

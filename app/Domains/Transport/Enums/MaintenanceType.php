@@ -14,9 +14,9 @@ enum MaintenanceType: string
     public static function labels(): array
     {
         return [
-            self::Preventive->value => 'Preventive',
+            self::Preventive->value => 'Préventive',
             self::Corrective->value => 'Corrective',
-            self::Emergency->value => 'Emergency',
+            self::Emergency->value => 'Urgence',
             self::Inspection->value => 'Inspection',
         ];
     }

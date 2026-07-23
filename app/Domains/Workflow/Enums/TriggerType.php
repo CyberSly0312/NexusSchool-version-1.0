@@ -15,11 +15,11 @@ enum TriggerType: string
     public function label(): string
     {
         return match ($this) {
-            self::Event => 'Event Trigger',
-            self::Time => 'Time Trigger',
-            self::Manual => 'Manual Trigger',
-            self::Api => 'API Trigger',
-            self::Scheduled => 'Scheduled Trigger',
+            self::Event => 'Déclencheur d\'événement',
+            self::Time => 'Déclencheur horaire',
+            self::Manual => 'Déclencheur manuel',
+            self::Api => 'Déclencheur API',
+            self::Scheduled => 'Déclencheur planifié',
         };
     }
 

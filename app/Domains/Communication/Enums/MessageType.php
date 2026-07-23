@@ -13,7 +13,7 @@ enum MessageType: string
     {
         return [
             self::Direct->value => 'Direct',
-            self::Broadcast->value => 'Broadcast',
+            self::Broadcast->value => 'Diffusion',
         ];
     }
 

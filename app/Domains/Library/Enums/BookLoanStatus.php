@@ -14,10 +14,10 @@ enum BookLoanStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Returned => 'Returned',
-            self::Overdue => 'Overdue',
-            self::Lost => 'Lost',
+            self::Active => 'Actif',
+            self::Returned => 'Retourné',
+            self::Overdue => 'En retard',
+            self::Lost => 'Perdu',
         };
     }
 

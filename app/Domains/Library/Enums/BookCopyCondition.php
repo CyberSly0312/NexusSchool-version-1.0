@@ -15,11 +15,11 @@ enum BookCopyCondition: string
     public function label(): string
     {
         return match ($this) {
-            self::New => 'New',
-            self::Good => 'Good',
-            self::Fair => 'Fair',
-            self::Poor => 'Poor',
-            self::Damaged => 'Damaged',
+            self::New => 'Neuf',
+            self::Good => 'Bon',
+            self::Fair => 'Acceptable',
+            self::Poor => 'Mauvais',
+            self::Damaged => 'Endommagé',
         };
     }
 

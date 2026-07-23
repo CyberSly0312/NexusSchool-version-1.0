@@ -14,10 +14,10 @@ enum AiProviderStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Error => 'Error',
-            self::RateLimited => 'Rate Limited',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
+            self::Error => 'Erreur',
+            self::RateLimited => 'Limite de débit atteinte',
         };
     }
 

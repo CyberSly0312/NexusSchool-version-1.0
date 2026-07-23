@@ -41,7 +41,7 @@ class FineResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Fine Details')
+                SectionComponent::make('Détails de l\'amende')
                     ->schema([
                         Forms\Components\TextInput::make('borrower_id')
                             ->numeric()
@@ -54,25 +54,25 @@ class FineResource extends Resource
                             ->maxLength(255),
                         Forms\Components\TextInput::make('amount')
                             ->numeric()
-                            ->prefix('currency')
+                            ->prefix('FCFA')
                             ->required(),
                         Forms\Components\DatePicker::make('fine_date')
                             ->required()
                             ->default(now()),
                     ])->columns(2),
-                SectionComponent::make('Payment')
+                SectionComponent::make('Paiement')
                     ->schema([
                         Forms\Components\TextInput::make('paid_amount')
                             ->numeric()
-                            ->prefix('currency')
+                            ->prefix('FCFA')
                             ->default(0),
                         Forms\Components\DatePicker::make('paid_date')
                             ->nullable(),
                         Forms\Components\Select::make('payment_method')
                             ->options([
-                                'cash' => 'Cash',
-                                'bank_transfer' => 'Bank Transfer',
-                                'card' => 'Card',
+                                'cash' => 'Espèces',
+                                'bank_transfer' => 'Virement bancaire',
+                                'card' => 'Carte',
                                 'mobile_money' => 'Mobile Money',
                             ])
                             ->nullable(),
@@ -81,12 +81,12 @@ class FineResource extends Resource
                             ->nullable(),
                         Forms\Components\TextInput::make('waived_amount')
                             ->numeric()
-                            ->prefix('currency')
+                            ->prefix('FCFA')
                             ->default(0),
                         Forms\Components\DatePicker::make('waived_date')
                             ->nullable(),
                     ])->columns(3),
-                SectionComponent::make('Reference')
+                SectionComponent::make('Référence')
                     ->schema([
                         Forms\Components\TextInput::make('book_loan_id')
                             ->numeric()
@@ -116,19 +116,19 @@ class FineResource extends Resource
                 TextColumn::make('reason')
                     ->searchable(),
                 TextColumn::make('amount')
-                    ->money()
+                    ->money('FCFA', locale: 'fr_FR')
                     ->sortable(),
                 TextColumn::make('paid_amount')
-                    ->money()
+                    ->money('FCFA', locale: 'fr_FR')
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (FineStatus $state): string => $state->color()),
                 TextColumn::make('fine_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

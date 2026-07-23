@@ -14,10 +14,10 @@ enum AiConversationStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Archived => 'Archived',
-            self::Summarized => 'Summarized',
-            self::Closed => 'Closed',
+            self::Active => 'Actif',
+            self::Archived => 'Archivé',
+            self::Summarized => 'Résumé',
+            self::Closed => 'Fermé',
         };
     }
 

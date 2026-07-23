@@ -32,6 +32,43 @@ class School extends Tenant implements TenantWithDatabase
         return SchoolFactory::new();
     }
 
+    protected static function booted(): void
+    {
+        static::creating(function (School $school) {
+            if (empty($school->uuid)) {
+                $school->uuid = \Illuminate\Support\Str::ulid()->toString();
+            }
+        });
+    }
+
+    public static function getCustomColumns(): array
+    {
+        return [
+            'id',
+            'uuid',
+            'name',
+            'slug',
+            'database',
+            'domain',
+            'email',
+            'phone',
+            'address',
+            'city',
+            'state',
+            'country',
+            'postal_code',
+            'timezone',
+            'currency',
+            'locale',
+            'logo_url',
+            'registration_number',
+            'school_type',
+            'status',
+            'settings',
+            'metadata',
+        ];
+    }
+
     protected $fillable = [
         'uuid',
         'name',

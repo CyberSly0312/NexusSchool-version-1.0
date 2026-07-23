@@ -41,12 +41,12 @@ class GuardianResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Personal Information')
+                SectionComponent::make('Informations personnelles')
                     ->schema([
                         Forms\Components\TextInput::make('guardian_number')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Unique guardian identifier within the school'),
+                            ->helperText('Identifiant tuteur unique dans l\'établissement'),
                         Forms\Components\TextInput::make('first_name')
                             ->required()
                             ->maxLength(100),
@@ -61,9 +61,9 @@ class GuardianResource extends Resource
                             ->nullable(),
                         Forms\Components\Select::make('gender')
                             ->options([
-                                'male' => 'Male',
-                                'female' => 'Female',
-                                'other' => 'Other',
+                                'male' => 'Masculin',
+                                'female' => 'Féminin',
+                                'other' => 'Autre',
                             ])
                             ->required(),
                         Forms\Components\DatePicker::make('date_of_birth')
@@ -76,7 +76,7 @@ class GuardianResource extends Resource
                             ->options(collect(RelationshipType::cases())->mapWithKeys(fn ($case) => [$case->value => $case->label()]))
                             ->required(),
                     ])->columns(3),
-                SectionComponent::make('Contact Information')
+                SectionComponent::make('Coordonnées')
                     ->schema([
                         Forms\Components\TextInput::make('email')
                             ->email()
@@ -95,9 +95,9 @@ class GuardianResource extends Resource
                             ->default('phone'),
                         Forms\Components\Select::make('preferred_communication_language')
                             ->options([
-                                'English' => 'English',
-                                'French' => 'French',
-                                'Spanish' => 'Spanish',
+                                'English' => 'Anglais',
+                                'French' => 'Français',
+                                'Spanish' => 'Espagnol',
                             ])
                             ->nullable(),
                         Forms\Components\Textarea::make('residential_address')
@@ -110,7 +110,7 @@ class GuardianResource extends Resource
                             ->rows(2)
                             ->nullable(),
                     ])->columns(2),
-                SectionComponent::make('Professional Information')
+                SectionComponent::make('Informations professionnelles')
                     ->schema([
                         Forms\Components\TextInput::make('occupation')
                             ->maxLength(200)
@@ -119,10 +119,10 @@ class GuardianResource extends Resource
                             ->maxLength(200)
                             ->nullable(),
                         Forms\Components\Toggle::make('is_primary_guardian')
-                            ->label('Primary Guardian')
+                            ->label('Tuteur principal')
                             ->default(false),
                     ])->columns(3),
-                SectionComponent::make('Status & Notes')
+                SectionComponent::make('Statut et notes')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(GuardianStatus::class)
@@ -156,13 +156,13 @@ class GuardianResource extends Resource
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_primary_guardian')
                     ->boolean()
-                    ->label('Primary')
+                    ->label('Principal')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (GuardianStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -174,10 +174,10 @@ class GuardianResource extends Resource
                 Tables\Filters\SelectFilter::make('relationship_type')
                     ->options(collect(RelationshipType::cases())->mapWithKeys(fn ($case) => [$case->value => $case->label()])),
                 Tables\Filters\SelectFilter::make('is_primary_guardian')
-                    ->label('Primary Guardian')
+                    ->label('Tuteur principal')
                     ->options([
-                        1 => 'Yes',
-                        0 => 'No',
+                        1 => 'Oui',
+                        0 => 'Non',
                     ]),
             ])
             ->actions([

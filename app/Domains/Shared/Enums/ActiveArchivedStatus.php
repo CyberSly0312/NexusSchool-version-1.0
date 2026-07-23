@@ -12,8 +12,8 @@ enum ActiveArchivedStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Archived => 'Archived',
+            self::Active => 'Actif',
+            self::Archived => 'Archivé',
         };
     }
 

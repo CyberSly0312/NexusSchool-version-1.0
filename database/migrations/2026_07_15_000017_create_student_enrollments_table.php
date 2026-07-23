@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('student_enrollments', function (Blueprint $table) {
             $table->id();
-            $table->ulid('uuid')->unique();
+            $table->ulid('uuid')->unique()->nullable();
             $table->string('school_id');
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('academic_year_id')->constrained();

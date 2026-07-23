@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('schools', function (Blueprint $table) {
             // ── Identity ──────────────────────────────────────────────
             $table->id();
-            $table->ulid('uuid')->unique();
+            $table->ulid('uuid')->unique()->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('database')->unique();

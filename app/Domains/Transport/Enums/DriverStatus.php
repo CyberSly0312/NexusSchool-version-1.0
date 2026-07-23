@@ -14,10 +14,10 @@ enum DriverStatus: string
     public static function labels(): array
     {
         return [
-            self::Available->value => 'Available',
-            self::OnTrip->value => 'On Trip',
-            self::OnLeave->value => 'On Leave',
-            self::Inactive->value => 'Inactive',
+            self::Available->value => 'Disponible',
+            self::OnTrip->value => 'En tournée',
+            self::OnLeave->value => 'En congé',
+            self::Inactive->value => 'Inactif',
         ];
     }
 

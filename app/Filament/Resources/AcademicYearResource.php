@@ -41,15 +41,15 @@ class AcademicYearResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('Academic Year Details')
+                Section::make("Détails de l'année scolaire")
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(100)
-                            ->helperText('e.g., 2025-2026'),
+                            ->helperText('ex., 2025-2026'),
                         Forms\Components\TextInput::make('code')
                             ->maxLength(50)
-                            ->helperText('Optional short code (e.g., AY-2526)'),
+                            ->helperText('Code court optionnel (ex., AY-2526)'),
                         Forms\Components\DatePicker::make('start_date')
                             ->required(),
                         Forms\Components\DatePicker::make('end_date')
@@ -58,7 +58,7 @@ class AcademicYearResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
                     ])->columns(2),
-                Section::make('Status')
+                Section::make('Statut')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(AcademicYearStatus::class)
@@ -80,10 +80,10 @@ class AcademicYearResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('start_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -91,7 +91,7 @@ class AcademicYearResource extends Resource
                     ->badge()
                     ->color(fn (AcademicYearStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
@@ -103,7 +103,7 @@ class AcademicYearResource extends Resource
             ->actions([
                 EditAction::make(),
                 Action::make('activate')
-                    ->label('Activate')
+                    ->label('Activer')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->visible(fn (AcademicYear $record): bool => ! $record->isActive())

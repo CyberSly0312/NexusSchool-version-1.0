@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Domains\Section\Enums\SectionStatus;
 use App\Models\GradeLevel;
-use App\Models\School;
+use App\Domains\School\Models\School;
 use App\Models\Section;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +12,7 @@ class SectionSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = School::where('slug', 'demo-school')->first();
+        $school = School::where('slug', 'nexus-demo')->first();
 
         if (! $school) {
             return;

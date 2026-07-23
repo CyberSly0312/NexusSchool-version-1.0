@@ -14,10 +14,10 @@ enum WorkflowStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Draft => 'Draft',
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Archived => 'Archived',
+            self::Draft => 'Brouillon',
+            self::Active => 'Actif',
+            self::Inactive => 'Inactif',
+            self::Archived => 'Archivé',
         };
     }
 

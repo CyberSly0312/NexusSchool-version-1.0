@@ -41,18 +41,18 @@ class ReportResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([
-            SectionComponent::make('Report Details')->schema([
+            SectionComponent::make('Détails du rapport')->schema([
                 Forms\Components\TextInput::make('name')->required()->maxLength(255),
                 Forms\Components\Textarea::make('description')->rows(3),
                 Forms\Components\TextInput::make('type')->required()->maxLength(100)->default('custom'),
             ]),
-            SectionComponent::make('Output')->schema([
+            SectionComponent::make('Sortie')->schema([
                 Forms\Components\Select::make('format')
                     ->options(ReportFormat::labels())->required()->default('pdf'),
                 Forms\Components\Select::make('status')
                     ->options(ReportStatus::labels())->required()->default('draft'),
             ])->columns(2),
-            SectionComponent::make('Scheduling')->schema([
+            SectionComponent::make('Planification')->schema([
                 Forms\Components\Select::make('scheduled_frequency')
                     ->options(ScheduleFrequency::labels())->nullable(),
                 Forms\Components\DateTimePicker::make('scheduled_at'),
@@ -70,9 +70,9 @@ class ReportResource extends Resource
                     ->color(fn (ReportFormat $state): string => ReportFormat::colors()[$state] ?? 'gray'),
                 TextColumn::make('status')->badge()
                     ->color(fn (ReportStatus $state): string => ReportStatus::colors()[$state] ?? 'gray'),
-                TextColumn::make('scheduled_frequency')->label('Frequency')->toggleable(),
-                TextColumn::make('last_generated_at')->dateTime()->sortable()->toggleable()->toggledHiddenByDefault(),
-                TextColumn::make('created_at')->dateTime()->sortable()->toggledHiddenByDefault(),
+                TextColumn::make('scheduled_frequency')->label('Fréquence')->toggleable(),
+                TextColumn::make('last_generated_at')->dateTime('d/m/Y H:i')->sortable()->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable()->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('status')->options(ReportStatus::labels()),

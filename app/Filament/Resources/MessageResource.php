@@ -41,7 +41,7 @@ class MessageResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Message Details')
+                SectionComponent::make('Détails du message')
                     ->schema([
                         Forms\Components\TextInput::make('subject')
                             ->maxLength(255),
@@ -50,7 +50,7 @@ class MessageResource extends Resource
                             ->rows(4),
                     ]),
 
-                SectionComponent::make('Type & Status')
+                SectionComponent::make('Type et statut')
                     ->schema([
                         Forms\Components\Select::make('type')
                             ->options(MessageType::labels())
@@ -84,15 +84,15 @@ class MessageResource extends Resource
                     ->color(fn (MessageStatus $state): string => MessageStatus::colors()[$state] ?? 'gray')
                     ->icon(fn (MessageStatus $state): string => MessageStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('sender.first_name')
-                    ->label('Sender')
+                    ->label('Expéditeur')
                     ->toggleable(),
                 TextColumn::make('sent_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

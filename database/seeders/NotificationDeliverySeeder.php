@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Domains\School\Models\School;
 use App\Models\Notification;
 use App\Models\NotificationDelivery;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class NotificationDeliverySeeder extends Seeder
@@ -17,12 +18,17 @@ class NotificationDeliverySeeder extends Seeder
         }
 
         $notifications = Notification::where('school_id', $school->id)->get();
+        $users = User::where('school_id', $school->id)->get();
+
+        if ($notifications->isEmpty() || $users->isEmpty()) {
+            return;
+        }
 
         foreach ($notifications as $notification) {
             NotificationDelivery::firstOrCreate(
                 [
                     'notification_id' => $notification->id,
-                    'recipient_id' => $school->id,
+                    'recipient_id' => $users->first()->id,
                 ],
                 [
                     'school_id' => $school->id,

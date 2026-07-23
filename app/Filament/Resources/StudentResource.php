@@ -39,22 +39,22 @@ class StudentResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Student Identifiers')
+                SectionComponent::make('Identifiants de l\'élève')
                     ->schema([
                         Forms\Components\TextInput::make('student_number')
                             ->required()
                             ->maxLength(50)
-                            ->helperText('Unique identifier within the school'),
+                            ->helperText('Identifiant unique dans l\'établissement'),
                         Forms\Components\TextInput::make('admission_number')
                             ->maxLength(50)
                             ->nullable()
-                            ->helperText('Unique admission number'),
+                            ->helperText('Numéro d\'admission unique'),
                         Forms\Components\TextInput::make('national_id')
                             ->maxLength(100)
                             ->nullable()
-                            ->label('National ID'),
+                            ->label('Identifiant national'),
                     ])->columns(3),
-                SectionComponent::make('Personal Information')
+                SectionComponent::make('Informations personnelles')
                     ->schema([
                         Forms\Components\TextInput::make('first_name')
                             ->required()
@@ -70,9 +70,9 @@ class StudentResource extends Resource
                             ->nullable(),
                         Forms\Components\Select::make('gender')
                             ->options([
-                                'male' => 'Male',
-                                'female' => 'Female',
-                                'other' => 'Other',
+                                'male' => 'Masculin',
+                                'female' => 'Féminin',
+                                'other' => 'Autre',
                             ])
                             ->required(),
                         Forms\Components\DatePicker::make('date_of_birth')
@@ -104,7 +104,7 @@ class StudentResource extends Resource
                             ->directory('student-photos')
                             ->nullable(),
                     ])->columns(3),
-                SectionComponent::make('Contact Information')
+                SectionComponent::make('Coordonnées')
                     ->schema([
                         Forms\Components\TextInput::make('email')
                             ->email()
@@ -118,12 +118,12 @@ class StudentResource extends Resource
                             ->rows(2)
                             ->nullable(),
                     ])->columns(2),
-                SectionComponent::make('Academic Information')
+                SectionComponent::make('Informations académiques')
                     ->schema([
                         Forms\Components\DatePicker::make('admission_date')
                             ->nullable(),
                     ])->columns(2),
-                SectionComponent::make('Medical Information')
+                SectionComponent::make('Informations médicales')
                     ->schema([
                         Forms\Components\Textarea::make('allergies')
                             ->rows(2)
@@ -132,7 +132,7 @@ class StudentResource extends Resource
                             ->rows(2)
                             ->nullable(),
                     ])->columns(2),
-                SectionComponent::make('Status & Notes')
+                SectionComponent::make('Statut et notes')
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->options(collect(StudentStatus::cases())->mapWithKeys(fn ($case) => [$case->value => $case->label()]))
@@ -158,7 +158,7 @@ class StudentResource extends Resource
                 Tables\Columns\TextColumn::make('gender')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('date_of_birth')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('email')
@@ -168,11 +168,11 @@ class StudentResource extends Resource
                     ->badge()
                     ->color(fn (StudentStatus $state): string => $state->color()),
                 Tables\Columns\TextColumn::make('admission_date')
-                    ->date()
+                    ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),

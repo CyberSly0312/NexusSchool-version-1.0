@@ -16,12 +16,12 @@ enum NotificationStatus: string
     public static function labels(): array
     {
         return [
-            self::Pending->value => 'Pending',
-            self::Queued->value => 'Queued',
-            self::Sent->value => 'Sent',
-            self::Delivered->value => 'Delivered',
-            self::Failed->value => 'Failed',
-            self::Cancelled->value => 'Cancelled',
+            self::Pending->value => 'En attente',
+            self::Queued->value => 'En file d\'attente',
+            self::Sent->value => 'Envoyé',
+            self::Delivered->value => 'Livré',
+            self::Failed->value => 'Échoué',
+            self::Cancelled->value => 'Annulé',
         ];
     }
 

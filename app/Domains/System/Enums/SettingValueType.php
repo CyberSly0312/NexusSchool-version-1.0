@@ -16,12 +16,12 @@ enum SettingValueType: string
     public function label(): string
     {
         return match ($this) {
-            self::String => 'String',
-            self::Integer => 'Integer',
-            self::Float => 'Float',
-            self::Boolean => 'Boolean',
+            self::String => 'Chaîne',
+            self::Integer => 'Entier',
+            self::Float => 'Décimal',
+            self::Boolean => 'Booléen',
             self::Json => 'JSON',
-            self::Encrypted => 'Encrypted',
+            self::Encrypted => 'Chiffré',
         };
     }
 

@@ -14,10 +14,10 @@ enum FineStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::PartiallyPaid => 'Partially Paid',
-            self::Paid => 'Paid',
-            self::Waived => 'Waived',
+            self::Pending => 'En attente',
+            self::PartiallyPaid => 'Partiellement payé',
+            self::Paid => 'Payé',
+            self::Waived => 'Annulé',
         };
     }
 

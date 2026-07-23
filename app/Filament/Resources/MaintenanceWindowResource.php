@@ -41,7 +41,7 @@ class MaintenanceWindowResource extends Resource
     {
         return $schema
             ->schema([
-                SectionComponent::make('Maintenance Details')
+                SectionComponent::make('Détails de maintenance')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
@@ -54,7 +54,7 @@ class MaintenanceWindowResource extends Resource
                     ])
                     ->columns(1),
 
-                SectionComponent::make('Schedule')
+                SectionComponent::make('Planification')
                     ->schema([
                         Forms\Components\DateTimePicker::make('starts_at')
                             ->required(),
@@ -65,14 +65,14 @@ class MaintenanceWindowResource extends Resource
                     ])
                     ->columns(3),
 
-                SectionComponent::make('Affected Services')
+                SectionComponent::make('Services affectés')
                     ->schema([
                         Forms\Components\Repeater::make('affected_services')
                             ->schema([
                                 Forms\Components\TextInput::make('service'),
                             ])
                             ->defaultItems(0)
-                            ->addActionLabel('Add Service'),
+                            ->addActionLabel('Ajouter un service'),
                     ]),
             ]);
     }
@@ -90,24 +90,24 @@ class MaintenanceWindowResource extends Resource
                 TextColumn::make('status')
                     ->badge(),
                 IconColumn::make('is_readonly')
-                    ->label('Read-only')
+                    ->label('Lecture seule')
                     ->boolean()
                     ->toggleable(),
                 TextColumn::make('starts_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
                 TextColumn::make('ends_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->options(['pending' => 'Pending', 'active' => 'Active', 'completed' => 'Completed']),
+                    ->options(['pending' => 'En attente', 'active' => 'Actif', 'completed' => 'Terminé']),
                 SelectFilter::make('type')
                     ->options(MaintenanceType::labels()),
             ])

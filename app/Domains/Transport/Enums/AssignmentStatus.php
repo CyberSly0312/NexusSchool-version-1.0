@@ -13,9 +13,9 @@ enum AssignmentStatus: string
     public static function labels(): array
     {
         return [
-            self::Active->value => 'Active',
-            self::Inactive->value => 'Inactive',
-            self::Suspended->value => 'Suspended',
+            self::Active->value => 'Actif',
+            self::Inactive->value => 'Inactif',
+            self::Suspended->value => 'Suspendu',
         ];
     }
 
