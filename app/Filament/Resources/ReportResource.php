@@ -19,9 +19,12 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class ReportResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = Report::class;
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -67,9 +70,9 @@ class ReportResource extends Resource
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('type')->searchable(),
                 TextColumn::make('format')->badge()
-                    ->color(fn (ReportFormat $state): string => ReportFormat::colors()[$state] ?? 'gray'),
+                    ->color(fn (ReportFormat $state): string => $state->color()),
                 TextColumn::make('status')->badge()
-                    ->color(fn (ReportStatus $state): string => ReportStatus::colors()[$state] ?? 'gray'),
+                    ->color(fn (ReportStatus $state): string => $state->color()),
                 TextColumn::make('scheduled_frequency')->label('Fréquence')->toggleable(),
                 TextColumn::make('last_generated_at')->dateTime('d/m/Y H:i')->sortable()->toggleable()->toggledHiddenByDefault(),
                 TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable()->toggledHiddenByDefault(),

@@ -10,4 +10,15 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $panelId = filament()->getCurrentPanel()->getId();
+
+        if ($panelId === 'school-admin') {
+            $data['school_id'] = tenant()?->id;
+        }
+
+        return $data;
+    }
 }

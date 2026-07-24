@@ -127,8 +127,8 @@ class DriverResource extends Resource
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (DriverStatus $state): string => DriverStatus::colors()[$state] ?? 'gray')
-                    ->icon(fn (DriverStatus $state): string => DriverStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (DriverStatus $state): string => DriverStatus::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (DriverStatus $state): string => DriverStatus::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->toggleable()

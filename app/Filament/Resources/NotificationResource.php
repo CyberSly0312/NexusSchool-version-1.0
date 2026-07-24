@@ -87,12 +87,12 @@ class NotificationResource extends Resource
                     ->toggleable(),
                 TextColumn::make('channel')
                     ->badge()
-                    ->color(fn (NotificationChannel $state): string => NotificationChannel::colors()[$state] ?? 'gray')
-                    ->icon(fn (NotificationChannel $state): string => NotificationChannel::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (NotificationChannel $state): string => NotificationChannel::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (NotificationChannel $state): string => NotificationChannel::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (NotificationStatus $state): string => NotificationStatus::colors()[$state] ?? 'gray')
-                    ->icon(fn (NotificationStatus $state): string => NotificationStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (NotificationStatus $state): string => NotificationStatus::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (NotificationStatus $state): string => NotificationStatus::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('sender.first_name')
                     ->label('Expéditeur')
                     ->toggleable(),

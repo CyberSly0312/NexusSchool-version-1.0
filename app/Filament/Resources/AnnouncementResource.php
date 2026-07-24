@@ -18,9 +18,12 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class AnnouncementResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = Announcement::class;
 
     protected static ?string $recordTitleAttribute = 'title';
@@ -99,8 +102,8 @@ class AnnouncementResource extends Resource
                     ->sortable(),
                 TextColumn::make('scope')
                     ->badge()
-                    ->color(fn (AnnouncementScope $state): string => AnnouncementScope::colors()[$state] ?? 'gray')
-                    ->icon(fn (AnnouncementScope $state): string => AnnouncementScope::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (AnnouncementScope $state): string => AnnouncementScope::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (AnnouncementScope $state): string => AnnouncementScope::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('priority')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {

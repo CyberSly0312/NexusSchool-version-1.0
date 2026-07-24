@@ -11,11 +11,21 @@ class SchoolAdminDashboard extends Dashboard
 {
     protected static \BackedEnum|string|null $navigationIcon = Heroicon::Cog6Tooth;
     protected static ?string $navigationLabel = 'Tableau de bord';
-    protected static ?string $title = 'Administration de l\'école';
+    protected static ?string $title = 'Administration de l\'établissement';
     protected static ?int $navigationSort = 0;
 
     public function getWidgets(): array
     {
-        return [];
+        return [
+            \App\Filament\SchoolAdmin\Widgets\SetupStatusWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\ActiveAcademicYearWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\StudentsCountWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\TeachersCountWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\StaffCountWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\ClassesCountWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\SubjectsCountWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\ConfigurationAlertsWidget::class,
+            \App\Filament\SchoolAdmin\Widgets\RecentEnrollmentsWidget::class,
+        ];
     }
 }

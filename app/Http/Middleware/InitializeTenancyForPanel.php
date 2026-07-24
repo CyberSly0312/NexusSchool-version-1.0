@@ -8,11 +8,12 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Stancl\Tenancy\Facades\Tenancy;
+
 class InitializeTenancyForPanel
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Tenancy::initialized()) {
+        if (tenancy()->initialized) {
             return $next($request);
         }
 

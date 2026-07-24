@@ -18,9 +18,12 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class MessageResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = Message::class;
 
     protected static ?string $recordTitleAttribute = 'subject';
@@ -77,12 +80,12 @@ class MessageResource extends Resource
                     ->searchable(),
                 TextColumn::make('type')
                     ->badge()
-                    ->color(fn (MessageType $state): string => MessageType::colors()[$state] ?? 'gray')
-                    ->icon(fn (MessageType $state): string => MessageType::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (MessageType $state): string => MessageType::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (MessageType $state): string => MessageType::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (MessageStatus $state): string => MessageStatus::colors()[$state] ?? 'gray')
-                    ->icon(fn (MessageStatus $state): string => MessageStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (MessageStatus $state): string => MessageStatus::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (MessageStatus $state): string => MessageStatus::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('sender.first_name')
                     ->label('Expéditeur')
                     ->toggleable(),

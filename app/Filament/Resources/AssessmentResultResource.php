@@ -18,9 +18,12 @@ use Filament\Schemas\Components\Section as SectionComponent;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class AssessmentResultResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = AssessmentResult::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';

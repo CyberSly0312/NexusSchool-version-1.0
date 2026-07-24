@@ -136,6 +136,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         }
 
         $panelRoles = match ($panel->getId()) {
+            'super-admin' => ['super_admin'],
             'admin' => ['school_admin'],
             'school-admin' => ['school_admin'],
             'director' => ['director'],

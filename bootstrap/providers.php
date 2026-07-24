@@ -9,7 +9,6 @@ return [
     \App\Domains\Plugin\PluginServiceProvider::class,
 
     // Filament Panel Providers
-    \App\Providers\Filament\AdminPanelProvider::class,
     \App\Providers\Filament\SuperAdminPanelProvider::class,
     \App\Providers\Filament\SchoolAdminPanelProvider::class,
     \App\Providers\Filament\DirectorPanelProvider::class,

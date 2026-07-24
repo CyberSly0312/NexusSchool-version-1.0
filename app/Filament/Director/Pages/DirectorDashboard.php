@@ -16,6 +16,12 @@ class DirectorDashboard extends Dashboard
 
     public function getWidgets(): array
     {
-        return [];
+        return [
+            \App\Filament\Director\Widgets\DirectorStatsOverview::class,
+            \App\Filament\Director\Widgets\EnrollmentChart::class,
+            \App\Filament\Director\Widgets\AttendanceChart::class,
+            \App\Filament\Director\Widgets\PaymentsChart::class,
+            \App\Filament\Director\Widgets\AcademicResultsChart::class,
+        ];
     }
 }

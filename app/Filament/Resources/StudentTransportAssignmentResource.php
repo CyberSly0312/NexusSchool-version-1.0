@@ -138,8 +138,8 @@ class StudentTransportAssignmentResource extends Resource
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (AssignmentStatus $state): string => AssignmentStatus::colors()[$state] ?? 'gray')
-                    ->icon(fn (AssignmentStatus $state): string => AssignmentStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (AssignmentStatus $state): string => AssignmentStatus::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (AssignmentStatus $state): string => AssignmentStatus::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->toggleable()

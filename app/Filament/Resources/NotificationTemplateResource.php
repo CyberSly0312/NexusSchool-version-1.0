@@ -90,12 +90,12 @@ class NotificationTemplateResource extends Resource
                     ->toggleable(),
                 TextColumn::make('category')
                     ->badge()
-                    ->color(fn (TemplateCategory $state): string => TemplateCategory::colors()[$state] ?? 'gray')
-                    ->icon(fn (TemplateCategory $state): string => TemplateCategory::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (TemplateCategory $state): string => TemplateCategory::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (TemplateCategory $state): string => TemplateCategory::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('channel')
                     ->badge()
-                    ->color(fn (NotificationChannel $state): string => NotificationChannel::colors()[$state] ?? 'gray')
-                    ->icon(fn (NotificationChannel $state): string => NotificationChannel::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (NotificationChannel $state): string => NotificationChannel::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (NotificationChannel $state): string => NotificationChannel::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')

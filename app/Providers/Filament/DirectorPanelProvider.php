@@ -26,9 +26,20 @@ class DirectorPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::hex('#00a2ff'),
             ])
+            ->favicon(null)
             ->sidebarCollapsibleOnDesktop()
             ->pages([
                 \App\Filament\Director\Pages\DirectorDashboard::class,
+                \App\Filament\Director\Pages\DocumentCenter::class,
+                \App\Filament\Director\Pages\SchoolIdentity::class,
+                \App\Filament\Director\Pages\SchoolWizard::class,
+            ])
+            ->widgets([
+                \App\Filament\Director\Widgets\DirectorStatsOverview::class,
+                \App\Filament\Director\Widgets\EnrollmentChart::class,
+                \App\Filament\Director\Widgets\AttendanceChart::class,
+                \App\Filament\Director\Widgets\PaymentsChart::class,
+                \App\Filament\Director\Widgets\AcademicResultsChart::class,
             ])
             ->middleware([
                 \App\Http\Middleware\InitializeTenancyForPanel::class,

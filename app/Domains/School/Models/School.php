@@ -6,6 +6,12 @@ namespace App\Domains\School\Models;
 
 use App\Domains\School\Enums\SchoolStatus;
 use App\Domains\School\Enums\SchoolType;
+use App\Models\AcademicYear;
+use App\Models\Assessment;
+use App\Models\AssessmentResult;
+use App\Models\Guardian;
+use App\Models\Student;
+use App\Models\StudentEnrollment;
 use App\Models\User;
 use Database\Factories\SchoolFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;

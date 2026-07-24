@@ -18,9 +18,12 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class GradeLevelResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = GradeLevel::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-list-bullet';

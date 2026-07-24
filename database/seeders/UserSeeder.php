@@ -33,12 +33,12 @@ class UserSeeder extends Seeder
         );
 
         $admin = User::updateOrCreate(
-            ['email' => 'admin@nexusdemo.edu'],
+            ['email' => 'admin@nexusschool.local'],
             [
                 'school_id' => $school->id,
                 'first_name' => 'Admin',
                 'last_name' => 'Système',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin1234'),
                 'status' => UserStatus::Active,
                 'email_verified_at' => now(),
             ]

@@ -16,9 +16,12 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class DepartmentResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = Department::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-library';

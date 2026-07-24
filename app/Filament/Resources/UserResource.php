@@ -17,6 +17,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
@@ -36,6 +37,11 @@ class UserResource extends Resource
     protected static ?string $recordTitleAttribute = 'full_name';
 
     protected static ?int $navigationSort = 10;
+
+    protected static function isSchoolAdminPanel(): bool
+    {
+        return filament()->getCurrentPanel()->getId() === 'school-admin';
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -67,11 +73,13 @@ class UserResource extends Resource
 
                 Section::make('Compte')
                     ->schema([
-                        Forms\Components\Select::make('school_id')
-                            ->relationship('school', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->nullable(),
+                        ...(! self::isSchoolAdminPanel() ? [
+                            Forms\Components\Select::make('school_id')
+                                ->relationship('school', 'name')
+                                ->searchable()
+                                ->preload()
+                                ->nullable(),
+                        ] : []),
                         Forms\Components\Select::make('status')
                             ->options([
                                 'active' => 'Actif',
@@ -106,6 +114,8 @@ class UserResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $isSchoolAdmin = self::isSchoolAdminPanel();
+
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('first_name')
@@ -121,10 +131,12 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->toggleable()
                     ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('school.name')
-                    ->label('École')
-                    ->sortable()
-                    ->toggleable(),
+                ...(! $isSchoolAdmin ? [
+                    Tables\Columns\TextColumn::make('school.name')
+                        ->label('École')
+                        ->sortable()
+                        ->toggleable(),
+                ] : []),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state): string => match ($state) {
@@ -155,11 +167,13 @@ class UserResource extends Resource
                         'pending' => 'En attente',
                         'suspended' => 'Suspendu',
                     ]),
-                Tables\Filters\SelectFilter::make('school_id')
-                    ->relationship('school', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->label('École'),
+                ...(! $isSchoolAdmin ? [
+                    Tables\Filters\SelectFilter::make('school_id')
+                        ->relationship('school', 'name')
+                        ->searchable()
+                        ->preload()
+                        ->label('École'),
+                ] : []),
             ])
             ->actions([
                 EditAction::make(),
@@ -168,6 +182,20 @@ class UserResource extends Resource
             ->bulkActions([
                 DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (self::isSchoolAdminPanel()) {
+            $tenantId = tenant()?->id;
+            if ($tenantId) {
+                $query->where('school_id', $tenantId);
+            }
+        }
+
+        return $query;
     }
 
     public static function getRelations(): array

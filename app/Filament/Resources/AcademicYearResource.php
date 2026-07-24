@@ -18,9 +18,12 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class AcademicYearResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = AcademicYear::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-calendar-days';

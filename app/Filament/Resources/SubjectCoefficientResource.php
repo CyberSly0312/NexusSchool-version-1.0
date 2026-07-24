@@ -16,9 +16,12 @@ use Filament\Schemas\Components\Section as SectionComponent;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class SubjectCoefficientResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = SubjectCoefficient::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-scale';

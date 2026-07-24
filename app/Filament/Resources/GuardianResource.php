@@ -18,9 +18,12 @@ use Filament\Schemas\Components\Section as SectionComponent;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class GuardianResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = Guardian::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';

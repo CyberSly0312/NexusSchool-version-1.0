@@ -95,8 +95,8 @@ class RouteResource extends Resource
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (RouteStatus $state): string => RouteStatus::colors()[$state] ?? 'gray')
-                    ->icon(fn (RouteStatus $state): string => RouteStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (RouteStatus $state): string => RouteStatus::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (RouteStatus $state): string => RouteStatus::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->toggleable()

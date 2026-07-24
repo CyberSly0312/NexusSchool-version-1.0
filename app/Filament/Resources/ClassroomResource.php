@@ -17,9 +17,12 @@ use Filament\Schemas\Components\Section as SectionComponent;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Traits\ScopedByTenant;
 
 class ClassroomResource extends Resource
 {
+    use ScopedByTenant;
+
     protected static ?string $model = Classroom::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office-2';

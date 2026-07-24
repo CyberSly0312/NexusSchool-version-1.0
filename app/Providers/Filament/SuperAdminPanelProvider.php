@@ -22,14 +22,35 @@ class SuperAdminPanelProvider extends PanelProvider
             ->id('super-admin')
             ->path('super-admin')
             ->login()
-            ->brandName('NexusSchool')
+            ->brandName('NexusSchool — SaaS')
             ->colors([
-                'primary' => Color::hex('#00a2ff'),
+                'primary' => Color::hex('#1e40af'),
             ])
             ->favicon(null)
             ->sidebarCollapsibleOnDesktop()
             ->pages([
                 \App\Filament\SuperAdmin\Pages\SuperAdminDashboard::class,
+            ])
+            ->resources([
+                // Plateforme
+                \App\Filament\Resources\SuperAdminSchoolResource::class,
+                \App\Filament\Resources\PlanResource::class,
+                \App\Filament\Resources\SubscriptionResource::class,
+                \App\Filament\Resources\DomainResource::class,
+                \App\Filament\Resources\CentralUserResource::class,
+                // Administration système
+                \App\Filament\Resources\AuditLogResource::class,
+                \App\Filament\Resources\SystemSettingResource::class,
+                \App\Filament\Resources\BackupResource::class,
+                \App\Filament\Resources\SystemHealthResource::class,
+                \App\Filament\Resources\MaintenanceWindowResource::class,
+                \App\Filament\Resources\NotificationChannelResource::class,
+            ])
+            ->widgets([
+                \App\Filament\SuperAdmin\Widgets\StatsOverview::class,
+                \App\Filament\SuperAdmin\Widgets\SchoolsChart::class,
+                \App\Filament\SuperAdmin\Widgets\RevenueChart::class,
+                \App\Filament\SuperAdmin\Widgets\SubscriptionStatusChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,

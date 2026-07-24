@@ -59,7 +59,7 @@ class DashboardResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('type')->badge()
-                    ->color(fn (DashboardType $state): string => DashboardType::colors()[$state] ?? 'gray'),
+                    ->color(fn (DashboardType $state): string => DashboardType::colors()[$state->value] ?? 'gray'),
                 IconColumn::make('is_default')->boolean(),
                 IconColumn::make('is_active')->boolean(),
                 TextColumn::make('widgets_count')->counts('widgets')->label('Widgets')->sortable(),

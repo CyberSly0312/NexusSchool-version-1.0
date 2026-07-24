@@ -14,6 +14,11 @@ class SuperAdminDashboard extends Dashboard
 
     public function getWidgets(): array
     {
-        return [];
+        return [
+            \App\Filament\SuperAdmin\Widgets\StatsOverview::class,
+            \App\Filament\SuperAdmin\Widgets\SchoolsChart::class,
+            \App\Filament\SuperAdmin\Widgets\RevenueChart::class,
+            \App\Filament\SuperAdmin\Widgets\SubscriptionStatusChart::class,
+        ];
     }
 }

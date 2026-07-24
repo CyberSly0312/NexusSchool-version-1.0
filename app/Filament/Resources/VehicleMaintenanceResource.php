@@ -102,8 +102,8 @@ class VehicleMaintenanceResource extends Resource
                     ->sortable(),
                 TextColumn::make('type')
                     ->badge()
-                    ->color(fn (MaintenanceType $state): string => MaintenanceType::colors()[$state] ?? 'gray')
-                    ->icon(fn (MaintenanceType $state): string => MaintenanceType::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (MaintenanceType $state): string => MaintenanceType::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (MaintenanceType $state): string => MaintenanceType::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('service_date')
                     ->date('d/m/Y')
                     ->sortable(),
@@ -120,8 +120,8 @@ class VehicleMaintenanceResource extends Resource
                     ->toggleable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (MaintenanceStatus $state): string => MaintenanceStatus::colors()[$state] ?? 'gray')
-                    ->icon(fn (MaintenanceStatus $state): string => MaintenanceStatus::icons()[$state] ?? 'heroicon-o-question-mark'),
+                    ->color(fn (MaintenanceStatus $state): string => MaintenanceStatus::colors()[$state->value] ?? 'gray')
+                    ->icon(fn (MaintenanceStatus $state): string => MaintenanceStatus::icons()[$state->value] ?? 'heroicon-o-question-mark'),
                 TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->toggleable()

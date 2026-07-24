@@ -66,7 +66,7 @@ class KpiResource extends Resource
                 TextColumn::make('target_value')->label('Objectif')->numeric()->toggleable(),
                 TextColumn::make('unit')->toggleable(),
                 TextColumn::make('status')->badge()
-                    ->color(fn (KpiStatus $state): string => KpiStatus::colors()[$state] ?? 'gray'),
+                    ->color(fn (KpiStatus $state): string => KpiStatus::colors()[$state->value] ?? 'gray'),
                 TextColumn::make('last_calculated_at')->dateTime('d/m/Y H:i')->sortable()->toggleable()->toggledHiddenByDefault(),
                 TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable()->toggledHiddenByDefault(),
             ])
