@@ -21,7 +21,7 @@ class PDFSettings extends Page implements HasForms
     protected static ?string $navigationLabel = 'Paramètres PDF';
     protected static ?string $title = 'Configuration des documents PDF';
     protected static string|\UnitEnum|null $navigationGroup = 'Paramètres';
-    protected static ?int $navigationSort = 91;
+    protected static ?int $navigationSort = 92;
     protected string $view = 'filament.school-admin.pages.pdf-settings';
 
     public string $pdf_stamp_path = '';

@@ -27,7 +27,7 @@ class SectionResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+    protected static string|\UnitEnum|null $navigationGroup = 'Académique';
 
     protected static ?string $navigationLabel = 'Sections';
 
@@ -37,7 +37,7 @@ class SectionResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?int $navigationSort = 14;
+    protected static ?int $navigationSort = 24;
 
     public static function form(Schema $schema): Schema
     {

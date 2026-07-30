@@ -24,7 +24,7 @@ class CampusResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'École';
+    protected static string|\UnitEnum|null $navigationGroup = 'Établissement';
 
     protected static ?string $navigationLabel = 'Campus / Annexes';
 
@@ -32,7 +32,7 @@ class CampusResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Campus';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Schema $schema): Schema
     {

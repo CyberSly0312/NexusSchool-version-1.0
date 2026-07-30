@@ -22,6 +22,8 @@ class IncidentResource extends Resource
 {
     use ScopedByTenant;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Incident::class;
 
     protected static ?string $recordTitleAttribute = 'title';

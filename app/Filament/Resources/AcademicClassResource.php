@@ -31,7 +31,7 @@ class AcademicClassResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+    protected static string|\UnitEnum|null $navigationGroup = 'Académique';
 
     protected static ?string $navigationLabel = 'Classes';
 
@@ -41,7 +41,7 @@ class AcademicClassResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?int $navigationSort = 15;
+    protected static ?int $navigationSort = 25;
 
     public static function form(Schema $schema): Schema
     {

@@ -24,6 +24,8 @@ class AnnouncementResource extends Resource
 {
     use ScopedByTenant;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Announcement::class;
 
     protected static ?string $recordTitleAttribute = 'title';

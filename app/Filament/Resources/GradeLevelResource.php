@@ -28,7 +28,7 @@ class GradeLevelResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-list-bullet';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+    protected static string|\UnitEnum|null $navigationGroup = 'Académique';
 
     protected static ?string $navigationLabel = 'Niveaux';
 
@@ -38,7 +38,7 @@ class GradeLevelResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?int $navigationSort = 13;
+    protected static ?int $navigationSort = 23;
 
     public static function form(Schema $schema): Schema
     {

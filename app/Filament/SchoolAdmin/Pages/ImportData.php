@@ -16,6 +16,8 @@ class ImportData extends Page implements HasForms
 {
     use InteractsWithForms;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-arrow-up-tray';
     protected static ?string $navigationLabel = 'Import de données';
     protected static ?string $title = 'Import Excel / CSV';

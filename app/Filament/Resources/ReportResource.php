@@ -25,6 +25,8 @@ class ReportResource extends Resource
 {
     use ScopedByTenant;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Report::class;
 
     protected static ?string $recordTitleAttribute = 'name';

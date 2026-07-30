@@ -24,6 +24,8 @@ class AssessmentResultResource extends Resource
 {
     use ScopedByTenant;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = AssessmentResult::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';

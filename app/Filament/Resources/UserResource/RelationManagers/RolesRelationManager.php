@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Models\Role;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class RolesRelationManager extends RelationManager
 {
@@ -34,7 +36,7 @@ class RolesRelationManager extends RelationManager
         return filament()->getCurrentPanel()->getId() === 'school-admin';
     }
 
-    public static function canView(): bool
+    public function canView(Model $record): bool
     {
         return true;
     }
@@ -78,7 +80,7 @@ class RolesRelationManager extends RelationManager
                     ->toggledHiddenByDefault(),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
+                Actions\CreateAction::make()
                     ->label('Assign Role')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['guard_name'] = $data['guard_name'] ?? 'web';
@@ -86,27 +88,27 @@ class RolesRelationManager extends RelationManager
                         return $data;
                     })
                     ->visible(! self::isSchoolAdminPanel()),
-                Tables\Actions\AssociateAction::make()
+                Actions\AssociateAction::make()
                     ->label('Link Existing Role')
-                    ->recordSelect(
-                        Forms\Components\Select::make('role_id')
+                    ->recordSelect(function (Forms\Components\Select $select) {
+                        return $select
                             ->options(fn () => self::isSchoolAdminPanel()
                                 ? Role::whereIn('name', self::$schoolAdminAllowedRoles)->pluck('name', 'id')
                                 : Role::pluck('name', 'id'))
                             ->searchable()
-                            ->preload(),
-                    )
+                            ->preload();
+                    })
                     ->associateRelatedRecordUsing(function ($record, $data) {
                         $role = Role::findOrFail($data['role_id']);
                         $record->roles()->attach($role);
                     }),
             ])
             ->actions([
-                Tables\Actions\DissociateAction::make()
+                Actions\DissociateAction::make()
                     ->label('Remove'),
             ])
             ->bulkActions([
-                Tables\Actions\DissociateBulkAction::make(),
+                Actions\DissociateBulkAction::make(),
             ]);
     }
 }

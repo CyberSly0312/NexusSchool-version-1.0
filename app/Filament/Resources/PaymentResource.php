@@ -21,6 +21,8 @@ class PaymentResource extends Resource
 {
     use ScopedByTenant;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Payment::class;
 
     protected static ?string $recordTitleAttribute = 'reference';

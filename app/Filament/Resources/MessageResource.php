@@ -24,6 +24,8 @@ class MessageResource extends Resource
 {
     use ScopedByTenant;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Message::class;
 
     protected static ?string $recordTitleAttribute = 'subject';

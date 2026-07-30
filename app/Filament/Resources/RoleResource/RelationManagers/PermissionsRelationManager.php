@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\RoleResource\RelationManagers;
 
 use App\Domains\Permission\Enums\PermissionGroup;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -70,20 +71,19 @@ class PermissionsRelationManager extends RelationManager
                     }),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
+                Actions\CreateAction::make()
                     ->label('Assign Permission')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['guard_name'] = $data['guard_name'] ?? 'web';
 
                         return $data;
                     }),
-                Tables\Actions\AssociateAction::make()
+                Actions\AssociateAction::make()
                     ->label('Link Existing Permission')
-                    ->recordSelect(
-                        Forms\Components\Select::make('permission_id')
-                            ->options(Permission::pluck('name', 'id'))
-                            ->searchable()
-                            ->preload(),
+                    ->recordSelect(fn (Forms\Components\Select $select) => $select
+                        ->options(Permission::pluck('name', 'id'))
+                        ->searchable()
+                        ->preload(),
                     )
                     ->associateRelatedRecordUsing(function ($record, $data) {
                         $permission = Permission::findOrFail($data['permission_id']);
@@ -91,11 +91,11 @@ class PermissionsRelationManager extends RelationManager
                     }),
             ])
             ->actions([
-                Tables\Actions\DissociateAction::make()
+                Actions\DissociateAction::make()
                     ->label('Remove'),
             ])
             ->bulkActions([
-                Tables\Actions\DissociateBulkAction::make(),
+                Actions\DissociateBulkAction::make(),
             ]);
     }
 }

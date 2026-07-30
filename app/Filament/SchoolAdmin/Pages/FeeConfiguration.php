@@ -20,8 +20,8 @@ class FeeConfiguration extends Page implements HasForms
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'Configuration des frais';
     protected static ?string $title = 'Configuration des frais scolaires';
-    protected static string|\UnitEnum|null $navigationGroup = 'Finances';
-    protected static ?int $navigationSort = 5;
+    protected static string|\UnitEnum|null $navigationGroup = 'Configuration financière';
+    protected static ?int $navigationSort = 60;
     protected string $view = 'filament.school-admin.pages.fee-configuration';
 
     public function mount(): void

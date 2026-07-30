@@ -17,6 +17,8 @@ class SchoolSettings extends Page implements HasForms
 {
     use InteractsWithForms;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office-2';
     protected static ?string $navigationLabel = 'Informations de l\'établissement';
     protected static ?string $title = 'Paramètres de l\'établissement';

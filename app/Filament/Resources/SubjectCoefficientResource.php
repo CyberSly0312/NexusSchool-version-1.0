@@ -26,7 +26,7 @@ class SubjectCoefficientResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-scale';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Enseignements';
+    protected static string|\UnitEnum|null $navigationGroup = 'Académique';
 
     protected static ?string $navigationLabel = 'Coefficients';
 
@@ -36,7 +36,7 @@ class SubjectCoefficientResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'coefficient';
 
-    protected static ?int $navigationSort = 19;
+    protected static ?int $navigationSort = 29;
 
     public static function form(Schema $schema): Schema
     {
