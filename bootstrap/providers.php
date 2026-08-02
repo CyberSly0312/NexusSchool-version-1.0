@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Providers\AppServiceProvider;
 use App\Providers\TenancyServiceProvider;
 
@@ -7,6 +9,8 @@ return [
     AppServiceProvider::class,
     TenancyServiceProvider::class,
     \App\Domains\Plugin\PluginServiceProvider::class,
+    \App\Domains\Academic\AcademicServiceProvider::class,
+    \App\Domains\Student\StudentServiceProvider::class,
 
     // Filament Panel Providers
     \App\Providers\Filament\SuperAdminPanelProvider::class,

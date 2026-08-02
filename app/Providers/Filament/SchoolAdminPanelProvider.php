@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -50,12 +49,25 @@ class SchoolAdminPanelProvider extends PanelProvider
                 \App\Filament\Resources\SubjectResource::class,
                 \App\Filament\Resources\SubjectCoefficientResource::class,
 
+                // ── Académique · Moteur canonique SPR-002 ──
+                \App\Domains\Academic\Presentation\Filament\Resources\AcademicCalendarYearResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\AcademicCalendarTermResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\AcademicCalendarEventResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\EducationLevelResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\AcademicProgramResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\StreamResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\SchoolClassResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\ClassSectionResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\SubjectGroupResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\AcademicSubjectResource::class,
+                \App\Domains\Academic\Presentation\Filament\Resources\CoefficientResource::class,
+
                 // ── Utilisateurs ──
                 \App\Filament\Resources\UserResource::class,
                 \App\Filament\Resources\DepartmentResource::class,
 
                 // ── Élèves ──
-                \App\Filament\Resources\StudentResource::class,
+                \App\Domains\Student\Presentation\Filament\Resources\StudentResource::class,
                 \App\Filament\Resources\GuardianResource::class,
                 \App\Filament\Resources\StudentEnrollmentResource::class,
 
@@ -79,6 +91,7 @@ class SchoolAdminPanelProvider extends PanelProvider
                 \App\Filament\SchoolAdmin\Widgets\StaffCountWidget::class,
                 \App\Filament\SchoolAdmin\Widgets\ClassesCountWidget::class,
                 \App\Filament\SchoolAdmin\Widgets\SubjectsCountWidget::class,
+                \App\Domains\Academic\Presentation\Filament\Widgets\CalendarOverviewWidget::class,
             ])
             ->middleware([
                 \App\Http\Middleware\InitializeTenancyForPanel::class,

@@ -146,6 +146,7 @@ class PermissionService
 
     public const EXTRA_ACTIONS = [
         'workflow' => ['execute', 'manage', 'publish'],
+        'student' => ['transfer', 'suspend', 'graduate', 'archive', 'restore'],
     ];
 
     public function getDefaultPermissions(): array

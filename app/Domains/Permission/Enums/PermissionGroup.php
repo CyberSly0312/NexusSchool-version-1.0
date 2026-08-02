@@ -48,6 +48,17 @@ enum PermissionGroup: string
     case MaintenanceWindow = 'maintenance_window';
     case NotificationChannel = 'notification_channel';
     case Workflows = 'workflow';
+    case AcademicCalendarYear = 'academic_calendar_year';
+    case AcademicCalendarTerm = 'academic_calendar_term';
+    case AcademicCalendarEvent = 'academic_calendar_event';
+    case EducationLevel = 'education_level';
+    case AcademicProgram = 'academic_program';
+    case Stream = 'stream';
+    case SchoolClass = 'school_class';
+    case ClassSection = 'class_section';
+    case SubjectGroup = 'subject_group';
+    case AcademicSubject = 'academic_subject';
+    case Coefficient = 'coefficient';
 
     public function label(): string
     {
@@ -94,6 +105,17 @@ enum PermissionGroup: string
             self::MaintenanceWindow => 'Fenêtres de maintenance',
             self::NotificationChannel => 'Canaux de notification',
             self::Workflows => 'Flux de travail',
+            self::AcademicCalendarYear => 'Années scolaires',
+            self::AcademicCalendarTerm => 'Périodes',
+            self::AcademicCalendarEvent => 'Événements',
+            self::EducationLevel => 'Niveaux',
+            self::AcademicProgram => 'Programmes',
+            self::Stream => 'Filières',
+            self::SchoolClass => 'Classes',
+            self::ClassSection => 'Sections',
+            self::SubjectGroup => 'Groupes de matières',
+            self::AcademicSubject => 'Matières',
+            self::Coefficient => 'Coefficients',
         };
     }
 
