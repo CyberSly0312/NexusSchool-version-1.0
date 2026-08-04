@@ -68,8 +68,21 @@ class SchoolAdminPanelProvider extends PanelProvider
 
                 // ── Élèves ──
                 \App\Domains\Student\Presentation\Filament\Resources\StudentResource::class,
-                \App\Filament\Resources\GuardianResource::class,
                 \App\Filament\Resources\StudentEnrollmentResource::class,
+
+                // ── Tuteurs · Moteur canonique SPR-005 ──
+                \App\Domains\Guardian\Presentation\Filament\Resources\GuardianResource::class,
+                \App\Domains\Guardian\Presentation\Filament\Resources\StudentGuardianRelationshipResource::class,
+                \App\Domains\Guardian\Presentation\Filament\Resources\EmergencyContactsResource::class,
+                \App\Domains\Guardian\Presentation\Filament\Resources\AuthorizedPickupResource::class,
+
+                // ── Parcours scolaire · Moteur canonique SPR-004 ──
+                \App\Domains\Enrollment\Presentation\Filament\Resources\EnrollmentResource::class,
+                \App\Domains\Enrollment\Presentation\Filament\Resources\EnrollmentHistoryResource::class,
+                \App\Domains\Enrollment\Presentation\Filament\Resources\PromotionResource::class,
+                \App\Domains\Enrollment\Presentation\Filament\Resources\TransferResource::class,
+                \App\Domains\Enrollment\Presentation\Filament\Resources\GraduationResource::class,
+                \App\Domains\Enrollment\Presentation\Filament\Resources\BulkEnrollmentResource::class,
 
                 // ── Ressources déplacées (masquées, pour futurs panels) ──
                 // Director: AssessmentResult, Incident, Report

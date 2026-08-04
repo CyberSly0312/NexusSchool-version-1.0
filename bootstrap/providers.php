@@ -11,6 +11,8 @@ return [
     \App\Domains\Plugin\PluginServiceProvider::class,
     \App\Domains\Academic\AcademicServiceProvider::class,
     \App\Domains\Student\StudentServiceProvider::class,
+    \App\Domains\Enrollment\EnrollmentServiceProvider::class,
+    \App\Domains\Guardian\GuardianServiceProvider::class,
 
     // Filament Panel Providers
     \App\Providers\Filament\SuperAdminPanelProvider::class,

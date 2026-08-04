@@ -13,6 +13,10 @@ uses(TestCase::class, RefreshDatabase::class)
         'Feature/Domains/Academic',
         'Unit/Domains/Student',
         'Feature/Domains/Student',
+        'Unit/Domains/Enrollment',
+        'Feature/Domains/Enrollment',
+        'Unit/Domains/Guardian',
+        'Feature/Domains/Guardian',
     );
 
 /**
@@ -68,4 +72,68 @@ function makeAcademicContext(string $schoolId, string $className = '6ème A'): a
     ]);
 
     return [$year, $class];
+}
+
+/**
+ * Build a full enrollment context (active program + level + year + class) for
+ * a school, so enrollment actions can validate their academic assignment.
+ *
+ * @return array{\App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear, \App\Domains\Academic\Infrastructure\Models\SchoolClass, \App\Domains\Academic\Infrastructure\Models\AcademicProgram, \App\Domains\Academic\Infrastructure\Models\EducationLevel}
+ */
+function makeEnrollmentContext(string $schoolId, string $className = '6ème A'): array
+{
+    $program = \App\Domains\Academic\Infrastructure\Models\AcademicProgram::create([
+        'school_id' => $schoolId,
+        'name' => 'Test program '.Str::random(4),
+        'code' => 'TP'.Str::upper(Str::random(4)),
+    ]);
+
+    $level = \App\Domains\Academic\Infrastructure\Models\EducationLevel::create([
+        'school_id' => $schoolId,
+        'name' => 'Collège',
+        'code' => 'EL'.Str::upper(Str::random(3)),
+        'sort_order' => 1,
+        'status' => 'active',
+    ]);
+
+    $year = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::create([
+        'school_id' => $schoolId,
+        'name' => '2026-2027',
+        'start_date' => '2026-09-01',
+        'end_date' => '2027-07-31',
+        'status' => 'active',
+    ]);
+
+    $class = \App\Domains\Academic\Infrastructure\Models\SchoolClass::create([
+        'school_id' => $schoolId,
+        'academic_program_id' => $program->id,
+        'education_level_id' => $level->id,
+        'name' => $className,
+        'code' => 'CL'.Str::upper(Str::random(3)),
+        'status' => 'active',
+    ]);
+
+    return [$year, $class, $program, $level];
+}
+
+/**
+ * Open the next academic year for a school. Only one active year is allowed
+ * per school at a time, so the current active year is archived first.
+ */
+function makeNextAcademicYear(
+    string $schoolId,
+    \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear $currentYear,
+): \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear {
+    $currentYear->update(['status' => 'archived']);
+
+    $start = \Illuminate\Support\Carbon::parse($currentYear->start_date)->addYear();
+    $end = \Illuminate\Support\Carbon::parse($currentYear->end_date)->addYear();
+
+    return \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::create([
+        'school_id' => $schoolId,
+        'name' => $start->format('Y').'-'.$end->format('Y'),
+        'start_date' => $start,
+        'end_date' => $end,
+        'status' => 'active',
+    ]);
 }

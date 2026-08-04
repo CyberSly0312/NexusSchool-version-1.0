@@ -16,6 +16,7 @@ enum PermissionGroup: string
     case AcademicYear = 'academic_year';
     case Students = 'student';
     case StudentEnrollment = 'student_enrollment';
+    case Enrollment = 'enrollment';
     case Teachers = 'teacher';
     case Guardians = 'guardian';
     case Admissions = 'admission';
@@ -73,6 +74,7 @@ enum PermissionGroup: string
             self::AcademicYear => 'Années scolaires',
             self::Students => 'Élèves',
             self::StudentEnrollment => 'Inscriptions',
+            self::Enrollment => 'Parcours scolaire',
             self::Teachers => 'Enseignants',
             self::Guardians => 'Parents / Tuteurs',
             self::Admissions => 'Admissions',

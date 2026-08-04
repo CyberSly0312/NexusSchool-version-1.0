@@ -1,0 +1,3283 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$avg_latency\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/AiUsageReport.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$failed\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/AiUsageReport.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$total_cost\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/AiUsageReport.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$total_requests\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/AiUsageReport.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ScheduleReports.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ScheduleReports.php
+
+		-
+			message: '#^Parameter \#1 \$backup of method App\\Domains\\System\\Services\\BackupService\:\:executeBackup\(\) expects App\\Models\\Backup, App\\Domains\\System\\DTOs\\BackupData given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Console/Commands/System/SystemBackupCommand.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Console/Commands/Workflow/WorkflowProcessSchedules.php
+
+		-
+			message: '#^Parameter \#1 \$schedule of method App\\Domains\\Workflow\\Services\\ScheduleService\:\:processSchedule\(\) expects App\\Models\\WorkflowSchedule, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Console/Commands/Workflow/WorkflowProcessSchedules.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/Academic/Application/Actions/CreateCalendarTermAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Listeners/AcademicAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarEvent.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarEvent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarTerm.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Academic\\Domain\\Enums\\CalendarTermStatus\:\:Closed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarTerm.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Academic\\Domain\\Enums\\CalendarTermStatus\:\:Open will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarTerm.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Academic\\Domain\\Enums\\CalendarTermStatus\:\:Planned will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarTerm.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarTerm.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarYear.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Academic\\Domain\\Enums\\CalendarYearStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarYear.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Academic\\Domain\\Enums\\CalendarYearStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarYear.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Academic\\Domain\\Enums\\CalendarYearStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarYear.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarYear.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicProgram.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicProgram.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicSubject.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/AcademicSubject.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/ClassSection.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/ClassSection.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/Coefficient.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/Coefficient.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/EducationLevel.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/EducationLevel.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/SchoolClass.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/SchoolClass.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/Stream.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/Stream.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/SubjectGroup.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Models/SubjectGroup.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Academic/Infrastructure/Observers/AcademicEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/AcademicCalendarEventPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/AcademicCalendarTermPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/AcademicCalendarYearPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/AcademicProgramPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/AcademicSubjectPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/ClassSectionPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/CoefficientPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/EducationLevelPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/SchoolClassPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/StreamPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Academic/Infrastructure/Policies/SubjectGroupPolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Academic/Presentation/Filament/Resources/AcademicCalendarEventResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Presentation/Filament/Resources/AcademicCalendarTermResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Presentation/Filament/Resources/AcademicProgramResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Presentation/Filament/Resources/AcademicSubjectResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Presentation/Filament/Resources/ClassSectionResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Academic/Presentation/Filament/Resources/CoefficientResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: app/Domains/Academic/Presentation/Filament/Resources/SchoolClassResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Academic/Presentation/Filament/Resources/StreamResource.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/Academic/Presentation/Filament/Widgets/CalendarOverviewWidget.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Academic/Presentation/Filament/Widgets/CalendarOverviewWidget.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicClass/Listeners/LogAcademicClassUpdated.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicTerm/Listeners/LogAcademicTermUpdated.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/AcademicTerm/Services/AcademicTermService.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/AcademicTerm/Services/AcademicTermService.php
+
+		-
+			message: '#^Parameter \#2 \$oldStatus of event class App\\Domains\\AcademicTerm\\Events\\AcademicTermStatusChanged constructor expects App\\Domains\\AcademicTerm\\Enums\\AcademicTermStatus in App\\Domains\\AcademicTerm\\Events\\AcademicTermStatusChanged\:\:dispatch\(\), string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Domains/AcademicTerm/Services/AcademicTermService.php
+
+		-
+			message: '#^Parameter \#3 \$newStatus of event class App\\Domains\\AcademicTerm\\Events\\AcademicTermStatusChanged constructor expects App\\Domains\\AcademicTerm\\Enums\\AcademicTermStatus in App\\Domains\\AcademicTerm\\Events\\AcademicTermStatusChanged\:\:dispatch\(\), string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicTerm/Services/AcademicTermService.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/AcademicTerm/Services/AcademicTermService.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/AcademicYear/Listeners/LogAcademicYearDatesChanged.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/AcademicYear/Listeners/LogAcademicYearDatesChanged.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicYear/Listeners/LogAcademicYearUpdated.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: app/Domains/AcademicYear/Services/AcademicYearService.php
+
+		-
+			message: '#^Parameter \#1 \$school of event class App\\Domains\\AcademicYear\\Events\\AcademicYearSwitched constructor expects App\\Domains\\School\\Models\\School in App\\Domains\\AcademicYear\\Events\\AcademicYearSwitched\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicYear/Services/AcademicYearService.php
+
+		-
+			message: '#^Parameter \#2 \$oldStatus of event class App\\Domains\\AcademicYear\\Events\\AcademicYearStatusChanged constructor expects App\\Domains\\AcademicYear\\Enums\\AcademicYearStatus in App\\Domains\\AcademicYear\\Events\\AcademicYearStatusChanged\:\:dispatch\(\), string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Domains/AcademicYear/Services/AcademicYearService.php
+
+		-
+			message: '#^Parameter \#3 \$newStatus of event class App\\Domains\\AcademicYear\\Events\\AcademicYearStatusChanged constructor expects App\\Domains\\AcademicYear\\Enums\\AcademicYearStatus in App\\Domains\\AcademicYear\\Events\\AcademicYearStatusChanged\:\:dispatch\(\), string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicYear/Services/AcademicYearService.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/AcademicYear/Services/AcademicYearService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$avg_latency_ms\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$billable_requests\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$cached_requests\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$failed_requests\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$total_cost\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$total_input_tokens\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$total_output_tokens\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$total_requests\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Ai/Services/AiService.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Ai/Services/ConversationService.php
+
+		-
+			message: '#^Cannot call method canTransitionTo\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/Ai/Services/ConversationService.php
+
+		-
+			message: '#^Instanceof between string and App\\Domains\\Analytics\\Enums\\DashboardType will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/DTOs/DashboardData.php
+
+		-
+			message: '#^Instanceof between string and App\\Domains\\Analytics\\Enums\\WidgetType will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/DTOs/DashboardWidgetData.php
+
+		-
+			message: '#^Instanceof between string and App\\Domains\\Analytics\\Enums\\KpiStatus will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/DTOs/KpiData.php
+
+		-
+			message: '#^Instanceof between string\|null and App\\Domains\\Analytics\\Enums\\ScheduleFrequency will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/DTOs/KpiData.php
+
+		-
+			message: '#^Instanceof between string and App\\Domains\\Analytics\\Enums\\ReportFormat will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/DTOs/ReportData.php
+
+		-
+			message: '#^Instanceof between string and App\\Domains\\Analytics\\Enums\\ReportStatus will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/DTOs/ReportData.php
+
+		-
+			message: '#^Instanceof between string\|null and App\\Domains\\Analytics\\Enums\\ScheduleFrequency will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/DTOs/ReportData.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Analytics/Listeners/AuditLogger.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Analytics/Listeners/ExportGenerator.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Analytics/Listeners/NotificationDispatcher.php
+
+		-
+			message: '#^Method App\\Domains\\Analytics\\Services\\KpiService\:\:computeAverageFormula\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: app/Domains/Analytics/Services/KpiService.php
+
+		-
+			message: '#^Method App\\Domains\\Analytics\\Services\\KpiService\:\:computeCountFormula\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: app/Domains/Analytics/Services/KpiService.php
+
+		-
+			message: '#^Method App\\Domains\\Analytics\\Services\\KpiService\:\:computeSumFormula\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: app/Domains/Analytics/Services/KpiService.php
+
+		-
+			message: '#^Offset ''type'' on non\-falsy\-string in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: app/Domains/Analytics/Services/KpiService.php
+
+		-
+			message: '#^Result of \|\| is always true\.$#'
+			identifier: booleanOr.alwaysTrue
+			count: 1
+			path: app/Domains/Analytics/Services/KpiService.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: app/Domains/Analytics/Services/KpiService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Analytics\\Enums\\ReportStatus\:\:Generating will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Analytics/Services/ReportingService.php
+
+		-
+			message: '#^Parameter \#1 \$token of method App\\Domains\\Api\\Services\\ApiTokenService\:\:revoke\(\) expects App\\Models\\ApiToken, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Api/Services/OAuthService.php
+
+		-
+			message: '#^Method App\\Domains\\Campus\\Enums\\CampusStatus\:\:color\(\) never returns array so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Domains/Campus/Enums/CampusStatus.php
+
+		-
+			message: '#^Method App\\Domains\\Campus\\Enums\\CampusStatus\:\:color\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Domains/Campus/Enums/CampusStatus.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Classroom/Listeners/LogClassroomUpdated.php
+
+		-
+			message: '#^Parameter \#2 \$academicClass of event class App\\Domains\\Classroom\\Events\\ClassroomReleased constructor expects App\\Models\\AcademicClass in App\\Domains\\Classroom\\Events\\ClassroomReleased\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Classroom/Services/ClassroomService.php
+
+		-
+			message: '#^Instanceof between App\\Domains\\Communication\\Enums\\AnnouncementScope and App\\Domains\\Communication\\Enums\\AnnouncementScope will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: app/Domains/Communication/DTOs/AnnouncementData.php
+
+		-
+			message: '#^Instanceof between App\\Domains\\Communication\\Enums\\MessageStatus and App\\Domains\\Communication\\Enums\\MessageStatus will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: app/Domains/Communication/DTOs/MessageData.php
+
+		-
+			message: '#^Instanceof between App\\Domains\\Communication\\Enums\\MessageType and App\\Domains\\Communication\\Enums\\MessageType will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: app/Domains/Communication/DTOs/MessageData.php
+
+		-
+			message: '#^Instanceof between App\\Domains\\Communication\\Enums\\NotificationChannel and App\\Domains\\Communication\\Enums\\NotificationChannel will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: app/Domains/Communication/DTOs/NotificationData.php
+
+		-
+			message: '#^Instanceof between App\\Domains\\Communication\\Enums\\NotificationStatus and App\\Domains\\Communication\\Enums\\NotificationStatus will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: app/Domains/Communication/DTOs/NotificationData.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Department/Listeners/LogDepartmentUpdated.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Enrollment\\Domain\\Exceptions\\EnrollmentStateException\:\:transition\(\) expects App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/GraduateStudentAction.php
+
+		-
+			message: '#^Property App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\:\:\$status \(string\) does not accept App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Graduated\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/GraduateStudentAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Enrollment\\Domain\\Exceptions\\EnrollmentStateException\:\:transition\(\) expects App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/PromoteStudentAction.php
+
+		-
+			message: '#^Property App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\:\:\$status \(string\) does not accept App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Archived\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/PromoteStudentAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Enrollment\\Domain\\Exceptions\\EnrollmentStateException\:\:transition\(\) expects App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/RepeatStudentAction.php
+
+		-
+			message: '#^Property App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\:\:\$status \(string\) does not accept App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Archived\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/RepeatStudentAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Enrollment\\Domain\\Exceptions\\EnrollmentStateException\:\:transition\(\) expects App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/RestoreEnrollmentAction.php
+
+		-
+			message: '#^Property App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\:\:\$status \(string\) does not accept App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Active\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/RestoreEnrollmentAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Enrollment\\Domain\\Exceptions\\EnrollmentStateException\:\:transition\(\) expects App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/SuspendEnrollmentAction.php
+
+		-
+			message: '#^Property App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\:\:\$status \(string\) does not accept App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Suspended\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/SuspendEnrollmentAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Enrollment\\Domain\\Exceptions\\EnrollmentStateException\:\:transition\(\) expects App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/TransferEnrollmentAction.php
+
+		-
+			message: '#^Property App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\:\:\$status \(string\) does not accept App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Archived\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/TransferEnrollmentAction.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/UpdateEnrollmentAction.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/WithdrawStudentAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Enrollment\\Domain\\Exceptions\\EnrollmentStateException\:\:transition\(\) expects App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/WithdrawStudentAction.php
+
+		-
+			message: '#^Property App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\:\:\$status \(string\) does not accept App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Withdrawn\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Enrollment/Application/Actions/WithdrawStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 4
+			path: app/Domains/Enrollment/Infrastructure/Listeners/EnrollmentAuditLogger.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: app/Domains/Enrollment/Infrastructure/Listeners/EnrollmentAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:displayName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Graduated will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Enrollment\\Domain\\Enums\\EnrollmentStatus\:\:Withdrawn will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentGraduation.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentGraduation.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentHistory.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentHistory.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentPromotion.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentPromotion.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentTransfer.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentTransfer.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Enrollment/Infrastructure/Observers/EnrollmentEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Enrollment/Infrastructure/Policies/EnrollmentPolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 6
+			path: app/Domains/Enrollment/Presentation/Filament/Resources/BulkEnrollmentResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Presentation/Filament/Resources/BulkEnrollmentResource/Pages/CreateBulkEnrollment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>school_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Presentation/Filament/Resources/BulkEnrollmentResource/Pages/CreateBulkEnrollment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 8
+			path: app/Domains/Enrollment/Presentation/Filament/Resources/EnrollmentResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Presentation/Filament/Resources/EnrollmentResource/Pages/CreateEnrollment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>school_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Enrollment/Presentation/Filament/Resources/EnrollmentResource/Pages/CreateEnrollment.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/GradeLevel/Listeners/LogGradeLevelUpdated.php
+
+		-
+			message: '#^Cannot call method isDeletable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Services/GradebookService.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Services/GradebookService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between mixed and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/Gradebook/Services/GradebookService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/Guardian.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/Guardian.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Guardian\\Domain\\Enums\\GuardianStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/Guardian.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Guardian\\Domain\\Enums\\GuardianStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/Guardian.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/Guardian.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/RelationshipType.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/RelationshipType.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationship.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:displayName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationship.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationship.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationship.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationshipHistory.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationshipHistory.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Guardian/Infrastructure/Observers/GuardianEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Guardian/Infrastructure/Policies/GuardianPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Guardian/Infrastructure/Policies/StudentGuardianRelationshipPolicy.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Guardian/Listeners/LogGuardianUpdated.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Tables\\Actions\\EditAction\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Domains/Guardian/Presentation/Filament/Resources/GuardianResource/RelationManagers/StudentsRelationManager.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Library/Listeners/LogBookBorrowed.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Library/Listeners/LogBookBorrowed.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Library/Listeners/LogBookReturned.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Library/Listeners/LogFineGenerated.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Library/Listeners/LogFinePaid.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Library/Listeners/LogReservationCreated.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Library/Listeners/LogReservationCreated.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Library/Listeners/LogReservationExpired.php
+
+		-
+			message: '#^Relation ''borrower'' is not found in App\\Models\\Reservation model\.$#'
+			identifier: larastan.relationExistence
+			count: 2
+			path: app/Domains/Library/Services/CirculationService.php
+
+		-
+			message: '#^Result of && is always true\.$#'
+			identifier: booleanAnd.alwaysTrue
+			count: 1
+			path: app/Domains/Library/Services/CirculationService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\Library\\Enums\\BookLoanStatus\:\:Active will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 3
+			path: app/Domains/Library/Services/CirculationService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\Library\\Enums\\BookLoanStatus\:\:Overdue will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/Library/Services/CirculationService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\Library\\Enums\\ReservationStatus\:\:Pending will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 2
+			path: app/Domains/Library/Services/CirculationService.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 5
+			path: app/Domains/Library/Services/CirculationService.php
+
+		-
+			message: '#^Cannot call method diffInDays\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Library/Services/FineService.php
+
+		-
+			message: '#^Result of \|\| is always false\.$#'
+			identifier: booleanOr.alwaysFalse
+			count: 2
+			path: app/Domains/Library/Services/FineService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\FineStatus\:\:Paid will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 2
+			path: app/Domains/Library/Services/FineService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\FineStatus\:\:Waived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 2
+			path: app/Domains/Library/Services/FineService.php
+
+		-
+			message: '#^Method App\\Domains\\Permission\\Services\\PermissionService\:\:create\(\) should return Spatie\\Permission\\Models\\Permission but returns Spatie\\Permission\\Contracts\\Permission\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Permission/Services/PermissionService.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Permission/Services/PermissionService.php
+
+		-
+			message: '#^Parameter \#1 \$permission of event class App\\Domains\\Permission\\Events\\PermissionCreated constructor expects Spatie\\Permission\\Models\\Permission in App\\Domains\\Permission\\Events\\PermissionCreated\:\:dispatch\(\), Spatie\\Permission\\Contracts\\Permission given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Permission/Services/PermissionService.php
+
+		-
+			message: '#^Call to function is_string\(\) with array will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Domains/Plugin/DTOs/PluginDependencyData.php
+
+		-
+			message: '#^Class App\\Domains\\Plugin\\PluginMenuRegistration not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Domains/Plugin/PluginServiceProvider.php
+
+		-
+			message: '#^Call to an undefined method Filament\\Panel\:\:getResource\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Plugin/Services/FilamentPluginIntegration.php
+
+		-
+			message: '#^Method App\\Domains\\Plugin\\Services\\FilamentPluginIntegration\:\:resolveClass\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Domains/Plugin/Services/FilamentPluginIntegration.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Migrations\\Migration\:\:down\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Plugin/Services/PluginMigrationLoader.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Migrations\\Migration\:\:up\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Plugin/Services/PluginMigrationLoader.php
+
+		-
+			message: '#^Call to function is_string\(\) with \*NEVER\* will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domains/Plugin/Services/PluginPermissionRegistration.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: app/Domains/Plugin/Services/PluginPermissionRegistration.php
+
+		-
+			message: '#^Offset ''name'' on \*NEVER\* on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Plugin/Services/PluginPermissionRegistration.php
+
+		-
+			message: '#^Offset ''permissions'' on array\{\}\|string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Plugin/Services/PluginPermissionRegistration.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between \*NEVER\* and '''' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/Plugin/Services/PluginPermissionRegistration.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string\|null and App\\Domains\\Plugin\\Enums\\PluginStatus\:\:Enabled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Plugin/Services/PluginRegistry.php
+
+		-
+			message: '#^Method App\\Domains\\Plugin\\Services\\PluginSeederLoader\:\:resolveSeederClass\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Domains/Plugin/Services/PluginSeederLoader.php
+
+		-
+			message: '#^Call to an undefined static method Illuminate\\Support\\Facades\\Lang\:\:override\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Domains/Plugin/Services/PluginTranslationLoader.php
+
+		-
+			message: '#^Property App\\Domains\\Plugin\\Services\\PluginUpdater\:\:\$filesystem is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Domains/Plugin/Services/PluginUpdater.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Program/Listeners/LogProgramUpdated.php
+
+		-
+			message: '#^Method App\\Domains\\Role\\Services\\RoleService\:\:create\(\) should return Spatie\\Permission\\Models\\Role but returns Spatie\\Permission\\Contracts\\Role\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Role/Services/RoleService.php
+
+		-
+			message: '#^Parameter \#1 \$role of event class App\\Domains\\Role\\Events\\RoleCreated constructor expects Spatie\\Permission\\Models\\Role in App\\Domains\\Role\\Events\\RoleCreated\:\:dispatch\(\), Spatie\\Permission\\Contracts\\Role given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Role/Services/RoleService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 3
+			path: app/Domains/School/Exceptions/SchoolNotFoundException.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\School\\Enums\\SchoolStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/School/Models/School.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\School\\Enums\\SchoolStatus\:\:Pending will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/School/Models/School.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\School\\Enums\\SchoolStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/School/Models/School.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Section/Listeners/LogSectionUpdated.php
+
+		-
+			message: '#^Trait App\\Domains\\Shared\\Traits\\UniqueValidator is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: app/Domains/Shared/Traits/UniqueValidator.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Student/Application/Actions/ArchiveStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Student/Application/Actions/GraduateStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Student/Application/Actions/ReactivateStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Student/Application/Actions/RestoreStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Student/Application/Actions/SuspendStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Student/Application/Actions/TransferStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Student/Application/Actions/UpdateStudentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Student/Application/Actions/WithdrawStudentAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Domain\\Enums\\StudentStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Domain\\Enums\\StudentStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Domain\\Enums\\StudentStatus\:\:Graduated will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Domain\\Enums\\StudentStatus\:\:Inactive will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Domain\\Enums\\StudentStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Domain\\Enums\\StudentStatus\:\:Withdrawn will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/Student.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/StudentGuardian.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Student/Infrastructure/Models/StudentGuardian.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Infrastructure/Observers/StudentEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Student/Infrastructure/Policies/StudentPolicy.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Student/Listeners/LogStudentUpdated.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/CreateStudent.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>school_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/CreateStudent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/EditStudent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_primary\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/EditStudent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/EditStudent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$phone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/EditStudent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$relationship\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/EditStudent.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Domains/Student/Presentation/Filament/Resources/StudentResource/Pages/EditStudent.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/StudentEnrollment/Services/StudentEnrollmentService.php
+
+		-
+			message: '#^Result of \|\| is always false\.$#'
+			identifier: booleanOr.alwaysFalse
+			count: 2
+			path: app/Domains/StudentEnrollment/Services/StudentEnrollmentService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Cancelled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/StudentEnrollment/Services/StudentEnrollmentService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Completed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/StudentEnrollment/Services/StudentEnrollmentService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Withdrawn will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/StudentEnrollment/Services/StudentEnrollmentService.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Subject/Listeners/LogSubjectUpdated.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/SubjectCategory/Listeners/LogSubjectCategoryUpdated.php
+
+		-
+			message: '#^Cannot call method diffInMilliseconds\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/System/Services/BackupService.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function in_array expects array, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/System/Services/BackupService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/System/Services/MonitoringService.php
+
+		-
+			message: '#^Argument of an invalid type string supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: app/Domains/Workflow/Services/AutomationService.php
+
+		-
+			message: '#^Cannot call method addSeconds\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Workflow/Services/AutomationService.php
+
+		-
+			message: '#^Parameter \#1 \$conditions of method App\\Domains\\Workflow\\Services\\AutomationService\:\:evaluateConditions\(\) expects array, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Workflow/Services/AutomationService.php
+
+		-
+			message: '#^Variable \$conditions in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: app/Domains/Workflow/Services/AutomationService.php
+
+		-
+			message: '#^Cannot call method diffInMilliseconds\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: app/Domains/Workflow/Services/ExecutionService.php
+
+		-
+			message: '#^Cannot call method isRetryable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Workflow/Services/ExecutionService.php
+
+		-
+			message: '#^Cannot call method isTerminal\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Workflow/Services/ExecutionService.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: app/Domains/Workflow/Services/ExecutionService.php
+
+		-
+			message: '#^Method App\\Domains\\Workflow\\Services\\ExecutionService\:\:createTasksForExecution\(\) returns void but does not have any side effects\.$#'
+			identifier: void.pure
+			count: 1
+			path: app/Domains/Workflow/Services/ExecutionService.php
+
+		-
+			message: '#^Offset ''id'' does not exist on non\-falsy\-string\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: app/Domains/Workflow/Services/ExecutionService.php
+
+		-
+			message: '#^Parameter \#1 \$execution of method App\\Domains\\Workflow\\Services\\ExecutionService\:\:checkExecutionProgress\(\) expects App\\Models\\WorkflowExecution, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Workflow/Services/ExecutionService.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
+			count: 1
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Offset ''approvals'' on string\|null on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Offset ''label'' on string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Offset ''node_started_at'' on string\|null on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Offset ''source'' on string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Offset ''target'' on non\-falsy\-string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Offset ''target'' on string\|null on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 2
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between null and string will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 2
+			path: app/Domains/Workflow/Services/RuleEngineService.php
+
+		-
+			message: '#^Call to static method factory\(\) on an unknown class Carbon\\CronExpression\.$#'
+			identifier: class.notFound
+			count: 3
+			path: app/Domains/Workflow/Services/ScheduleService.php
+
+		-
+			message: '#^Call to static method isValid\(\) on an unknown class Carbon\\CronExpression\.$#'
+			identifier: class.notFound
+			count: 2
+			path: app/Domains/Workflow/Services/ScheduleService.php
+
+		-
+			message: '#^Parameter \#3 \$payload of job class App\\Jobs\\Workflow\\ProcessScheduledWorkflow constructor expects array\|null in App\\Jobs\\Workflow\\ProcessScheduledWorkflow\:\:dispatch\(\), string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Workflow/Services/ScheduleService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 3
+			path: app/Exceptions/ApiException.php
+
+		-
+			message: '#^Access to an undefined property App\\Filament\\Director\\Pages\\DocumentCenter\:\:\$form\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Director/Pages/DocumentCenter.php
+
+		-
+			message: '#^Call to method schema\(\) on an unknown class Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/DocumentCenter.php
+
+		-
+			message: '#^Method App\\Filament\\Director\\Pages\\DocumentCenter\:\:form\(\) has invalid return type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/DocumentCenter.php
+
+		-
+			message: '#^Parameter \$form of method App\\Filament\\Director\\Pages\\DocumentCenter\:\:form\(\) has invalid type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/DocumentCenter.php
+
+		-
+			message: '#^Access to an undefined property App\\Filament\\Director\\Pages\\SchoolIdentity\:\:\$form\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/Director/Pages/SchoolIdentity.php
+
+		-
+			message: '#^Call to method schema\(\) on an unknown class Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/SchoolIdentity.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Section\.$#'
+			identifier: class.notFound
+			count: 3
+			path: app/Filament/Director/Pages/SchoolIdentity.php
+
+		-
+			message: '#^Method App\\Filament\\Director\\Pages\\SchoolIdentity\:\:form\(\) has invalid return type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/SchoolIdentity.php
+
+		-
+			message: '#^Parameter \$form of method App\\Filament\\Director\\Pages\\SchoolIdentity\:\:form\(\) has invalid type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/SchoolIdentity.php
+
+		-
+			message: '#^Access to an undefined property App\\Filament\\Director\\Pages\\SchoolWizard\:\:\$form\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/Director/Pages/SchoolWizard.php
+
+		-
+			message: '#^Call to method schema\(\) on an unknown class Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/SchoolWizard.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Group\.$#'
+			identifier: class.notFound
+			count: 5
+			path: app/Filament/Director/Pages/SchoolWizard.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Section\.$#'
+			identifier: class.notFound
+			count: 5
+			path: app/Filament/Director/Pages/SchoolWizard.php
+
+		-
+			message: '#^Method App\\Filament\\Director\\Pages\\SchoolWizard\:\:form\(\) has invalid return type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/SchoolWizard.php
+
+		-
+			message: '#^Parameter \$form of method App\\Filament\\Director\\Pages\\SchoolWizard\:\:form\(\) has invalid type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/SchoolWizard.php
+
+		-
+			message: '#^Cannot call method isDeletable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Filament/Resources/AssessmentResultResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/AssessmentResultResource/Pages/EditAssessmentResult.php
+
+		-
+			message: '#^Invoking callable on an unknown class Filament\\Forms\\Get\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/AutomationRuleResource.php
+
+		-
+			message: '#^Parameter \$get of anonymous function has invalid type Filament\\Forms\\Get\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/AutomationRuleResource.php
+
+		-
+			message: '#^Anonymous function should return string but returns null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/BookLoanResource.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Filament/Resources/BookLoanResource.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: app/Filament/Resources/BookLoanResource.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookLoanStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Filament/Resources/BookLoanResource.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Section\.$#'
+			identifier: class.notFound
+			count: 4
+			path: app/Filament/Resources/CampusResource.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Tables\\Actions\\DeleteAction\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/CampusResource.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Tables\\Actions\\DeleteBulkAction\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/CampusResource.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Tables\\Actions\\EditAction\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/CampusResource.php
+
+		-
+			message: '#^Call to an undefined static method App\\Domains\\Analytics\\Enums\\DashboardType\:\:colors\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Filament/Resources/DashboardResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/FuelLogResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/FuelLogResource.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class App\\Filament\\Resources\\Filament\\Actions\\DeleteBulkAction\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/IncidentResource.php
+
+		-
+			message: '#^Call to an undefined static method App\\Domains\\Analytics\\Enums\\KpiStatus\:\:colors\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: app/Filament/Resources/KpiResource.php
+
+		-
+			message: '#^Invoking callable on an unknown class Filament\\Forms\\Set\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/PermissionResource.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/Resources/PermissionResource.php
+
+		-
+			message: '#^Parameter \$set of anonymous function has invalid type Filament\\Forms\\Set\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/PermissionResource.php
+
+		-
+			message: '#^Call to an undefined method Filament\\Actions\\AssociateAction\:\:associateRelatedRecordUsing\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Resources/RoleResource/RelationManagers/PermissionsRelationManager.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/StudentTransportAssignmentResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/StudentTransportAssignmentResource.php
+
+		-
+			message: '#^Call to an undefined method BackedEnum\:\:label\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Resources/SuperAdminSchoolResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/TripResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/TripResource.php
+
+		-
+			message: '#^Call to an undefined method Filament\\Actions\\AssociateAction\:\:associateRelatedRecordUsing\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Resources/UserResource/RelationManagers/RolesRelationManager.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Schemas\\Components\\TextEntry\.$#'
+			identifier: class.notFound
+			count: 10
+			path: app/Filament/Resources/WorkflowExecutionResource/Pages/ViewWorkflowExecution.php
+
+		-
+			message: '#^Access to an undefined property App\\Filament\\SchoolAdmin\\Pages\\EstablishmentInfo\:\:\$form\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Call to method schema\(\) on an unknown class Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Section\.$#'
+			identifier: class.notFound
+			count: 5
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Method App\\Filament\\SchoolAdmin\\Pages\\EstablishmentInfo\:\:form\(\) has invalid return type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Offset ''date_format'' on array\{\}\|string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Offset ''first_day_of_week'' on array\{\}\|string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Offset ''pdf'' on array\{\}\|string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 2
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Offset ''time_format'' on array\{\}\|string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Offset ''website'' on array\{\}\|string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Parameter \$form of method App\\Filament\\SchoolAdmin\\Pages\\EstablishmentInfo\:\:form\(\) has invalid type Filament\\Forms\\Form\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>settings" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/SchoolAdmin/Pages/EstablishmentInfo.php
+
+		-
+			message: '#^Access to an undefined property App\\Filament\\SchoolAdmin\\Pages\\FeeConfiguration\:\:\$form\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/SchoolAdmin/Pages/FeeConfiguration.php
+
+		-
+			message: '#^Access to an undefined property App\\Filament\\SchoolAdmin\\Pages\\PDFSettings\:\:\$form\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/SchoolAdmin/Pages/PDFSettings.php
+
+		-
+			message: '#^Access to an undefined property App\\Filament\\SchoolAdmin\\Pages\\SchoolSettings\:\:\$form\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/SchoolAdmin/Pages/SchoolSettings.php
+
+		-
+			message: '#^Offset ''pdf'' on array\{\}\|string in empty\(\) does not exist\.$#'
+			identifier: empty.offset
+			count: 2
+			path: app/Filament/SchoolAdmin/Widgets/ConfigAlertsWidget.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>logo_url" in empty\(\) is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/ConfigAlertsWidget.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>settings" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/ConfigAlertsWidget.php
+
+		-
+			message: '#^Comparison operation "\>" between 7 and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/ConfigStatusWidget.php
+
+		-
+			message: '#^Offset ''pdf'' on array\{\}\|string in empty\(\) does not exist\.$#'
+			identifier: empty.offset
+			count: 2
+			path: app/Filament/SchoolAdmin/Widgets/ConfigStatusWidget.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>settings" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/ConfigStatusWidget.php
+
+		-
+			message: '#^Offset ''fees'' on array\{\}\|string in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/ConfigurationAlertsWidget.php
+
+		-
+			message: '#^Offset ''pdf'' on array\{\}\|string in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/ConfigurationAlertsWidget.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>settings" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/ConfigurationAlertsWidget.php
+
+		-
+			message: '#^Anonymous function never returns array so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/RecentEnrollmentsWidget.php
+
+		-
+			message: '#^Anonymous function never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/RecentEnrollmentsWidget.php
+
+		-
+			message: '#^Comparison operation "\>" between 7 and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/SetupStatusWidget.php
+
+		-
+			message: '#^Offset ''fees'' on array\{\}\|string in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/SetupStatusWidget.php
+
+		-
+			message: '#^Offset ''pdf'' on array\{\}\|string in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/SetupStatusWidget.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>settings" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/SchoolAdmin/Widgets/SetupStatusWidget.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/OAuthController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>school_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Middleware/LogApiRequest.php
+
+		-
+			message: '#^Right side of && is always false\.$#'
+			identifier: booleanAnd.rightAlwaysFalse
+			count: 1
+			path: app/Http/Middleware/ValidateApiToken.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiAuditLogResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiAuditLogResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiAuditLogResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiAuditLogResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiAuditLogResource\:\:\$ip_address\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiAuditLogResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiAuditLogResource\:\:\$method\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiAuditLogResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiAuditLogResource\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiAuditLogResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiAuditLogResource\:\:\$response_time_ms\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiAuditLogResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiAuditLogResource\:\:\$status_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiAuditLogResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$rate_limit_per_day\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$rate_limit_per_minute\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$scopes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiClientResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiTokenResource\:\:\$abilities\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiTokenResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiTokenResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiTokenResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiTokenResource\:\:\$expires_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiTokenResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiTokenResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiTokenResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiTokenResource\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiTokenResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiTokenResource\:\:\$last_used_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiTokenResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ApiTokenResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ApiTokenResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookDeliveryResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookDeliveryResource\:\:\$delivered_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookDeliveryResource\:\:\$event\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookDeliveryResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookDeliveryResource\:\:\$response_status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookDeliveryResource\:\:\$retry_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookDeliveryResource\:\:\$success\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$events\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$failure_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$last_triggered_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\WebhookResource\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/WebhookResource.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Jobs/GenerateReport.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: app/Jobs/IndexKnowledgeSource.php
+
+		-
+			message: '#^Offset ''table'' on array\{\}\|string on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Jobs/IndexKnowledgeSource.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: app/Jobs/IndexKnowledgeSource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Jobs/RetryWebhookDelivery.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$secret\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Jobs/RetryWebhookDelivery.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Jobs/RetryWebhookDelivery.php
+
+		-
+			message: '#^Parameter \#2 \$data of method Illuminate\\Http\\Client\\PendingRequest\<false\>\:\:post\(\) expects array\<int\<0, max\>\|string, mixed\>\|Illuminate\\Contracts\\Support\\Arrayable\<string, mixed\>\|JsonSerializable, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/RetryWebhookDelivery.php
+
+		-
+			message: '#^Cannot call method isTerminal\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Jobs/Workflow/ExecuteWorkflowNode.php
+
+		-
+			message: '#^Parameter \#1 \$node of method App\\Domains\\Workflow\\Services\\RuleEngineService\:\:evaluateNode\(\) expects array, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Jobs/Workflow/ExecuteWorkflowNode.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicClass\\Enums\\AcademicClassStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicClass.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicClass\\Enums\\AcademicClassStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicClass.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicTerm\\Enums\\AcademicTermStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicTerm.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicTerm\\Enums\\AcademicTermStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicTerm.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicTerm\\Enums\\AcademicTermStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicTerm.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/AcademicYear.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicYear\\Enums\\AcademicYearStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicYear.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicYear\\Enums\\AcademicYearStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicYear.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicYear\\Enums\\AcademicYearStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AcademicYear.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Models/AcademicYear.php
+
+		-
+			message: '#^Method App\\Models\\ActivityLog\:\:causer\(\) has invalid return type Illuminate\\Database\\Eloquent\\MorphTo\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/ActivityLog.php
+
+		-
+			message: '#^Method App\\Models\\ActivityLog\:\:causer\(\) should return Illuminate\\Database\\Eloquent\\MorphTo but returns Illuminate\\Database\\Eloquent\\Relations\\MorphTo\<Illuminate\\Database\\Eloquent\\Model, \$this\(App\\Models\\ActivityLog\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/ActivityLog.php
+
+		-
+			message: '#^Method App\\Models\\ActivityLog\:\:subject\(\) has invalid return type Illuminate\\Database\\Eloquent\\MorphTo\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/ActivityLog.php
+
+		-
+			message: '#^Method App\\Models\\ActivityLog\:\:subject\(\) should return Illuminate\\Database\\Eloquent\\MorphTo but returns Illuminate\\Database\\Eloquent\\Relations\\MorphTo\<Illuminate\\Database\\Eloquent\\Model, \$this\(App\\Models\\ActivityLog\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/ActivityLog.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Announcement.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Announcement.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/ApiToken.php
+
+		-
+			message: '#^Cannot call method canTransitionTo\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/AssessmentResult.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AssessmentResult.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Entered will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AssessmentResult.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Locked will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AssessmentResult.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AssessmentResult.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Verified will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/AssessmentResult.php
+
+		-
+			message: '#^Method App\\Models\\AuditLog\:\:auditable\(\) has invalid return type Illuminate\\Database\\Eloquent\\MorphTo\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Method App\\Models\\AuditLog\:\:auditable\(\) should return Illuminate\\Database\\Eloquent\\MorphTo but returns Illuminate\\Database\\Eloquent\\Relations\\MorphTo\<Illuminate\\Database\\Eloquent\\Model, \$this\(App\\Models\\AuditLog\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Method App\\Models\\AuditLog\:\:user\(\) has invalid return type Illuminate\\Database\\Eloquent\\MorphTo\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Method App\\Models\\AuditLog\:\:user\(\) should return Illuminate\\Database\\Eloquent\\MorphTo but returns Illuminate\\Database\\Eloquent\\Relations\\MorphTo\<Illuminate\\Database\\Eloquent\\Model, \$this\(App\\Models\\AuditLog\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/AuditLog.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\AuthorStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Author.php
+
+		-
+			message: '#^Method App\\Models\\Book\:\:loans\(\) should return Illuminate\\Database\\Eloquent\\Relations\\HasMany but returns Illuminate\\Database\\Eloquent\\Relations\\HasManyThrough\<App\\Models\\BookLoan, App\\Models\\BookCopy, \$this\(App\\Models\\Book\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Book.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Book.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookCategoryStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/BookCategory.php
+
+		-
+			message: '#^Cannot call method canTransitionTo\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/BookCopy.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: app/Models/BookCopy.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookCopyStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/BookCopy.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookCopyStatus\:\:Available will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/BookCopy.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookCopyStatus\:\:Borrowed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/BookCopy.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookCopyStatus\:\:Reserved will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/BookCopy.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\BookLoan\:\:\$is_overdue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Cannot call method diffInDays\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Cannot call method modelClass\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 2
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookLoanStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 3
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookLoanStatus\:\:Lost will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookLoanStatus\:\:Returned will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/BookLoan.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Campus.php
+
+		-
+			message: '#^Class App\\Models\\School not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Campus.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Campus.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Models/Campus.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Classroom\\Enums\\ClassroomStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Classroom.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Classroom\\Enums\\ClassroomStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Classroom.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/CommunicationChannel.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/CommunicationChannel.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Department\\Enums\\DepartmentStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Department.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Department\\Enums\\DepartmentStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Department.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Driver.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Driver.php
+
+		-
+			message: '#^Cannot call method modelClass\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Fine.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\FineStatus\:\:Paid will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Fine.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\FineStatus\:\:Pending will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Fine.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\FineStatus\:\:Waived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Fine.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/FuelLog.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/FuelLog.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\GradeLevel\\Enums\\GradeLevelStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/GradeLevel.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\GradeLevel\\Enums\\GradeLevelStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/GradeLevel.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Guardian\\Enums\\GuardianStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Guardian.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Guardian\\Enums\\GuardianStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Guardian.php
+
+		-
+			message: '#^Cannot call method diffInMinutes\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Kpi.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Message.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Message.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/MessageRecipient.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/MessageRecipient.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Notification.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Notification.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/NotificationDelivery.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/NotificationDelivery.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/NotificationTemplate.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/NotificationTemplate.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Plugin\\Enums\\PluginStatus\:\:Enabled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Plugin.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Program\\Enums\\ProgramStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Program.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Program\\Enums\\ProgramStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Program.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\PublisherStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Publisher.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Models/Reservation.php
+
+		-
+			message: '#^Cannot call method modelClass\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 2
+			path: app/Models/Reservation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\ReservationStatus\:\:Fulfilled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Reservation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\ReservationStatus\:\:Pending will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 3
+			path: app/Models/Reservation.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Route.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Route.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/RouteStop.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/RouteStop.php
+
+		-
+			message: '#^Property App\\Models\\ScheduledTask\:\:\$id \(int\<0, max\>\) does not accept non\-empty\-string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Models/ScheduledTask.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Section\\Enums\\SectionStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Section.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Section\\Enums\\SectionStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Section.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Enums\\StudentStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Enums\\StudentStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Enums\\StudentStatus\:\:Graduated will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Student.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Student\\Enums\\StudentStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Student.php
+
+		-
+			message: '#^Cannot call method canTransitionTo\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/StudentEnrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/StudentEnrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Cancelled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/StudentEnrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Completed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/StudentEnrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Pending will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/StudentEnrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/StudentEnrollment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\StudentEnrollment\\Enums\\EnrollmentStatus\:\:Withdrawn will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/StudentEnrollment.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/StudentTransportAssignment.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/StudentTransportAssignment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Subject\\Enums\\SubjectStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Subject.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Subject\\Enums\\SubjectStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Subject.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\SubjectCategory\\Enums\\SubjectCategoryStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/SubjectCategory.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\SubjectCategory\\Enums\\SubjectCategoryStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/SubjectCategory.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\SubjectCoefficient\\Enums\\SubjectCoefficientStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/SubjectCoefficient.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\SubjectCoefficient\\Enums\\SubjectCoefficientStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/SubjectCoefficient.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Trip.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Trip.php
+
+		-
+			message: '#^Property App\\Models\\User\:\:\$uuid \(string\|null\) does not accept Symfony\\Component\\Uid\\Ulid\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\User\\Enums\\UserStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\User\\Enums\\UserStatus\:\:Inactive will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\User\\Enums\\UserStatus\:\:Pending will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\User\\Enums\\UserStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Vehicle.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Vehicle.php
+
+		-
+			message: '#^Class App\\Models\\Tenant not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/VehicleMaintenance.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/VehicleMaintenance.php
+
+		-
+			message: '#^Cannot access property \$school_id on class\-string\|object\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Policies/TenantPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''App\\\\Domains\\\\Subject\\\\Events\\\\SubjectArchived'' \(\\App\\Domains\\Subject\\Events\\SubjectArchived\:\:class, \\App\\Domains\\Subject\\Events\\SubjectArchived\:\:class\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: app/Providers/EventServiceProvider.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''App\\\\Domains\\\\Subject\\\\Events\\\\SubjectCreated'' \(\\App\\Domains\\Subject\\Events\\SubjectCreated\:\:class, \\App\\Domains\\Subject\\Events\\SubjectCreated\:\:class\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: app/Providers/EventServiceProvider.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''App\\\\Domains\\\\Subject\\\\Events\\\\SubjectUpdated'' \(\\App\\Domains\\Subject\\Events\\SubjectUpdated\:\:class, \\App\\Domains\\Subject\\Events\\SubjectUpdated\:\:class\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: app/Providers/EventServiceProvider.php
+
+		-
+			message: '#^Class App\\Providers\\ClassroomArchived not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Providers/EventServiceProvider.php
+
+		-
+			message: '#^Class App\\Providers\\LogClassroomArchived not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Providers/EventServiceProvider.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Services/DocumentGenerationService.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/DocumentGenerationService.php

@@ -7,13 +7,12 @@ namespace App\Filament\SchoolAdmin\Widgets;
 use App\Domains\School\Models\School;
 use App\Models\AcademicClass;
 use App\Models\AcademicYear;
-use App\Models\Subject;
 use App\Models\User;
 use Filament\Widgets\Widget;
 
 class ConfigAlertsWidget extends Widget
 {
-    protected static string $view = 'filament.school-admin.widgets.config-alerts';
+    protected string $view = 'filament.school-admin.widgets.config-alerts';
 
     protected static ?int $sort = 1;
 
