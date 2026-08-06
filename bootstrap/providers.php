@@ -13,6 +13,14 @@ return [
     \App\Domains\Student\StudentServiceProvider::class,
     \App\Domains\Enrollment\EnrollmentServiceProvider::class,
     \App\Domains\Guardian\GuardianServiceProvider::class,
+    \App\Domains\Staff\StaffServiceProvider::class,
+    \App\Domains\Timetable\TimetableServiceProvider::class,
+    \App\Domains\Attendance\AttendanceServiceProvider::class,
+    \App\Domains\Assessment\AssessmentServiceProvider::class,
+    \App\Domains\Gradebook\GradebookServiceProvider::class,
+    \App\Domains\ClassCouncil\ClassCouncilServiceProvider::class,
+    \App\Domains\ReportCard\ReportCardServiceProvider::class,
+    \App\Domains\AcademicCommunication\AcademicCommunicationServiceProvider::class,
 
     // Filament Panel Providers
     \App\Providers\Filament\SuperAdminPanelProvider::class,

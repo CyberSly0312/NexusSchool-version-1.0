@@ -33,6 +33,14 @@ class PermissionService
 
     public const CRUD_ACTIONS = ['view', 'create', 'update', 'delete'];
 
+    /**
+     * Groups that only expose their declared extra actions — the Academic
+     * Communication Engine deliberately exposes exactly the document
+     * capabilities (view, generate, review, approve, publish, archive,
+     * template.manage) and nothing else.
+     */
+    public const NO_CRUD_GROUPS = ['document'];
+
     public function create(PermissionData $data): Permission
     {
         return DB::transaction(function () use ($data) {
@@ -149,6 +157,13 @@ class PermissionService
         'student' => ['transfer', 'suspend', 'graduate', 'archive', 'restore'],
         'enrollment' => ['promote', 'repeat', 'transfer', 'graduate', 'withdraw', 'suspend', 'restore'],
         'guardian' => ['link', 'unlink', 'primary', 'emergency', 'pickup'],
+        'staff' => ['assign', 'transfer', 'terminate', 'suspend', 'restore', 'teach'],
+        'timetable' => ['publish', 'archive', 'manage', 'generate', 'duplicate'],
+        'schedule' => ['manage'],
+        'conflict' => ['resolve'],
+        'attendance' => ['record', 'correct', 'lock', 'unlock', 'report', 'manage'],
+        'assessment' => ['schedule', 'score', 'validate', 'publish', 'archive', 'statistics', 'manage'],
+        'document' => ['generate', 'review', 'approve', 'publish', 'archive', 'template.manage'],
     ];
 
     public function getDefaultPermissions(): array
@@ -156,11 +171,13 @@ class PermissionService
         $permissions = [];
 
         foreach (PermissionGroup::cases() as $group) {
-            foreach (self::CRUD_ACTIONS as $action) {
-                $permissions[] = [
-                    'name' => "{$group->value}.{$action}",
-                    'guard_name' => 'web',
-                ];
+            if (! in_array($group->value, self::NO_CRUD_GROUPS, true)) {
+                foreach (self::CRUD_ACTIONS as $action) {
+                    $permissions[] = [
+                        'name' => "{$group->value}.{$action}",
+                        'guard_name' => 'web',
+                    ];
+                }
             }
 
             if (isset(self::EXTRA_ACTIONS[$group->value])) {

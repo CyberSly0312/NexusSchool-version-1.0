@@ -18,6 +18,7 @@ enum PermissionGroup: string
     case StudentEnrollment = 'student_enrollment';
     case Enrollment = 'enrollment';
     case Teachers = 'teacher';
+    case Staff = 'staff';
     case Guardians = 'guardian';
     case Admissions = 'admission';
     case Attendance = 'attendance';
@@ -60,6 +61,11 @@ enum PermissionGroup: string
     case SubjectGroup = 'subject_group';
     case AcademicSubject = 'academic_subject';
     case Coefficient = 'coefficient';
+    case Timetable = 'timetable';
+    case Schedule = 'schedule';
+    case Conflict = 'conflict';
+    case Assessment = 'assessment';
+    case AcademicCommunication = 'document';
 
     public function label(): string
     {
@@ -76,6 +82,7 @@ enum PermissionGroup: string
             self::StudentEnrollment => 'Inscriptions',
             self::Enrollment => 'Parcours scolaire',
             self::Teachers => 'Enseignants',
+            self::Staff => 'Personnel',
             self::Guardians => 'Parents / Tuteurs',
             self::Admissions => 'Admissions',
             self::Attendance => 'Présences',
@@ -118,6 +125,11 @@ enum PermissionGroup: string
             self::SubjectGroup => 'Groupes de matières',
             self::AcademicSubject => 'Matières',
             self::Coefficient => 'Coefficients',
+            self::Timetable => 'Emplois du temps',
+            self::Schedule => 'Planning des cours',
+            self::Conflict => 'Conflits',
+            self::Assessment => 'Évaluations',
+            self::AcademicCommunication => 'Communication académique',
         };
     }
 

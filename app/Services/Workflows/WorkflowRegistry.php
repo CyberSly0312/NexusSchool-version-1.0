@@ -111,7 +111,7 @@ class WorkflowRegistry
     {
         return [
             'name' => 'Bulletin',
-            'model' => 'AssessmentResult',
+            'model' => 'Gradebook',
             'steps' => [
                 1 => [
                     'action' => 'Saisir les résultats',

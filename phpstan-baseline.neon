@@ -1,6 +1,239 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>value" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$archived_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ArchiveCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Archived\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ArchiveCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$held_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ConveneCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Convened\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ConveneCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$published_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/PublishCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Published\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/PublishCouncilSessionAction.php
+
+		-
+			message: '#^Cannot call method isDeliberating\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDecisionAction.php
+
+		-
+			message: '#^Parameter \#1 \$status of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\CouncilSessionLockedException\:\:notDeliberating\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDecisionAction.php
+
+		-
+			message: '#^Cannot call method isDeliberating\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDeliberationAction.php
+
+		-
+			message: '#^Parameter \#1 \$status of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\CouncilSessionLockedException\:\:notDeliberating\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDeliberationAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>student_number" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Infrastructure\\Listeners\\ClassCouncilAuditLogger\:\:log\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Infrastructure\\Listeners\\ClassCouncilAuditLogger\:\:payload\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Convened will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Observers/ClassCouncilEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/ClassCouncil/Infrastructure/Policies/CouncilSessionPolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 5
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource.php
+
+		-
+			message: '#^Cannot access property \$status on Illuminate\\Database\\Eloquent\\Model\|int\|string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Application\\ClassCouncilService\:\:conveneSession\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Application\\ClassCouncilService\:\:publishSession\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/ClassCouncilAdapter.php
+		-
 			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$avg_latency\.$#'
 			identifier: property.notFound
 			count: 1
@@ -373,6 +606,636 @@ parameters:
 			path: app/Domains/AcademicClass/Listeners/LogAcademicClassUpdated.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$approval_roles\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/ApproveDocumentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/ApproveDocumentAction.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>approval_roles" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/ApproveDocumentAction.php
+
+		-
+			message: '#^Result of \|\| is always true\.$#'
+			identifier: booleanOr.alwaysTrue
+			count: 2
+			path: app/Domains/AcademicCommunication/Application/Actions/GenerateDocumentAction.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentType will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 2
+			path: app/Domains/AcademicCommunication/Application/Actions/GenerateDocumentAction.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: app/Domains/AcademicCommunication/Application/Actions/GenerateDocumentAction.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:visibilityPolicy\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Parameter \#1 \$document of event class App\\Domains\\AcademicCommunication\\Domain\\Events\\PublicationCompleted constructor expects App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\AcademicDocument in App\\Domains\\AcademicCommunication\\Domain\\Events\\PublicationCompleted\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Parameter \#1 \$version of method App\\Domains\\AcademicCommunication\\Domain\\Contracts\\DocumentRendererContract\:\:renderHtml\(\) expects App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\AcademicDocumentVersion, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Parameter \#2 \$policy of method App\\Domains\\AcademicCommunication\\Application\\Services\\PublicationRecipientResolver\:\:resolve\(\) expects App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\PublicationPolicy, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Parameter \#2 \$template of method App\\Domains\\AcademicCommunication\\Domain\\Contracts\\DocumentRendererContract\:\:renderHtml\(\) expects App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\AcademicDocumentTemplate, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Parameter \#2 \$version of event class App\\Domains\\AcademicCommunication\\Domain\\Events\\DocumentPublished constructor expects App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\AcademicDocumentVersion in App\\Domains\\AcademicCommunication\\Domain\\Events\\DocumentPublished\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\ApprovalStatus\:\:Approved will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/PublishDocumentAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$version_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/RegenerateDocumentAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/RegenerateDocumentAction.php
+
+		-
+			message: '#^Parameter \#1 \$type of static method App\\Domains\\AcademicCommunication\\Domain\\Exceptions\\TemplateNotFoundException\:\:forType\(\) expects App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentType, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/RegenerateDocumentAction.php
+
+		-
+			message: '#^Parameter \#3 \$template of method App\\Domains\\AcademicCommunication\\Application\\Actions\\RegenerateDocumentAction\:\:renderOfficialFile\(\) expects App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\AcademicDocumentTemplate, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/RegenerateDocumentAction.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>version_number" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Actions/RegenerateDocumentAction.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Services/DocumentContentComposer.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\{\} will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Services/PublicationRecipientResolver.php
+
+		-
+			message: '#^Comparison operation "\>" between \*NEVER\* and 0 results in an error\.$#'
+			identifier: greater.invalid
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Services/PublicationRecipientResolver.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Services/PublicationRecipientResolver.php
+
+		-
+			message: '#^Offset ''inspector_recipients'' on string\|null on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domains/AcademicCommunication/Application/Services/PublicationRecipientResolver.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\ApprovalStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/ApprovalStatus.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentChannel\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/DocumentChannel.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentOrigin\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/DocumentOrigin.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/DocumentStatus.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentType\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/DocumentType.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\PublicationStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/PublicationStatus.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\SignatureType\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/SignatureType.php
+
+		-
+			message: '#^Method App\\Domains\\AcademicCommunication\\Domain\\Enums\\VisibilityScope\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/Enums/VisibilityScope.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domains/AcademicCommunication/Domain/ValueObjects/VisibilityPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$document_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Channels/PdfExportChannel.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$document_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Channels/PdfExportChannel.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Anonymous function never returns string so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AssessmentAdapter.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between float and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AssessmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AssessmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>coefficient" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>value" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/StudentIdentityAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/StudentIdentityAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/StudentIdentityAdapter.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/StudentIdentityAdapter.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/StudentIdentityAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Domains/AcademicCommunication/Infrastructure/Listeners/AcademicCommunicationAuditLogger.php
+
+		-
+			message: '#^Parameter \#1 \$document of method App\\Domains\\AcademicCommunication\\Infrastructure\\Listeners\\AcademicCommunicationAuditLogger\:\:log\(\) expects App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\AcademicDocument, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Listeners/AcademicCommunicationAuditLogger.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\ApprovalStatus\:\:Rejected will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Listeners/AcademicCommunicationAuditLogger.php
+
+		-
+			message: '#^Ternary operator condition is always false\.$#'
+			identifier: ternary.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Listeners/AcademicCommunicationAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\AcademicCommunication\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\ApprovalStatus\:\:Pending will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:Approved will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:Generated will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:Reviewed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentTemplate.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentTemplate.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentTemplate.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentVersion.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\DocumentStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentVersion.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentVersion.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentApproval.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentApproval.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentAudit.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentAudit.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentRecipient.php
+
+		-
+			message: '#^Property App\\Domains\\AcademicCommunication\\Infrastructure\\Models\\DocumentRecipient\:\:\$portal_viewed_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentRecipient.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentRecipient.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentSignature.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentSignature.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/GeneratedFile.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/GeneratedFile.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationChannel.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationChannel.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationChannel.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationDeliveryAttempt.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationDeliveryAttempt.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationPolicy.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationPolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationRecord.php
+
+		-
+			message: '#^Cannot call method isTerminal\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationRecord.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\PublicationStatus\:\:Completed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationRecord.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationRecord.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Observers/AcademicCommunicationEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/AcademicCommunication/Infrastructure/Policies/AcademicDocumentPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/AcademicCommunication/Infrastructure/Policies/AcademicDocumentTemplatePolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/AcademicCommunication/Infrastructure/Policies/PublicationPolicyPolicy.php
+
+		-
 			message: '#^Cannot access property \$value on string\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -623,6 +1486,1002 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: app/Domains/Api/Services/OAuthService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$maximum_score\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Application/Actions/BulkRecordScoresAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$maximum_score\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Application/Actions/GenerateAssessmentStatisticsAction.php
+
+		-
+			message: '#^Anonymous function should return App\\Domains\\Assessment\\Infrastructure\\Models\\AssessmentStatistics but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Assessment/Application/Actions/GenerateAssessmentStatisticsAction.php
+
+		-
+			message: '#^Parameter \#2 \$statistics of event class App\\Domains\\Assessment\\Domain\\Events\\AssessmentStatisticsGenerated constructor expects App\\Domains\\Assessment\\Infrastructure\\Models\\AssessmentStatistics in App\\Domains\\Assessment\\Domain\\Events\\AssessmentStatisticsGenerated\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Application/Actions/GenerateAssessmentStatisticsAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$maximum_score\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Application/Actions/RecordScoreAction.php
+
+		-
+			message: '#^Anonymous function has an unused use \$actor\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: app/Domains/Assessment/Application/Actions/UpdateAssessmentAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$maximum_score\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Application/Actions/ValidateScoresAction.php
+
+		-
+			message: '#^Method App\\Domains\\Assessment\\Application\\Actions\\UpdateAssessmentAction\:\:execute\(\) invoked with 3 parameters, 1\-2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: app/Domains/Assessment/Application/AssessmentService.php
+
+		-
+			message: '#^Parameter \#1 \$data of method App\\Domains\\Assessment\\Application\\Actions\\UpdateAssessmentAction\:\:execute\(\) expects App\\Domains\\Assessment\\Application\\DTOs\\UpdateAssessmentData, App\\Domains\\Assessment\\Infrastructure\\Models\\Assessment given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Application/AssessmentService.php
+
+		-
+			message: '#^Parameter \#2 \$actor of method App\\Domains\\Assessment\\Application\\Actions\\UpdateAssessmentAction\:\:execute\(\) expects App\\Models\\User\|null, App\\Domains\\Assessment\\Application\\DTOs\\UpdateAssessmentData given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Application/AssessmentService.php
+
+		-
+			message: '#^Property App\\Domains\\Assessment\\Application\\Services\\AssessmentCompletionService\:\:\$enrollment is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Domains/Assessment/Application/Services/AssessmentCompletionService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:Published will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/Assessment/Application/Services/AssessmentCompletionService.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: app/Domains/Assessment/Application/Services/AssessmentCompletionService.php
+
+		-
+			message: '#^Parameter \#1 \$array \(non\-empty\-list\<float\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: app/Domains/Assessment/Application/Services/AssessmentStatisticsCalculator.php
+
+		-
+			message: '#^Method App\\Domains\\Assessment\\Domain\\Enums\\AssessmentSessionStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Assessment/Domain/Enums/AssessmentSessionStatus.php
+
+		-
+			message: '#^Method App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Assessment/Domain/Enums/AssessmentStatus.php
+
+		-
+			message: '#^Method App\\Domains\\Assessment\\Domain\\Enums\\AssessmentType\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Assessment/Domain/Enums/AssessmentType.php
+
+		-
+			message: '#^Method App\\Domains\\Assessment\\Domain\\Enums\\ScoreStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Assessment/Domain/Enums/ScoreStatus.php
+
+		-
+			message: '#^Readonly property App\\Domains\\Assessment\\Domain\\ValueObjects\\Remark\:\:\$text is already assigned\.$#'
+			identifier: assign.readOnlyProperty
+			count: 1
+			path: app/Domains/Assessment/Domain/ValueObjects/Remark.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between non\-empty\-string and '''' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Assessment/Domain/ValueObjects/Remark.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: app/Domains/Assessment/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: app/Domains/Assessment/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Assessment\\Domain\\References\\EnrollmentReference, Closure\(App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\)\: App\\Domains\\Assessment\\Domain\\References\\EnrollmentReference given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Assessment\\Domain\\References\\StudentReference, Closure\(App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\)\: App\\Domains\\Assessment\\Domain\\References\\StudentReference given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>first_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>last_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$array \(array\{\}\|array\{0\?\: int\}\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Assessment\\Domain\\References\\TimeSlotReference, Closure\(App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\)\: App\\Domains\\Assessment\\Domain\\References\\TimeSlotReference given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Contracts/TimetableAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Listeners/AssessmentAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Cannot call method isDefinitionImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Cannot call method isScoreable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Assessment\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:Completed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:Scheduled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentAttachment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentAttachment.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentComponent.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentComponent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentRemark.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentRemark.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentScore.php
+
+		-
+			message: '#^Cannot call method isMutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentScore.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentScore.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentScore.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentSession.php
+
+		-
+			message: '#^Cannot call method isActive\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentSession.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentSession.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentSession.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentStatistics.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentStatistics.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentTemplate.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentTemplate.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentType.php
+
+		-
+			message: '#^Cannot call method isCustom\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentType.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentType.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentType.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentWeight.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Models/AssessmentWeight.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Assessment/Infrastructure/Observers/AssessmentEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Assessment/Infrastructure/Policies/AssessmentPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Assessment/Infrastructure/Policies/AssessmentScorePolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Assessment/Infrastructure/Policies/AssessmentSessionPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Assessment/Infrastructure/Policies/AssessmentTemplatePolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Assessment/Infrastructure/Policies/AssessmentTypePolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 8
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentResource.php
+
+		-
+			message: '#^Call to method createAssessment\(\) on an unknown class App\\Domains\\Assessment\\Application\\Services\\AssessmentService\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentResource/Pages/CreateAssessment.php
+
+		-
+			message: '#^Class App\\Domains\\Assessment\\Application\\Services\\AssessmentService not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentResource/Pages/CreateAssessment.php
+
+		-
+			message: '#^Call to method updateAssessment\(\) on an unknown class App\\Domains\\Assessment\\Application\\Services\\AssessmentService\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentResource/Pages/EditAssessment.php
+
+		-
+			message: '#^Class App\\Domains\\Assessment\\Application\\Services\\AssessmentService not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentResource/Pages/EditAssessment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentScoreResource.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:assertMutable\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentScoreResource/Pages/EditAssessmentScore.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentStatisticsResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentStatisticsResource/Pages/ListAssessmentStatistics.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Assessment/Presentation/Filament/Resources/AssessmentTemplateResource.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/BulkAttendanceAction.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isArchived\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/CorrectAttendanceAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/CorrectAttendanceAction.php
+
+		-
+			message: '#^Parameter \$previousStatus of event class App\\Domains\\Attendance\\Domain\\Events\\AttendanceCorrected constructor expects App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus in App\\Domains\\Attendance\\Domain\\Events\\AttendanceCorrected\:\:dispatch\(\), string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/CorrectAttendanceAction.php
+
+		-
+			message: '#^Property App\\Domains\\Attendance\\Infrastructure\\Models\\AttendanceRecord\:\:\$status \(string\) does not accept App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/CorrectAttendanceAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/CorrectAttendanceAction.php
+
+		-
+			message: '#^Property App\\Domains\\Attendance\\Infrastructure\\Models\\AttendanceSession\:\:\$locked_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/LockAttendanceSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\Attendance\\Infrastructure\\Models\\AttendanceSession\:\:\$status \(string\) does not accept App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Locked\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/LockAttendanceSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\Attendance\\Infrastructure\\Models\\AttendanceSession\:\:\$status \(string\) does not accept App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Open\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/OpenAttendanceSessionAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/RecordAttendanceAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Attendance\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/UnlockAttendanceSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\Attendance\\Infrastructure\\Models\\AttendanceSession\:\:\$status \(string\) does not accept App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Submitted\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Attendance/Application/Actions/UnlockAttendanceSessionAction.php
+
+		-
+			message: '#^Access to an undefined property App\\Domains\\Attendance\\Infrastructure\\Models\\AttendanceRecord\:\:\$session_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Application/Services/AttendanceRecordQuery.php
+
+		-
+			message: '#^Method App\\Domains\\Attendance\\Application\\Services\\AttendanceRecordQuery\:\:rowsForEnrollment\(\) should return list\<array\{date\: string, status\: App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus\}\> but returns array\<int, array\{date\: string, status\: string\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Attendance/Application/Services/AttendanceRecordQuery.php
+
+		-
+			message: '#^Method App\\Domains\\Attendance\\Domain\\Enums\\AttendanceAlertStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Attendance/Domain/Enums/AttendanceAlertStatus.php
+
+		-
+			message: '#^Method App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Attendance/Domain/Enums/AttendanceSessionStatus.php
+
+		-
+			message: '#^Method App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus\:\:options\(\) should return array\<string, string\> but returns array\<int, string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domains/Attendance/Domain/Enums/AttendanceStatus.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: app/Domains/Attendance/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: app/Domains/Attendance/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Attendance\\Domain\\References\\EnrollmentReference, Closure\(App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\)\: App\\Domains\\Attendance\\Domain\\References\\EnrollmentReference given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Attendance\\Domain\\References\\StudentReference, Closure\(App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\)\: App\\Domains\\Attendance\\Domain\\References\\StudentReference given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>first_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>last_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$array \(array\{\}\|array\{0\?\: int\}\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Attendance\\Domain\\References\\TimeSlotReference, Closure\(App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\)\: App\\Domains\\Attendance\\Domain\\References\\TimeSlotReference given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Contracts/TimetableAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Listeners/AttendanceAuditLogger.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Listeners/AttendanceAuditLogger.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Listeners/AttendanceAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceAlert.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceAlertStatus\:\:Open will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceAlert.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceAlert.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceCorrection.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceCorrection.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
+
+		-
+			message: '#^Result of \|\| is always false\.$#'
+			identifier: booleanOr.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus\:\:Absent will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus\:\:Late will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus\:\:Unexcused will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Cannot call method isRecordable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Attendance\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Locked will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Open will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:Submitted will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceSessionStatus\:\:TakingAttendance will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSummary.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSummary.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/EarlyDeparture.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/EarlyDeparture.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/LateArrival.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Models/LateArrival.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Attendance/Infrastructure/Observers/AttendanceEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Policies/AttendanceAlertPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Policies/AttendanceCorrectionPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Policies/AttendanceRecordPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Policies/AttendanceSessionPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Attendance/Infrastructure/Policies/AttendanceSummaryPolicy.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Attendance/Presentation/Filament/Resources/AttendanceCorrectionResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Attendance/Presentation/Filament/Resources/AttendanceCorrectionResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Attendance/Presentation/Filament/Resources/AttendanceRecordResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 6
+			path: app/Domains/Attendance/Presentation/Filament/Resources/AttendanceSessionResource.php
 
 		-
 			message: '#^Method App\\Domains\\Campus\\Enums\\CampusStatus\:\:color\(\) never returns array so it can be removed from the return type\.$#'
@@ -949,22 +2808,364 @@ parameters:
 			path: app/Domains/GradeLevel/Listeners/LogGradeLevelUpdated.php
 
 		-
-			message: '#^Cannot call method isDeletable\(\) on string\.$#'
-			identifier: method.nonObject
+			message: '#^Parameter \#1 \$from of method App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
 			count: 1
-			path: app/Domains/Gradebook/Services/GradebookService.php
+			path: app/Domains/Gradebook/Application/Actions/ArchiveGradebookAction.php
 
 		-
-			message: '#^Cannot call method label\(\) on string\.$#'
-			identifier: method.nonObject
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Gradebook\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
 			count: 1
-			path: app/Domains/Gradebook/Services/GradebookService.php
+			path: app/Domains/Gradebook/Application/Actions/ArchiveGradebookAction.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between mixed and null will always evaluate to true\.$#'
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$archived_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/ArchiveGradebookAction.php
+
+		-
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$status \(string\) does not accept App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Archived\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/ArchiveGradebookAction.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments string, array\{App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Draft, App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Calculated\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/CalculateGradebookAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Gradebook\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/CalculateGradebookAction.php
+
+		-
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$calculated_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/CalculateGradebookAction.php
+
+		-
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$status \(string\) does not accept App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Calculated\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/CalculateGradebookAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Locked will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/CalculateGradebookAction.php
+
+		-
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$locked_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/LockGradebookAction.php
+
+		-
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$status \(string\) does not accept App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Locked\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/LockGradebookAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Locked will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/LockGradebookAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/PublishGradebookAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Gradebook\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/PublishGradebookAction.php
+
+		-
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$published_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/PublishGradebookAction.php
+
+		-
+			message: '#^Property App\\Domains\\Gradebook\\Infrastructure\\Models\\Gradebook\:\:\$status \(string\) does not accept App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Published\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/PublishGradebookAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Gradebook\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/UnlockGradebookAction.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Locked will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
-			path: app/Domains/Gradebook/Services/GradebookService.php
+			path: app/Domains/Gradebook/Application/Actions/UnlockGradebookAction.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: app/Domains/Gradebook/Application/Actions/UnlockGradebookAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Gradebook/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/Gradebook/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Gradebook/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$assessment_type_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/AssessmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$maximum_score\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/AssessmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/AssessmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Gradebook\\Domain\\References\\EnrollmentReference, Closure\(App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\)\: App\\Domains\\Gradebook\\Domain\\References\\EnrollmentReference given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: App\\Domains\\Gradebook\\Domain\\References\\StudentReference, Closure\(App\\Domains\\Enrollment\\Infrastructure\\Models\\Enrollment\)\: App\\Domains\\Gradebook\\Domain\\References\\StudentReference given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>first_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>last_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Contracts/GradebookQueryAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Listeners/GradebookAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/GradeEntry.php
+
+		-
+			message: '#^Cannot call method isEditable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/GradeEntry.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/GradeEntry.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/GradeEntry.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Gradebook\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Calculated will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Locked will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Domain\\Enums\\GradebookStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Gradebook/Infrastructure/Observers/GradebookEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Gradebook/Infrastructure/Policies/GradeEntryPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Gradebook/Infrastructure/Policies/GradebookPolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Gradebook/Presentation/Filament/Resources/GradeEntryResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 8
+			path: app/Domains/Gradebook/Presentation/Filament/Resources/GradebookResource.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
@@ -1297,6 +3498,282 @@ parameters:
 			path: app/Domains/Program/Listeners/LogProgramUpdated.php
 
 		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$archived_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/ArchiveReportCardAction.php
+
+		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$status \(string\) does not accept App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Archived\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/ArchiveReportCardAction.php
+
+		-
+			message: '#^Method App\\Domains\\ReportCard\\Application\\Actions\\GenerateReportCardAction\:\:composeEntry\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/GenerateReportCardAction.php
+
+		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$generated_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/GenerateReportCardAction.php
+
+		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$status \(string\) does not accept App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Generated\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/GenerateReportCardAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$academic_document_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/PublishReportCardAction.php
+
+		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$published_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/PublishReportCardAction.php
+
+		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$status \(string\) does not accept App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Published\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/PublishReportCardAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/RegenerateReportCardAction.php
+
+		-
+			message: '#^Cannot call method isRegenerable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/RegenerateReportCardAction.php
+
+		-
+			message: '#^Method App\\Domains\\ReportCard\\Application\\Actions\\RegenerateReportCardAction\:\:composeEntry\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/RegenerateReportCardAction.php
+
+		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$generated_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/RegenerateReportCardAction.php
+
+		-
+			message: '#^Property App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard\:\:\$status \(string\) does not accept App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Generated\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ReportCard/Application/Actions/RegenerateReportCardAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/AcademicCommunicationAdapter.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/AcademicCommunicationAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>student_number" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/GradebookAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/ReportCard/Infrastructure/Listeners/ReportCardAuditLogger.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Listeners/ReportCardAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\ReportCard\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Generated will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ReportCard\\Domain\\Enums\\ReportCardStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCardEntry.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Models/ReportCardEntry.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Observers/ReportCardEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/ReportCard/Infrastructure/Policies/ReportCardPolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 5
+			path: app/Domains/ReportCard/Presentation/Filament/Resources/ReportCardResource.php
+
+		-
+			message: '#^Cannot access property \$status on Illuminate\\Database\\Eloquent\\Model\|int\|string\.$#'
+			identifier: property.nonObject
+			count: 4
+			path: app/Domains/ReportCard/Presentation/Filament/Resources/ReportCardResource/Pages/EditReportCard.php
+
+		-
+			message: '#^Parameter \#1 \$reportCard of method App\\Domains\\ReportCard\\Application\\ReportCardService\:\:generateReportCard\(\) expects App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ReportCard/Presentation/Filament/Resources/ReportCardResource/Pages/EditReportCard.php
+
+		-
+			message: '#^Parameter \#1 \$reportCard of method App\\Domains\\ReportCard\\Application\\ReportCardService\:\:publishReportCard\(\) expects App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ReportCard/Presentation/Filament/Resources/ReportCardResource/Pages/EditReportCard.php
+
+		-
+			message: '#^Parameter \#1 \$reportCard of method App\\Domains\\ReportCard\\Application\\ReportCardService\:\:regenerateReportCard\(\) expects App\\Domains\\ReportCard\\Infrastructure\\Models\\ReportCard, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ReportCard/Presentation/Filament/Resources/ReportCardResource/Pages/EditReportCard.php
+
+		-
 			message: '#^Method App\\Domains\\Role\\Services\\RoleService\:\:create\(\) should return Spatie\\Permission\\Models\\Role but returns Spatie\\Permission\\Contracts\\Role\.$#'
 			identifier: return.type
 			count: 1
@@ -1343,6 +3820,240 @@ parameters:
 			identifier: trait.unused
 			count: 1
 			path: app/Domains/Shared/Traits/UniqueValidator.php
+
+		-
+			message: '#^Parameter \#2 \$specialization of static method App\\Domains\\Staff\\Domain\\Exceptions\\TeacherSpecializationException\:\:notTeacher\(\) expects App\\Domains\\Staff\\Domain\\Enums\\StaffSpecialization, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Staff/Application/Actions/AssignTeachingSubjectsAction.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffSpecialization\:\:Teacher will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/Staff/Application/Actions/AssignTeachingSubjectsAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffSpecialization\:\:Teacher will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Staff/Application/Actions/CreateStaffAction.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\Staff\\Domain\\Exceptions\\InvalidStaffStateException\:\:transition\(\) expects App\\Domains\\Staff\\Domain\\Enums\\StaffStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Staff/Application/Actions/RestoreStaffAction.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffStatus\:\:Suspended will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domains/Staff/Application/Actions/RestoreStaffAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Staff/Application/Actions/SuspendStaffAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Application/Actions/TerminateEmploymentAction.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Staff/Application/Actions/TerminateEmploymentAction.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Application/Actions/TerminateEmploymentAction.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between mixed and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 6
+			path: app/Domains/Staff/Application/Actions/UpdateStaffAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Assignment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Assignment.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Certification.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Certification.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Certification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Employment.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/Staff/Infrastructure/Models/Employment.php
+
+		-
+			message: '#^Cannot call method isCurrent\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Employment.php
+
+		-
+			message: '#^Cannot call method isTerminated\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Employment.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Employment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Employment.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/EmploymentHistory.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/EmploymentHistory.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Position.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Position.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Qualification.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Qualification.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Staff.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Staff.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffSpecialization\:\:Teacher will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Staff.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffStatus\:\:Active will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Staff.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Staff\\Domain\\Enums\\StaffStatus\:\:Suspended will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Staff.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/Staff.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/StaffEmergencyContact.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/StaffEmergencyContact.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/TeacherProfile.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Models/TeacherProfile.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Staff/Infrastructure/Observers/StaffEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Staff/Infrastructure/Policies/StaffPolicy.php
 
 		-
 			message: '#^Cannot access property \$value on string\.$#'
@@ -1591,6 +4302,810 @@ parameters:
 			path: app/Domains/System/Services/MonitoringService.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Timetable/Application/Actions/AssignRoomAction.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDraft\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignRoomAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignRoomAction.php
+
+		-
+			message: '#^Parameter \#1 \$timetable of method App\\Domains\\Timetable\\Application\\Services\\ScheduleEntryValidator\:\:assertSlotFree\(\) expects App\\Domains\\Timetable\\Infrastructure\\Models\\Timetable, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignRoomAction.php
+
+		-
+			message: '#^Parameter \#2 \$timetable of event class App\\Domains\\Timetable\\Domain\\Events\\RoomAssigned constructor expects App\\Domains\\Timetable\\Infrastructure\\Models\\Timetable in App\\Domains\\Timetable\\Domain\\Events\\RoomAssigned\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignRoomAction.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>value" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignRoomAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignTeacherAction.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDraft\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignTeacherAction.php
+
+		-
+			message: '#^Parameter \#1 \$timetable of method App\\Domains\\Timetable\\Application\\Services\\ScheduleEntryValidator\:\:assertSlotFree\(\) expects App\\Domains\\Timetable\\Infrastructure\\Models\\Timetable, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignTeacherAction.php
+
+		-
+			message: '#^Parameter \#2 \$timetable of event class App\\Domains\\Timetable\\Domain\\Events\\TeacherAssigned constructor expects App\\Domains\\Timetable\\Infrastructure\\Models\\Timetable in App\\Domains\\Timetable\\Domain\\Events\\TeacherAssigned\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/AssignTeacherAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$day_of_week\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DetectConflictsAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$ends_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DetectConflictsAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$starts_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DetectConflictsAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$academic_subject_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$class_section_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$constraint_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$day_of_week\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$duration_minutes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$end_after_occurrences\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$ends_at\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$ends_on\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$entry_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$exceptions\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$frequency\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$interval\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_recurring\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$occurs_on_days\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$period_number\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$reason\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$room_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$schedule_entry_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_class_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$staff_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$starts_at\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$starts_on\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$target_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$target_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$teaching_period_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$time_slot_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$week_end\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$week_start\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/DuplicateTimetableAction.php
+
+		-
+			message: '#^Parameter \#1 \$array \(non\-empty\-list\<int\|string\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/GenerateTimetableAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Anonymous function has an unused use \$data\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDraft\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Parameter \#1 \$timetable of method App\\Domains\\Timetable\\Application\\Actions\\UpdateScheduleEntryAction\:\:syncEntryCount\(\) expects App\\Domains\\Timetable\\Infrastructure\\Models\\Timetable, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Parameter \#1 \$timetable of method App\\Domains\\Timetable\\Application\\Services\\ScheduleEntryValidator\:\:assertSlotFree\(\) expects App\\Domains\\Timetable\\Infrastructure\\Models\\Timetable, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Parameter \#2 \$timetable of event class App\\Domains\\Timetable\\Domain\\Events\\ScheduleEntryUpdated constructor expects App\\Domains\\Timetable\\Infrastructure\\Models\\Timetable in App\\Domains\\Timetable\\Domain\\Events\\ScheduleEntryUpdated\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>value" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Timetable/Application/Actions/UpdateScheduleEntryAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$class_section_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/ScheduleEntryValidator.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$ends_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/ScheduleEntryValidator.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$room_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/ScheduleEntryValidator.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_class_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/ScheduleEntryValidator.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$staff_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/ScheduleEntryValidator.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$starts_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/ScheduleEntryValidator.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$class_section_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$day_of_week\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$ends_at\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$period_number\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$room_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_class_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$staff_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$starts_at\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function array_filter expects \(callable\(Illuminate\\Database\\Eloquent\\Model\)\: bool\)\|null, Closure\(App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\)\: bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function usort expects callable\(Illuminate\\Database\\Eloquent\\Model, Illuminate\\Database\\Eloquent\\Model\)\: int, Closure\(App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry, App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\)\: int\<\-1, 1\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Parameter \#2 \$entries of method App\\Domains\\Timetable\\Application\\Services\\TimetableConflictEngine\:\:detectConstraintViolations\(\) expects list\<App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\>, list\<Illuminate\\Database\\Eloquent\\Model\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Parameter \#2 \$entries of method App\\Domains\\Timetable\\Application\\Services\\TimetableConflictEngine\:\:detectOutOfGrid\(\) expects list\<App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\>, list\<Illuminate\\Database\\Eloquent\\Model\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Parameter \#3 \$a of method App\\Domains\\Timetable\\Application\\Services\\TimetableConflictEngine\:\:pairReport\(\) expects App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 5
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Parameter \#4 \$b of method App\\Domains\\Timetable\\Application\\Services\\TimetableConflictEngine\:\:pairReport\(\) expects App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 5
+			path: app/Domains/Timetable/Application/Services/TimetableConflictEngine.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$academic_subject_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$class_section_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$day_of_week\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$duration_minutes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$ends_at\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$entry_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$period_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$room_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_class_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$staff_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$starts_at\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: \(lowercase\-string&non\-falsy\-string&uppercase\-string\), Closure\(App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\)\: \(lowercase\-string&non\-falsy\-string&uppercase\-string\) given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Application/Services/TimetableQueryService.php
+
+		-
+			message: '#^Match expression does not handle remaining values\: int\<min, \-1\>\|int\<7, max\>$#'
+			identifier: match.unhandled
+			count: 2
+			path: app/Domains/Timetable/Domain/ValueObjects/DayOfWeek.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$subject\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: app/Domains/Timetable/Infrastructure/Contracts/AcademicFrameworkAdapter.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Assessment\\Domain\\Enums\\AssessmentStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/AssessmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domains/Timetable/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/RoomAdapter.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/RoomAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$max_weekly_hours\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$teaching_subject_ids\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Parameter \#1 \$array \(array\{\}\|array\{0\?\: int\}\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>teaching_subject_ids" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Contracts/StaffAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Domains/Timetable/Infrastructure/Listeners/TimetableAuditLogger.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Listeners/TimetableAuditLogger.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: array\{id\: mixed, uuid\: string\|null, academic_subject_id\: int\<0, max\>, school_class_id\: int\<0, max\>, class_section_id\: int\<0, max\>\|null, staff_id\: int\<0, max\>\|null, room_id\: string\|null, day_of_week\: int\<0, max\>, period_number\: int\<0, max\>, starts_at\: string, ends_at\: string, duration_minutes\: int\<0, max\>, entry_type\: mixed, status\: mixed\}, Closure\(App\\Domains\\Timetable\\Infrastructure\\Models\\ScheduleEntry\)\: array\{id\: mixed, uuid\: string\|null, academic_subject_id\: int\<0, max\>, school_class_id\: int\<0, max\>, class_section_id\: int\<0, max\>\|null, staff_id\: int\<0, max\>\|null, room_id\: string\|null, day_of_week\: int\<0, max\>, period_number\: int\<0, max\>, starts_at\: string, ends_at\: string, duration_minutes\: int\<0, max\>, entry_type\: mixed, status\: mixed\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Listeners/TimetableAuditLogger.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/Timetable/Infrastructure/Listeners/TimetableAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/AvailabilityConstraint.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Domains/Timetable/Infrastructure/Models/AvailabilityConstraint.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/AvailabilityConstraint.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/RecurringPattern.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/RecurringPattern.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/RoomAssignment.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/RoomAssignment.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/ScheduleEntry.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Timetable\\Domain\\Enums\\ScheduleEntryStatus\:\:Cancelled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/ScheduleEntry.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Timetable\\Domain\\Enums\\ScheduleEntryStatus\:\:Rescheduled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/ScheduleEntry.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Timetable\\Domain\\Enums\\ScheduleEntryStatus\:\:Scheduled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/ScheduleEntry.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/ScheduleEntry.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TeachingPeriod.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TeachingPeriod.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TimeSlot.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TimeSlot.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/Timetable.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Timetable\\Domain\\Enums\\TimetableStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/Timetable.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Timetable\\Domain\\Enums\\TimetableStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/Timetable.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Timetable\\Domain\\Enums\\TimetableStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/Timetable.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/Timetable.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TimetableConflict.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TimetableConflict.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TimetableVersion.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Models/TimetableVersion.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/Timetable/Infrastructure/Observers/TimetableEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Timetable/Infrastructure/Policies/ScheduleEntryPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Timetable/Infrastructure/Policies/TimetableConflictPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Domains/Timetable/Infrastructure/Policies/TimetablePolicy.php
+
+		-
 			message: '#^Argument of an invalid type string supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
@@ -1735,6 +5250,18 @@ parameters:
 			path: app/Exceptions/ApiException.php
 
 		-
+			message: '#^Class App\\Filament\\Director\\Widgets\\AcademicResultsChart not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Director/Pages/DirectorDashboard.php
+
+		-
+			message: '#^Method App\\Filament\\Director\\Pages\\DirectorDashboard\:\:getWidgets\(\) should return array\<class\-string\<Filament\\Widgets\\Widget\>\|Filament\\Widgets\\WidgetConfiguration\> but returns array\{''App\\\\Filament\\\\Director\\\\Widgets\\\\DirectorStatsOverview'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\EnrollmentChart'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\AttendanceChart'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\PaymentsChart'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\AcademicResultsChart''\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Director/Pages/DirectorDashboard.php
+
+		-
 			message: '#^Access to an undefined property App\\Filament\\Director\\Pages\\DocumentCenter\:\:\$form\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1823,18 +5350,6 @@ parameters:
 			identifier: class.notFound
 			count: 1
 			path: app/Filament/Director/Pages/SchoolWizard.php
-
-		-
-			message: '#^Cannot call method isDeletable\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Filament/Resources/AssessmentResultResource.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Filament/Resources/AssessmentResultResource/Pages/EditAssessmentResult.php
 
 		-
 			message: '#^Invoking callable on an unknown class Filament\\Forms\\Get\.$#'
@@ -2587,42 +6102,6 @@ parameters:
 			path: app/Models/ApiToken.php
 
 		-
-			message: '#^Cannot call method canTransitionTo\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Models/AssessmentResult.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Draft will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Models/AssessmentResult.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Entered will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Models/AssessmentResult.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Locked will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Models/AssessmentResult.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Published will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Models/AssessmentResult.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Gradebook\\Enums\\AssessmentResultStatus\:\:Verified will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Models/AssessmentResult.php
-
-		-
 			message: '#^Method App\\Models\\AuditLog\:\:auditable\(\) has invalid return type Illuminate\\Database\\Eloquent\\MorphTo\.$#'
 			identifier: class.notFound
 			count: 1
@@ -3269,6 +6748,18 @@ parameters:
 			identifier: class.notFound
 			count: 1
 			path: app/Providers/EventServiceProvider.php
+
+		-
+			message: '#^Class App\\Filament\\Director\\Widgets\\AcademicResultsChart not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Providers/Filament/DirectorPanelProvider.php
+
+		-
+			message: '#^Parameter \#1 \$widgets of method Filament\\Panel\:\:widgets\(\) expects array\<class\-string\<Filament\\Widgets\\Widget\>\|Filament\\Widgets\\WidgetConfiguration\>, array\{''App\\\\Filament\\\\Director\\\\Widgets\\\\DirectorStatsOverview'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\EnrollmentChart'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\AttendanceChart'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\PaymentsChart'', ''App\\\\Filament\\\\Director\\\\Widgets\\\\AcademicResultsChart''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Providers/Filament/DirectorPanelProvider.php
 
 		-
 			message: '#^Cannot call method format\(\) on string\.$#'

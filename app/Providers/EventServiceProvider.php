@@ -96,16 +96,6 @@ use App\Domains\Department\Events\DepartmentUpdated;
 use App\Domains\Department\Listeners\LogDepartmentArchived;
 use App\Domains\Department\Listeners\LogDepartmentCreated;
 use App\Domains\Department\Listeners\LogDepartmentUpdated;
-use App\Domains\Gradebook\Events\AssessmentResultRecorded;
-use App\Domains\Gradebook\Events\AssessmentResultsPublished;
-use App\Domains\Gradebook\Events\AssessmentResultVerified;
-use App\Domains\Gradebook\Events\GradebookCalculated;
-use App\Domains\Gradebook\Events\RankingsCalculated;
-use App\Domains\Gradebook\Listeners\LogAssessmentResultRecorded;
-use App\Domains\Gradebook\Listeners\LogAssessmentResultsPublished;
-use App\Domains\Gradebook\Listeners\LogAssessmentResultVerified;
-use App\Domains\Gradebook\Listeners\LogGradebookCalculated;
-use App\Domains\Gradebook\Listeners\LogRankingsCalculated;
 use App\Domains\GradeLevel\Events\GradeLevelArchived;
 use App\Domains\GradeLevel\Events\GradeLevelCreated;
 use App\Domains\GradeLevel\Events\GradeLevelUpdated;
@@ -485,22 +475,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         EnrollmentWithdrawn::class => [
             LogEnrollmentWithdrawn::class,
-        ],
-
-        AssessmentResultRecorded::class => [
-            LogAssessmentResultRecorded::class,
-        ],
-        AssessmentResultVerified::class => [
-            LogAssessmentResultVerified::class,
-        ],
-        AssessmentResultsPublished::class => [
-            LogAssessmentResultsPublished::class,
-        ],
-        GradebookCalculated::class => [
-            LogGradebookCalculated::class,
-        ],
-        RankingsCalculated::class => [
-            LogRankingsCalculated::class,
         ],
 
         BookCreated::class => [

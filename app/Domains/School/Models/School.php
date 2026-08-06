@@ -7,8 +7,6 @@ namespace App\Domains\School\Models;
 use App\Domains\School\Enums\SchoolStatus;
 use App\Domains\School\Enums\SchoolType;
 use App\Models\AcademicYear;
-use App\Models\Assessment;
-use App\Models\AssessmentResult;
 use App\Models\Guardian;
 use App\Models\Student;
 use App\Models\StudentEnrollment;
@@ -151,16 +149,6 @@ class School extends Tenant implements TenantWithDatabase
     public function studentEnrollments(): HasMany
     {
         return $this->hasMany(StudentEnrollment::class);
-    }
-
-    public function assessments(): HasMany
-    {
-        return $this->hasMany(Assessment::class);
-    }
-
-    public function assessmentResults(): HasMany
-    {
-        return $this->hasMany(AssessmentResult::class);
     }
 
     /*

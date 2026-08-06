@@ -131,7 +131,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for code style, testing requirements, and
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+MIT License.
 
 ## Contributors
 

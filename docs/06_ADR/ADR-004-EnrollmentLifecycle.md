@@ -187,7 +187,7 @@ Schema: 5 migrations (enrollments + promotions + transfers + graduations + histo
 
 # Related Documents
 
-- SPR-004 Enrollment Domain Report
+- SPR-004 Enrollment Engine Report
 - 02_Domain/Student
 - 02_Domain/Academic
 - ADR-002-AcademicFramework

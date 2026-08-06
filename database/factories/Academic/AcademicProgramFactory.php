@@ -15,12 +15,14 @@ class AcademicProgramFactory extends Factory
 {
     protected $model = AcademicProgram::class;
 
+    protected static int $sequence = 0;
+
     public function definition(): array
     {
         return [
             'school_id' => null,
             'education_level_id' => null,
-            'name' => fake()->randomElement(['Général', 'Technique', 'Professionnel']),
+            'name' => fake()->randomElement(['Général', 'Technique', 'Professionnel']).' '.str_pad((string) (self::$sequence++ % 1000), 3, '0', STR_PAD_LEFT),
             'code' => fake()->unique()->bothify('PRG##'),
             'description' => fake()->optional()->sentence(),
             'status' => EntityStatus::Active,

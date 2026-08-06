@@ -15,9 +15,11 @@ class AcademicCalendarYearFactory extends Factory
 {
     protected $model = AcademicCalendarYear::class;
 
+    protected static int $sequence = 0;
+
     public function definition(): array
     {
-        $startYear = (int) fake()->year();
+        $startYear = 2000 + (self::$sequence++ % 200);
         $endYear = $startYear + 1;
 
         return [

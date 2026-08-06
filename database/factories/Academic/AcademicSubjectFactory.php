@@ -15,12 +15,14 @@ class AcademicSubjectFactory extends Factory
 {
     protected $model = AcademicSubject::class;
 
+    protected static int $sequence = 0;
+
     public function definition(): array
     {
         return [
             'school_id' => null,
             'subject_group_id' => null,
-            'name' => fake()->randomElement(['Mathématiques', 'Français', 'Physique-Chimie', 'Anglais']),
+            'name' => fake()->randomElement(['Mathématiques', 'Français', 'Physique-Chimie', 'Anglais']).' '.str_pad((string) (self::$sequence++ % 1000), 3, '0', STR_PAD_LEFT),
             'code' => fake()->unique()->bothify('SUB##'),
             'abbreviation' => fake()->optional()->bothify('??'),
             'description' => fake()->optional()->sentence(),

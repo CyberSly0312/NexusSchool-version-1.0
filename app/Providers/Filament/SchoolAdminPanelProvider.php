@@ -76,6 +76,14 @@ class SchoolAdminPanelProvider extends PanelProvider
                 \App\Domains\Guardian\Presentation\Filament\Resources\EmergencyContactsResource::class,
                 \App\Domains\Guardian\Presentation\Filament\Resources\AuthorizedPickupResource::class,
 
+                // ── Personnel · Moteur canonique SPR-006 ──
+                \App\Domains\Staff\Presentation\Filament\Resources\StaffResource::class,
+                \App\Domains\Staff\Presentation\Filament\Resources\PositionResource::class,
+                \App\Domains\Staff\Presentation\Filament\Resources\EmploymentResource::class,
+                \App\Domains\Staff\Presentation\Filament\Resources\AssignmentResource::class,
+                \App\Domains\Staff\Presentation\Filament\Resources\QualificationResource::class,
+                \App\Domains\Staff\Presentation\Filament\Resources\CertificationResource::class,
+
                 // ── Parcours scolaire · Moteur canonique SPR-004 ──
                 \App\Domains\Enrollment\Presentation\Filament\Resources\EnrollmentResource::class,
                 \App\Domains\Enrollment\Presentation\Filament\Resources\EnrollmentHistoryResource::class,
@@ -84,11 +92,41 @@ class SchoolAdminPanelProvider extends PanelProvider
                 \App\Domains\Enrollment\Presentation\Filament\Resources\GraduationResource::class,
                 \App\Domains\Enrollment\Presentation\Filament\Resources\BulkEnrollmentResource::class,
 
+                // ── Présences · Moteur canonique SPR-008 ──
+                \App\Domains\Attendance\Presentation\Filament\Resources\AttendanceSessionResource::class,
+                \App\Domains\Attendance\Presentation\Filament\Resources\AttendanceRecordResource::class,
+                \App\Domains\Attendance\Presentation\Filament\Resources\AttendanceCorrectionResource::class,
+                \App\Domains\Attendance\Presentation\Filament\Resources\AttendanceAlertResource::class,
+                \App\Domains\Attendance\Presentation\Filament\Resources\AttendanceSummaryResource::class,
+
+                // ── Évaluations · Moteur canonique SPR-009 ──
+                \App\Domains\Assessment\Presentation\Filament\Resources\AssessmentResource::class,
+                \App\Domains\Assessment\Presentation\Filament\Resources\AssessmentTypeResource::class,
+                \App\Domains\Assessment\Presentation\Filament\Resources\AssessmentSessionResource::class,
+                \App\Domains\Assessment\Presentation\Filament\Resources\AssessmentScoreResource::class,
+                \App\Domains\Assessment\Presentation\Filament\Resources\AssessmentTemplateResource::class,
+                \App\Domains\Assessment\Presentation\Filament\Resources\AssessmentStatisticsResource::class,
+
+                // ── Carnets de notes · Moteur canonique SPR-010 ──
+                \App\Domains\Gradebook\Presentation\Filament\Resources\GradebookResource::class,
+                \App\Domains\Gradebook\Presentation\Filament\Resources\GradeEntryResource::class,
+
+                // ── Conseil de classe · Moteur canonique SPR-013 ──
+                \App\Domains\ClassCouncil\Presentation\Filament\Resources\CouncilSessionResource::class,
+
+                // ── Bulletins · Moteur canonique SPR-011 ──
+                \App\Domains\ReportCard\Presentation\Filament\Resources\ReportCardResource::class,
+
+                // ── Communication académique · Moteur canonique SPR-012 ──
+                \App\Domains\AcademicCommunication\Presentation\Filament\Resources\AcademicDocumentResource::class,
+                \App\Domains\AcademicCommunication\Presentation\Filament\Resources\AcademicDocumentTemplateResource::class,
+                \App\Domains\AcademicCommunication\Presentation\Filament\Resources\PublicationPolicyResource::class,
+                \App\Domains\AcademicCommunication\Presentation\Filament\Resources\PublicationChannelResource::class,
+
                 // ── Ressources déplacées (masquées, pour futurs panels) ──
-                // Director: AssessmentResult, Incident, Report
+                // Director: Incident, Report
                 // Secretary: Message, Announcement
                 // Accountant: Payment
-                \App\Filament\Resources\AssessmentResultResource::class,
                 \App\Filament\Resources\IncidentResource::class,
                 \App\Filament\Resources\ReportResource::class,
                 \App\Filament\Resources\MessageResource::class,

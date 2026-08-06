@@ -6,6 +6,7 @@ namespace App\Domains\Academic\Infrastructure\Models;
 
 use App\Domains\Academic\Domain\Enums\EntityStatus;
 use App\Traits\HasSchoolId;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,6 +22,11 @@ class SchoolClass extends Model
     use HasFactory;
     use HasSchoolId;
     use SoftDeletes;
+
+    protected static function newFactory(): Factory
+    {
+        return new \Database\Factories\Academic\SchoolClassFactory();
+    }
 
     protected $fillable = [
         'school_id',
