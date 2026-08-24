@@ -1,314 +1,251 @@
-CONTINUE SPR-014 FROM THE CURRENT AUDIT STATE.
+Nous avons terminé l’audit architectural complet de SPR-014.
 
-IMPORTANT:
-Do NOT implement any RecordsLifecycle engine.
-Do NOT create RecordLifecycle models, state machines, generic lifecycle abstractions, contracts, adapters, migrations, factories, or services yet.
+IMPORTANT :
+NE CODE RIEN pour SPR-014.
+NE crée aucun RecordLifecycle.
+NE crée aucun modèle, migration, enum, service, contract, adapter, factory ou test RecordsLifecycle.
+NE crée aucun ADR.
+NE modifie aucun fichier de gouvernance avant d'avoir vérifié son contenu actuel.
 
-The repository audit has established that the previously claimed SPR-014 implementation does NOT exist in this repository. The current repository is the source of truth.
+Le verdict de l'audit est :
 
-CURRENT CONFIRMED STATE:
+SPR-014 = DEFERRED / NEEDS REWORK
 
-- HEAD: ac8acc2 on main
-- Working tree was clean before the audit
-- No RecordLifecycle / RecordsLifecycle implementation exists
-- No RecordsLifecycle tests exist
-- No SPR-014 implementation artifacts exist
-- SPR-014 report has now been created:
-  docs/docs/00_Project_Management/SPR-014_Records_Lifecycle_Engine_Report.md
-- Report status:
-  Audit / Phase 0-1 — NO IMPLEMENTATION
-- Report verdict:
-  NEEDS REWORK
+La raison est maintenant démontrée par le repository réel :
 
-The audit established:
+- AcademicCommunication possède déjà l'identité permanente, le versioning immuable,
+  la publication, l'archivage, l'audit et la tenancy des documents.
+- ClassCouncil possède son propre lifecycle et ses propres invariants.
+- ReportCard possède son propre lifecycle et délègue la production documentaire
+  à AcademicCommunication.
+- Il n'existe actuellement aucun besoin consommateur prouvé nécessitant un
+  RecordsLifecycle bounded context.
+- La vraie lacune est limitée à retention policy, long-term preservation,
+  archive export/package et éventuellement cold storage.
+- Le storage provider n'est pas encore choisi.
+- Le S3 adapter n'est pas installé.
+- Le roadmap place Cloud Archive en Phase 9 Enterprise Services.
+- SPR-015 ne dépend PAS de SPR-014.
+- SPR-015 peut agréger les données historiques existantes via les contrats
+  read-only déjà présents et générer Transcript/Certificate dans
+  AcademicCommunication.
+- Aucun code SPR-014 n'existe dans le repository actuel.
 
-1. AcademicCommunication already owns:
-   - permanent AcademicDocument identity
-   - immutable document versions
-   - publication
-   - archival
-   - publication records
-   - audit trail
-   - tenant isolation
-   - contract-based cross-domain consumption
+Le rapport d'audit officiel existe maintenant ici :
 
-2. ClassCouncil already owns:
-   - CouncilSession lifecycle
-   - published CouncilDecision as the official academic outcome
-   - publication
-   - archival
-   - audit
-   - tenant isolation
-   - contract boundaries
-
-3. ReportCard already owns:
-   - ReportCard lifecycle
-   - generation
-   - publication
-   - archival
-   - regeneration
-   - delegation of official academic documents to AcademicCommunication
-
-4. Shared Kernel contains no suitable lifecycle abstraction.
-
-5. No explicit retention mechanism exists.
-
-6. No explicit long-term preservation/archive mechanism exists.
-
-7. No consolidated permanent academic record per learner currently exists.
-
-8. Storage-provider decisions are still pending.
-
-9. ADR-012 explicitly establishes AcademicCommunication as the publication/document layer and already owns identity, versioning, publication and archival.
-
-Therefore:
-A generic cross-domain "Records Lifecycle Engine" would duplicate existing domain responsibilities and violate established architecture.
-
-CURRENT SPR-014 REPORT:
-Read the entire file:
 docs/docs/00_Project_Management/SPR-014_Records_Lifecycle_Engine_Report.md
 
-Do NOT contradict its findings unless you can prove a contradiction directly from repository code.
+Il contient le diagnostic complet et le plan de gouvernance proposé.
 
 ==================================================
-PHASE 1 — ROADMAP / GOVERNANCE RECONCILIATION
+PHASE A — GOVERNANCE RECONCILIATION
 ==================================================
 
-Before changing anything, inspect:
+Avant toute modification :
 
-- docs/docs/00_Project_Management/MASTER_ROADMAP.md
-- docs/docs/00_Project_Management/CURRENT_POSITION.md
-- docs/docs/00_Project_Management/PROJECT_STATE.md
-- docs/docs/SESSION_HANDOFF.md
-- all relevant SPR-015 documentation
-- all relevant project journal entries concerning:
-  - SPR-014
-  - permanent academic records
-  - retention
-  - archival
-  - storage
-  - transcripts
-  - certificates
+1. Lire intégralement :
+   - CURRENT_POSITION.md
+   - PROJECT_STATE.md
+   - SESSION_HANDOFF.md
+   - CHANGELOG.md
+   - MASTER_ROADMAP.md
+   - SPR-014_Records_Lifecycle_Engine_Report.md
 
-Determine:
+2. Vérifier que les sections proposées dans le rapport correspondent réellement
+   aux versions actuelles des fichiers.
 
-A. What was the ORIGINAL business objective of SPR-014?
-B. Which parts of that objective are already solved by existing bounded contexts?
-C. Which parts are genuinely unsolved?
-D. Which unsolved parts are actually prerequisites for SPR-015?
-E. Which decisions are still pending?
-F. Whether SPR-014 should remain a bounded context at all.
+3. Ne pas inventer de sections ou de contenu.
+   Adapter les modifications aux structures réellement présentes.
 
-Do not assume the roadmap wording is architecturally correct.
-The implementation and accepted ADRs are the source of truth.
-
-==================================================
-PHASE 2 — DEFINE THE REAL GAP
-==================================================
-
-Produce a concise architectural gap analysis.
-
-Explicitly classify each candidate responsibility:
-
-- Document identity
-- Document versioning
-- Publication
-- Archival
-- Audit
-- Tenant isolation
-- Retention policy
-- Legal retention / purge
-- Long-term preservation
-- Archive export/package
-- Object storage
-- Learner academic history
-- Transcript projection
-- Certificate projection
-- Cross-year academic record
-- Record discovery/search
-
-For every item classify it as:
-
-OWNED BY EXISTING DOMAIN
-UNSOLVED GAP
-SPR-015 RESPONSIBILITY
-FUTURE / DEFERRED
-NOT JUSTIFIED
-
-Do not invent responsibilities.
+4. Vérifier particulièrement :
+   - Current Sprint
+   - Current Engineering Priorities
+   - Next Planned Phase
+   - Domain Status
+   - WIP
+   - Next Sprint
+   - Roadmap Phase 3
+   - Changelog format
+   - Session handoff format
 
 ==================================================
-PHASE 3 — INVESTIGATE SPR-015
+PHASE B — APPLY THE GOVERNANCE DECISION
 ==================================================
 
-This is critical.
+Après cette vérification, appliquer uniquement les mises à jour suivantes :
 
-Inspect all SPR-015 documentation and existing code related to:
+1. SPR-014_Records_Lifecycle_Engine_Report.md
 
-- Transcript
-- Certificate
-- Student academic history
-- Academic records
-- Graduation
-- Completion
-- Learner permanent record
+   Ajouter/consolider le "Architectural Decision Brief — 2026-08-24"
+   déjà défini dans l'audit.
 
-Determine whether SPR-015 actually requires:
+   Le rapport doit clairement conclure :
 
-- a persistent academic record projection,
-- a retention service,
-- archival storage,
-- historical record aggregation,
-- or merely contracts from existing engines.
+   SPR-014 = DEFERRED
 
-Do not design the solution yet.
+   et expliquer :
 
-Produce a short dependency statement:
+   - pourquoi aucun RecordsLifecycle bounded context ne sera créé ;
+   - ce qui est déjà couvert par les bounded contexts existants ;
+   - le gap réel ;
+   - pourquoi ce gap n'est pas encore suffisamment sponsorisé ;
+   - pourquoi SPR-015 ne dépend pas de SPR-014 ;
+   - pourquoi Cloud Archive relève plutôt de Phase 9 ;
+   - quelles conditions pourraient réactiver le besoin.
 
-"SPR-015 requires X from SPR-014 because Y."
+2. CURRENT_POSITION.md
 
-If SPR-015 does not actually require SPR-014, say so explicitly.
+   Mettre SPR-014 en :
 
-==================================================
-PHASE 4 — STORAGE / PRESERVATION DECISION AUDIT
-==================================================
+   "Deferred — pending proven architectural need"
 
-Inspect:
+   Faire de SPR-015 le prochain sprint actif.
 
-- SESSION_HANDOFF
-- architecture docs
-- environment/config files
-- existing filesystem storage abstraction
-- Laravel filesystem configuration
-- any S3/object storage references
-- archive/export code
-- existing document storage mechanisms
+   Ne pas supprimer l'historique.
+   Ne pas réécrire les anciennes positions.
+   Modifier uniquement les sections d'état courant/priorités.
 
-Determine what storage capabilities already exist.
+3. PROJECT_STATE.md
 
-Do NOT choose an external provider unless the repository already establishes one.
+   Corriger le statut de Records Lifecycle :
 
-If provider selection is genuinely pending, document it as a decision dependency.
+   "Deferred — gap covered by existing domains; revisit with ADR"
 
-==================================================
-PHASE 5 — ARCHITECTURAL OPTIONS
-==================================================
+   Réordonner les priorités afin que :
 
-Based only on the repository findings, propose at most THREE options:
+   Priority 1 = Certificate & Transcript Engine / SPR-015
 
-OPTION A:
-Re-specify SPR-014 as a Retention & Preservation bounded context.
+   Records Lifecycle doit apparaître comme Deferred.
 
-OPTION B:
-Do not create a new bounded context.
-Implement retention/preservation capabilities inside the existing relevant infrastructure/domain boundaries.
+4. SESSION_HANDOFF.md
 
-OPTION C:
-Defer SPR-014 and make SPR-015 consume existing AcademicCommunication/ClassCouncil/ReportCard contracts directly.
+   Mettre à jour :
 
-For each option evaluate:
+   - Current Sprint Objective
+   - WIP
+   - Next Sprint
 
-- DDD fit
-- ADR compatibility
-- duplication risk
-- coupling
-- implementation complexity
-- usefulness to SPR-015
-- storage dependency
-- future extensibility
+   pour refléter :
 
-Then recommend ONE option.
+   SPR-014 deferred.
+   SPR-015 devient le prochain sprint.
 
-==================================================
-PHASE 6 — ADR REQUIREMENT
-==================================================
+   Conserver explicitement la raison de la décision.
 
-Do NOT create the ADR immediately.
+5. CHANGELOG.md
 
-First determine:
+   Ajouter une entrée datée du 2026-08-24 indiquant :
 
-- whether an existing ADR can cover the decision;
-- whether a new ADR is genuinely required;
-- what exact architectural decision the ADR would record.
+   - SPR-014 deferred after architectural audit
+   - aucun code SPR-014 produit
+   - aucun RecordsLifecycle bounded context créé
+   - SPR-015 devient le prochain sprint
+   - Cloud Archive reste prévu pour Phase 9 / future preservation work
 
-If a new ADR is required, prepare a DRAFT only.
+   Respecter exactement le format existant du CHANGELOG.
 
-Do not overwrite existing ADRs.
-Do not fill unrelated empty ADR files.
-Do not invent an ADR number.
+6. MASTER_ROADMAP.md
 
-The draft should contain:
+   Annoter SPR-014 comme :
 
-- Context
-- Problem
-- Existing architecture
-- Decision
-- Explicit non-goals
-- Boundaries
-- Consequences
-- Dependencies
-- Relationship to ADR-012 and ADR-013
-- Relationship to SPR-015
+   "Deferred — absorbed into SPR-015 prerequisites & Phase 9 Enterprise
+   Services (Cloud Archive)"
+
+   Ne pas réorganiser inutilement le roadmap.
 
 ==================================================
-PHASE 7 — GOVERNANCE UPDATE PLAN
+PHASE C — VALIDATION
 ==================================================
 
-Do not modify CURRENT_POSITION, PROJECT_STATE, CHANGELOG, or SESSION_HANDOFF yet.
+Après les modifications :
 
-First provide the exact proposed changes for:
+1. git diff --check
 
-- SPR-014 report
-- CURRENT_POSITION
-- PROJECT_STATE
-- SESSION_HANDOFF
-- CHANGELOG
-- possible ADR
+2. Vérifier que :
+   - aucun fichier app/ n'a été modifié ;
+   - aucun fichier database/ n'a été modifié ;
+   - aucun test n'a été créé/modifié ;
+   - aucun ADR n'a été créé/modifié ;
+   - aucun RecordLifecycle*.php n'existe ;
+   - aucun nouveau bounded context RecordsLifecycle n'existe.
 
-Show:
+3. Faire un git diff des seuls fichiers de gouvernance modifiés.
 
-FILE
-SECTION
-CHANGE
-REASON
+4. Vérifier la cohérence croisée :
+
+   CURRENT_POSITION
+       ↓
+   PROJECT_STATE
+       ↓
+   SESSION_HANDOFF
+       ↓
+   CHANGELOG
+       ↓
+   MASTER_ROADMAP
+       ↓
+   SPR-014 report
+
+   Tous doivent raconter exactement la même histoire :
+
+   SPR-014 = DEFERRED
+   SPR-015 = NEXT ACTIVE SPRINT
+   Cloud Archive = FUTURE / PHASE 9
+   Aucun RecordsLifecycle BC n'est implémenté.
+
+5. Ne lancer aucune implémentation SPR-015 pendant cette phase.
 
 ==================================================
-STOP CONDITION
+PHASE D — FINAL REPORT
 ==================================================
 
-STOP BEFORE WRITING ANY APPLICATION CODE.
+À la fin, produire un rapport précis :
 
-At the end, provide:
+GOVERNANCE RECONCILIATION — SPR-014
 
-SPR-014 ARCHITECTURAL DECISION BRIEF
+Status:
+- Deferred
 
-1. Original intent
-2. What already exists
-3. Real architectural gap
-4. SPR-015 dependency
-5. Storage dependency
-6. Options
-7. Recommended option
-8. Whether a new ADR is required
-9. Proposed new SPR-014 scope
-10. Explicit non-goals
-11. Files that would need documentation updates
-12. Exact next implementation step, but DO NOT IMPLEMENT IT
+Files modified:
+- liste exacte
 
-CRITICAL RULES:
+Files intentionally untouched:
+- app/
+- database/
+- tests/
+- docs/ADR/
 
-- Repository is the source of truth.
-- Existing accepted ADRs outrank roadmap assumptions.
-- Do not recreate missing historical work as if it existed.
-- Do not implement a generic lifecycle abstraction.
-- Do not modify application code.
-- Do not modify existing ADRs.
-- Do not create an ADR until the architectural decision is demonstrated to be necessary.
-- Do not create migrations.
-- Do not create models.
-- Do not create tests.
-- Do not create factories.
-- Do not create contracts/adapters.
-- Do not commit anything.
+Validation:
+- git diff --check
+- coherence check
+- no RecordsLifecycle implementation
 
-This phase is ARCHITECTURE ONLY.
+Then give the exact next implementation position:
+
+NEXT SPRINT:
+SPR-015 — Certificate & Transcript Engine
+
+NEXT TASK:
+SPR-015 DISCOVERY ONLY
+
+La première tâche de SPR-015 sera :
+
+1. Lire les contrats existants :
+   - ReportCard
+   - ClassCouncil
+   - Gradebook
+   - AcademicPolicies
+   - Enrollment
+
+2. Définir les business rules de :
+   - Transcript
+   - Certificate
+
+3. Identifier exactement quelles données publiées sont nécessaires.
+
+4. Vérifier les générateurs existants dans AcademicCommunication.
+
+5. Produire un SPR-015 discovery report AVANT toute modification de code.
+
+NE PAS commencer à coder SPR-015 dans cette session.
+
+STOP après la réconciliation de gouvernance et le rapport final.
