@@ -1,479 +1,286 @@
-# NEXUSSCHOOL — SPR-014 RECOVERY / RESTART PROTOCOL
-
-Tu travailles dans le repository :
-
-C:\xampp\htdocs\NexusSchool-version-1.0
-
-Nous devons reprendre le sprint SPR-014 — Records Lifecycle Management Engine.
+Continue exactement l’audit Phase 0 / Phase 1.
 
 IMPORTANT :
-Le précédent workspace dans lequel SPR-014 avait été développé est irrécupérable.
-Une vérification forensic complète a confirmé que les fichiers SPR-014 annoncés précédemment n'existent PAS dans ce repository et ne sont présents ni dans Git, ni dans les branches distantes, ni dans les worktrees/stashes locaux.
+- Aucun code ne doit être créé ou modifié pour l’instant.
+- Aucun migration, test, factory ou documentation SPR-014 ne doit être créé.
+- Nous sommes toujours en audit architectural.
+- Tout doit être basé sur ce repository réel, pas sur les travaux SPR-014 perdus de l’ancien workspace.
 
-NE SUPPOSE DONC PAS QUE LE CODE SPR-014 EXISTE.
+Tu as déjà confirmé :
+- HEAD ac8acc2
+- main
+- working tree clean
+- aucun RecordLifecycle existant
+- aucun provenance existant
+- Shared kernel limité notamment à Shared/Enums et Shared/Traits
+- SoftDeletes présent dans le repository
+- school_id / tenant ownership présent dans les migrations
+- ADR-006, ADR-012 et ADR-013 présents sous docs/ADR/
 
-État confirmé :
-
-- HEAD : ac8acc2
-- branche : main
-- working tree : clean
-- remote main : 345153c
-- aucun fichier RecordsLifecycle existant
-- aucun RecordLifecycle.php
-- aucun RecordLifecycleState.php
-- aucun RecordLifecycleService.php
-- aucune migration RecordsLifecycle
-- aucune factory RecordsLifecycle
-- aucun test RecordsLifecycle
-- aucun rapport SPR-014 existant
-- aucun commit contenant l'implémentation SPR-014
-- aucune branche locale alternative
-- aucun stash
-- aucun worktree alternatif récupérable
-
-Le travail SPR-014 précédent est donc considéré comme PERDU et ne doit PAS être présenté comme existant.
+Poursuis maintenant avec les points suivants.
 
 ==================================================
-OBJECTIF
+1. GOUVERNANCE / ADR
 ==================================================
 
-Nous allons maintenant RECONSTRUIRE SPR-014 proprement à partir du repository actuel.
+Lis intégralement les ADR pertinents, notamment :
 
-Mais avant d'écrire du code, nous devons refaire l'audit architectural.
+- ADR-006
+- ADR-012
+- ADR-013
+- tout autre ADR concernant :
+  tenancy
+  academic architecture
+  lifecycle
+  documents
+  events
+  authorization
+  bounded contexts
 
-Le sprint doit rester fidèle à l'architecture NexusSchool existante.
+Pour chaque ADR pertinent, indique :
 
-SPR-014 doit être conçu comme :
+- décision
+- statut
+- contraintes imposées
+- impact potentiel sur SPR-014
 
-"Thin provenance + lifecycle metadata envelope for official academic artifacts"
-
-et NON comme :
-
-- document generation engine
-- PDF engine
-- notification engine
-- archive storage system
-- transcript generator
-- reporting/dashboard engine
-- public API
-- replacement for ReportCard
-- replacement for AcademicCommunication
-- replacement for ClassCouncil
-
-==================================================
-PHASE 0 — BASELINE ABSOLUE
-==================================================
-
-Avant toute modification :
-
-1. Exécute :
-
-git status --short
-git log --oneline -10
-git branch -a
-git remote -v
-
-2. Vérifie réellement l'arborescence :
-
-app/Domains
-tests/Unit/Domains
-tests/Feature/Domains
-database/migrations
-database/factories
-docs/docs/00_Project_Management
-docs/docs/99_Project_Journal
-
-3. Recherche explicitement :
-
-RecordLifecycle
-RecordsLifecycle
-lifecycle
-provenance
-published_at
-archived_at
-SoftDeletes
-SchoolOwned
-HasSchoolId
-ScopedByTenant
-
-4. Lis les documents de gouvernance pertinents AVANT toute conception :
-
-- architecture globale
-- DDD / bounded contexts
-- tenancy
-- authorization
-- coding standards
-- testing standards
-- sprint workflow
-- ADRs
-- CURRENT_POSITION
-- PROJECT_STATE
-- SESSION_HANDOFF
-- MASTER_ROADMAP
-
-5. Lis particulièrement les implémentations existantes de :
-
-- ReportCard
-- AcademicCommunication
-- ClassCouncil
-- AcademicPolicy
-- Student
-- Enrollment
-
-Ne crée aucune abstraction avant d'avoir identifié les conventions réellement utilisées.
+Ne suppose jamais qu'un ADR est applicable simplement parce que son titre semble pertinent.
 
 ==================================================
-PHASE 1 — AUDIT DES DOMAINES EXISTANTS
+2. SHARED KERNEL
 ==================================================
 
-Nous devons déterminer comment les domaines existants représentent :
+Inspecte réellement :
 
-- création
-- publication
-- archivage
-- immutabilité
-- version
-- provenance
-- tenant ownership
-- authorization
-- événements
-- policies
+app/Domains/Shared/
+
+notamment :
+
+- Traits
+- Enums
+- éventuels contracts ou helpers
+
+Identifie les mécanismes existants que SPR-014 devrait réutiliser.
+
+==================================================
+3. CLASS COUNCIL
+==================================================
+
+Audit détaillé de :
+
+app/Domains/ClassCouncil/
+
+Documente :
+
+- models
+- enums / state machine
 - actions
 - services
 - contracts
 - adapters
-
-Commence obligatoirement par ClassCouncil car il existe déjà et constitue un exemple important de lifecycle académique.
-
-Inspecte notamment :
-
-- CouncilSession
-- CouncilDecision
-- CouncilDeliberation
-- CouncilSessionStatus
-- actions
+- policies
 - events
 - listeners
+- observers
+- migrations
+- factories
+- unit tests
+- feature tests
+
+Construis la lifecycle map réelle.
+
+Exemple de format :
+
+Draft
+ ↓
+Convened
+ ↓
+Published
+ ↓
+Archived
+
+Mais utilise UNIQUEMENT les états réellement présents dans le code.
+
+Identifie également les données qui pourraient constituer une provenance :
+
+- school_id
+- academic year
+- term
+- class
+- section
+- student
+- staff
+- session ID
+- decision ID
+- etc.
+
+==================================================
+4. REPORT CARD
+==================================================
+
+Même audit pour :
+
+app/Domains/ReportCard/
+
+Identifier précisément :
+
+- création/génération
+- publication
+- archivage
+- version
+- document identity
+- events
 - policies
+- authorization
+- tenant isolation
 - tests
 
-Puis inspecte :
+Vérifie particulièrement s'il existe déjà une abstraction de document,
+publication ou provenance qui pourrait rendre SPR-014 redondant.
 
+==================================================
+5. ACADEMIC COMMUNICATION
+==================================================
+
+Même audit pour :
+
+app/Domains/AcademicCommunication/
+
+Identifier :
+
+- AcademicDocument
+- DocumentType
+- GenerateDocumentAction
+- PublishDocumentAction
+- ArchiveDocumentAction
+- events
+- policies
+- version/document number
+- tenant ownership
+- tests
+
+Détermine précisément quelles données peuvent servir de provenance.
+
+==================================================
+6. ACADEMIC POLICY
+==================================================
+
+Inspecte :
+
+app/Domains/AcademicPolicy/
+
+Détermine si AcademicPolicy doit :
+
+- produire des records
+- être référencé par RecordsLifecycle
+- rester totalement indépendant
+
+Ne crée aucune dépendance simplement parce qu'elle semble utile.
+
+==================================================
+7. CROSS-DOMAIN ANALYSIS
+==================================================
+
+À partir des quatre domaines :
+
+ClassCouncil
 ReportCard
 AcademicCommunication
 AcademicPolicy
 
-Ne modifie encore aucun fichier.
+détermine :
+
+A. Qu'est-ce qu'ils ont réellement en commun ?
+B. Qu'est-ce qui est différent ?
+C. Quel problème architectural justifie réellement SPR-014 ?
+D. Quel problème ne nécessite PAS SPR-014 ?
+E. Quelle serait la plus petite abstraction commune viable ?
+F. Où placer cette abstraction dans l'architecture existante ?
+
+Très important :
+
+Ne pars PAS de l'idée que RecordsLifecycle doit obligatoirement être une
+nouvelle grosse bounded context.
+
+Prouve d'abord que cette abstraction est nécessaire.
 
 ==================================================
-PHASE 2 — GAP ANALYSIS
+8. PROPOSITION DE SCOPE
 ==================================================
 
-À partir du code réel, produis une analyse :
+À la fin de l'audit, propose :
 
-A. Ce qui existe déjà et peut être réutilisé
-B. Ce qui manque pour SPR-014
-C. Ce qui serait une duplication dangereuse
-D. Les frontières exactes entre RecordsLifecycle et les domaines producteurs
-E. Les contrats nécessaires
-F. Les transitions réellement nécessaires
+SPR-014 V1
 
-Le résultat doit être enregistré dans :
+avec :
 
-docs/docs/00_Project_Management/SPR-014_Records_Lifecycle_Engine_Report.md
-
-Créer le fichier s'il n'existe pas.
-
-Le rapport doit explicitement indiquer :
-
-STATUS: RECONSTRUCTION FROM SCRATCH
-
-et non "recovered", "already implemented" ou "previously validated".
-
-==================================================
-PHASE 3 — SCOPE INITIAL
-==================================================
-
-La première implémentation doit rester minimale.
-
-RecordsLifecycle doit fournir seulement :
-
-- provenance
-- source_domain
-- source_type
-- source_id
-- source_version
-- school_id
-- academic_context
-- lifecycle state
-- lifecycle transitions
-- authorization
-- tenant isolation
-- immutable terminal states
-
-États initiaux envisagés :
-
-Registered
-Published
-Archived
-
-Mais NE LES IMPOSE PAS aveuglément.
-
-Vérifie d'abord les lifecycle semantics existantes dans ReportCard,
-AcademicCommunication et ClassCouncil.
-
-Si une autre nomenclature est nécessaire pour rester cohérent avec NexusSchool,
-documente la décision dans le rapport avant implémentation.
-
-==================================================
-PHASE 4 — CONTRACT BOUNDARIES
-==================================================
-
-Le domaine RecordsLifecycle ne doit PAS importer directement :
-
-- ReportCard models
-- AcademicCommunication models
-- ClassCouncil models
-
-Les domaines producteurs ne doivent PAS manipuler directement le modèle
-RecordLifecycle.
-
-Utiliser des contracts/adapters si l'architecture actuelle les justifie.
-
-Définir explicitement :
-
-Producer Domain
-    ↓
-Domain Contract
-    ↓
-Adapter
-    ↓
-RecordsLifecycle Service
-    ↓
-RecordLifecycle persistence
-
-Mais seulement si cette architecture correspond réellement aux conventions
-existantes du repository.
-
-Ne crée pas d'architecture "parfaite" théorique inutile.
-
-==================================================
-PHASE 5 — IMPLEMENTATION
-==================================================
-
-Une fois les phases 0-4 terminées et documentées, implémente le premier slice.
-
-Structure attendue à adapter aux conventions réelles :
-
-app/Domains/RecordsLifecycle/
-
-    Domain/
-        Enums/
-        Contracts/
-
-    Application/
-        DTOs/
-        Actions/
-        Services/
-
-    Infrastructure/
-        Models/
-        Policies/
-
-    RecordsLifecycleServiceProvider.php
+- objectif précis
+- 1 à 3 use cases maximum
+- états nécessaires
+- provenance minimale
+- contrats nécessaires
+- producteurs concernés
+- consommateurs concernés
+- données persistées
+- policies
+- événements éventuels
+- tests nécessaires
 
 Puis :
 
-database/migrations/
-database/factories/RecordsLifecycle/
+NON-GOALS
 
-tests/Unit/Domains/RecordsLifecycle/
-tests/Feature/Domains/RecordsLifecycle/
-
-NE crée pas les dossiers/fichiers si les conventions du repository indiquent
-une autre organisation.
+avec tout ce qui doit explicitement rester hors scope.
 
 ==================================================
-PHASE 6 — STATE MACHINE
+9. VERDICT
 ==================================================
 
-Créer des tests explicites pour TOUTES les transitions.
+Donne obligatoirement l'un des trois verdicts :
 
-Si les états retenus sont :
+READY FOR IMPLEMENTATION
 
-Registered
-Published
-Archived
+ou
 
-tester séparément :
+NEEDS REWORK
 
-Registered → Published       VALID
-Registered → Archived        VALID
-Published → Archived        VALID
+ou
 
-et toutes les transitions invalides.
+SPR-014 NOT JUSTIFIED BY CURRENT ARCHITECTURE
 
-Tester particulièrement :
+Si READY FOR IMPLEMENTATION :
 
-Archived → Registered
-Archived → Published
-Archived → Archived
-Published → Registered
-Published → Published
-Registered → Registered
+donne l'ordre exact des fichiers à créer/modifier.
 
-Les états terminaux doivent être immuables.
+Si NEEDS REWORK :
+
+explique précisément ce qui manque.
+
+Si NOT JUSTIFIED :
+
+explique quel mécanisme existant doit être utilisé à la place.
 
 ==================================================
-PHASE 7 — SECURITY
+10. RAPPORT
 ==================================================
 
-Tenant isolation obligatoire.
+Tu peux créer/modifier UNIQUEMENT le rapport d'audit :
 
-Tester :
+docs/docs/00_Project_Management/SPR-014_Records_Lifecycle_Engine_Report.md
 
-- même school : autorisé
-- autre school : refusé
-- super admin : comportement conforme aux policies existantes
-- accès direct à un lifecycle d'une autre école
-- publication cross-school
-- archivage cross-school
-- suppression/restore/forceDelete selon les conventions du projet
+Si le fichier n'existe pas, crée-le.
 
-Ne jamais introduire une nouvelle logique de tenancy si une convention
-existante peut être réutilisée.
+Ce document doit commencer par :
 
-==================================================
-PHASE 8 — INTEGRATION
-==================================================
+SPR-014 STATUS: RECONSTRUCTION FROM SCRATCH
 
-NE commence pas immédiatement par intégrer tous les domaines.
-
-Après le core :
-
-1. intégrer ReportCard
-2. tester
-3. intégrer AcademicCommunication
-4. tester
-5. évaluer ClassCouncil
-
-ClassCouncil ne doit être intégré que si le modèle de provenance est réellement
-compatible avec ses artifacts.
-
-Ne force aucune intégration simplement pour "terminer le sprint".
-
-==================================================
-PHASE 9 — TESTS
-==================================================
-
-Après chaque incrément :
-
-- tests unitaires ciblés
-- tests feature ciblés
-- tests du domaine producteur concerné
-- PHPStan
-- Pint
-
-Puis seulement à la fin :
-
-php artisan test
-
-Si le full suite est lent, ne le tue pas arbitrairement.
-Utilise des commandes ciblées pendant le développement puis exécute le full
-suite avec un timeout raisonnable.
-
-Aucun résultat ne doit être déclaré "PASS" sans sortie réelle.
-
-==================================================
-PHASE 10 — DOCUMENTATION
-==================================================
-
-Mettre à jour uniquement après validation réelle :
-
-- SPR-014_Records_Lifecycle_Engine_Report.md
-- CURRENT_POSITION.md
-- PROJECT_STATE.md
-- CHANGELOG.md
-- SESSION_HANDOFF.md
-- journal du jour
-
-Chaque document doit refléter les résultats réellement observés.
-
-Aucun chiffre inventé.
-
-==================================================
-RÈGLE CRITIQUE : GIT
-==================================================
-
-Le repository contient déjà un historique propre.
-
-NE fais PAS de commit automatiquement.
-
-NE fais PAS de reset.
-NE fais PAS de rebase.
-NE fais PAS de force push.
-NE détruis aucune modification utilisateur.
-
-Avant toute modification, afficher :
-
-git status --short
-
-À la fin, afficher :
-
-git status --short
-
-et classifier clairement :
-
-1. fichiers créés pour SPR-014
-2. fichiers modifiés pour SPR-014
-3. fichiers préexistants modifiés par ailleurs
-4. fichiers non liés
-
-==================================================
-RÈGLE CRITIQUE : PAS D'INVENTION
-==================================================
-
-Tu dois distinguer strictement :
+et distinguer clairement :
 
 CONFIRMED
 INFERRED
 PROPOSED
 NOT VERIFIED
 
-Si une information n'est pas démontrée par le repository ou par un test exécuté,
-elle doit être marquée NOT VERIFIED.
+Aucune implémentation ne doit être faite dans cette étape.
 
-Ne jamais écrire :
-
-"already implemented"
-"already validated"
-"tests pass"
-
-sans preuve présente dans cette session.
-
-==================================================
-POINT DE DÉPART
-==================================================
-
-Commence MAINTENANT par PHASE 0 et PHASE 1 uniquement.
-
-NE CODE PAS ENCORE.
-
-À la fin de Phase 1, fournis :
-
-1. état réel du repository
-2. architecture des bounded contexts pertinents
-3. lifecycle patterns existants
-4. ClassCouncil lifecycle détaillé
-5. ReportCard lifecycle détaillé
-6. AcademicCommunication lifecycle détaillé
-7. éléments réutilisables
-8. gaps exacts
-9. proposition de scope SPR-014
-10. fichiers qui seront créés/modifiés
-11. risques architecturaux
-12. verdict : READY FOR IMPLEMENTATION ou NEEDS REWORK
-
-Puis arrête-toi.
-
-Nous déciderons de la Phase 2 à partir de preuves réelles.
+À la fin, arrête-toi et fournis le rapport Phase 0/1 complet.
