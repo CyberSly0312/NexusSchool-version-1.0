@@ -1,338 +1,210 @@
-CONTINUATION — NEXUSSCHOOL SPR-014
+SYNCHRONISATION SPR-014 — NE PAS CODER
 
-Nous reprenons exactement l'état actuel du repository.
+Tu as correctement détecté une divergence critique entre le workspace actuel
+et l'état SPR-014 que nous avions précédemment développé.
 
-Ne recommence pas les travaux déjà validés.
+CONFIRME D'ABORD CET ÉTAT :
 
-SPR-014 — Records Lifecycle Management
-Status actuel : IN PROGRESS
+Workspace actuel :
+- branch: main
+- HEAD: ac8acc2
+- working tree: clean
+- SPR-013 = dernier état présent dans ce checkout
 
-Déjà validé :
-- RecordsLifecycle core
-- state machine
-- policy / authorization
-- tenant isolation
-- factory
-- ReportCard integration
-- AcademicCommunication integration
-- targeted tests
-- PHPStan = 0 errors
-- Pint = PASS sur les fichiers concernés
-
-Pattern architectural validé :
-
-Source Domain
-    ↓
-RecordsLifecycleContract
-    ↓
-RecordsLifecycleAdapter
-    ↓
-RecordsLifecycleService
-    ↓
-RecordLifecycle
-
-Les domaines sources ne doivent PAS importer directement le modèle
-RecordLifecycle.
-
-==================================================
-OBJECTIF IMMÉDIAT
-==================================================
-
-Poursuivre SPR-014 avec l'intégration de Class Council.
-
-Mais avant toute modification :
-
-1. Vérifie l'état actuel du repository.
-2. Lis le rapport actuel :
-   docs/docs/00_Project_Management/SPR-014_Records_Lifecycle_Engine_Report.md
-3. Lis :
-   CURRENT_POSITION.md
-   PROJECT_STATE.md
-   SESSION_HANDOFF.md
-4. Inspecte réellement le bounded context ClassCouncil.
-
-NE SUPPOSE AUCUN NOM DE CLASSE OU DE MÉTHODE.
-
-==================================================
-PHASE 1 — AUDIT CLASS COUNCIL
-==================================================
-
-Identifie précisément :
-
-- ClassCouncilServiceProvider
-- modèles
-- actions
-- services
-- contrats
-- adapters
-- policies
-- événements
-- transitions d'état
-- génération d'artefacts
-- publication
-- archivage
-- version/document number
-- academic context
-- tenant scoping
-- tests existants
-
-Cherche notamment les opérations correspondant à :
-
-Create / Generate
-Publish
-Archive
-Approve
-Finalize
-Close
-
-Détermine exactement quels événements/actions représentent le cycle de vie
-réel d'un artefact de Class Council.
-
-NE CODE RIEN avant d'avoir compris ce flux.
-
-==================================================
-PHASE 2 — COMPATIBILITÉ AVEC LE PATTERN EXISTANT
-==================================================
-
-Compare avec les intégrations déjà validées :
-
-ReportCard
-AcademicCommunication
-
-Détermine :
-
-- source_domain
-- source_type
-- source_id
-- source_version
-- academic_context
-- origin_event
-
-Le contrat doit rester minimal.
-
-Ne crée pas d'abstraction générique supplémentaire simplement pour
-"factoriser".
-
-==================================================
-PHASE 3 — IMPLÉMENTATION
-==================================================
-
-Si ClassCouncil produit bien un artefact entrant dans le scope SPR-014 :
-
-Créer uniquement les composants nécessaires :
-
-Domain/Contracts/RecordsLifecycleContract.php
-Infrastructure/Contracts/RecordsLifecycleAdapter.php
-
-ou réutiliser les structures existantes si elles sont déjà compatibles.
-
-Puis :
-
-- binding dans ClassCouncilServiceProvider
-- registration au bon point de création/génération
-- publication au vrai point de publication
-- archivage au vrai point d'archivage
-
-Le domaine ClassCouncil ne doit jamais dépendre directement de :
-
-RecordLifecycle
-RecordLifecycleState
-RecordLifecycleService
-
-Utiliser uniquement le Contract.
-
-Respecter :
-
-- tenant isolation
-- authorization
-- transactions
-- provenance
-- lifecycle transition rules
-- bounded context boundaries
-
-==================================================
-PHASE 4 — TESTS CLASS COUNCIL
-==================================================
-
-Créer des tests d'intégration ciblés.
-
-Tester au minimum :
-
-1. création/génération → lifecycle Registered
-2. publication → Published
-3. archivage → Archived
-4. tenant isolation
-5. cross-school denial
-6. provenance correcte
-7. source_domain
-8. source_type
-9. source_id
-10. source_version si applicable
-11. academic_context
-12. invalid lifecycle transition
-
-Ajouter également un test architectural garantissant que ClassCouncil
-n'importe pas directement RecordLifecycle si cette vérification est
-compatible avec les conventions existantes.
-
-==================================================
-PHASE 5 — VALIDATION
-==================================================
-
-Exécuter réellement :
-
-php artisan test tests/Unit/Domains/RecordsLifecycle
-php artisan test tests/Feature/Domains/RecordsLifecycle
-
-Puis les tests ClassCouncil concernés.
-
-Puis :
-
-php artisan test tests/Feature/Domains/ReportCard
-php artisan test tests/Feature/Domains/AcademicCommunication
-
-Puis :
-
-vendor/bin/phpstan analyse
-
-Puis Pint sur les fichiers touchés.
+Le travail SPR-014 précédemment réalisé était NON COMMITÉ dans un autre état
+du workspace et n'est donc pas présent ici.
 
 IMPORTANT :
+NE RÉIMPLÉMENTE PAS SPR-014.
+NE CRÉE AUCUN FICHIER.
+NE MODIFIE AUCUN FICHIER.
+NE FAIS AUCUN COMMIT.
+NE SUPPOSE PAS QUE LE TRAVAIL EST PERDU.
 
-Une commande interrompue, tuée ou timeoutée n'est PAS un succès.
-
-Ne donne jamais un résultat supposé.
-
-==================================================
-PHASE 6 — RÉGRESSION COMPLÈTE
-==================================================
-
-Si toutes les suites ciblées passent :
-
-php artisan test
-
-Lancer la suite complète.
-
-Si elle échoue :
-
-- identifier exactement le test
-- déterminer si la régression vient de SPR-014
-- corriger uniquement si nécessaire
-- sinon documenter le problème comme préexistant
-
-Ne modifie pas les tests historiques uniquement pour obtenir du vert.
-
-Ne modifie pas phpstan-baseline.neon pour masquer de nouvelles erreurs.
+OBJECTIF :
+Nous devons d'abord retrouver/synchroniser le workspace qui contient le
+travail SPR-014 déjà réalisé.
 
 ==================================================
-PHASE 7 — DOCUMENTATION
+PHASE 1 — RECHERCHE LOCALE UNIQUEMENT
 ==================================================
 
-Après validation seulement, mettre à jour :
+Cherche si une autre copie du projet NexusSchool existe localement.
 
-docs/docs/00_Project_Management/SPR-014_Records_Lifecycle_Engine_Report.md
-docs/docs/00_Project_Management/CURRENT_POSITION.md
-docs/docs/00_Project_Management/PROJECT_STATE.md
-docs/docs/00_Project_Management/CHANGELOG.md
-docs/docs/SESSION_HANDOFF.md
+Recherche notamment :
 
-Ajouter le journal de session selon la convention existante.
+- autres dossiers NexusSchool
+- autres workspaces Windsurf
+- branches locales
+- worktrees Git
+- dossiers temporaires
+- copies du projet
+- éventuels répertoires de sauvegarde
 
-Vérifier qu'aucune ancienne information contradictoire ne reste.
+Commandes utiles :
 
-==================================================
-PHASE 8 — DÉCISION
-==================================================
+git branch -a
+git worktree list
+git reflog --all --date=local
 
-SPR-014 ne devient COMPLETE que si :
+Puis recherche dans les emplacements locaux accessibles des fichiers :
 
-- RecordsLifecycle core validé
-- ReportCard integration validée
-- AcademicCommunication integration validée
-- ClassCouncil integration validée si retenue dans le scope
-- tests ciblés verts
-- PHPStan vert
-- Pint vert sur les fichiers touchés
-- full suite exécutée
-- aucune régression SPR-014
-- documentation cohérente
-- tenant isolation confirmée
-- architecture boundaries respectées
+RecordLifecycle.php
+RecordLifecycleState.php
+RecordLifecycleService.php
+SPR-014_Records_Lifecycle_Engine_Report.md
 
-Sinon :
-
-SPR-014 reste IN PROGRESS.
+Tu peux utiliser PowerShell pour rechercher, mais NE MODIFIE RIEN.
 
 ==================================================
-CONTRAINTES
+PHASE 2 — VÉRIFIER LES RÉSULTATS
 ==================================================
 
-- Aucun commit.
-- Ne pas restaurer le repository.
-- Ne pas nettoyer les centaines de changements préexistants.
-- Ne pas toucher aux domaines sans nécessité.
-- Ne pas élargir le scope vers PDF, API, notifications, analytics,
-  dashboard, transcript generation ou archive storage.
-- Ne pas modifier le PHPStan baseline pour cacher des erreurs.
-- Ne pas inventer de résultats.
-- Distinguer clairement :
-  CONFIRMED
-  NOT VERIFIED
-  PRE-EXISTING
-  NEW
-  OUT OF SCOPE
+Si tu trouves une autre copie contenant SPR-014 :
+
+NE LA MODIFIE PAS.
+
+Rapporte :
+
+- chemin exact
+- branche éventuelle
+- HEAD éventuel
+- état git
+- présence des fichiers RecordsLifecycle
+- présence des intégrations ReportCard
+- présence des intégrations AcademicCommunication
+- présence des tests
+- présence des documents SPR-014
+
+Si tu trouves un worktree Git contenant SPR-014, indique-le explicitement.
 
 ==================================================
-FORMAT FINAL
+PHASE 3 — RECHERCHE GIT
 ==================================================
 
-# SPR-014 CURRENT POSITION
+Vérifie également si les travaux SPR-014 ont éventuellement été commités
+dans une branche ou un commit qui n'est pas actuellement checkouté.
 
-Status:
-Phase:
-Current Slice:
+Utilise :
 
-## Class Council Integration
+git log --all --oneline --decorate --graph
+git reflog --all
+git fsck --no-reflogs --unreachable
+
+Cherche particulièrement :
+
+RecordsLifecycle
+SPR-014
+AcademicCommunication
+ReportCard
+
+Si tu trouves un commit pertinent, NE LE CHERRY-PICK PAS.
+
+Donne-moi seulement :
+
+commit hash
+message
+branche éventuelle
+date
+fichiers concernés
+
+==================================================
+PHASE 4 — SI LE TRAVAIL EST RETROUVÉ
+==================================================
+
+NE FAIS AUCUNE SYNCHRONISATION AUTOMATIQUE.
+
+Ne fais pas :
+
+git reset
+git checkout
+git restore
+git clean
+git cherry-pick
+git merge
+git rebase
+
+tant que je ne t'ai pas donné explicitement l'autorisation.
+
+Nous déciderons ensuite de la méthode de récupération la plus sûre.
+
+==================================================
+PHASE 5 — SI LE TRAVAIL N'EST PAS RETROUVÉ
+==================================================
+
+Ne réimplémente toujours rien.
+
+Indique clairement :
+
+SPR-014 ARTIFACTS NOT FOUND LOCALLY
+
+Puis donne :
+
+- recherches effectuées
+- chemins examinés
+- branches trouvées
+- worktrees trouvés
+- commits pertinents trouvés ou non
+- reflog pertinent ou non
+- conclusion
+
+==================================================
+CONTRAINTE ABSOLUE
+==================================================
+
+Cette session est UNIQUEMENT une session de récupération/synchronisation.
+
+Aucun changement de code.
+
+Aucun changement documentaire.
+
+Aucun commit.
+
+Aucune restauration destructive.
+
+Aucun reset.
+
+Aucun cherry-pick.
+
+Aucun merge.
+
+Aucun rebase.
+
+Nous devons d'abord retrouver le véritable état SPR-014.
+
+==================================================
+RÉSULTAT FINAL
+==================================================
+
+# SPR-014 SYNCHRONIZATION STATUS
+
+Current workspace:
+HEAD:
+Working tree:
+
+## SPR-014 artifacts found
 - ...
 
-## Completed
+## Alternative workspaces
 - ...
 
-## Tests
-- RecordsLifecycle:
-- ReportCard:
-- AcademicCommunication:
-- ClassCouncil:
-- Full suite:
-
-## PHPStan
+## Git branches
 - ...
 
-## Pint
+## Relevant commits
 - ...
 
-## Files Added
+## Reflog findings
 - ...
 
-## Files Modified
+## Recovery candidate
 - ...
 
-## Confirmed
-- ...
+## Changes made
+NONE
 
-## Not Yet Verified
-- ...
+## Next safe action
+...
 
-## Known Issues
-- ...
-
-## Remaining Work
-- ...
-
-## Final Verdict
-COMPLETE / IN PROGRESS
-
-COMMENCE PAR LA PHASE 1 :
-AUDIT RÉEL DU BOUNDED CONTEXT CLASS COUNCIL.
-
-NE MODIFIE AUCUN FICHIER AVANT CET AUDIT.
+COMMENCE PAR LA RECHERCHE LOCALE ET GIT.
+NE MODIFIE RIEN.
