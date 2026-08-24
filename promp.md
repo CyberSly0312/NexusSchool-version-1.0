@@ -1,286 +1,313 @@
-Continue exactement l’audit Phase 0 / Phase 1.
+Continue l'audit exactement à partir de cette découverte.
 
 IMPORTANT :
-- Aucun code ne doit être créé ou modifié pour l’instant.
-- Aucun migration, test, factory ou documentation SPR-014 ne doit être créé.
-- Nous sommes toujours en audit architectural.
-- Tout doit être basé sur ce repository réel, pas sur les travaux SPR-014 perdus de l’ancien workspace.
+- Toujours aucune implémentation SPR-014.
+- Ne crée aucun ADR.
+- Ne remplis aucun ADR vide.
+- Ne modifie pas les ADR existants.
+- Nous sommes encore en Phase 0/1.
+- Documente uniquement les conclusions dans le rapport SPR-014.
 
-Tu as déjà confirmé :
-- HEAD ac8acc2
-- main
-- working tree clean
-- aucun RecordLifecycle existant
-- aucun provenance existant
-- Shared kernel limité notamment à Shared/Enums et Shared/Traits
-- SoftDeletes présent dans le repository
-- school_id / tenant ownership présent dans les migrations
-- ADR-006, ADR-012 et ADR-013 présents sous docs/ADR/
+Tu as confirmé :
 
-Poursuis maintenant avec les points suivants.
+CONFIRMED
+- 19 fichiers ADR existent sous docs/ADR/
+- seuls ADR-006, ADR-012 et ADR-013 contiennent réellement du contenu
+- les autres ADR sont des fichiers vides
+- Shared Kernel contient actuellement :
+  - HasEntityExtraction.php
+  - UniqueValidator.php
+  - ActiveArchivedStatus.php
+  - DraftActiveArchivedStatus.php
+- aucun RecordLifecycle n'existe dans le repository
+- aucun provenance mechanism explicite n'a été trouvé jusqu'ici
 
-==================================================
-1. GOUVERNANCE / ADR
-==================================================
-
-Lis intégralement les ADR pertinents, notamment :
-
-- ADR-006
-- ADR-012
-- ADR-013
-- tout autre ADR concernant :
-  tenancy
-  academic architecture
-  lifecycle
-  documents
-  events
-  authorization
-  bounded contexts
-
-Pour chaque ADR pertinent, indique :
-
-- décision
-- statut
-- contraintes imposées
-- impact potentiel sur SPR-014
-
-Ne suppose jamais qu'un ADR est applicable simplement parce que son titre semble pertinent.
+Continue maintenant avec les étapes suivantes.
 
 ==================================================
-2. SHARED KERNEL
+A. ADR-006 / ADR-012 / ADR-013
 ==================================================
 
-Inspecte réellement :
+Lis intégralement :
+
+docs/ADR/ADR-006.md
+docs/ADR/ADR-012.md
+docs/ADR/ADR-013.md
+
+Pour chacun, extrais uniquement ce qui est réellement écrit :
+
+1. Status
+2. Date
+3. Décision
+4. Architecture imposée
+5. Bounded contexts concernés
+6. Lifecycle / events / authorization / tenancy concernés
+7. Contraintes qui pourraient affecter SPR-014
+
+Ne complète pas les informations manquantes par déduction.
+
+==================================================
+B. SHARED KERNEL
+==================================================
+
+Inspecte complètement :
 
 app/Domains/Shared/
 
-notamment :
+Pour :
 
-- Traits
-- Enums
-- éventuels contracts ou helpers
+ActiveArchivedStatus
+DraftActiveArchivedStatus
+HasEntityExtraction
+UniqueValidator
 
-Identifie les mécanismes existants que SPR-014 devrait réutiliser.
+détermine :
+
+- où ils sont utilisés
+- quels domaines les utilisent
+- s'ils peuvent être réutilisés par SPR-014
+- ou s'ils sont trop spécifiques
+
+Cherche leurs références avec :
+
+git grep
+
+Ne crée aucune nouvelle enum.
 
 ==================================================
-3. CLASS COUNCIL
+C. TENANCY / SCHOOL OWNERSHIP
 ==================================================
 
-Audit détaillé de :
+Fais maintenant une recherche réelle dans le repository pour identifier le
+pattern officiel de tenant ownership.
+
+Cherche notamment :
+
+- school_id
+- tenant_id
+- SchoolOwned
+- HasSchoolId
+- ScopedByTenant
+- BelongsToSchool
+- InitializeTenancy
+- tenant()
+
+Puis identifie :
+
+1. le trait réellement utilisé
+2. les interfaces réellement utilisées
+3. le pattern des migrations
+4. le pattern des modèles
+5. le pattern des policies
+6. le pattern des tests cross-school
+
+Donne au moins 2 exemples réels provenant de domaines existants.
+
+==================================================
+D. CLASS COUNCIL
+==================================================
+
+Commence maintenant l'audit détaillé de ClassCouncil.
+
+Inspecte :
 
 app/Domains/ClassCouncil/
 
+et les tests correspondants.
+
+Tu dois établir une lifecycle map basée uniquement sur le code réel.
+
 Documente :
 
-- models
-- enums / state machine
-- actions
-- services
-- contracts
-- adapters
-- policies
-- events
-- listeners
-- observers
+MODEL
+- CouncilSession
+- CouncilDecision
+- CouncilDeliberation
+
+STATE
+- enum / status
+
+ACTIONS
+- Create
+- Convene
+- RecordDecision
+- RecordDeliberation
+- Publish
+- Archive
+- autres éventuelles
+
+EVENTS
+- Created
+- Convened
+- DecisionRecorded
+- Published
+- Archived
+- autres
+
+POLICIES / AUTHORIZATION
+- permissions
+- school isolation
+- roles
+
+PERSISTENCE
 - migrations
-- factories
-- unit tests
-- feature tests
+- foreign keys
+- version fields
+- timestamps
+- soft deletes éventuels
 
-Construis la lifecycle map réelle.
+TESTS
+- unit
+- feature
+- tenant isolation
+- transitions
+- authorization
 
-Exemple de format :
+Puis réponds à cette question :
 
-Draft
- ↓
-Convened
- ↓
-Published
- ↓
-Archived
+"Quel est exactement l'artefact officiel produit par ClassCouncil que
+RecordsLifecycle pourrait éventuellement envelopper ?"
 
-Mais utilise UNIQUEMENT les états réellement présents dans le code.
-
-Identifie également les données qui pourraient constituer une provenance :
-
-- school_id
-- academic year
-- term
-- class
-- section
-- student
-- staff
-- session ID
-- decision ID
-- etc.
+Ne suppose pas que CouncilSession lui-même est cet artefact.
 
 ==================================================
-4. REPORT CARD
+E. REPORT CARD
 ==================================================
 
-Même audit pour :
+Ensuite inspecte ReportCard.
 
-app/Domains/ReportCard/
+Cherche notamment :
 
-Identifier précisément :
-
-- création/génération
+- ReportCard model
+- generation
 - publication
-- archivage
+- archive
 - version
 - document identity
 - events
 - policies
 - authorization
-- tenant isolation
-- tests
-
-Vérifie particulièrement s'il existe déjà une abstraction de document,
-publication ou provenance qui pourrait rendre SPR-014 redondant.
-
-==================================================
-5. ACADEMIC COMMUNICATION
-==================================================
-
-Même audit pour :
-
-app/Domains/AcademicCommunication/
-
-Identifier :
-
-- AcademicDocument
-- DocumentType
-- GenerateDocumentAction
-- PublishDocumentAction
-- ArchiveDocumentAction
-- events
-- policies
-- version/document number
 - tenant ownership
 - tests
 
-Détermine précisément quelles données peuvent servir de provenance.
+Réponds :
+
+Quel est l'artefact officiel ?
+
+Quel est son identifiant ?
+
+Comment est-il versionné ?
+
+Comment sait-on qu'il est publié ?
+
+Comment sait-on qu'il est archivé ?
 
 ==================================================
-6. ACADEMIC POLICY
+F. ACADEMIC COMMUNICATION
 ==================================================
 
-Inspecte :
+Inspecte AcademicCommunication.
 
-app/Domains/AcademicPolicy/
+Cherche notamment :
 
-Détermine si AcademicPolicy doit :
-
-- produire des records
-- être référencé par RecordsLifecycle
-- rester totalement indépendant
-
-Ne crée aucune dépendance simplement parce qu'elle semble utile.
-
-==================================================
-7. CROSS-DOMAIN ANALYSIS
-==================================================
-
-À partir des quatre domaines :
-
-ClassCouncil
-ReportCard
-AcademicCommunication
-AcademicPolicy
-
-détermine :
-
-A. Qu'est-ce qu'ils ont réellement en commun ?
-B. Qu'est-ce qui est différent ?
-C. Quel problème architectural justifie réellement SPR-014 ?
-D. Quel problème ne nécessite PAS SPR-014 ?
-E. Quelle serait la plus petite abstraction commune viable ?
-F. Où placer cette abstraction dans l'architecture existante ?
-
-Très important :
-
-Ne pars PAS de l'idée que RecordsLifecycle doit obligatoirement être une
-nouvelle grosse bounded context.
-
-Prouve d'abord que cette abstraction est nécessaire.
-
-==================================================
-8. PROPOSITION DE SCOPE
-==================================================
-
-À la fin de l'audit, propose :
-
-SPR-014 V1
-
-avec :
-
-- objectif précis
-- 1 à 3 use cases maximum
-- états nécessaires
-- provenance minimale
-- contrats nécessaires
-- producteurs concernés
-- consommateurs concernés
-- données persistées
+- AcademicDocument
+- DocumentType
+- document number
+- publication
+- archive
+- events
 - policies
-- événements éventuels
-- tests nécessaires
+- tenant ownership
 
-Puis :
-
-NON-GOALS
-
-avec tout ce qui doit explicitement rester hors scope.
+Réponds aux mêmes questions que pour ReportCard.
 
 ==================================================
-9. VERDICT
+G. CROSS-DOMAIN COMPARISON
 ==================================================
 
-Donne obligatoirement l'un des trois verdicts :
+Construis une comparaison :
 
-READY FOR IMPLEMENTATION
+| Domaine | Artefact | Identité | Version | Publication | Archivage | Tenant | Events |
+|---------|----------|----------|---------|-------------|-----------|--------|--------|
 
-ou
+Remplis uniquement les informations prouvées par le repository.
 
-NEEDS REWORK
+Puis identifie les véritables invariants communs.
 
-ou
+==================================================
+H. QUESTION ARCHITECTURALE CRITIQUE
+==================================================
+
+Avant de proposer RecordsLifecycle, réponds :
+
+"Quel problème concret n'est PAS correctement résolu par les domaines existants
+et justifie l'existence d'un RecordsLifecycle bounded context ?"
+
+Si la réponse est faible ou si les domaines existants couvrent déjà le besoin,
+le verdict peut parfaitement être :
 
 SPR-014 NOT JUSTIFIED BY CURRENT ARCHITECTURE
 
-Si READY FOR IMPLEMENTATION :
-
-donne l'ordre exact des fichiers à créer/modifier.
-
-Si NEEDS REWORK :
-
-explique précisément ce qui manque.
-
-Si NOT JUSTIFIED :
-
-explique quel mécanisme existant doit être utilisé à la place.
+Nous ne sommes pas obligés de créer un nouveau bounded context simplement
+parce qu'un sprint existe dans la roadmap.
 
 ==================================================
-10. RAPPORT
+I. RAPPORT
 ==================================================
 
-Tu peux créer/modifier UNIQUEMENT le rapport d'audit :
+Continue/complète :
 
 docs/docs/00_Project_Management/SPR-014_Records_Lifecycle_Engine_Report.md
 
-Si le fichier n'existe pas, crée-le.
-
-Ce document doit commencer par :
-
-SPR-014 STATUS: RECONSTRUCTION FROM SCRATCH
-
-et distinguer clairement :
+Le rapport doit garder ces catégories :
 
 CONFIRMED
 INFERRED
 PROPOSED
 NOT VERIFIED
 
-Aucune implémentation ne doit être faite dans cette étape.
+Ajoute une section :
 
-À la fin, arrête-toi et fournis le rapport Phase 0/1 complet.
+"Repository Reality Check — 2026-08-24"
+
+et une section :
+
+"ADR Availability"
+
+qui précise que seuls ADR-006, ADR-012 et ADR-013 sont actuellement
+non-vides.
+
+NE PAS modifier :
+- CURRENT_POSITION
+- PROJECT_STATE
+- CHANGELOG
+- SESSION_HANDOFF
+
+tant que le verdict architectural final n'est pas établi.
+
+==================================================
+FIN DE L'ÉTAPE
+==================================================
+
+À la fin, ne code toujours pas.
+
+Retourne uniquement :
+
+1. ADR findings
+2. Shared Kernel findings
+3. Tenancy findings
+4. ClassCouncil lifecycle
+5. ReportCard lifecycle
+6. AcademicCommunication lifecycle
+7. Cross-domain comparison
+8. Actual architectural gap
+9. SPR-014 proposed minimum scope
+10. Final verdict
+
+Verdict obligatoire :
+
+READY FOR IMPLEMENTATION
+ou
+NEEDS REWORK
+ou
+SPR-014 NOT JUSTIFIED BY CURRENT ARCHITECTURE
