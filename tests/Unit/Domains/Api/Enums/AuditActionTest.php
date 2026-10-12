@@ -11,37 +11,37 @@ class AuditActionTest extends TestCase
 {
     public function test_token_created_label(): void
     {
-        $this->assertEquals('Token Created', AuditAction::TokenCreated->label());
+        $this->assertEquals('Jeton créé', AuditAction::TokenCreated->label());
     }
 
     public function test_token_revoked_label(): void
     {
-        $this->assertEquals('Token Revoked', AuditAction::TokenRevoked->label());
+        $this->assertEquals('Jeton révoqué', AuditAction::TokenRevoked->label());
     }
 
     public function test_client_created_label(): void
     {
-        $this->assertEquals('Client Created', AuditAction::ClientCreated->label());
+        $this->assertEquals('Client créé', AuditAction::ClientCreated->label());
     }
 
     public function test_client_disabled_label(): void
     {
-        $this->assertEquals('Client Disabled', AuditAction::ClientDisabled->label());
+        $this->assertEquals('Client désactivé', AuditAction::ClientDisabled->label());
     }
 
     public function test_webhook_registered_label(): void
     {
-        $this->assertEquals('Webhook Registered', AuditAction::WebhookRegistered->label());
+        $this->assertEquals('Webhook enregistré', AuditAction::WebhookRegistered->label());
     }
 
     public function test_webhook_delivered_label(): void
     {
-        $this->assertEquals('Webhook Delivered', AuditAction::WebhookDelivered->label());
+        $this->assertEquals('Webhook livré', AuditAction::WebhookDelivered->label());
     }
 
     public function test_webhook_failed_label(): void
     {
-        $this->assertEquals('Webhook Failed', AuditAction::WebhookFailed->label());
+        $this->assertEquals('Webhook échoué', AuditAction::WebhookFailed->label());
     }
 
     public function test_token_created_color(): void
@@ -91,5 +91,13 @@ class AuditActionTest extends TestCase
         $this->assertArrayHasKey('webhook_registered', $labels);
         $this->assertArrayHasKey('webhook_delivered', $labels);
         $this->assertArrayHasKey('webhook_failed', $labels);
+
+        $this->assertEquals('Jeton créé', $labels['token_created']);
+        $this->assertEquals('Jeton révoqué', $labels['token_revoked']);
+        $this->assertEquals('Client créé', $labels['client_created']);
+        $this->assertEquals('Client désactivé', $labels['client_disabled']);
+        $this->assertEquals('Webhook enregistré', $labels['webhook_registered']);
+        $this->assertEquals('Webhook livré', $labels['webhook_delivered']);
+        $this->assertEquals('Webhook échoué', $labels['webhook_failed']);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Filament;
 
-use App\Filament\Resources\UserResource;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Models\User;
@@ -43,16 +42,20 @@ class UserResourceTest extends TestCase
             'school_id' => $this->schoolId,
         ]);
 
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
         $this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_user_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/users')
+            ->get('/school-admin/users')
             ->assertSuccessful();
     }
 
@@ -61,26 +64,29 @@ class UserResourceTest extends TestCase
         $user = User::factory()->create([
             'first_name' => 'John',
             'last_name' => 'Doe',
+            'school_id' => $this->schoolId,
         ]);
 
         $this->actingAs($this->admin)
-            ->get('/admin/users')
+            ->get('/school-admin/users')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_user_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/users/create')
+            ->get('/school-admin/users/create')
             ->assertSuccessful();
     }
 
     public function test_can_render_edit_user_page(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'school_id' => $this->schoolId,
+        ]);
 
         $this->actingAs($this->admin)
-            ->get('/admin/users/'.$user->getRouteKey().'/edit')
+            ->get('/school-admin/users/'.$user->getRouteKey().'/edit')
             ->assertSuccessful();
     }
 
@@ -109,13 +115,18 @@ class UserResourceTest extends TestCase
         $user = User::factory()->create([
             'first_name' => 'Original',
             'last_name' => 'Name',
+            'school_id' => $this->schoolId,
         ]);
 
         Livewire::test(EditUser::class, ['record' => $user->getRouteKey()])
             ->fillForm([
                 'first_name' => 'Updated',
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'status' => 'active',
             ])
-            ->call('save');
+            ->call('save')
+            ->assertHasNoErrors();
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
@@ -125,7 +136,9 @@ class UserResourceTest extends TestCase
 
     public function test_can_delete_user(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'school_id' => $this->schoolId,
+        ]);
 
         Livewire::test(EditUser::class, ['record' => $user->getRouteKey()])
             ->callAction(DeleteAction::class);

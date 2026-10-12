@@ -10,7 +10,7 @@
 
 **Owner:** NexusSchool Architecture Team
 
-**Last Updated:** 06 August 2026
+**Last Updated:** 10 October 2026
 
 ---
 
@@ -95,7 +95,20 @@ Sprints
 * SPR-007 Timetable Engine
 * SPR-008 Attendance Engine
 * SPR-009 Assessment Engine
-* SPR-009.5 Academic Policies Engine
+* SPR-009.5 Academic Policies Engine — ✅ COMPLETED (2026-08-10, see note below)
+
+Status
+
+Completed
+
+Note (reconciliation 2026-08-10)
+
+SPR-009.5 Academic Policies Engine was **PLANNED / NOT STARTED** at the time of
+the reconciliation — only empty stub adapters existed. It has since been
+**implemented** (2026-08-10, third session): bounded context
+`App\Domains\AcademicPolicy`, real adapter wiring for Report Card and Academic
+Communication, typed policy store, Filament management surface. See
+`SPR-009.5_Academic_Policies_Engine_Report.md`.
 
 ---
 
@@ -122,17 +135,26 @@ Transform academic data into validated educational decisions.
 
 Status
 
-🟡 In Progress
+🔲 Planned — Not Started
 
 Sprints
 
-* SPR-014 Records Lifecycle Management Engine
+* SPR-014 Records Lifecycle Management Engine — 🔲 PLANNED / NOT STARTED
 * SPR-015 Certificate & Transcript Engine
 * SPR-016 Identity & Verification Engine
 
 Objective
 
 Create a permanent academic memory for every learner.
+
+Note (reconciliation 2026-08-10)
+
+SPR-009.5 Academic Policies Engine was **PLANNED / NOT STARTED** at the time of
+the reconciliation — no implementation existed (only empty stub adapters). It is
+now **COMPLETED** (2026-08-10, third session), lifting the architectural
+prerequisite for Phase 3. SPR-014 Records Lifecycle Management is **PLANNED /
+NOT STARTED** — no implementation, no migrations and no report exist. The next
+implementation target is **SPR-014 Records Lifecycle Management Engine**.
 
 ---
 
@@ -231,7 +253,7 @@ Planned
 
 Modules
 
-* Cloud Archive
+* Cloud Archive — **SPR-017 Archive & Cloud Storage Platform** (Phase 9; architecture in ADR-024, Proposed)
 * Backup
 * Disaster Recovery
 * Audit Center
@@ -248,9 +270,26 @@ Current Phase
 
 Phase 3 — Academic Records
 
+Last Completed Sprint
+
+SPR-015 — Certificate & Transcript Engine (COMPLETED)
+
+ESP-002
+
+Completed (hardening activity — working tree, uncommitted)
+
 Current Sprint
 
-SPR-014 Records Lifecycle Management Engine
+SPR-016 — Identity & Verification Engine — ARCHITECTURE DECISION / INITIALIZATION
+(ADR-022, 2026-09-07); NOT IMPLEMENTED
+
+Next Sprint
+
+SPR-016 — Identity & Verification Engine (implementation phase, ADR-022 governs)
+
+SPR-014
+
+Planned — Not Started
 
 Overall Progress
 
@@ -317,3 +356,56 @@ Major architectural changes require a new Architecture Decision Record (ADR).
 This document is the official strategic roadmap of the NexusSchool platform.
 
 Every future development must remain aligned with this roadmap.
+
+## SPR-014 — Records Lifecycle Management (validation update, 2026-08-11)
+
+**IMPLEMENTED — TARGETED GATES PASS**. Preserve the current thin metadata scope. Before marking complete, add and validate the narrow Report Card / Academic Communication contract-based registration or state-sync integration; do not duplicate their business logic.
+
+## SPR-015 / SPR-016 — Governance reconciliation (2026-09-07)
+
+**SPR-015 Certificate & Transcript Engine — COMPLETED** (implementation, report;
+suites green at last run: CertificateAndTranscript 45 tests / 218 assertions,
+AcademicCommunication 70 tests / 312 assertions).
+
+**SPR-016 Identity & Verification Engine — DISCOVERY COMPLETED; ARCHITECTURE
+DECISION / INITIALIZATION; NOT IMPLEMENTED.** Architecture formalized in **ADR-022**
+(Accepted, 2026-09-07): public unauthenticated central verification endpoint; random
+opaque verification token (≥144-bit, generated once, globally unique, SHA-256-hashed
+at rest) owned by the AcademicDocument aggregate; default LEVEL 2 disclosure; formal
+REVOKED/REPLACED semantics; QR = verification URL + opaque token (rendering delegated
+to SPR-012); central + opaque-token tenant resolution; document number never a
+secret. Phase 3 next implementation target is SPR-016, governed by ADR-022.
+
+**SPR-014 Records Lifecycle Management remains DEFERRED** — validated implementation
+awaiting the final closure decision; must not be considered COMPLETE before that
+closure.
+
+## SPR-017 — Phase 9 placement & ADR-024 (reconciliation 2026-10-10)
+
+**SPR-017 Archive & Cloud Storage Platform is a Phase 9 — Enterprise Services
+capability** (product-owner decision D1, 2026-10-10). It may be prioritized for
+**planning** now, but it is **not** an ordinary Phase 3 Academic Records sprint;
+any earlier roadmap/handoff reference implying otherwise is superseded by this note.
+
+Architecture is proposed in **ADR-024** (Status: **Proposed**, 2026-10-10):
+dedicated `App\Domains\Archive` bounded context consuming SPR-014
+`RecordsLifecycleContract` and SPR-012 read contracts only; **local-first storage
+with cloud deferred** (D2); retention **configurable per document type and per
+school**, mechanism built now with values owned by product/legal and automatic
+secure destruction disabled (D3); **`plans.storage_limit` stays the single quota
+authority** (D4); downloadable school archive packages in architectural scope but
+not mandatory for the first release (D5).
+
+Interlock: SPR-014 remains **DEFERRED** — consumed by contract only, must not be
+marked COMPLETE. No implementation was performed.
+
+Discovery / decision board:
+`SPR-017_Archive_Cloud_Storage_Decision_Board_Report.md`.
+
+### Note — §5 Current Position staleness (SPR-016)
+
+The §5 "Current Sprint" field still names SPR-016 at **ARCHITECTURE DECISION /
+INITIALIZATION; NOT IMPLEMENTED**, while later handoffs (`SESSION_HANDOFF.md`
+2026-09-07 … 2026-09-08) show SPR-016 Phases 1–5 implemented. Current reality:
+**SPR-016 IN PROGRESS (Phases 1–5 implemented, ADR-022 governs)**. This
+reconciliation records that by reference without rewriting the phase body above.

@@ -8,6 +8,7 @@ use App\Domains\AcademicCommunication\Application\DTOs\GenerateDocumentData;
 use App\Domains\AcademicCommunication\Application\Services\DocumentNumberGenerator;
 use App\Domains\AcademicCommunication\Domain\Contracts\AcademicFrameworkContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
+use App\Domains\AcademicCommunication\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\AcademicCommunication\Domain\Enums\ApprovalStatus;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentChannel;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentOrigin;
@@ -45,6 +46,7 @@ final class GenerateDocumentAction
         private readonly DocumentNumberGenerator $numberGenerator,
         private readonly DocumentRendererContract $renderer,
         private readonly AcademicFrameworkContract $academicFramework,
+        private readonly RecordsLifecycleContract $lifecycle,
     ) {
     }
 
@@ -110,6 +112,24 @@ final class GenerateDocumentAction
             $this->renderOfficialFile($document, $version, $template);
 
             $document->refresh();
+
+            $this->lifecycle->register(
+                $data->schoolId,
+                $data->documentType->value,
+                $document->getKey(),
+                $document->document_number,
+                array_filter([
+                    'year_id' => $data->yearId,
+                    'term_id' => $data->termId,
+                    'class_id' => $data->classId,
+                    'section_id' => $data->sectionId,
+                    'student_id' => $data->studentId,
+                    'staff_id' => $data->staffId,
+                ], static fn ($v): bool => $v !== null),
+                $actor?->getKey(),
+                'DocumentGenerated',
+                $actor,
+            );
 
             DocumentVersionCreated::dispatch($document, $version, false, $actor);
             DocumentGenerated::dispatch($document, $actor);

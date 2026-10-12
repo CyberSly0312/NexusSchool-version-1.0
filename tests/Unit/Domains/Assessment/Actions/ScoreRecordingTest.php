@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Domains\Assessment\Application\Actions\GenerateAssessmentStatisticsAction;
 use App\Domains\Assessment\Application\AssessmentService;
 use App\Domains\Assessment\Application\DTOs\BulkScoreItem;
 use App\Domains\Assessment\Application\DTOs\BulkScoresData;
+use App\Domains\Assessment\Domain\Contracts\AcademicPoliciesContract;
 use App\Domains\Assessment\Domain\Enums\AssessmentStatus;
 use App\Domains\Assessment\Domain\Enums\ScoreStatus;
 use App\Domains\Assessment\Domain\Enums\ScoreValidationStatus;
@@ -14,6 +16,7 @@ use App\Domains\Assessment\Domain\Exceptions\AssessmentNotScoreableException;
 use App\Domains\Assessment\Domain\Exceptions\ScoreOutOfRangeException;
 use App\Domains\Assessment\Domain\Exceptions\StudentNotEnrolledException;
 use App\Domains\Assessment\Domain\Exceptions\TeacherNotAuthorizedException;
+use App\Domains\Assessment\Domain\References\PolicyReference;
 use App\Domains\Assessment\Infrastructure\Models\AssessmentComponent;
 use App\Domains\Assessment\Infrastructure\Models\AssessmentScore;
 use App\Domains\Assessment\Infrastructure\Models\AssessmentStatistics;
@@ -32,6 +35,39 @@ function publishedAssessment(string $schoolId, array $context): \App\Domains\Ass
     app(AssessmentService::class)->publishAssessment($assessment);
 
     return $assessment->refresh();
+}
+
+final class FakeAssessmentPoliciesContract implements AcademicPoliciesContract
+{
+    /**
+     * @param  array<string, array<string, PolicyReference>>  $policies  Keyed by school then policy key.
+     */
+    public function __construct(private readonly array $policies = [])
+    {
+    }
+
+    public function policy(string $schoolId, string $key): ?PolicyReference
+    {
+        return $this->policies[$schoolId][$key] ?? null;
+    }
+}
+
+/**
+ * Bind a fake policy contract keyed by school, then by policy key.
+ */
+function withAssessmentPolicies(array $policies): void
+{
+    app()->instance(AcademicPoliciesContract::class, new FakeAssessmentPoliciesContract($policies));
+}
+
+function assessmentPolicy(string $key, float $value): PolicyReference
+{
+    return new PolicyReference(key: $key, label: $key, value: $value, valueType: 'float');
+}
+
+function generateAssessmentStatistics(\App\Domains\Assessment\Infrastructure\Models\Assessment $assessment)
+{
+    return app(GenerateAssessmentStatisticsAction::class)->execute($assessment);
 }
 
 test('a score is recorded for an enrolled student of the class', function (): void {
@@ -337,6 +373,197 @@ test('statistics persist official aggregates for an assessment', function (): vo
 
     expect($assessment->statistics()->count())->toBe(1)
         ->and(AssessmentStatistics::query()->where('school_id', $this->schoolId)->count())->toBe(1);
+});
+
+test('statistics honor an assessment passing score that differs from the global default', function (): void {
+    $enrollments = collect(range(1, 2))->map(fn (): \App\Domains\Enrollment\Infrastructure\Models\Enrollment => enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    ));
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => 16.0]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[0], score: 16.0);
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[1], score: 15.0);
+
+    $result = app(AssessmentService::class)->generateStatistics($assessment);
+
+    expect($result->passRate)->toBe(50.0);
+});
+
+test('statistics fall back to the global default when no passing score is set', function (): void {
+    $enrollments = collect(range(1, 2))->map(fn (): \App\Domains\Enrollment\Infrastructure\Models\Enrollment => enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    ));
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => null]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[0], score: 11.0);
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[1], score: 9.0);
+
+    $result = app(AssessmentService::class)->generateStatistics($assessment);
+
+    expect($result->passRate)->toBe(50.0);
+});
+
+test('a score exactly equal to the assessment passing score counts as a pass', function (): void {
+    $enrollment = enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    );
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => 16.0]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollment, score: 16.0);
+
+    $result = app(AssessmentService::class)->generateStatistics($assessment);
+
+    expect($result->passRate)->toBe(100.0);
+});
+
+test('score validation keeps flagging below the assessment passing score as a legitimate fail', function (): void {
+    $enrollment = enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    );
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => 16.0]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollment, score: 12.0);
+
+    expect($assessment->scores()->first()->validation_status)->toBe(ScoreValidationStatus::BelowPassing);
+
+    $result = app(AssessmentService::class)->generateStatistics($assessment);
+
+    expect($result->totalScores)->toBe(1)
+        ->and($result->passRate)->toBe(0.0);
+});
+
+test('an explicit assessment passing score precedes a school policy', function (): void {
+    withAssessmentPolicies([
+        $this->schoolId => [
+            'academic.assessment.default_passing_percentage' => assessmentPolicy('academic.assessment.default_passing_percentage', 40.0),
+        ],
+    ]);
+
+    $enrollments = collect(range(1, 2))->map(fn (): \App\Domains\Enrollment\Infrastructure\Models\Enrollment => enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    ));
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => 16.0]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[0], score: 12.0);
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[1], score: 16.0);
+
+    $result = generateAssessmentStatistics($assessment);
+
+    expect($result->passRate)->toBe(50.0);
+});
+
+test('a school policy overrides the global default when no passing score is set', function (): void {
+    withAssessmentPolicies([
+        $this->schoolId => [
+            'academic.assessment.default_passing_percentage' => assessmentPolicy('academic.assessment.default_passing_percentage', 40.0),
+        ],
+    ]);
+
+    $enrollments = collect(range(1, 2))->map(fn (): \App\Domains\Enrollment\Infrastructure\Models\Enrollment => enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    ));
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => null]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[0], score: 9.0);
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[1], score: 11.0);
+
+    $result = generateAssessmentStatistics($assessment);
+
+    expect($result->passRate)->toBe(100.0);
+});
+
+test('a school without a policy falls back to the global passing percentage', function (): void {
+    withAssessmentPolicies([]);
+
+    $enrollments = collect(range(1, 2))->map(fn (): \App\Domains\Enrollment\Infrastructure\Models\Enrollment => enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    ));
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => null]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[0], score: 11.0);
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[1], score: 9.0);
+
+    $result = generateAssessmentStatistics($assessment);
+
+    expect($result->passRate)->toBe(50.0);
+});
+
+test('one school policy never affects another school statistics', function (): void {
+    $otherSchool = makeTenant();
+
+    withAssessmentPolicies([
+        $otherSchool => [
+            'academic.assessment.default_passing_percentage' => assessmentPolicy('academic.assessment.default_passing_percentage', 40.0),
+        ],
+    ]);
+
+    $enrollments = collect(range(1, 2))->map(fn (): \App\Domains\Enrollment\Infrastructure\Models\Enrollment => enrollStudent(
+        $this->schoolId,
+        $this->context['year']->id,
+        $this->context['program']->id,
+        $this->context['level']->id,
+        $this->context['class']->id,
+    ));
+
+    $assessment = makeAssessment($this->schoolId, $this->context, ['passing_score' => null]);
+    app(AssessmentService::class)->publishAssessment($assessment);
+    $assessment = $assessment->refresh();
+
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[0], score: 11.0);
+    recordAssessmentScore($this->schoolId, $assessment, $enrollments[1], score: 9.0);
+
+    $result = generateAssessmentStatistics($assessment);
+
+    expect($result->passRate)->toBe(50.0);
 });
 
 test('statistics include below-passing scores but never out-of-range rows', function (): void {

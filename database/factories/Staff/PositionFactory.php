@@ -18,7 +18,7 @@ class PositionFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'code' => fake()->unique()->regexify('[a-z_]{4,12}'),
             'title' => fake()->jobTitle(),
             'description' => fake()->optional()->sentence(),

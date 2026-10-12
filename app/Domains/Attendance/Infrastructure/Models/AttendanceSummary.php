@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Attendance\Infrastructure\Models;
 
+use App\Contracts\SchoolOwned;
 use App\Domains\Attendance\Domain\ValueObjects\AttendancePercentage;
 use App\Domains\Attendance\Domain\ValueObjects\RiskScore;
 use App\Traits\HasSchoolId;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * (SPR-008). Produced by GenerateAttendanceSummaryAction; kept so reports never
  * re-derive heavy aggregations.
  */
-class AttendanceSummary extends Model
+class AttendanceSummary extends Model implements SchoolOwned
 {
     use HasFactory;
     use HasSchoolId;

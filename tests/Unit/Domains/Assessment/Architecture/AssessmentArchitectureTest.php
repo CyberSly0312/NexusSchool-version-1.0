@@ -37,6 +37,7 @@ test('the assessment Domain and Application layers never import foreign domain c
 test('every assessment adapter implements one of the domain contracts', function (): void {
     $contracts = [
         App\Domains\Assessment\Domain\Contracts\AcademicFrameworkContract::class,
+        App\Domains\Assessment\Domain\Contracts\AcademicPoliciesContract::class,
         App\Domains\Assessment\Domain\Contracts\EnrollmentContract::class,
         App\Domains\Assessment\Domain\Contracts\StudentIdentityContract::class,
         App\Domains\Assessment\Domain\Contracts\StaffContract::class,
@@ -67,6 +68,7 @@ test('every assessment adapter implements one of the domain contracts', function
 test('every assessment domain contract is bound in the container', function (): void {
     $contracts = [
         App\Domains\Assessment\Domain\Contracts\AcademicFrameworkContract::class,
+        App\Domains\Assessment\Domain\Contracts\AcademicPoliciesContract::class,
         App\Domains\Assessment\Domain\Contracts\EnrollmentContract::class,
         App\Domains\Assessment\Domain\Contracts\StudentIdentityContract::class,
         App\Domains\Assessment\Domain\Contracts\StaffContract::class,

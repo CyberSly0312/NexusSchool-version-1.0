@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\AcademicCommunication\Application\Actions;
 
+use App\Domains\AcademicCommunication\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentStatus;
 use App\Domains\AcademicCommunication\Domain\Events\DocumentArchived;
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocument;
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\DB;
  */
 final class ArchiveDocumentAction
 {
+    public function __construct(
+        private readonly RecordsLifecycleContract $lifecycle,
+    ) {
+    }
+
     public function execute(AcademicDocument $document, ?User $actor = null): AcademicDocument
     {
         return DB::transaction(function () use ($document, $actor): AcademicDocument {
@@ -28,6 +34,13 @@ final class ArchiveDocumentAction
             ]);
 
             $document->refresh();
+
+            $this->lifecycle->archive(
+                $document->school_id,
+                (string) $document->getAttributes()['document_type'],
+                $document->getKey(),
+                $actor,
+            );
 
             DocumentArchived::dispatch($document, $actor);
 

@@ -70,7 +70,6 @@ test('a draft assessment definition can be updated', function (): void {
     $assessment = makeAssessment($this->schoolId, $this->context);
 
     $updated = $this->service->updateAssessment(
-        $assessment,
         assessmentUpdateData([
             'assessment_id' => $assessment->id,
             'title' => 'Devoir révisé',
@@ -95,7 +94,6 @@ test('a draft can be published and becomes definition-immutable', function (): v
         ->and($published->published_at)->not->toBeNull();
 
     $this->service->updateAssessment(
-        $published,
         assessmentUpdateData(['assessment_id' => $published->id, 'title' => 'Trop tard']),
     );
 })->throws(AssessmentDefinitionImmutableException::class);
@@ -141,7 +139,6 @@ test('an archived assessment remains definition-immutable', function (): void {
     $this->service->archiveAssessment($assessment);
 
     $this->service->updateAssessment(
-        $assessment->refresh(),
         assessmentUpdateData(['assessment_id' => $assessment->id]),
     );
 })->throws(AssessmentDefinitionImmutableException::class);

@@ -19,7 +19,7 @@ class SchoolClassFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'academic_program_id' => AcademicProgram::factory(),
             'education_level_id' => null,
             'stream_id' => null,

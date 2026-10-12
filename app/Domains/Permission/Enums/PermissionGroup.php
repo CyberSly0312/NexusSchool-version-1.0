@@ -66,6 +66,11 @@ enum PermissionGroup: string
     case Conflict = 'conflict';
     case Assessment = 'assessment';
     case AcademicCommunication = 'document';
+    case ClassCouncil = 'class-council';
+    case ReportCard = 'report-card';
+    case AcademicPolicy = 'academic_policy';
+    case RecordsLifecycle = 'records_lifecycle';
+    case CertificateAndTranscript = 'certificate-and-transcript';
 
     public function label(): string
     {
@@ -130,6 +135,11 @@ enum PermissionGroup: string
             self::Conflict => 'Conflits',
             self::Assessment => 'Évaluations',
             self::AcademicCommunication => 'Communication académique',
+            self::ClassCouncil => 'Conseil de classe',
+            self::ReportCard => 'Bulletins',
+            self::AcademicPolicy => 'Politiques académiques',
+            self::RecordsLifecycle => 'Cycle de vie des dossiers',
+            self::CertificateAndTranscript => 'Certificats & relevés',
         };
     }
 

@@ -18,7 +18,7 @@ class AcademicCalendarEventFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'calendar_year_id' => null,
             'calendar_term_id' => null,
             'title' => fake()->sentence(3),

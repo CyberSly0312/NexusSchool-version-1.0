@@ -23,7 +23,7 @@ class TimetableConflictFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'timetable_id' => \App\Domains\Timetable\Infrastructure\Models\Timetable::factory(),
             'detection_id' => \Illuminate\Support\Str::uuid()->toString(),
             'entry_id' => null,

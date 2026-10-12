@@ -13,16 +13,20 @@ use App\Domains\ClassCouncil\Application\Actions\RecordCouncilDeliberationAction
 use App\Domains\ClassCouncil\Application\ClassCouncilService;
 use App\Domains\ClassCouncil\Application\Services\AutomaticDecisionService;
 use App\Domains\ClassCouncil\Domain\Contracts\AcademicFrameworkContract;
+use App\Domains\ClassCouncil\Domain\Contracts\AcademicPoliciesContract;
 use App\Domains\ClassCouncil\Domain\Contracts\EnrollmentContract;
 use App\Domains\ClassCouncil\Domain\Contracts\GradebookContract;
+use App\Domains\ClassCouncil\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ClassCouncil\Domain\Events\CouncilDecisionRecorded;
 use App\Domains\ClassCouncil\Domain\Events\CouncilSessionArchived;
 use App\Domains\ClassCouncil\Domain\Events\CouncilSessionConvened;
 use App\Domains\ClassCouncil\Domain\Events\CouncilSessionCreated;
 use App\Domains\ClassCouncil\Domain\Events\CouncilSessionPublished;
 use App\Domains\ClassCouncil\Infrastructure\Contracts\AcademicFrameworkAdapter;
+use App\Domains\ClassCouncil\Infrastructure\Contracts\AcademicPoliciesAdapter;
 use App\Domains\ClassCouncil\Infrastructure\Contracts\EnrollmentAdapter;
 use App\Domains\ClassCouncil\Infrastructure\Contracts\GradebookAdapter;
+use App\Domains\ClassCouncil\Infrastructure\Contracts\RecordsLifecycleAdapter;
 use App\Domains\ClassCouncil\Infrastructure\Listeners\ClassCouncilAuditLogger;
 use App\Domains\ClassCouncil\Infrastructure\Models\CouncilDecision;
 use App\Domains\ClassCouncil\Infrastructure\Models\CouncilDeliberation;
@@ -59,8 +63,10 @@ final class ClassCouncilServiceProvider extends ServiceProvider
         $this->app->bind(ArchiveCouncilSessionAction::class);
 
         $this->app->bind(AcademicFrameworkContract::class, AcademicFrameworkAdapter::class);
+        $this->app->bind(AcademicPoliciesContract::class, AcademicPoliciesAdapter::class);
         $this->app->bind(EnrollmentContract::class, EnrollmentAdapter::class);
         $this->app->bind(GradebookContract::class, GradebookAdapter::class);
+        $this->app->bind(RecordsLifecycleContract::class, RecordsLifecycleAdapter::class);
     }
 
     public function boot(): void

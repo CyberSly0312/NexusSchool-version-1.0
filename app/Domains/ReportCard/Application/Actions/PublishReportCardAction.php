@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\ReportCard\Application\Actions;
 
 use App\Domains\ReportCard\Domain\Contracts\AcademicCommunicationContract;
+use App\Domains\ReportCard\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ReportCard\Domain\Enums\ReportCardEntryStatus;
 use App\Domains\ReportCard\Domain\Enums\ReportCardStatus;
 use App\Domains\ReportCard\Domain\Events\ReportCardPublished;
@@ -23,6 +24,7 @@ final class PublishReportCardAction
 {
     public function __construct(
         private readonly AcademicCommunicationContract $communication,
+        private readonly RecordsLifecycleContract $lifecycle,
     ) {
     }
 
@@ -47,6 +49,12 @@ final class PublishReportCardAction
             $reportCard->status = ReportCardStatus::Published;
             $reportCard->published_at = now();
             $reportCard->save();
+
+            $this->lifecycle->publish(
+                $reportCard->school_id,
+                $reportCard->getKey(),
+                $actor,
+            );
 
             ReportCardPublished::dispatch($reportCard, $entries->count(), $actor);
 

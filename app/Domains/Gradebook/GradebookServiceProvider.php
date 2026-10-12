@@ -15,6 +15,7 @@ use App\Domains\Gradebook\Application\Services\AcademicStandingService;
 use App\Domains\Gradebook\Application\Services\GradeCalculationService;
 use App\Domains\Gradebook\Application\Services\GradeRankingService;
 use App\Domains\Gradebook\Domain\Contracts\AcademicFrameworkContract;
+use App\Domains\Gradebook\Domain\Contracts\AcademicPoliciesContract;
 use App\Domains\Gradebook\Domain\Contracts\AssessmentContract;
 use App\Domains\Gradebook\Domain\Contracts\EnrollmentContract;
 use App\Domains\Gradebook\Domain\Contracts\GradebookContract;
@@ -26,6 +27,7 @@ use App\Domains\Gradebook\Domain\Events\GradebookPublished;
 use App\Domains\Gradebook\Domain\Events\GradebookUnlocked;
 use App\Domains\Gradebook\Domain\Events\RankingsCalculated;
 use App\Domains\Gradebook\Infrastructure\Contracts\AcademicFrameworkAdapter;
+use App\Domains\Gradebook\Infrastructure\Contracts\AcademicPoliciesAdapter;
 use App\Domains\Gradebook\Infrastructure\Contracts\AssessmentAdapter;
 use App\Domains\Gradebook\Infrastructure\Contracts\EnrollmentAdapter;
 use App\Domains\Gradebook\Infrastructure\Contracts\GradebookQueryAdapter;
@@ -67,6 +69,7 @@ final class GradebookServiceProvider extends ServiceProvider
         $this->app->bind(ArchiveGradebookAction::class);
 
         $this->app->bind(AcademicFrameworkContract::class, AcademicFrameworkAdapter::class);
+        $this->app->bind(AcademicPoliciesContract::class, AcademicPoliciesAdapter::class);
         $this->app->bind(EnrollmentContract::class, EnrollmentAdapter::class);
         $this->app->bind(AssessmentContract::class, AssessmentAdapter::class);
         $this->app->bind(GradebookContract::class, GradebookQueryAdapter::class);

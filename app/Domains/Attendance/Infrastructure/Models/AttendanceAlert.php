@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Attendance\Infrastructure\Models;
 
+use App\Contracts\SchoolOwned;
 use App\Domains\Attendance\Domain\Enums\AttendanceAlertStatus;
 use App\Traits\HasSchoolId;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * The engine only persists the alert and publishes domain events; notification
  * delivery is owned by the future Notifications domain.
  */
-class AttendanceAlert extends Model
+class AttendanceAlert extends Model implements SchoolOwned
 {
     use HasFactory;
     use HasSchoolId;

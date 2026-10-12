@@ -18,6 +18,7 @@ use App\Domains\Assessment\Application\Services\AssessmentScoreQuery;
 use App\Domains\Assessment\Application\Services\AssessmentStatisticsCalculator;
 use App\Domains\Assessment\Application\Services\ScoreValidationService;
 use App\Domains\Assessment\Domain\Contracts\AcademicFrameworkContract;
+use App\Domains\Assessment\Domain\Contracts\AcademicPoliciesContract;
 use App\Domains\Assessment\Domain\Contracts\AttendanceContract;
 use App\Domains\Assessment\Domain\Contracts\EnrollmentContract;
 use App\Domains\Assessment\Domain\Contracts\StaffContract;
@@ -31,6 +32,7 @@ use App\Domains\Assessment\Domain\Events\AssessmentStatisticsGenerated;
 use App\Domains\Assessment\Domain\Events\ScoreRecorded;
 use App\Domains\Assessment\Domain\Events\ScoreUpdated;
 use App\Domains\Assessment\Infrastructure\Contracts\AcademicFrameworkAdapter;
+use App\Domains\Assessment\Infrastructure\Contracts\AcademicPoliciesAdapter;
 use App\Domains\Assessment\Infrastructure\Contracts\AttendanceAdapter;
 use App\Domains\Assessment\Infrastructure\Contracts\EnrollmentAdapter;
 use App\Domains\Assessment\Infrastructure\Contracts\StaffAdapter;
@@ -88,6 +90,7 @@ final class AssessmentServiceProvider extends ServiceProvider
         $this->app->bind(GenerateAssessmentStatisticsAction::class);
 
         $this->app->bind(AcademicFrameworkContract::class, AcademicFrameworkAdapter::class);
+        $this->app->bind(AcademicPoliciesContract::class, AcademicPoliciesAdapter::class);
         $this->app->bind(StudentIdentityContract::class, StudentIdentityAdapter::class);
         $this->app->bind(EnrollmentContract::class, EnrollmentAdapter::class);
         $this->app->bind(StaffContract::class, StaffAdapter::class);

@@ -123,6 +123,12 @@ class SchoolAdminPanelProvider extends PanelProvider
                 \App\Domains\AcademicCommunication\Presentation\Filament\Resources\PublicationPolicyResource::class,
                 \App\Domains\AcademicCommunication\Presentation\Filament\Resources\PublicationChannelResource::class,
 
+                // ── Politiques académiques · Moteur canonique SPR-009.5 ──
+                \App\Domains\AcademicPolicy\Presentation\Filament\Resources\AcademicPolicyResource::class,
+
+                // ── Vérification de documents · Moteur canonique SPR-016 ──
+                \App\Domains\IdentityAndVerification\Presentation\Filament\Resources\VerificationIdentityResource::class,
+
                 // ── Ressources déplacées (masquées, pour futurs panels) ──
                 // Director: Incident, Report
                 // Secretary: Message, Announcement

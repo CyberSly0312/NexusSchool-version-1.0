@@ -99,13 +99,16 @@ return [
     |--------------------------------------------------------------------------
     |
     | Aggregates are rounded to a fixed number of decimals. `pass_rate` uses the
-    | assessment passing score when set, otherwise a 50 % default.
+    | assessment passing score when set, otherwise the school-scoped
+    | `academic.assessment.default_passing_percentage` policy, otherwise the
+    | configurable 50 % default below.
     |
     */
 
     'statistics' => [
         'decimal_places' => (int) env('NEXUS_ASSESSMENT_STATISTICS_DECIMALS', 2),
         'default_passing_percentage' => (float) env('NEXUS_ASSESSMENT_DEFAULT_PASSING_PERCENTAGE', 50.0),
+        'passing_percentage_key' => env('NEXUS_ASSESSMENT_DEFAULT_PASSING_PERCENTAGE_KEY', 'academic.assessment.default_passing_percentage'),
     ],
 
     /*

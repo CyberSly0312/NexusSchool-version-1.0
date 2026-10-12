@@ -11,22 +11,22 @@ class WebhookStatusTest extends TestCase
 {
     public function test_active_label(): void
     {
-        $this->assertEquals('Active', WebhookStatus::Active->label());
+        $this->assertEquals('Actif', WebhookStatus::Active->label());
     }
 
     public function test_inactive_label(): void
     {
-        $this->assertEquals('Inactive', WebhookStatus::Inactive->label());
+        $this->assertEquals('Inactif', WebhookStatus::Inactive->label());
     }
 
     public function test_failed_label(): void
     {
-        $this->assertEquals('Failed', WebhookStatus::Failed->label());
+        $this->assertEquals('Échoué', WebhookStatus::Failed->label());
     }
 
     public function test_pending_label(): void
     {
-        $this->assertEquals('Pending', WebhookStatus::Pending->label());
+        $this->assertEquals('En attente', WebhookStatus::Pending->label());
     }
 
     public function test_active_color(): void
@@ -58,5 +58,10 @@ class WebhookStatusTest extends TestCase
         $this->assertArrayHasKey('inactive', $labels);
         $this->assertArrayHasKey('failed', $labels);
         $this->assertArrayHasKey('pending', $labels);
+
+        $this->assertEquals('Actif', $labels['active']);
+        $this->assertEquals('Inactif', $labels['inactive']);
+        $this->assertEquals('Échoué', $labels['failed']);
+        $this->assertEquals('En attente', $labels['pending']);
     }
 }

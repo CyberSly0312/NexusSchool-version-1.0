@@ -10,7 +10,7 @@
 
 **Owner:** NexusSchool Architecture Team
 
-**Last Updated:** 06 August 2026
+**Last Updated:** 07 September 2026
 
 ---
 
@@ -64,11 +64,11 @@ Laravel 12
 
 Programming Language
 
-PHP 8.4
+PHP 8.2.12 (runtime; composer requirement ^8.2)
 
 Administration Panel
 
-Filament 4
+Filament 5.6.8
 
 Database
 
@@ -135,9 +135,24 @@ Markdown
 | Report Card            | ✅ Complete     |
 | Academic Communication | ✅ Complete     |
 | Class Council          | ✅ Complete     |
-| Records Lifecycle      | 🟡 In Progress  |
-| Certificate            | ⏳ Planned      |
-| Identity Verification  | ⏳ Planned      |
+| Records Lifecycle      | 🟡 Deferred      |
+| Certificate            | ✅ Complete     |
+| Identity Verification  | 🟡 Initialization |
+
+Status legend (reconciliation 2026-08-10, updated 2026-08-19)
+
+* ✅ Complete — implementation exists in code. Certificate & Transcript (SPR-015)
+  is implemented (bounded context, report, green suites). Academic Policies
+  (SPR-009.5) is implemented (bounded context `App\Domains\AcademicPolicy`; see the
+  sprint report).
+* 🟡 Initialization — architecture decision / ADR phase; no implementation
+  (Identity & Verification, SPR-016 — ADR-022, 2026-09-07).
+* 🟡 Deferred — validated implementation awaiting final closure decision
+  (Records Lifecycle SPR-014: metadata envelope, state machine, actions, policy,
+  all three source-domain integration seams wired, 12 tests / 38 assertions,
+  PHPStan + Pint clean).
+* 🔲 Planned — no implementation.
+* ⏳ Planned (future) — no implementation.
 
 ---
 
@@ -217,7 +232,7 @@ Low
 
 Priority 1
 
-Implement Records Lifecycle Management
+Records Lifecycle Management (SPR-014) — SPR-009.5 architectural prerequisite now complete
 
 Priority 2
 
@@ -229,7 +244,7 @@ Identity & Verification Engine
 
 Priority 4
 
-Archive & Cloud Storage Platform
+Policy-driven Gradebook / Class Council / Assessment integration (deferred work)
 
 ---
 
@@ -246,6 +261,22 @@ The platform currently provides
 * Documentation Governance
 * Architecture Governance
 * Versioned Development
+
+Architectural consequence of ESP-002 (Repository Hardening): tenant ownership is
+now **explicitly represented** for the Attendance aggregates and `CouncilSession`
+through the `SchoolOwned` contract (`getSchoolId(): string`), and the Attendance /
+Class Council authorization traits read the school id through the contract
+instead of an implicit `school_id` magic property. The change is additive and
+type-safety only; authorization semantics are unchanged. It does **not** claim
+repository-wide tenancy hardening — the pattern is available for future adoption.
+
+Repository state (reconciliation 2026-08-10): the working tree contains a large
+**pre-existing uncommitted refonte** (deleted legacy Filament resources and
+tests, factory and permission changes, PHPStan configuration and baseline
+changes, domain changes) plus the ESP-002 hardening changes — approximately
+**298 files vs HEAD `ac8acc2`**. The current green test state is **not anchored
+to a new commit**. This work is **UNCOMMITTED REFACTORING / UNCLASSIFIED** until
+a separate forensic review establishes its scope and status.
 
 ---
 
@@ -356,3 +387,28 @@ The technical quality of NexusSchool shall never be sacrificed for delivery spee
 Every architectural decision shall prioritize long-term maintainability over short-term implementation convenience.
 
 This document represents the official engineering health of the NexusSchool platform and shall be updated continuously throughout the project's lifecycle.
+
+## SPR-014 — Records Lifecycle Management (2026-08-11, updated 2026-08-20)
+
+**IMPLEMENTED — ALL THREE SOURCE DOMAIN INTEGRATIONS COMPLETE**. The metadata envelope, state transitions, policy authorization, tenant checks, migration, factory, and test suite are validated. 12 tests / 38 assertions pass for the core RecordsLifecycle context. Report Card, Academic Communication, and Class Council all register lifecycle metadata through the contract/adapter pattern (27 integration tests / 97 assertions). PHPStan 0 errors. Pint clean. Full suite: 1,889 tests / 4,507 assertions. Awaiting final closure decision.
+
+## SPR-015 / SPR-016 — Governance reconciliation (2026-09-07)
+
+**SPR-015 Certificate & Transcript Engine — COMPLETED** (implementation + report;
+suites green at last run: CertificateAndTranscript 45 tests / 218 assertions,
+AcademicCommunication 70 tests / 312 assertions).
+
+**SPR-016 Identity & Verification Engine — DISCOVERY COMPLETED; ARCHITECTURE
+DECISION / INITIALIZATION; NOT IMPLEMENTED.** Architecture formalized in **ADR-022**
+(Accepted, 2026-09-07): public unauthenticated central verification endpoint; random
+opaque verification token (≥144-bit, generated once, globally unique, SHA-256-hashed
+at rest) owned by the AcademicDocument aggregate; default LEVEL 2 disclosure; formal
+REVOKED/REPLACED semantics; QR = verification URL + opaque token (rendering delegated
+to SPR-012); central + opaque-token tenant resolution; document number never a
+secret.
+
+**SPR-014 Records Lifecycle Management remains DEFERRED** — validated implementation
+awaiting the final closure decision; must not be treated as COMPLETE before that
+closure. Priority list corrected above (Priority 4 was a duplicate of Priority 3).
+
+No code was changed by this reconciliation; governance documents only.

@@ -17,13 +17,14 @@ beforeEach(function (): void {
     $this->schoolId = makeTenant();
     $this->context = makeAssessmentContext($this->schoolId, false);
 
-    $this->level = EducationLevel::create([
-        'school_id' => $this->schoolId,
-        'name' => 'Collège',
-        'code' => 'EL'.Str::upper(Str::random(3)),
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $this->level = EducationLevel::firstOrCreate(
+        ['school_id' => $this->schoolId, 'name' => 'Collège'],
+        [
+            'code' => 'EL'.Str::upper(Str::random(3)),
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
 
     $this->enrollmentA = enrollStudent(
         $this->schoolId,

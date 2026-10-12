@@ -20,7 +20,7 @@ class DocumentSignatureFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'academic_document_id' => AcademicDocument::factory(),
             'document_version_id' => AcademicDocumentVersion::factory(),
             'signature_type' => SignatureType::Electronic,

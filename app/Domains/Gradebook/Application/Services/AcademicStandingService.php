@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Gradebook\Application\Services;
 
+use App\Domains\Gradebook\Domain\Contracts\AcademicPoliciesContract;
 use App\Domains\Gradebook\Domain\Enums\AcademicStanding;
 use App\Domains\Gradebook\Domain\References\StandingContributionReference;
 use App\Domains\Gradebook\Domain\ValueObjects\Gpa;
@@ -14,14 +15,18 @@ use App\Domains\Gradebook\Domain\ValueObjects\Gpa;
  * The GPA is the coefficient-weighted mean of the grade points of the student's
  * published grade entries; the CGPA is the same aggregation applied over every
  * published entry (no period filter). Academic standing derives from the
- * overall weighted percentage and the number of failing subjects. All formulas
- * live here — grade calculations belong exclusively to the Gradebook engine and
- * are never recomputed by the Report Card engine.
+ * overall weighted percentage and the number of failing subjects. The standing
+ * thresholds are policy-driven per school through the Academic Policies engine,
+ * falling back to the configurable engine defaults when the school did not
+ * define a policy. All formulas live here — grade calculations belong
+ * exclusively to the Gradebook engine and are never recomputed by the Report
+ * Card engine.
  */
 final class AcademicStandingService
 {
     public function __construct(
         private readonly GradeCalculationService $calculator,
+        private readonly AcademicPoliciesContract $policies,
     ) {
     }
 
@@ -68,11 +73,28 @@ final class AcademicStandingService
     }
 
     /**
-     * Student-level academic standing derived from the published contributions.
+     * Number of failing subjects of a student: contributions below the
+     * policy-driven passing threshold of the school.
      *
      * @param  list<StandingContributionReference>  $contributions
      */
-    public function standing(array $contributions): ?AcademicStanding
+    public function failedSubjectCount(array $contributions, string $schoolId): int
+    {
+        $passingPercentage = $this->passingPercentage($schoolId);
+
+        return count(array_filter(
+            $contributions,
+            static fn (StandingContributionReference $c): bool => $c->percentage < $passingPercentage,
+        ));
+    }
+
+    /**
+     * Student-level academic standing derived from the published contributions,
+     * using the per-school policy-driven thresholds.
+     *
+     * @param  list<StandingContributionReference>  $contributions
+     */
+    public function standing(array $contributions, string $schoolId): ?AcademicStanding
     {
         $percentage = $this->overallPercentage($contributions);
 
@@ -80,17 +102,63 @@ final class AcademicStandingService
             return null;
         }
 
-        $failedSubjects = count(array_filter(
-            $contributions,
-            static fn (StandingContributionReference $c): bool => $c->percentage < (float) config('nexus-gradebook.standing.passing_percentage', 50.0),
-        ));
-
         return AcademicStanding::fromResult(
             $percentage,
-            $failedSubjects,
-            passingPercentage: (float) config('nexus-gradebook.standing.passing_percentage', 50.0),
-            distinctionPercentage: (float) config('nexus-gradebook.standing.distinction_percentage', 80.0),
-            conditionalFailures: (int) config('nexus-gradebook.standing.conditional_failures', 1),
+            $this->failedSubjectCount($contributions, $schoolId),
+            passingPercentage: $this->passingPercentage($schoolId),
+            distinctionPercentage: $this->distinctionPercentage($schoolId),
+            conditionalFailures: $this->conditionalFailures($schoolId),
         );
+    }
+
+    /**
+     * Resolve the per-school passing threshold, falling back to the engine
+     * default when the school did not define the policy.
+     */
+    private function passingPercentage(string $schoolId): float
+    {
+        return $this->resolveFloat($schoolId, 'passing_percentage_key', 'passing_percentage', 50.0);
+    }
+
+    /**
+     * Resolve the per-school distinction threshold, falling back to the engine
+     * default when the school did not define the policy.
+     */
+    private function distinctionPercentage(string $schoolId): float
+    {
+        return $this->resolveFloat($schoolId, 'distinction_percentage_key', 'distinction_percentage', 80.0);
+    }
+
+    /**
+     * Resolve the per-school conditional-failure allowance, falling back to the
+     * engine default when the school did not define the policy.
+     */
+    private function conditionalFailures(string $schoolId): int
+    {
+        return $this->resolveInt($schoolId, 'conditional_failures_key', 'conditional_failures', 1);
+    }
+
+    private function resolveFloat(string $schoolId, string $keyNode, string $defaultNode, float $fallback): float
+    {
+        $config = config('nexus-gradebook.standing', []);
+        $policy = $this->policies->policy($schoolId, (string) ($config[$keyNode] ?? ''));
+
+        if ($policy !== null && is_numeric($policy->value)) {
+            return (float) $policy->value;
+        }
+
+        return (float) ($config[$defaultNode] ?? $fallback);
+    }
+
+    private function resolveInt(string $schoolId, string $keyNode, string $defaultNode, int $fallback): int
+    {
+        $config = config('nexus-gradebook.standing', []);
+        $policy = $this->policies->policy($schoolId, (string) ($config[$keyNode] ?? ''));
+
+        if ($policy !== null && is_numeric($policy->value)) {
+            return (int) $policy->value;
+        }
+
+        return (int) ($config[$defaultNode] ?? $fallback);
     }
 }

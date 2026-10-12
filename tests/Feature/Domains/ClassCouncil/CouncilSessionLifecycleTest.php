@@ -30,13 +30,14 @@ use Illuminate\Support\Str;
 
 function classCouncilLevel(string $schoolId): EducationLevel
 {
-    return EducationLevel::create([
-        'school_id' => $schoolId,
-        'name' => 'Collège',
-        'code' => 'EL'.Str::upper(Str::random(3)),
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    return EducationLevel::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => 'Collège'],
+        [
+            'code' => 'EL'.Str::upper(Str::random(3)),
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
 }
 
 /**

@@ -18,6 +18,7 @@ return [
 
     'promotion' => [
         'passing_percentage' => (float) env('NEXUS_CLASS_COUNCIL_PASSING_PERCENTAGE', 50.0),
+        'passing_percentage_key' => 'academic.class-council.passing_percentage',
     ],
 
     'decision' => [

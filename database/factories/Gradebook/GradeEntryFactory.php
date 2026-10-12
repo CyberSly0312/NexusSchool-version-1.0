@@ -24,7 +24,7 @@ class GradeEntryFactory extends Factory
         $letter = LetterGrade::fromPercentage($percentage);
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'gradebook_id' => GradebookFactory::new(),
             'enrollment_id' => Enrollment::factory(),
             'student_id' => Student::factory(),

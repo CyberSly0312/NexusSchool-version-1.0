@@ -20,7 +20,11 @@ return [
     \App\Domains\Gradebook\GradebookServiceProvider::class,
     \App\Domains\ClassCouncil\ClassCouncilServiceProvider::class,
     \App\Domains\ReportCard\ReportCardServiceProvider::class,
+    \App\Domains\CertificateAndTranscript\CertificateAndTranscriptServiceProvider::class,
     \App\Domains\AcademicCommunication\AcademicCommunicationServiceProvider::class,
+    \App\Domains\AcademicPolicy\AcademicPolicyServiceProvider::class,
+    \App\Domains\RecordsLifecycle\RecordsLifecycleServiceProvider::class,
+    \App\Domains\IdentityAndVerification\IdentityAndVerificationServiceProvider::class,
 
     // Filament Panel Providers
     \App\Providers\Filament\SuperAdminPanelProvider::class,

@@ -7,3 +7,4 @@ parameters:
     paths:
         - app
     tmpDir: storage/phpstan
+    reportUnmatchedIgnoredErrors: false

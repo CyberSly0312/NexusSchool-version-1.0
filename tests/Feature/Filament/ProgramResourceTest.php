@@ -22,25 +22,31 @@ class ProgramResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
+            'school_id' => (string) Str::ulid(),
         ]);
 
-        $this->actingAs($this->admin);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_program_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/programs')
+            ->get('/school-admin/programs')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_program_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/programs/create')
+            ->get('/school-admin/programs/create')
             ->assertSuccessful();
     }
 
@@ -63,7 +69,7 @@ class ProgramResourceTest extends TestCase
             ->create();
 
         $this->actingAs($this->admin)
-            ->get('/admin/programs/'.$program->id.'/edit')
+            ->get('/school-admin/programs/'.$program->id.'/edit')
             ->assertSuccessful();
     }
 }

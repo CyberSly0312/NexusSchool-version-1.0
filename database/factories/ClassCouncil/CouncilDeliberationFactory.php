@@ -18,7 +18,7 @@ class CouncilDeliberationFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'council_session_id' => CouncilSession::factory(),
             'student_id' => null,
             'council_decision_id' => null,

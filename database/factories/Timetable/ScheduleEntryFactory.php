@@ -19,7 +19,7 @@ class ScheduleEntryFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'timetable_id' => \App\Domains\Timetable\Infrastructure\Models\Timetable::factory(),
             'time_slot_id' => null,
             'academic_subject_id' => fake()->numberBetween(1, 9999),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\ClassCouncil\Application\Actions;
 
+use App\Domains\ClassCouncil\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ClassCouncil\Domain\Enums\CouncilSessionStatus;
 use App\Domains\ClassCouncil\Domain\Events\CouncilSessionArchived;
 use App\Domains\ClassCouncil\Infrastructure\Models\CouncilSession;
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\DB;
  */
 final class ArchiveCouncilSessionAction
 {
+    public function __construct(
+        private readonly RecordsLifecycleContract $lifecycle,
+    ) {
+    }
+
     public function execute(CouncilSession $session, ?User $actor = null): void
     {
         DB::transaction(function () use ($session, $actor): void {
@@ -27,6 +33,12 @@ final class ArchiveCouncilSessionAction
             $session->save();
 
             CouncilSessionArchived::dispatch($session, $actor);
+
+            $this->lifecycle->archive(
+                $session->school_id,
+                $session->getKey(),
+                $actor,
+            );
         });
     }
 }

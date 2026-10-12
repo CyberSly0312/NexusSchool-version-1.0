@@ -29,6 +29,7 @@ use App\Domains\AcademicCommunication\Domain\Contracts\ClassCouncilContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\GradebookContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\GuardianContract;
+use App\Domains\AcademicCommunication\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\SchoolContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\StaffContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\StudentIdentityContract;
@@ -46,6 +47,7 @@ use App\Domains\AcademicCommunication\Infrastructure\Contracts\AttendanceAdapter
 use App\Domains\AcademicCommunication\Infrastructure\Contracts\ClassCouncilAdapter;
 use App\Domains\AcademicCommunication\Infrastructure\Contracts\GradebookAdapter;
 use App\Domains\AcademicCommunication\Infrastructure\Contracts\GuardianAdapter;
+use App\Domains\AcademicCommunication\Infrastructure\Contracts\RecordsLifecycleAdapter;
 use App\Domains\AcademicCommunication\Infrastructure\Contracts\SchoolAdapter;
 use App\Domains\AcademicCommunication\Infrastructure\Contracts\StaffAdapter;
 use App\Domains\AcademicCommunication\Infrastructure\Contracts\StudentIdentityAdapter;
@@ -128,6 +130,7 @@ final class AcademicCommunicationServiceProvider extends ServiceProvider
         $this->app->bind(GradebookContract::class, GradebookAdapter::class);
         $this->app->bind(ClassCouncilContract::class, ClassCouncilAdapter::class);
         $this->app->bind(AcademicPoliciesContract::class, AcademicPoliciesAdapter::class);
+        $this->app->bind(RecordsLifecycleContract::class, RecordsLifecycleAdapter::class);
     }
 
     public function boot(): void

@@ -42,12 +42,18 @@ class StudentEnrollmentResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
+            'school_id' => (string) Str::ulid(),
         ]);
 
-        $this->actingAs($this->admin);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
 
         $this->schoolId = 'test-school-'.uniqid();
         DB::table('tenants')->insert([
@@ -89,14 +95,14 @@ class StudentEnrollmentResourceTest extends TestCase
     public function test_can_render_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/student-enrollments')
+            ->get('/school-admin/student-enrollments')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/student-enrollments/create')
+            ->get('/school-admin/student-enrollments/create')
             ->assertSuccessful();
     }
 
@@ -114,7 +120,7 @@ class StudentEnrollmentResourceTest extends TestCase
             ]);
 
         $this->actingAs($this->admin)
-            ->get('/admin/student-enrollments/'.$enrollment->id.'/edit')
+            ->get('/school-admin/student-enrollments/'.$enrollment->id.'/edit')
             ->assertSuccessful();
     }
 }

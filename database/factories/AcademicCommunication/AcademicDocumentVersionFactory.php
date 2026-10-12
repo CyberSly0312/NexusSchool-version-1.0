@@ -30,7 +30,7 @@ class AcademicDocumentVersionFactory extends Factory
         ];
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'academic_document_id' => AcademicDocument::factory(),
             'version_number' => 1,
             'status' => DocumentStatus::Draft,

@@ -23,7 +23,7 @@ class AssessmentScoreFactory extends Factory
         $score = fake()->randomFloat(2, 0, 20);
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'assessment_id' => AssessmentFactory::new(),
             'assessment_component_id' => null,
             'enrollment_id' => Enrollment::factory(),

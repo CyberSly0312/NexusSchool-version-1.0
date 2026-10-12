@@ -18,6 +18,7 @@ use App\Domains\AcademicCommunication\Domain\Events\DocumentPublished;
 use App\Domains\AcademicCommunication\Domain\Exceptions\DocumentApprovalException;
 use App\Domains\AcademicCommunication\Domain\Exceptions\DocumentNotApprovedException;
 use App\Domains\AcademicCommunication\Domain\Exceptions\DocumentPublicationFailedException;
+use App\Domains\AcademicCommunication\Domain\Exceptions\InvalidStatusTransitionException;
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocument;
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocumentTemplate;
 use App\Domains\AcademicCommunication\Infrastructure\Models\DocumentApproval;
@@ -324,4 +325,81 @@ test('a published document can be archived', function (): void {
 
     expect($archived->status)->toBe(DocumentStatus::Archived)
         ->and($archived->archived_at)->not->toBeNull();
+});
+
+test('publishing an already published document is rejected without mutating it', function (): void {
+    makeRoleUser($this->schoolId, 'director');
+
+    $document = $this->service->generateDocument(generateData($this->schoolId, $this->context['template'], $this->context['policy']));
+
+    $this->service->publish(PublishDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+        'channels' => [DocumentChannel::InternalPortal->value],
+    ]));
+
+    $publishedAt = $document->refresh()->published_at;
+    $recordsBefore = PublicationRecord::query()->forSchool($this->schoolId)->count();
+
+    expect(fn () => $this->service->publish(PublishDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+        'channels' => [DocumentChannel::InternalPortal->value],
+    ])))->toThrow(InvalidStatusTransitionException::class);
+
+    expect($document->refresh()->status)->toBe(DocumentStatus::Published)
+        ->and($document->published_at->equalTo($publishedAt))->toBeTrue()
+        ->and(PublicationRecord::query()->forSchool($this->schoolId)->count())->toBe($recordsBefore);
+});
+
+test('an archived document cannot be published', function (): void {
+    makeRoleUser($this->schoolId, 'director');
+
+    $document = $this->service->generateDocument(generateData($this->schoolId, $this->context['template'], $this->context['policy']));
+
+    $this->service->publish(PublishDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+        'channels' => [DocumentChannel::InternalPortal->value],
+    ]));
+
+    $this->service->archive($document->refresh());
+
+    expect(fn () => $this->service->publish(PublishDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+        'channels' => [DocumentChannel::InternalPortal->value],
+    ])))->toThrow(InvalidStatusTransitionException::class);
+
+    expect($document->refresh()->status)->toBe(DocumentStatus::Archived);
+});
+
+test('archiving an already archived document is rejected without mutating it', function (): void {
+    makeRoleUser($this->schoolId, 'director');
+
+    $document = $this->service->generateDocument(generateData($this->schoolId, $this->context['template'], $this->context['policy']));
+
+    $this->service->publish(PublishDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+        'channels' => [DocumentChannel::InternalPortal->value],
+    ]));
+
+    $this->service->archive($document->refresh());
+
+    $archivedAt = $document->refresh()->archived_at;
+
+    expect(fn () => $this->service->archive($document))->toThrow(InvalidStatusTransitionException::class);
+
+    expect($document->refresh()->status)->toBe(DocumentStatus::Archived)
+        ->and($document->archived_at->equalTo($archivedAt))->toBeTrue();
+});
+
+test('a draft document cannot be archived', function (): void {
+    $draft = AcademicDocument::factory()->forSchool($this->schoolId)->create();
+
+    expect(fn () => $this->service->archive($draft))->toThrow(InvalidStatusTransitionException::class);
+
+    expect($draft->refresh()->status)->toBe(DocumentStatus::Draft)
+        ->and($draft->archived_at)->toBeNull();
 });

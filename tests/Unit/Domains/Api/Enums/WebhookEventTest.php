@@ -11,42 +11,42 @@ class WebhookEventTest extends TestCase
 {
     public function test_student_created_label(): void
     {
-        $this->assertEquals('Student Created', WebhookEvent::StudentCreated->label());
+        $this->assertEquals('Élève créé', WebhookEvent::StudentCreated->label());
     }
 
     public function test_student_updated_label(): void
     {
-        $this->assertEquals('Student Updated', WebhookEvent::StudentUpdated->label());
+        $this->assertEquals('Élève mis à jour', WebhookEvent::StudentUpdated->label());
     }
 
     public function test_enrollment_created_label(): void
     {
-        $this->assertEquals('Enrollment Created', WebhookEvent::EnrollmentCreated->label());
+        $this->assertEquals('Inscription créée', WebhookEvent::EnrollmentCreated->label());
     }
 
     public function test_attendance_recorded_label(): void
     {
-        $this->assertEquals('Attendance Recorded', WebhookEvent::AttendanceRecorded->label());
+        $this->assertEquals('Présence enregistrée', WebhookEvent::AttendanceRecorded->label());
     }
 
     public function test_grade_published_label(): void
     {
-        $this->assertEquals('Grade Published', WebhookEvent::GradePublished->label());
+        $this->assertEquals('Note publiée', WebhookEvent::GradePublished->label());
     }
 
     public function test_payment_received_label(): void
     {
-        $this->assertEquals('Payment Received', WebhookEvent::PaymentReceived->label());
+        $this->assertEquals('Paiement reçu', WebhookEvent::PaymentReceived->label());
     }
 
     public function test_notification_sent_label(): void
     {
-        $this->assertEquals('Notification Sent', WebhookEvent::NotificationSent->label());
+        $this->assertEquals('Notification envoyée', WebhookEvent::NotificationSent->label());
     }
 
     public function test_report_generated_label(): void
     {
-        $this->assertEquals('Report Generated', WebhookEvent::ReportGenerated->label());
+        $this->assertEquals('Rapport généré', WebhookEvent::ReportGenerated->label());
     }
 
     public function test_labels(): void
@@ -62,5 +62,14 @@ class WebhookEventTest extends TestCase
         $this->assertArrayHasKey('payment_received', $labels);
         $this->assertArrayHasKey('notification_sent', $labels);
         $this->assertArrayHasKey('report_generated', $labels);
+
+        $this->assertEquals('Élève créé', $labels['student_created']);
+        $this->assertEquals('Élève mis à jour', $labels['student_updated']);
+        $this->assertEquals('Inscription créée', $labels['enrollment_created']);
+        $this->assertEquals('Présence enregistrée', $labels['attendance_recorded']);
+        $this->assertEquals('Note publiée', $labels['grade_published']);
+        $this->assertEquals('Paiement reçu', $labels['payment_received']);
+        $this->assertEquals('Notification envoyée', $labels['notification_sent']);
+        $this->assertEquals('Rapport généré', $labels['report_generated']);
     }
 }

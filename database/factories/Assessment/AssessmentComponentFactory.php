@@ -17,7 +17,7 @@ class AssessmentComponentFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'assessment_id' => AssessmentFactory::new(),
             'name' => fake()->unique()->randomElement([
                 'Partie écrite', 'Partie orale', 'Pratique', 'Rapport', 'Dossier',

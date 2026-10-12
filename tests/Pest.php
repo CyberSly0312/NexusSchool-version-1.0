@@ -33,6 +33,14 @@ uses(TestCase::class, RefreshDatabase::class)
         'Feature/Domains/ClassCouncil',
         'Unit/Domains/AcademicCommunication',
         'Feature/Domains/AcademicCommunication',
+        'Unit/Domains/AcademicPolicy',
+        'Feature/Domains/AcademicPolicy',
+        'Unit/Domains/RecordsLifecycle',
+        'Feature/Domains/RecordsLifecycle',
+        'Unit/Domains/CertificateAndTranscript',
+        'Feature/Domains/CertificateAndTranscript',
+        'Unit/Domains/IdentityAndVerification',
+        'Feature/Domains/IdentityAndVerification',
     );
 
 /**
@@ -116,13 +124,14 @@ function makeAcademicContext(string $schoolId, string $className = '6ème A'): a
         'code' => 'TP'.Str::upper(Str::random(4)),
     ]);
 
-    $year = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::create([
-        'school_id' => $schoolId,
-        'name' => '2026-2027',
-        'start_date' => '2026-09-01',
-        'end_date' => '2027-07-31',
-        'status' => 'active',
-    ]);
+    $year = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => '2026-2027'],
+        [
+            'start_date' => '2026-09-01',
+            'end_date' => '2027-07-31',
+            'status' => 'active',
+        ],
+    );
 
     $class = \App\Domains\Academic\Infrastructure\Models\SchoolClass::create([
         'school_id' => $schoolId,
@@ -149,21 +158,23 @@ function makeEnrollmentContext(string $schoolId, string $className = '6ème A'):
         'code' => 'TP'.Str::upper(Str::random(4)),
     ]);
 
-    $level = \App\Domains\Academic\Infrastructure\Models\EducationLevel::create([
-        'school_id' => $schoolId,
-        'name' => 'Collège',
-        'code' => 'EL'.Str::upper(Str::random(3)),
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $level = \App\Domains\Academic\Infrastructure\Models\EducationLevel::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => 'Collège'],
+        [
+            'code' => 'EL'.Str::upper(Str::random(3)),
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
 
-    $year = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::create([
-        'school_id' => $schoolId,
-        'name' => '2026-2027',
-        'start_date' => '2026-09-01',
-        'end_date' => '2027-07-31',
-        'status' => 'active',
-    ]);
+    $year = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => '2026-2027'],
+        [
+            'start_date' => '2026-09-01',
+            'end_date' => '2027-07-31',
+            'status' => 'active',
+        ],
+    );
 
     $class = \App\Domains\Academic\Infrastructure\Models\SchoolClass::create([
         'school_id' => $schoolId,
@@ -264,14 +275,15 @@ function makeTimetableAcademicContext(string $schoolId, bool $withSection = true
         'code' => 'TP'.Str::upper(Str::random(4)),
     ]);
 
-    $year = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::create([
-        'school_id' => $schoolId,
-        'name' => '2026-2027',
-        'code' => 'AY-2026-2027',
-        'start_date' => '2026-09-01',
-        'end_date' => '2027-07-31',
-        'status' => 'active',
-    ]);
+    $year = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarYear::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => '2026-2027'],
+        [
+            'code' => 'AY-2026-2027',
+            'start_date' => '2026-09-01',
+            'end_date' => '2027-07-31',
+            'status' => 'active',
+        ],
+    );
 
     $term = \App\Domains\Academic\Infrastructure\Models\AcademicCalendarTerm::create([
         'school_id' => $schoolId,
@@ -375,13 +387,14 @@ function makePublishedLesson(
 ): array {
     $academic = makeTimetableAcademicContext($schoolId);
 
-    $level = \App\Domains\Academic\Infrastructure\Models\EducationLevel::create([
-        'school_id' => $schoolId,
-        'name' => 'Collège',
-        'code' => 'EL'.Str::upper(Str::random(3)),
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $level = \App\Domains\Academic\Infrastructure\Models\EducationLevel::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => 'Collège'],
+        [
+            'code' => 'EL'.Str::upper(Str::random(3)),
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
 
     $timetable = makeTimetable($schoolId, $academic['year']->id, $academic['term']->id);
 
@@ -448,13 +461,22 @@ function makeAssessmentContext(string $schoolId, bool $withSection = true): arra
 {
     $context = makeTimetableAcademicContext($schoolId, $withSection);
 
+    $level = \App\Domains\Academic\Infrastructure\Models\EducationLevel::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => 'Collège'],
+        [
+            'code' => 'EL'.Str::upper(Str::random(3)),
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
+
     $teacher = makeTeacher($schoolId, [$context['subject']->id]);
 
     $type = \App\Domains\Assessment\Infrastructure\Models\AssessmentType::factory()
         ->forSchool($schoolId)
         ->create();
 
-    return [...$context, 'teacher' => $teacher, 'type' => $type];
+    return [...$context, 'level' => $level, 'teacher' => $teacher, 'type' => $type];
 }
 
 /**

@@ -23,32 +23,32 @@ class WidgetTypeTest extends TestCase
 
     public function test_label_chart(): void
     {
-        $this->assertSame('Chart', WidgetType::Chart->label());
+        $this->assertSame('Graphique', WidgetType::Chart->label());
     }
 
     public function test_label_metric(): void
     {
-        $this->assertSame('Metric Card', WidgetType::Metric->label());
+        $this->assertSame('Carte métrique', WidgetType::Metric->label());
     }
 
     public function test_label_table(): void
     {
-        $this->assertSame('Data Table', WidgetType::Table->label());
+        $this->assertSame('Tableau de données', WidgetType::Table->label());
     }
 
     public function test_label_progress(): void
     {
-        $this->assertSame('Progress Bar', WidgetType::Progress->label());
+        $this->assertSame('Barre de progression', WidgetType::Progress->label());
     }
 
     public function test_label_list(): void
     {
-        $this->assertSame('List', WidgetType::List->label());
+        $this->assertSame('Liste', WidgetType::List->label());
     }
 
     public function test_label_custom(): void
     {
-        $this->assertSame('Custom Widget', WidgetType::Custom->label());
+        $this->assertSame('Widget personnalisé', WidgetType::Custom->label());
     }
 
     public function test_color_chart(): void
@@ -93,11 +93,11 @@ class WidgetTypeTest extends TestCase
         $this->assertArrayHasKey(WidgetType::List->value, $labels);
         $this->assertArrayHasKey(WidgetType::Custom->value, $labels);
 
-        $this->assertSame('Chart', $labels[WidgetType::Chart->value]);
-        $this->assertSame('Metric Card', $labels[WidgetType::Metric->value]);
-        $this->assertSame('Data Table', $labels[WidgetType::Table->value]);
-        $this->assertSame('Progress Bar', $labels[WidgetType::Progress->value]);
-        $this->assertSame('List', $labels[WidgetType::List->value]);
-        $this->assertSame('Custom Widget', $labels[WidgetType::Custom->value]);
+        $this->assertSame('Graphique', $labels[WidgetType::Chart->value]);
+        $this->assertSame('Carte métrique', $labels[WidgetType::Metric->value]);
+        $this->assertSame('Tableau de données', $labels[WidgetType::Table->value]);
+        $this->assertSame('Barre de progression', $labels[WidgetType::Progress->value]);
+        $this->assertSame('Liste', $labels[WidgetType::List->value]);
+        $this->assertSame('Widget personnalisé', $labels[WidgetType::Custom->value]);
     }
 }

@@ -20,7 +20,7 @@ class RelationshipTypeFactory extends Factory
         $code = fake()->unique()->slug(2);
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'code' => $code,
             'label' => ucfirst(str_replace('-', ' ', $code)),
             'description' => fake()->optional()->sentence(),

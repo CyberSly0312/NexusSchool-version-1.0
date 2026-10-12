@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\AcademicCommunication\Infrastructure\Models;
 
 use App\Domains\AcademicCommunication\Domain\Enums\ApprovalStatus;
+use App\Models\User;
 use App\Traits\HasSchoolId;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,6 +54,11 @@ class DocumentApproval extends Model
     public function document(): BelongsTo
     {
         return $this->belongsTo(AcademicDocument::class, 'academic_document_id');
+    }
+
+    public function approver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approver_user_id');
     }
 
     public function version(): BelongsTo

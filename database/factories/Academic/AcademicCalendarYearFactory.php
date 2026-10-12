@@ -23,7 +23,7 @@ class AcademicCalendarYearFactory extends Factory
         $endYear = $startYear + 1;
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'name' => "{$startYear}-{$endYear}",
             'code' => "AY-{$startYear}-{$endYear}",
             'start_date' => "{$startYear}-09-01",

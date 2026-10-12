@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Attendance\Infrastructure\Models;
 
+use App\Contracts\SchoolOwned;
 use App\Domains\Attendance\Domain\Enums\AttendanceSessionStatus;
 use App\Domains\Attendance\Domain\Exceptions\InvalidStatusTransitionException;
 use App\Traits\HasSchoolId;
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * and time slot, a forward-only lifecycle (Draft → Open → Taking Attendance →
  * Submitted → Locked → Archived), and full immutability once locked.
  */
-class AttendanceSession extends Model
+class AttendanceSession extends Model implements SchoolOwned
 {
     use HasFactory;
     use HasSchoolId;

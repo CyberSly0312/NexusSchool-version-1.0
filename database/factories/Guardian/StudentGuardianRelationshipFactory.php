@@ -20,12 +20,12 @@ class StudentGuardianRelationshipFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'student_id' => Student::factory(),
             'guardian_id' => Guardian::factory(),
             'relationship_type_id' => RelationshipType::factory(),
             'name' => fn (array $attributes): string => Guardian::find($attributes['guardian_id'])?->full_name ?? fake()->name(),
-            'phone' => fn (array $attributes): string => Guardian::find($attributes['guardian_id'])?->phone_number ?? fake()->phoneNumber(),
+            'phone' => fn (array $attributes): string => Guardian::find($attributes['guardian_id'])?->phone_number ?? fake()->e164PhoneNumber(),
             'email' => fn (array $attributes): string => Guardian::find($attributes['guardian_id'])?->email ?? fake()->safeEmail(),
             'relationship' => 'guardian',
             'is_primary' => false,

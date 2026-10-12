@@ -20,17 +20,17 @@ class KpiStatusTest extends TestCase
 
     public function test_label_active(): void
     {
-        $this->assertSame('Active', KpiStatus::Active->label());
+        $this->assertSame('Actif', KpiStatus::Active->label());
     }
 
     public function test_label_inactive(): void
     {
-        $this->assertSame('Inactive', KpiStatus::Inactive->label());
+        $this->assertSame('Inactif', KpiStatus::Inactive->label());
     }
 
     public function test_label_archived(): void
     {
-        $this->assertSame('Archived', KpiStatus::Archived->label());
+        $this->assertSame('Archivé', KpiStatus::Archived->label());
     }
 
     public function test_color_active(): void
@@ -57,8 +57,8 @@ class KpiStatusTest extends TestCase
         $this->assertArrayHasKey(KpiStatus::Inactive->value, $labels);
         $this->assertArrayHasKey(KpiStatus::Archived->value, $labels);
 
-        $this->assertSame('Active', $labels[KpiStatus::Active->value]);
-        $this->assertSame('Inactive', $labels[KpiStatus::Inactive->value]);
-        $this->assertSame('Archived', $labels[KpiStatus::Archived->value]);
+        $this->assertSame('Actif', $labels[KpiStatus::Active->value]);
+        $this->assertSame('Inactif', $labels[KpiStatus::Inactive->value]);
+        $this->assertSame('Archivé', $labels[KpiStatus::Archived->value]);
     }
 }

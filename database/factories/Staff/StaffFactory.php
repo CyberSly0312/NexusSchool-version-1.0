@@ -19,7 +19,7 @@ class StaffFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'staff_number' => fake()->unique()->regexify('STF-[0-9A-F]{6}-[0-9]{4}'),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),

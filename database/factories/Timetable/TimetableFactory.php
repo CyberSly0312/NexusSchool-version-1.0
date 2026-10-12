@@ -18,7 +18,7 @@ class TimetableFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'name' => 'Emploi du temps '.fake()->year(),
             'code' => fake()->unique()->regexify('TT-[0-9]{4}'),
             'status' => TimetableStatus::Draft,

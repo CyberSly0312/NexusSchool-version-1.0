@@ -102,3 +102,39 @@ test('passes is false for a non-positive maximum', function (): void {
 
     expect($calculator->passes(['score' => 0.0, 'maximum' => 0.0]))->toBeFalse();
 });
+
+test('pass rate applies the provided default fraction of each row maximum', function (): void {
+    $calculator = new AssessmentStatisticsCalculator();
+
+    $rows = [
+        ['score' => 15.0, 'maximum' => 20.0],
+        ['score' => 14.0, 'maximum' => 20.0],
+        ['score' => 15.0, 'maximum' => 20.0],
+    ];
+
+    expect($calculator->passRate($rows, 0.75))->toBe(66.67);
+});
+
+test('an explicit row passing score takes precedence over the provided default fraction', function (): void {
+    $calculator = new AssessmentStatisticsCalculator();
+
+    $rows = [
+        ['score' => 12.0, 'maximum' => 20.0, 'passing' => 16.0],
+        ['score' => 16.0, 'maximum' => 20.0, 'passing' => 16.0],
+    ];
+
+    expect($calculator->passRate($rows, 0.4))->toBe(50.0);
+});
+
+test('a score exactly equal to the passing threshold counts as a pass', function (): void {
+    $calculator = new AssessmentStatisticsCalculator();
+
+    $rows = [
+        ['score' => 10.0, 'maximum' => 20.0],
+        ['score' => 9.0, 'maximum' => 20.0],
+    ];
+
+    expect($calculator->passRate($rows, 0.5))->toBe(50.0)
+        ->and($calculator->passes($rows[0], 0.5))->toBeTrue()
+        ->and($calculator->passes($rows[1], 0.5))->toBeFalse();
+});

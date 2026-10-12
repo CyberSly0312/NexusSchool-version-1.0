@@ -6,6 +6,7 @@ namespace App\Domains\ClassCouncil\Application\Actions;
 
 use App\Domains\ClassCouncil\Application\DTOs\CreateCouncilSessionData;
 use App\Domains\ClassCouncil\Domain\Contracts\AcademicFrameworkContract;
+use App\Domains\ClassCouncil\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ClassCouncil\Domain\Enums\CouncilSessionStatus;
 use App\Domains\ClassCouncil\Domain\Events\CouncilSessionCreated;
 use App\Domains\ClassCouncil\Domain\Exceptions\ClassCouncilException;
@@ -24,6 +25,7 @@ final class CreateCouncilSessionAction
 {
     public function __construct(
         private readonly AcademicFrameworkContract $academic,
+        private readonly RecordsLifecycleContract $lifecycle,
     ) {
     }
 
@@ -44,6 +46,21 @@ final class CreateCouncilSessionAction
             ]);
 
             CouncilSessionCreated::dispatch($session, $actor);
+
+            $this->lifecycle->register(
+                $session->school_id,
+                $session->getKey(),
+                $session->uuid,
+                [
+                    'year_id' => $session->academic_calendar_year_id,
+                    'term_id' => $session->academic_calendar_term_id,
+                    'class_id' => $session->school_class_id,
+                    'section_id' => $session->class_section_id,
+                ],
+                $actor?->getKey(),
+                'CouncilSessionCreated',
+                $actor,
+            );
 
             return $session;
         });

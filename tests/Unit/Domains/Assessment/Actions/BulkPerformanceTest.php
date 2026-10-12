@@ -5,7 +5,9 @@ declare(strict_types=1);
 use App\Domains\Assessment\Application\AssessmentService;
 use App\Domains\Assessment\Application\DTOs\BulkScoreItem;
 use App\Domains\Assessment\Application\DTOs\BulkScoresData;
+use App\Domains\Assessment\Domain\Events\ScoreRecorded;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 
 beforeEach(function (): void {
     $this->schoolId = makeTenant();
@@ -28,6 +30,8 @@ test('bulk recording a large class stays bounded in query count', function (): v
     $items = $enrollments->map(
         fn ($enrollment): BulkScoreItem => new BulkScoreItem(enrollmentId: $enrollment->id, score: 14.0),
     )->all();
+
+    Event::fake([ScoreRecorded::class]);
 
     DB::flushQueryLog();
     DB::enableQueryLog();

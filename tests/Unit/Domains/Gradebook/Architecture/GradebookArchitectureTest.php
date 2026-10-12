@@ -43,6 +43,7 @@ test('every gradebook adapter implements one of the domain contracts', function 
         App\Domains\Gradebook\Domain\Contracts\AcademicFrameworkContract::class,
         App\Domains\Gradebook\Domain\Contracts\EnrollmentContract::class,
         App\Domains\Gradebook\Domain\Contracts\AssessmentContract::class,
+        App\Domains\Gradebook\Domain\Contracts\AcademicPoliciesContract::class,
         App\Domains\Gradebook\Domain\Contracts\GradebookContract::class,
     ];
 
@@ -71,6 +72,7 @@ test('every gradebook domain contract is bound in the container', function (): v
         App\Domains\Gradebook\Domain\Contracts\AcademicFrameworkContract::class,
         App\Domains\Gradebook\Domain\Contracts\EnrollmentContract::class,
         App\Domains\Gradebook\Domain\Contracts\AssessmentContract::class,
+        App\Domains\Gradebook\Domain\Contracts\AcademicPoliciesContract::class,
         App\Domains\Gradebook\Domain\Contracts\GradebookContract::class,
     ];
 

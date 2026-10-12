@@ -77,7 +77,7 @@ final class ConveneCouncilSessionAction
                 enrollmentId: $enrollment->id,
                 student: $enrollment->student,
                 standing: $standing,
-                automatic: $this->automatic->propose($standing),
+                automatic: $this->automatic->propose($standing, $session->school_id),
             );
         }, $enrollments);
     }

@@ -18,7 +18,7 @@ class EnrollmentTransferFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'enrollment_id' => \App\Domains\Enrollment\Infrastructure\Models\Enrollment::factory(),
             'student_id' => \App\Domains\Student\Infrastructure\Models\Student::factory(),
             'transfer_type' => TransferType::Internal,

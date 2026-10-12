@@ -36,10 +36,10 @@ class PermissionService
     /**
      * Groups that only expose their declared extra actions — the Academic
      * Communication Engine deliberately exposes exactly the document
-     * capabilities (view, generate, review, approve, publish, archive,
+     * capabilities (view, generate, review, approve, publish, archive, revoke,
      * template.manage) and nothing else.
      */
-    public const NO_CRUD_GROUPS = ['document'];
+    public const NO_CRUD_GROUPS = ['document', 'certificate-and-transcript'];
 
     public function create(PermissionData $data): Permission
     {
@@ -163,7 +163,11 @@ class PermissionService
         'conflict' => ['resolve'],
         'attendance' => ['record', 'correct', 'lock', 'unlock', 'report', 'manage'],
         'assessment' => ['schedule', 'score', 'validate', 'publish', 'archive', 'statistics', 'manage'],
-        'document' => ['generate', 'review', 'approve', 'publish', 'archive', 'template.manage'],
+        'document' => ['view', 'generate', 'review', 'approve', 'publish', 'archive', 'revoke', 'template.manage'],
+        'class-council' => ['convene', 'decide', 'publish', 'archive'],
+        'report-card' => ['generate', 'regenerate', 'publish'],
+        'records_lifecycle' => ['publish', 'archive'],
+        'certificate-and-transcript' => ['view', 'generate', 'review', 'approve', 'publish', 'archive'],
     ];
 
     public function getDefaultPermissions(): array

@@ -47,6 +47,7 @@ test('every report card adapter implements one of the domain contracts', functio
         App\Domains\ReportCard\Domain\Contracts\AcademicPoliciesContract::class,
         App\Domains\ReportCard\Domain\Contracts\ClassCouncilContract::class,
         App\Domains\ReportCard\Domain\Contracts\AcademicCommunicationContract::class,
+        App\Domains\ReportCard\Domain\Contracts\RecordsLifecycleContract::class,
     ];
 
     foreach (File::files(app_path('Domains/ReportCard/Infrastructure/Contracts')) as $file) {
@@ -78,6 +79,7 @@ test('every report card domain contract is bound in the container', function ():
         App\Domains\ReportCard\Domain\Contracts\AcademicPoliciesContract::class,
         App\Domains\ReportCard\Domain\Contracts\ClassCouncilContract::class,
         App\Domains\ReportCard\Domain\Contracts\AcademicCommunicationContract::class,
+        App\Domains\ReportCard\Domain\Contracts\RecordsLifecycleContract::class,
     ];
 
     foreach ($contracts as $contract) {
@@ -92,13 +94,7 @@ test('every report card domain contract is bound in the container', function ():
 test('every report card aggregate carries a generated public uuid on creation', function (): void {
     $schoolId = makeTenant();
     $context = makeAssessmentContext($schoolId, false);
-    $level = \App\Domains\Academic\Infrastructure\Models\EducationLevel::create([
-        'school_id' => $schoolId,
-        'name' => 'Collège',
-        'code' => 'EL'.Str::upper(Str::random(3)),
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $level = $context['level'];
 
     $enrollment = enrollStudent(
         $schoolId,

@@ -35,7 +35,7 @@ class StudentFactory extends Factory
             'religion' => fake()->randomElement(['Christianity', 'Islam', 'Hinduism', 'Buddhism', 'Traditional']),
             'photo' => null,
             'email' => fake()->safeEmail(),
-            'phone_number' => fake()->phoneNumber(),
+            'phone_number' => fake()->e164PhoneNumber(),
             'residential_address' => fake()->address(),
             'admission_date' => fake()->dateTimeBetween('-5 years', 'now')->format('Y-m-d'),
             'allergies' => fake()->randomElement(['Peanuts', 'Dust', 'Pollen', 'Shellfish', 'Lactose', 'None']),

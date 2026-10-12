@@ -20,7 +20,7 @@ class EnrollmentPromotionFactory extends Factory
         $academicSchoolId = 'acad-'.(string) \Illuminate\Support\Str::ulid();
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'enrollment_id' => \App\Domains\Enrollment\Infrastructure\Models\Enrollment::factory(),
             'student_id' => \App\Domains\Student\Infrastructure\Models\Student::factory(),
             'academic_calendar_year_id' => \Database\Factories\Academic\AcademicCalendarYearFactory::new()

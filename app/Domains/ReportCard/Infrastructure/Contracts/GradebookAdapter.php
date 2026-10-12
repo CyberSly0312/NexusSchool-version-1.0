@@ -101,17 +101,12 @@ final class GradebookAdapter implements GradebookContract
             return null;
         }
 
-        $passingPercentage = (float) config('nexus-gradebook.standing.passing_percentage', 50.0);
-
         return new GradebookStandingReference(
             gpa: $this->standing->gpa($contributions)?->gpa,
             cgpa: $this->standing->cgpa($contributions)?->gpa,
             overallPercentage: $this->standing->overallPercentage($contributions),
-            academicStanding: $this->standing->standing($contributions)?->value,
-            failedSubjects: count(array_filter(
-                $contributions,
-                static fn (StandingContributionReference $contribution): bool => $contribution->percentage < $passingPercentage,
-            )),
+            academicStanding: $this->standing->standing($contributions, $schoolId)?->value,
+            failedSubjects: $this->standing->failedSubjectCount($contributions, $schoolId),
         );
     }
 

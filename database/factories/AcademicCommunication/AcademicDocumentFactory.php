@@ -25,7 +25,7 @@ class AcademicDocumentFactory extends Factory
         $type = DocumentType::ReportCard;
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'document_number' => DocumentNumber::fromParts(
                 'NS',
                 '2027',

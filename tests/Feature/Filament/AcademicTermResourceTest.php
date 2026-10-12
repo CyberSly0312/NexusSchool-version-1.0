@@ -23,25 +23,31 @@ class AcademicTermResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
+            'school_id' => (string) Str::ulid(),
         ]);
 
-        $this->actingAs($this->admin);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_academic_term_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/academic-terms')
+            ->get('/school-admin/academic-terms')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_academic_term_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/academic-terms/create')
+            ->get('/school-admin/academic-terms/create')
             ->assertSuccessful();
     }
 
@@ -68,7 +74,7 @@ class AcademicTermResourceTest extends TestCase
             ->create();
 
         $this->actingAs($this->admin)
-            ->get('/admin/academic-terms/'.$term->id.'/edit')
+            ->get('/school-admin/academic-terms/'.$term->id.'/edit')
             ->assertSuccessful();
     }
 }

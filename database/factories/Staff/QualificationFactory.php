@@ -19,7 +19,7 @@ class QualificationFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'staff_id' => Staff::factory(),
             'qualification_level' => fake()->randomElement(QualificationLevel::cases()),
             'field_of_study' => fake()->optional()->words(2, true),

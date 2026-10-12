@@ -20,7 +20,7 @@ class ReportCardEntryFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'report_card_id' => ReportCard::factory(),
             'enrollment_id' => Enrollment::factory(),
             'student_id' => 1,

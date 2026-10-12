@@ -22,27 +22,27 @@ class ReportStatusTest extends TestCase
 
     public function test_label_draft(): void
     {
-        $this->assertSame('Draft', ReportStatus::Draft->label());
+        $this->assertSame('Brouillon', ReportStatus::Draft->label());
     }
 
     public function test_label_scheduled(): void
     {
-        $this->assertSame('Scheduled', ReportStatus::Scheduled->label());
+        $this->assertSame('Planifié', ReportStatus::Scheduled->label());
     }
 
     public function test_label_generating(): void
     {
-        $this->assertSame('Generating', ReportStatus::Generating->label());
+        $this->assertSame('Génération en cours', ReportStatus::Generating->label());
     }
 
     public function test_label_completed(): void
     {
-        $this->assertSame('Completed', ReportStatus::Completed->label());
+        $this->assertSame('Terminé', ReportStatus::Completed->label());
     }
 
     public function test_label_failed(): void
     {
-        $this->assertSame('Failed', ReportStatus::Failed->label());
+        $this->assertSame('Échoué', ReportStatus::Failed->label());
     }
 
     public function test_color_draft(): void
@@ -81,10 +81,10 @@ class ReportStatusTest extends TestCase
         $this->assertArrayHasKey(ReportStatus::Completed->value, $labels);
         $this->assertArrayHasKey(ReportStatus::Failed->value, $labels);
 
-        $this->assertSame('Draft', $labels[ReportStatus::Draft->value]);
-        $this->assertSame('Scheduled', $labels[ReportStatus::Scheduled->value]);
-        $this->assertSame('Generating', $labels[ReportStatus::Generating->value]);
-        $this->assertSame('Completed', $labels[ReportStatus::Completed->value]);
-        $this->assertSame('Failed', $labels[ReportStatus::Failed->value]);
+        $this->assertSame('Brouillon', $labels[ReportStatus::Draft->value]);
+        $this->assertSame('Planifié', $labels[ReportStatus::Scheduled->value]);
+        $this->assertSame('Génération en cours', $labels[ReportStatus::Generating->value]);
+        $this->assertSame('Terminé', $labels[ReportStatus::Completed->value]);
+        $this->assertSame('Échoué', $labels[ReportStatus::Failed->value]);
     }
 }

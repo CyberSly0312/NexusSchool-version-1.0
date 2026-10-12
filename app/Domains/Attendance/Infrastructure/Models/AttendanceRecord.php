@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Attendance\Infrastructure\Models;
 
+use App\Contracts\SchoolOwned;
 use App\Domains\Attendance\Domain\Enums\AttendanceStatus;
 use App\Traits\HasSchoolId;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * enrollment per session (unique constraint); late arrivals and early
  * departures are supporting entities kept as immutable audit entries.
  */
-class AttendanceRecord extends Model
+class AttendanceRecord extends Model implements SchoolOwned
 {
     use HasFactory;
     use HasSchoolId;

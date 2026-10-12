@@ -121,7 +121,10 @@ return [
 
     'standing' => [
         'passing_percentage' => (float) env('NEXUS_GRADEBOOK_STANDING_PASSING_PERCENTAGE', 50.0),
+        'passing_percentage_key' => 'academic.gradebook.passing_percentage',
         'distinction_percentage' => (float) env('NEXUS_GRADEBOOK_STANDING_DISTINCTION_PERCENTAGE', 80.0),
+        'distinction_percentage_key' => 'academic.gradebook.distinction_percentage',
         'conditional_failures' => (int) env('NEXUS_GRADEBOOK_STANDING_CONDITIONAL_FAILURES', 1),
+        'conditional_failures_key' => 'academic.gradebook.conditional_failures',
     ],
 ];

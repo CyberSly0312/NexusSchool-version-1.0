@@ -26,7 +26,7 @@ class SchoolFactory extends Factory
             'database' => 'school_'.Str::slug($name),
             'domain' => Str::slug($name).'.nexus.school',
             'email' => fake()->unique()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
+            'phone' => fake()->e164PhoneNumber(),
             'address' => fake()->streetAddress(),
             'city' => fake()->city(),
             'state' => fake()->state(),

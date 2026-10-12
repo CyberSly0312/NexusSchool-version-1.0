@@ -24,25 +24,31 @@ class SectionResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
+            'school_id' => (string) Str::ulid(),
         ]);
 
-        $this->actingAs($this->admin);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_section_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/sections')
+            ->get('/school-admin/sections')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_section_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/sections/create')
+            ->get('/school-admin/sections/create')
             ->assertSuccessful();
     }
 
@@ -74,7 +80,7 @@ class SectionResourceTest extends TestCase
             ->create();
 
         $this->actingAs($this->admin)
-            ->get('/admin/sections/'.$section->id.'/edit')
+            ->get('/school-admin/sections/'.$section->id.'/edit')
             ->assertSuccessful();
     }
 }

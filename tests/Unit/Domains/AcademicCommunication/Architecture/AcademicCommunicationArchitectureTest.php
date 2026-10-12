@@ -48,6 +48,7 @@ test('every AcademicCommunication adapter implements one of the domain contracts
         App\Domains\AcademicCommunication\Domain\Contracts\SchoolContract::class,
         App\Domains\AcademicCommunication\Domain\Contracts\StaffContract::class,
         App\Domains\AcademicCommunication\Domain\Contracts\StudentIdentityContract::class,
+        App\Domains\AcademicCommunication\Domain\Contracts\RecordsLifecycleContract::class,
     ];
 
     foreach (File::files(app_path('Domains/AcademicCommunication/Infrastructure/Contracts')) as $file) {
@@ -85,6 +86,7 @@ test('every AcademicCommunication domain contract is bound in the container', fu
         App\Domains\AcademicCommunication\Domain\Contracts\SchoolContract::class,
         App\Domains\AcademicCommunication\Domain\Contracts\StaffContract::class,
         App\Domains\AcademicCommunication\Domain\Contracts\StudentIdentityContract::class,
+        App\Domains\AcademicCommunication\Domain\Contracts\RecordsLifecycleContract::class,
     ];
 
     foreach ($contracts as $contract) {

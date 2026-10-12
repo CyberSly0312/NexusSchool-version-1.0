@@ -26,25 +26,31 @@ class SubjectCoefficientResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
+            'school_id' => (string) Str::ulid(),
         ]);
 
-        $this->actingAs($this->admin);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_subject_coefficient_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/subject-coefficients')
+            ->get('/school-admin/subject-coefficients')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_subject_coefficient_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/subject-coefficients/create')
+            ->get('/school-admin/subject-coefficients/create')
             ->assertSuccessful();
     }
 
@@ -79,7 +85,7 @@ class SubjectCoefficientResourceTest extends TestCase
             ->create();
 
         $this->actingAs($this->admin)
-            ->get('/admin/subject-coefficients/'.$subjectCoefficient->id.'/edit')
+            ->get('/school-admin/subject-coefficients/'.$subjectCoefficient->id.'/edit')
             ->assertSuccessful();
     }
 }

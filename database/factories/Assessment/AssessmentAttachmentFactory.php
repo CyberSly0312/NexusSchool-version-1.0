@@ -17,7 +17,7 @@ class AssessmentAttachmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'assessment_id' => AssessmentFactory::new(),
             'file_name' => fake()->words(3, true).'.pdf',
             'file_path' => 'assessments/'.fake()->uuid().'.pdf',

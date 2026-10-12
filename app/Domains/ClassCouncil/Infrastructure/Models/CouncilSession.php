@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\ClassCouncil\Infrastructure\Models;
 
+use App\Contracts\SchoolOwned;
 use App\Domains\ClassCouncil\Domain\Enums\CouncilSessionStatus;
 use App\Domains\ClassCouncil\Domain\Exceptions\InvalidStatusTransitionException;
 use App\Traits\HasSchoolId;
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * lifecycle (Draft → Convened → Published → Archived) in which only convened
  * sessions accept decisions and published sessions are immutable.
  */
-class CouncilSession extends Model
+class CouncilSession extends Model implements SchoolOwned
 {
     use HasFactory;
     use HasSchoolId;

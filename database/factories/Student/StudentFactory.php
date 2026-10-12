@@ -20,7 +20,7 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'student_number' => fake()->unique()->regexify('[A-Z]{2}-[0-9]{4}'),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
@@ -29,7 +29,7 @@ class StudentFactory extends Factory
             'gender' => fake()->randomElement(Gender::cases()),
             'date_of_birth' => fake()->dateTimeBetween('-18 years', '-6 years')->format('Y-m-d'),
             'nationality' => fake()->country(),
-            'email' => fake()->optional(0.7)->safeEmail(),
+            'email' => fake()->unique()->safeEmail(),
             'phone_number' => fake()->optional()->phoneNumber(),
             'admission_date' => fake()->dateTimeBetween('-3 years', 'now')->format('Y-m-d'),
             'medical_notes' => fake()->optional()->sentence(),

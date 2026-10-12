@@ -19,13 +19,14 @@ function tenantGradebookFixture(string $schoolId): array
 {
     $context = makeAssessmentContext($schoolId, false);
 
-    $level = EducationLevel::create([
-        'school_id' => $schoolId,
-        'name' => 'Collège',
-        'code' => 'EL'.Str::upper(Str::random(3)),
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $level = EducationLevel::firstOrCreate(
+        ['school_id' => $schoolId, 'name' => 'Collège'],
+        [
+            'code' => 'EL'.Str::upper(Str::random(3)),
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
 
     $enrollment = enrollStudent(
         $schoolId,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Domains\AcademicCommunication\Application\AcademicCommunicationService;
 use App\Domains\AcademicCommunication\Application\DTOs\ApproveDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\GenerateDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\PublishDocumentData;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentChannel;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentType;
@@ -153,3 +154,18 @@ test('document numbering is independent per school', function (): void {
 
     expect($firstB->documentNumber()->sequence)->toBe(1);
 });
+
+test('publishing scoped to school A cannot act on a document of school B', function (): void {
+    $schoolA = makeTenant();
+    $schoolB = makeTenant();
+
+    $contextB = makeIsolationContext($schoolB);
+
+    $document = $this->service->generateDocument(isolationData($schoolB, $contextB['template'], $contextB['policy']));
+
+    $this->service->publish(PublishDocumentData::fromArray([
+        'school_id' => $schoolA,
+        'document_id' => $document->id,
+        'channels' => [DocumentChannel::InternalPortal->value],
+    ]));
+})->throws(ModelNotFoundException::class);

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\Attendance\Domain\Traits;
 
+use App\Contracts\SchoolOwned;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Authorization for the Attendance engine (SPR-008).
@@ -26,13 +26,13 @@ trait HandlesAttendanceAuthorization
         return $user->hasRole('super_admin') || $user->hasPermissionTo($this->permissionGroup().'.view');
     }
 
-    public function view(User $user, Model $model): bool
+    public function view(User $user, SchoolOwned $model): bool
     {
         if ($user->hasRole('super_admin')) {
             return true;
         }
 
-        return $user->school_id === $model->school_id && $user->hasPermissionTo($this->permissionGroup().'.view');
+        return $user->school_id === $model->getSchoolId() && $user->hasPermissionTo($this->permissionGroup().'.view');
     }
 
     public function create(User $user): bool
@@ -40,63 +40,63 @@ trait HandlesAttendanceAuthorization
         return $user->hasRole('super_admin') || $user->hasPermissionTo($this->permissionGroup().'.record');
     }
 
-    public function update(User $user, Model $model): bool
+    public function update(User $user, SchoolOwned $model): bool
     {
         return $this->authorizeAttendanceAction($user, $model, 'record');
     }
 
-    public function delete(User $user, Model $model): bool
+    public function delete(User $user, SchoolOwned $model): bool
     {
         return false;
     }
 
-    public function restore(User $user, Model $model): bool
+    public function restore(User $user, SchoolOwned $model): bool
     {
         return false;
     }
 
-    public function forceDelete(User $user, Model $model): bool
+    public function forceDelete(User $user, SchoolOwned $model): bool
     {
         return false;
     }
 
-    public function record(User $user, ?Model $model = null): bool
+    public function record(User $user, ?SchoolOwned $model = null): bool
     {
         return $this->authorizeAttendanceAction($user, $model, 'record');
     }
 
-    public function correct(User $user, ?Model $model = null): bool
+    public function correct(User $user, ?SchoolOwned $model = null): bool
     {
         return $this->authorizeAttendanceAction($user, $model, 'correct');
     }
 
-    public function lock(User $user, ?Model $model = null): bool
+    public function lock(User $user, ?SchoolOwned $model = null): bool
     {
         return $this->authorizeAttendanceAction($user, $model, 'lock');
     }
 
-    public function unlock(User $user, ?Model $model = null): bool
+    public function unlock(User $user, ?SchoolOwned $model = null): bool
     {
         return $this->authorizeAttendanceAction($user, $model, 'unlock');
     }
 
-    public function report(User $user, ?Model $model = null): bool
+    public function report(User $user, ?SchoolOwned $model = null): bool
     {
         return $this->authorizeAttendanceAction($user, $model, 'report');
     }
 
-    public function manage(User $user, ?Model $model = null): bool
+    public function manage(User $user, ?SchoolOwned $model = null): bool
     {
         return $this->authorizeAttendanceAction($user, $model, 'manage');
     }
 
-    private function authorizeAttendanceAction(User $user, ?Model $model, string $action): bool
+    private function authorizeAttendanceAction(User $user, ?SchoolOwned $model, string $action): bool
     {
         if ($user->hasRole('super_admin')) {
             return true;
         }
 
-        if ($model !== null && $user->school_id !== $model->school_id) {
+        if ($model !== null && $user->school_id !== $model->getSchoolId()) {
             return false;
         }
 

@@ -23,7 +23,7 @@ class AssessmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'academic_calendar_year_id' => AcademicCalendarYear::factory(),
             'academic_calendar_term_id' => AcademicCalendarTerm::factory(),
             'academic_subject_id' => AcademicSubject::factory(),

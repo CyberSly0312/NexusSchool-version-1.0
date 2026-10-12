@@ -18,7 +18,7 @@ class ClassSectionFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'school_class_id' => null,
             'name' => fake()->randomElement(['A', 'B', 'C']),
             'code' => fake()->unique()->bothify('SEC##'),

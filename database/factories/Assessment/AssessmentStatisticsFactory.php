@@ -17,7 +17,7 @@ class AssessmentStatisticsFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'assessment_id' => AssessmentFactory::new(),
             'total_scores' => fake()->numberBetween(10, 50),
             'average' => fake()->randomFloat(2, 0, 20),

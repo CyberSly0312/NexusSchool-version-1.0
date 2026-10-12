@@ -89,12 +89,13 @@ class AssessmentStatisticsCalculator
 
     /**
      * Share of rows whose score reaches the passing threshold. When a row does
-     * not carry a passing score the configurable default passing percentage is
-     * applied to its maximum.
+     * not carry a passing score, the provided default fraction is applied to
+     * its maximum; when no fraction is provided the configurable default
+     * passing percentage is used.
      *
      * @param  list<array{score: float, maximum: float, passing?: float}>  $rows
      */
-    public function passRate(array $rows): float
+    public function passRate(array $rows, ?float $defaultFraction = null): float
     {
         if ($rows === []) {
             return 0.0;
@@ -103,7 +104,7 @@ class AssessmentStatisticsCalculator
         $passed = 0;
 
         foreach ($rows as $row) {
-            if ($this->passes($row)) {
+            if ($this->passes($row, $defaultFraction)) {
                 $passed++;
             }
         }
@@ -114,7 +115,7 @@ class AssessmentStatisticsCalculator
     /**
      * @param  array{score: float, maximum: float, passing?: float}  $row
      */
-    public function passes(array $row): bool
+    public function passes(array $row, ?float $defaultFraction = null): bool
     {
         $maximum = $row['maximum'];
 
@@ -122,7 +123,7 @@ class AssessmentStatisticsCalculator
             return false;
         }
 
-        $passing = $row['passing'] ?? ($maximum * $this->defaultPassingFraction());
+        $passing = $row['passing'] ?? ($maximum * ($defaultFraction ?? $this->defaultPassingFraction()));
 
         return $row['score'] >= $passing;
     }

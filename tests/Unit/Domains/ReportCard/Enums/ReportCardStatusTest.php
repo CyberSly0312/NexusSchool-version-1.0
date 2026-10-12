@@ -14,7 +14,10 @@ test('a report card run is created as a draft', function (): void {
     $reportCard = ReportCard::factory()
         ->forSchool($schoolId)
         ->forClass($context['class']->id)
-        ->create();
+        ->create([
+            'academic_calendar_year_id' => $context['year']->id,
+            'academic_calendar_term_id' => $context['term']->id,
+        ]);
 
     expect($reportCard->status)->toBe(ReportCardStatus::Draft)
         ->and($reportCard->isDraft())->toBeTrue()
@@ -71,7 +74,11 @@ test('assertCanTransitionTo throws on an invalid transition', function (): void 
     $reportCard = ReportCard::factory()
         ->forSchool($schoolId)
         ->forClass($context['class']->id)
-        ->create(['status' => ReportCardStatus::Draft]);
+        ->create([
+            'status' => ReportCardStatus::Draft,
+            'academic_calendar_year_id' => $context['year']->id,
+            'academic_calendar_term_id' => $context['term']->id,
+        ]);
 
     expect(fn () => $reportCard->assertCanTransitionTo(ReportCardStatus::Published))
         ->toThrow(InvalidStatusTransitionException::class);

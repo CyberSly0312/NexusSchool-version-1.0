@@ -20,7 +20,7 @@ class AcademicProgramFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'education_level_id' => null,
             'name' => fake()->randomElement(['Général', 'Technique', 'Professionnel']).' '.str_pad((string) (self::$sequence++ % 1000), 3, '0', STR_PAD_LEFT),
             'code' => fake()->unique()->bothify('PRG##'),

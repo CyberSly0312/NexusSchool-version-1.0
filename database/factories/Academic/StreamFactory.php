@@ -18,7 +18,7 @@ class StreamFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'academic_program_id' => null,
             'education_level_id' => null,
             'name' => fake()->randomElement(['Sciences', 'Lettres', 'Technique']),

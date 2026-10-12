@@ -1,239 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Cannot access property \$value on string\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
-
-		-
-			message: '#^Cannot call method toDateString\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
-
-		-
-			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>value" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
-
-		-
-			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$archived_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/ArchiveCouncilSessionAction.php
-
-		-
-			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Archived\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/ArchiveCouncilSessionAction.php
-
-		-
-			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$held_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/ConveneCouncilSessionAction.php
-
-		-
-			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Convened\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/ConveneCouncilSessionAction.php
-
-		-
-			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$published_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/PublishCouncilSessionAction.php
-
-		-
-			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Published\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/PublishCouncilSessionAction.php
-
-		-
-			message: '#^Cannot call method isDeliberating\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDecisionAction.php
-
-		-
-			message: '#^Parameter \#1 \$status of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\CouncilSessionLockedException\:\:notDeliberating\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDecisionAction.php
-
-		-
-			message: '#^Cannot call method isDeliberating\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDeliberationAction.php
-
-		-
-			message: '#^Parameter \#1 \$status of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\CouncilSessionLockedException\:\:notDeliberating\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDeliberationAction.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>student_number" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
-
-		-
-			message: '#^Cannot access property \$value on string\.$#'
-			identifier: property.nonObject
-			count: 3
-			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
-
-		-
-			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Infrastructure\\Listeners\\ClassCouncilAuditLogger\:\:log\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
-
-		-
-			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Infrastructure\\Listeners\\ClassCouncilAuditLogger\:\:payload\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
-
-		-
-			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 2
-			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Cannot call method isImmutable\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Parameter \#1 \$from of method App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Parameter \#1 \$from of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Archived will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Convened will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Draft will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Published will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Domains/ClassCouncil/Infrastructure/Observers/ClassCouncilEntityObserver.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Domains/ClassCouncil/Infrastructure/Policies/CouncilSessionPolicy.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 5
-			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource.php
-
-		-
-			message: '#^Cannot access property \$status on Illuminate\\Database\\Eloquent\\Model\|int\|string\.$#'
-			identifier: property.nonObject
-			count: 2
-			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
-
-		-
-			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Application\\ClassCouncilService\:\:conveneSession\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
-
-		-
-			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Application\\ClassCouncilService\:\:publishSession\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
-
-		-
-			message: '#^Cannot access property \$value on string\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: app/Domains/ReportCard/Infrastructure/Contracts/ClassCouncilAdapter.php
-		-
 			message: '#^Access to an undefined property App\\Models\\AiUsageLog\:\:\$avg_latency\.$#'
 			identifier: property.notFound
 			count: 1
@@ -306,12 +73,6 @@ parameters:
 			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarEvent.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarEvent.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
@@ -332,12 +93,6 @@ parameters:
 		-
 			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Academic\\Domain\\Enums\\CalendarTermStatus\:\:Planned will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarTerm.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarTerm.php
 
@@ -366,20 +121,8 @@ parameters:
 			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarYear.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/AcademicCalendarYear.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/AcademicProgram.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Academic/Infrastructure/Models/AcademicProgram.php
 
@@ -390,20 +133,8 @@ parameters:
 			path: app/Domains/Academic/Infrastructure/Models/AcademicSubject.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/AcademicSubject.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/ClassSection.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Academic/Infrastructure/Models/ClassSection.php
 
@@ -414,20 +145,8 @@ parameters:
 			path: app/Domains/Academic/Infrastructure/Models/Coefficient.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/Coefficient.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/EducationLevel.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Academic/Infrastructure/Models/EducationLevel.php
 
@@ -438,32 +157,14 @@ parameters:
 			path: app/Domains/Academic/Infrastructure/Models/SchoolClass.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/SchoolClass.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/Academic/Infrastructure/Models/Stream.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/Stream.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Academic/Infrastructure/Models/SubjectGroup.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Academic/Infrastructure/Models/SubjectGroup.php
 
@@ -858,6 +559,30 @@ parameters:
 			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/AssessmentAdapter.php
 
 		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>value" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/AcademicCommunication/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$code\.$#'
 			identifier: property.notFound
 			count: 4
@@ -1032,12 +757,6 @@ parameters:
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocument.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1046,12 +765,6 @@ parameters:
 		-
 			message: '#^Cannot call method label\(\) on string\.$#'
 			identifier: method.nonObject
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentTemplate.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentTemplate.php
 
@@ -1068,32 +781,14 @@ parameters:
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentVersion.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/AcademicDocumentVersion.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentApproval.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentApproval.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentAudit.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentAudit.php
 
@@ -1110,32 +805,14 @@ parameters:
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentRecipient.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentRecipient.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentSignature.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/DocumentSignature.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/GeneratedFile.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/GeneratedFile.php
 
@@ -1152,20 +829,8 @@ parameters:
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationChannel.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationChannel.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationDeliveryAttempt.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationDeliveryAttempt.php
 
@@ -1178,12 +843,6 @@ parameters:
 		-
 			message: '#^Cannot call method label\(\) on string\.$#'
 			identifier: method.nonObject
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationPolicy.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationPolicy.php
 
@@ -1202,12 +861,6 @@ parameters:
 		-
 			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\AcademicCommunication\\Domain\\Enums\\PublicationStatus\:\:Completed will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationRecord.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/AcademicCommunication/Infrastructure/Models/PublicationRecord.php
 
@@ -1530,24 +1183,6 @@ parameters:
 			path: app/Domains/Assessment/Application/Actions/ValidateScoresAction.php
 
 		-
-			message: '#^Method App\\Domains\\Assessment\\Application\\Actions\\UpdateAssessmentAction\:\:execute\(\) invoked with 3 parameters, 1\-2 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: app/Domains/Assessment/Application/AssessmentService.php
-
-		-
-			message: '#^Parameter \#1 \$data of method App\\Domains\\Assessment\\Application\\Actions\\UpdateAssessmentAction\:\:execute\(\) expects App\\Domains\\Assessment\\Application\\DTOs\\UpdateAssessmentData, App\\Domains\\Assessment\\Infrastructure\\Models\\Assessment given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/Assessment/Application/AssessmentService.php
-
-		-
-			message: '#^Parameter \#2 \$actor of method App\\Domains\\Assessment\\Application\\Actions\\UpdateAssessmentAction\:\:execute\(\) expects App\\Models\\User\|null, App\\Domains\\Assessment\\Application\\DTOs\\UpdateAssessmentData given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Domains/Assessment/Application/AssessmentService.php
-
-		-
 			message: '#^Property App\\Domains\\Assessment\\Application\\Services\\AssessmentCompletionService\:\:\$enrollment is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
@@ -1776,20 +1411,8 @@ parameters:
 			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/Assessment.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentAttachment.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentAttachment.php
 
@@ -1800,20 +1423,8 @@ parameters:
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentComponent.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentComponent.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentRemark.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentRemark.php
 
@@ -1831,12 +1442,6 @@ parameters:
 
 		-
 			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentScore.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentScore.php
@@ -1860,32 +1465,14 @@ parameters:
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentSession.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentSession.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentStatistics.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentStatistics.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentTemplate.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentTemplate.php
 
@@ -1908,20 +1495,8 @@ parameters:
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentType.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentType.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Assessment/Infrastructure/Models/AssessmentWeight.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Assessment/Infrastructure/Models/AssessmentWeight.php
 
@@ -2250,20 +1825,8 @@ parameters:
 			path: app/Domains/Attendance/Infrastructure/Models/AttendanceAlert.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Attendance/Infrastructure/Models/AttendanceAlert.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Attendance/Infrastructure/Models/AttendanceCorrection.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Attendance/Infrastructure/Models/AttendanceCorrection.php
 
@@ -2294,12 +1857,6 @@ parameters:
 		-
 			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Attendance\\Domain\\Enums\\AttendanceStatus\:\:Unexcused will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Attendance/Infrastructure/Models/AttendanceRecord.php
 
@@ -2382,20 +1939,8 @@ parameters:
 			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSession.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSummary.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Attendance/Infrastructure/Models/AttendanceSummary.php
 
@@ -2406,20 +1951,8 @@ parameters:
 			path: app/Domains/Attendance/Infrastructure/Models/EarlyDeparture.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Attendance/Infrastructure/Models/EarlyDeparture.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Attendance/Infrastructure/Models/LateArrival.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Attendance/Infrastructure/Models/LateArrival.php
 
@@ -2494,6 +2027,228 @@ parameters:
 			identifier: return.unusedType
 			count: 1
 			path: app/Domains/Campus/Enums/CampusStatus.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$archived_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ArchiveCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Archived\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ArchiveCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$held_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ConveneCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Convened\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/ConveneCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$published_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/PublishCouncilSessionAction.php
+
+		-
+			message: '#^Property App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession\:\:\$status \(string\) does not accept App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Published\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/PublishCouncilSessionAction.php
+
+		-
+			message: '#^Cannot call method isDeliberating\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDecisionAction.php
+
+		-
+			message: '#^Parameter \#1 \$status of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\CouncilSessionLockedException\:\:notDeliberating\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDecisionAction.php
+
+		-
+			message: '#^Cannot call method isDeliberating\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDeliberationAction.php
+
+		-
+			message: '#^Parameter \#1 \$status of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\CouncilSessionLockedException\:\:notDeliberating\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Application/Actions/RecordCouncilDeliberationAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$student_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>full_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>student_number" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Contracts/EnrollmentAdapter.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Infrastructure\\Listeners\\ClassCouncilAuditLogger\:\:log\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Infrastructure\\Listeners\\ClassCouncilAuditLogger\:\:payload\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domains/ClassCouncil/Infrastructure/Listeners/ClassCouncilAuditLogger.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilDecision.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilDeliberation.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Cannot call method isImmutable\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$from of method App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:allowsTransitionFrom\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$from of static method App\\Domains\\ClassCouncil\\Domain\\Exceptions\\InvalidStatusTransitionException\:\:from\(\) expects App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Archived will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Convened will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Draft will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\ClassCouncil\\Domain\\Enums\\CouncilSessionStatus\:\:Published will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Models/CouncilSession.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$uuid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domains/ClassCouncil/Infrastructure/Observers/ClassCouncilEntityObserver.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domains/ClassCouncil/Infrastructure/Policies/CouncilSessionPolicy.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 5
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource.php
+
+		-
+			message: '#^Cannot access property \$status on Illuminate\\Database\\Eloquent\\Model\|int\|string\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Application\\ClassCouncilService\:\:conveneSession\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
+
+		-
+			message: '#^Parameter \#1 \$session of method App\\Domains\\ClassCouncil\\Application\\ClassCouncilService\:\:publishSession\(\) expects App\\Domains\\ClassCouncil\\Infrastructure\\Models\\CouncilSession, Illuminate\\Database\\Eloquent\\Model\|int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domains/ClassCouncil/Presentation/Filament/Resources/CouncilSessionResource/Pages/EditCouncilSession.php
 
 		-
 			message: '#^Cannot access property \$value on string\.$#'
@@ -2700,20 +2455,8 @@ parameters:
 			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Enrollment/Infrastructure/Models/Enrollment.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentGraduation.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentGraduation.php
 
@@ -2724,32 +2467,14 @@ parameters:
 			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentHistory.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentHistory.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentPromotion.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentPromotion.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentTransfer.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Enrollment/Infrastructure/Models/EnrollmentTransfer.php
 
@@ -3054,12 +2779,6 @@ parameters:
 			path: app/Domains/Gradebook/Infrastructure/Models/GradeEntry.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Gradebook/Infrastructure/Models/GradeEntry.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 1
@@ -3126,12 +2845,6 @@ parameters:
 			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Gradebook/Infrastructure/Models/Gradebook.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -3192,20 +2905,8 @@ parameters:
 			path: app/Domains/Guardian/Infrastructure/Models/Guardian.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Guardian/Infrastructure/Models/Guardian.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Guardian/Infrastructure/Models/RelationshipType.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Guardian/Infrastructure/Models/RelationshipType.php
 
@@ -3228,20 +2929,8 @@ parameters:
 			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationship.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationship.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationshipHistory.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Guardian/Infrastructure/Models/StudentGuardianRelationshipHistory.php
 
@@ -3588,6 +3277,12 @@ parameters:
 			path: app/Domains/ReportCard/Infrastructure/Contracts/AcademicCommunicationAdapter.php
 
 		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domains/ReportCard/Infrastructure/Contracts/ClassCouncilAdapter.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_name\.$#'
 			identifier: property.notFound
 			count: 1
@@ -3708,12 +3403,6 @@ parameters:
 			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/ReportCard/Infrastructure/Models/ReportCard.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -3722,12 +3411,6 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/ReportCard/Infrastructure/Models/ReportCardEntry.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/ReportCard/Infrastructure/Models/ReportCardEntry.php
 
@@ -3888,12 +3571,6 @@ parameters:
 			path: app/Domains/Staff/Infrastructure/Models/Assignment.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/Assignment.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
@@ -3902,12 +3579,6 @@ parameters:
 		-
 			message: '#^Cannot call method isPast\(\) on string\.$#'
 			identifier: method.nonObject
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/Certification.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Staff/Infrastructure/Models/Certification.php
 
@@ -3942,20 +3613,8 @@ parameters:
 			path: app/Domains/Staff/Infrastructure/Models/Employment.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/Employment.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/EmploymentHistory.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Staff/Infrastructure/Models/EmploymentHistory.php
 
@@ -3966,20 +3625,8 @@ parameters:
 			path: app/Domains/Staff/Infrastructure/Models/Position.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/Position.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/Qualification.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Staff/Infrastructure/Models/Qualification.php
 
@@ -4014,32 +3661,14 @@ parameters:
 			path: app/Domains/Staff/Infrastructure/Models/Staff.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/Staff.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/Staff/Infrastructure/Models/StaffEmergencyContact.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/StaffEmergencyContact.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Staff/Infrastructure/Models/TeacherProfile.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Staff/Infrastructure/Models/TeacherProfile.php
 
@@ -4152,20 +3781,8 @@ parameters:
 			path: app/Domains/Student/Infrastructure/Models/Student.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Student/Infrastructure/Models/Student.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Student/Infrastructure/Models/StudentGuardian.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Student/Infrastructure/Models/StudentGuardian.php
 
@@ -4944,32 +4561,14 @@ parameters:
 			path: app/Domains/Timetable/Infrastructure/Models/AvailabilityConstraint.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/AvailabilityConstraint.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/Timetable/Infrastructure/Models/RecurringPattern.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/RecurringPattern.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/RoomAssignment.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Timetable/Infrastructure/Models/RoomAssignment.php
 
@@ -4998,32 +4597,14 @@ parameters:
 			path: app/Domains/Timetable/Infrastructure/Models/ScheduleEntry.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/ScheduleEntry.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/Timetable/Infrastructure/Models/TeachingPeriod.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/TeachingPeriod.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/TimeSlot.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Timetable/Infrastructure/Models/TimeSlot.php
 
@@ -5052,32 +4633,14 @@ parameters:
 			path: app/Domains/Timetable/Infrastructure/Models/Timetable.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/Timetable.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Domains/Timetable/Infrastructure/Models/TimetableConflict.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/TimetableConflict.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$school_id\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Domains/Timetable/Infrastructure/Models/TimetableVersion.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Domains/Timetable/Infrastructure/Models/TimetableVersion.php
 
@@ -5352,42 +4915,6 @@ parameters:
 			path: app/Filament/Director/Pages/SchoolWizard.php
 
 		-
-			message: '#^Invoking callable on an unknown class Filament\\Forms\\Get\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Filament/Resources/AutomationRuleResource.php
-
-		-
-			message: '#^Parameter \$get of anonymous function has invalid type Filament\\Forms\\Get\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Filament/Resources/AutomationRuleResource.php
-
-		-
-			message: '#^Anonymous function should return string but returns null\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Filament/Resources/BookLoanResource.php
-
-		-
-			message: '#^Cannot call method isPast\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Filament/Resources/BookLoanResource.php
-
-		-
-			message: '#^Result of && is always false\.$#'
-			identifier: booleanAnd.alwaysFalse
-			count: 1
-			path: app/Filament/Resources/BookLoanResource.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between string and App\\Domains\\Library\\Enums\\BookLoanStatus\:\:Active will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Filament/Resources/BookLoanResource.php
-
-		-
 			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Section\.$#'
 			identifier: class.notFound
 			count: 4
@@ -5412,70 +4939,10 @@ parameters:
 			path: app/Filament/Resources/CampusResource.php
 
 		-
-			message: '#^Call to an undefined static method App\\Domains\\Analytics\\Enums\\DashboardType\:\:colors\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: app/Filament/Resources/DashboardResource.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Filament/Resources/FuelLogResource.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Filament/Resources/FuelLogResource.php
-
-		-
 			message: '#^Call to static method make\(\) on an unknown class App\\Filament\\Resources\\Filament\\Actions\\DeleteBulkAction\.$#'
 			identifier: class.notFound
 			count: 1
 			path: app/Filament/Resources/IncidentResource.php
-
-		-
-			message: '#^Call to an undefined static method App\\Domains\\Analytics\\Enums\\KpiStatus\:\:colors\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: app/Filament/Resources/KpiResource.php
-
-		-
-			message: '#^Invoking callable on an unknown class Filament\\Forms\\Set\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Filament/Resources/PermissionResource.php
-
-		-
-			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: app/Filament/Resources/PermissionResource.php
-
-		-
-			message: '#^Parameter \$set of anonymous function has invalid type Filament\\Forms\\Set\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Filament/Resources/PermissionResource.php
-
-		-
-			message: '#^Call to an undefined method Filament\\Actions\\AssociateAction\:\:associateRelatedRecordUsing\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Filament/Resources/RoleResource/RelationManagers/PermissionsRelationManager.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Filament/Resources/StudentTransportAssignmentResource.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Filament/Resources/StudentTransportAssignmentResource.php
 
 		-
 			message: '#^Call to an undefined method BackedEnum\:\:label\(\)\.$#'
@@ -5484,28 +4951,10 @@ parameters:
 			path: app/Filament/Resources/SuperAdminSchoolResource.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$first_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Filament/Resources/TripResource.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$last_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Filament/Resources/TripResource.php
-
-		-
 			message: '#^Call to an undefined method Filament\\Actions\\AssociateAction\:\:associateRelatedRecordUsing\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Filament/Resources/UserResource/RelationManagers/RolesRelationManager.php
-
-		-
-			message: '#^Call to static method make\(\) on an unknown class Filament\\Schemas\\Components\\TextEntry\.$#'
-			identifier: class.notFound
-			count: 10
-			path: app/Filament/Resources/WorkflowExecutionResource/Pages/ViewWorkflowExecution.php
 
 		-
 			message: '#^Access to an undefined property App\\Filament\\SchoolAdmin\\Pages\\EstablishmentInfo\:\:\$form\.$#'
@@ -6054,12 +5503,6 @@ parameters:
 			path: app/Models/AcademicYear.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Models/AcademicYear.php
-
-		-
 			message: '#^Method App\\Models\\ActivityLog\:\:causer\(\) has invalid return type Illuminate\\Database\\Eloquent\\MorphTo\.$#'
 			identifier: class.notFound
 			count: 1
@@ -6248,12 +5691,6 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:belongsTo\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
 			identifier: argument.type
-			count: 1
-			path: app/Models/Campus.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Models/Campus.php
 

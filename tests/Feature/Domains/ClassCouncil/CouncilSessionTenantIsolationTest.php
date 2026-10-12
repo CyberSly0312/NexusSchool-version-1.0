@@ -60,22 +60,24 @@ test('convening reviews only the session school enrollments', function (): void 
     $contextA = makeAssessmentContext($schoolA, false);
     $contextB = makeAssessmentContext($schoolB, false);
 
-    $levelA = EducationLevel::create([
-        'school_id' => $schoolA,
-        'name' => 'Collège',
-        'code' => 'ELA',
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $levelA = EducationLevel::firstOrCreate(
+        ['school_id' => $schoolA, 'name' => 'Collège'],
+        [
+            'code' => 'ELA',
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
     $enrollmentA = enrollStudent($schoolA, $contextA['year']->id, $contextA['program']->id, $levelA->id, $contextA['class']->id);
 
-    $levelB = EducationLevel::create([
-        'school_id' => $schoolB,
-        'name' => 'Collège',
-        'code' => 'ELB',
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $levelB = EducationLevel::firstOrCreate(
+        ['school_id' => $schoolB, 'name' => 'Collège'],
+        [
+            'code' => 'ELB',
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
     $enrollmentB = enrollStudent($schoolB, $contextB['year']->id, $contextB['program']->id, $levelB->id, $contextB['class']->id);
 
     $session = $this->service->createSession(classCouncilTenantData($schoolA, $contextA));
@@ -91,13 +93,14 @@ test('decisions are scoped to their session school', function (): void {
     $schoolB = makeTenant();
 
     $contextA = makeAssessmentContext($schoolA, false);
-    $levelA = EducationLevel::create([
-        'school_id' => $schoolA,
-        'name' => 'Collège',
-        'code' => 'ELA',
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $levelA = EducationLevel::firstOrCreate(
+        ['school_id' => $schoolA, 'name' => 'Collège'],
+        [
+            'code' => 'ELA',
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
     $enrollmentA = enrollStudent($schoolA, $contextA['year']->id, $contextA['program']->id, $levelA->id, $contextA['class']->id);
 
     $session = $this->service->createSession(classCouncilTenantData($schoolA, $contextA));

@@ -18,7 +18,7 @@ class EducationLevelFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'name' => fake()->randomElement(['Primaire', 'Collège', 'Lycée']),
             'code' => fake()->unique()->bothify('EL##'),
             'sort_order' => fake()->numberBetween(0, 10),

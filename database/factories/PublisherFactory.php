@@ -19,7 +19,7 @@ class PublisherFactory extends Factory
             'name' => $this->faker->company(),
             'address' => $this->faker->streetAddress(),
             'city' => $this->faker->city(),
-            'state' => $this->faker->state(),
+            'state' => $this->faker->city(),
             'country' => $this->faker->country(),
             'postal_code' => $this->faker->postcode(),
             'phone' => $this->faker->phoneNumber(),

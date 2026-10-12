@@ -20,7 +20,7 @@ class AttendanceRecordFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'attendance_session_id' => AttendanceSession::factory(),
             'enrollment_id' => Enrollment::factory(),
             'status' => AttendanceStatus::Present,

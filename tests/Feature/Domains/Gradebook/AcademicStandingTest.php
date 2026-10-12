@@ -15,13 +15,14 @@ beforeEach(function (): void {
     $this->schoolId = makeTenant();
     $this->context = makeAssessmentContext($this->schoolId, false);
 
-    $this->level = EducationLevel::create([
-        'school_id' => $this->schoolId,
-        'name' => 'Collège',
-        'code' => 'EL'.Str::upper(Str::random(3)),
-        'sort_order' => 1,
-        'status' => 'active',
-    ]);
+    $this->level = EducationLevel::firstOrCreate(
+        ['school_id' => $this->schoolId, 'name' => 'Collège'],
+        [
+            'code' => 'EL'.Str::upper(Str::random(3)),
+            'sort_order' => 1,
+            'status' => 'active',
+        ],
+    );
 
     $this->enrollment = enrollStudent(
         $this->schoolId,
@@ -99,7 +100,7 @@ test('the GPA, overall percentage and standing aggregate published gradebooks', 
 
     $gpa = $this->standing->gpa($contributions);
     $percentage = $this->standing->overallPercentage($contributions);
-    $standing = $this->standing->standing($contributions);
+    $standing = $this->standing->standing($contributions, $this->schoolId);
 
     expect($gpa->gpa)->toBe(round((3.7 * 2 + 3.0 * 1) / 3, 2))
         ->and($percentage)->toBe(round((80.0 * 2 + 60.0 * 1) / 3, 2))
@@ -123,5 +124,5 @@ test('only published gradebooks feed the standing', function (): void {
     $this->service->calculateGradebook($gradebook);
 
     expect($this->standing->gpa([]))->toBeNull()
-        ->and($this->standing->standing([]))->toBeNull();
+        ->and($this->standing->standing([], $this->schoolId))->toBeNull();
 });

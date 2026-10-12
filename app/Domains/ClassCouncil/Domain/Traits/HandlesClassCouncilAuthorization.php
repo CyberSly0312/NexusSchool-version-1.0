@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\ClassCouncil\Domain\Traits;
 
+use App\Contracts\SchoolOwned;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Authorization for class council lifecycle operations (SPR-013). Extends the
@@ -21,13 +21,13 @@ trait HandlesClassCouncilAuthorization
         return $user->hasRole('super_admin') || $user->hasPermissionTo($this->permissionGroup().'.view');
     }
 
-    public function view(User $user, Model $model): bool
+    public function view(User $user, SchoolOwned $model): bool
     {
         if ($user->hasRole('super_admin')) {
             return true;
         }
 
-        return $user->school_id === $model->school_id && $user->hasPermissionTo($this->permissionGroup().'.view');
+        return $user->school_id === $model->getSchoolId() && $user->hasPermissionTo($this->permissionGroup().'.view');
     }
 
     public function create(User $user): bool
@@ -35,56 +35,56 @@ trait HandlesClassCouncilAuthorization
         return $user->hasRole('super_admin') || $user->hasPermissionTo($this->permissionGroup().'.create');
     }
 
-    public function update(User $user, Model $model): bool
+    public function update(User $user, SchoolOwned $model): bool
     {
         if ($user->hasRole('super_admin')) {
             return true;
         }
 
-        return $user->school_id === $model->school_id && $user->hasPermissionTo($this->permissionGroup().'.update');
+        return $user->school_id === $model->getSchoolId() && $user->hasPermissionTo($this->permissionGroup().'.update');
     }
 
-    public function delete(User $user, Model $model): bool
+    public function delete(User $user, SchoolOwned $model): bool
     {
         return false;
     }
 
-    public function restore(User $user, Model $model): bool
+    public function restore(User $user, SchoolOwned $model): bool
     {
         return false;
     }
 
-    public function forceDelete(User $user, Model $model): bool
+    public function forceDelete(User $user, SchoolOwned $model): bool
     {
         return false;
     }
 
-    public function convene(User $user, Model $model): bool
+    public function convene(User $user, SchoolOwned $model): bool
     {
         return $this->authorizeLifecycle($user, $model, 'convene');
     }
 
-    public function decide(User $user, Model $model): bool
+    public function decide(User $user, SchoolOwned $model): bool
     {
         return $this->authorizeLifecycle($user, $model, 'decide');
     }
 
-    public function publish(User $user, Model $model): bool
+    public function publish(User $user, SchoolOwned $model): bool
     {
         return $this->authorizeLifecycle($user, $model, 'publish');
     }
 
-    public function archive(User $user, Model $model): bool
+    public function archive(User $user, SchoolOwned $model): bool
     {
         return $this->authorizeLifecycle($user, $model, 'archive');
     }
 
-    private function authorizeLifecycle(User $user, Model $model, string $action): bool
+    private function authorizeLifecycle(User $user, SchoolOwned $model, string $action): bool
     {
         if ($user->hasRole('super_admin')) {
             return true;
         }
 
-        return $user->school_id === $model->school_id && $user->hasPermissionTo($this->permissionGroup().'.'.$action);
+        return $user->school_id === $model->getSchoolId() && $user->hasPermissionTo($this->permissionGroup().'.'.$action);
     }
 }

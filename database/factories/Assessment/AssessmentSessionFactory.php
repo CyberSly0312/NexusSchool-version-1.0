@@ -18,7 +18,7 @@ class AssessmentSessionFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'assessment_id' => null,
             'title' => fake()->sentence(3),
             'date' => fake()->dateTimeBetween('-7 days', '+14 days')->format('Y-m-d'),

@@ -18,6 +18,7 @@ use App\Domains\ReportCard\Domain\Contracts\AttendanceContract;
 use App\Domains\ReportCard\Domain\Contracts\ClassCouncilContract;
 use App\Domains\ReportCard\Domain\Contracts\EnrollmentContract;
 use App\Domains\ReportCard\Domain\Contracts\GradebookContract;
+use App\Domains\ReportCard\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ReportCard\Domain\Events\ReportCardArchived;
 use App\Domains\ReportCard\Domain\Events\ReportCardCreated;
 use App\Domains\ReportCard\Domain\Events\ReportCardGenerated;
@@ -30,6 +31,7 @@ use App\Domains\ReportCard\Infrastructure\Contracts\AttendanceAdapter;
 use App\Domains\ReportCard\Infrastructure\Contracts\ClassCouncilAdapter;
 use App\Domains\ReportCard\Infrastructure\Contracts\EnrollmentAdapter;
 use App\Domains\ReportCard\Infrastructure\Contracts\GradebookAdapter;
+use App\Domains\ReportCard\Infrastructure\Contracts\RecordsLifecycleAdapter;
 use App\Domains\ReportCard\Infrastructure\Listeners\ReportCardAuditLogger;
 use App\Domains\ReportCard\Infrastructure\Models\ReportCard;
 use App\Domains\ReportCard\Infrastructure\Models\ReportCardEntry;
@@ -70,6 +72,7 @@ final class ReportCardServiceProvider extends ServiceProvider
         $this->app->bind(AcademicPoliciesContract::class, AcademicPoliciesAdapter::class);
         $this->app->bind(ClassCouncilContract::class, ClassCouncilAdapter::class);
         $this->app->bind(AcademicCommunicationContract::class, AcademicCommunicationAdapter::class);
+        $this->app->bind(RecordsLifecycleContract::class, RecordsLifecycleAdapter::class);
     }
 
     public function boot(): void

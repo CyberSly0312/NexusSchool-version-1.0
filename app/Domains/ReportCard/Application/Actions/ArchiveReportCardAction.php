@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\ReportCard\Application\Actions;
 
+use App\Domains\ReportCard\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ReportCard\Domain\Enums\ReportCardStatus;
 use App\Domains\ReportCard\Domain\Events\ReportCardArchived;
 use App\Domains\ReportCard\Infrastructure\Models\ReportCard;
@@ -16,6 +17,11 @@ use Illuminate\Support\Facades\DB;
  */
 final class ArchiveReportCardAction
 {
+    public function __construct(
+        private readonly RecordsLifecycleContract $lifecycle,
+    ) {
+    }
+
     public function execute(ReportCard $reportCard, ?User $actor = null): void
     {
         DB::transaction(function () use ($reportCard, $actor): void {
@@ -24,6 +30,12 @@ final class ArchiveReportCardAction
             $reportCard->status = ReportCardStatus::Archived;
             $reportCard->archived_at = now();
             $reportCard->save();
+
+            $this->lifecycle->archive(
+                $reportCard->school_id,
+                $reportCard->getKey(),
+                $actor,
+            );
 
             ReportCardArchived::dispatch($reportCard, $actor);
         });

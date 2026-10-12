@@ -12,6 +12,7 @@ use App\Domains\AcademicCommunication\Domain\Exceptions\DocumentImmutableExcepti
 use App\Domains\AcademicCommunication\Domain\Exceptions\InvalidStatusTransitionException;
 use App\Domains\AcademicCommunication\Domain\ValueObjects\DocumentNumber;
 use App\Domains\AcademicCommunication\Domain\ValueObjects\VisibilityPolicy;
+use App\Domains\IdentityAndVerification\Infrastructure\Models\VerificationIdentity;
 use App\Traits\HasSchoolId;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -147,6 +148,18 @@ class AcademicDocument extends Model
     public function files(): HasMany
     {
         return $this->hasMany(GeneratedFile::class, 'academic_document_id');
+    }
+
+    /**
+     * Read-only verification identity issued for this document (SPR-016).
+     *
+     * At most one identity exists per document (unique academic_document_id).
+     * Only non-sensitive metadata (status, lifecycle timestamps) is persisted;
+     * the opaque token digest is never surfaced by the presentation layer.
+     */
+    public function verificationIdentity(): HasOne
+    {
+        return $this->hasOne(VerificationIdentity::class, 'academic_document_id');
     }
 
     /*

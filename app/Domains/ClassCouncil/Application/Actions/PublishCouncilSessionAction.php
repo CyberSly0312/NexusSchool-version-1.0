@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\ClassCouncil\Application\Actions;
 
+use App\Domains\ClassCouncil\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ClassCouncil\Domain\Enums\CouncilSessionStatus;
 use App\Domains\ClassCouncil\Domain\Events\CouncilSessionPublished;
 use App\Domains\ClassCouncil\Infrastructure\Models\CouncilSession;
@@ -19,6 +20,11 @@ use Illuminate\Support\Facades\DB;
  */
 final class PublishCouncilSessionAction
 {
+    public function __construct(
+        private readonly RecordsLifecycleContract $lifecycle,
+    ) {
+    }
+
     public function execute(CouncilSession $session, ?User $actor = null): CouncilSession
     {
         return DB::transaction(function () use ($session, $actor): CouncilSession {
@@ -31,6 +37,12 @@ final class PublishCouncilSessionAction
             $session->save();
 
             CouncilSessionPublished::dispatch($session, $decisionsCount, $actor);
+
+            $this->lifecycle->publish(
+                $session->school_id,
+                $session->getKey(),
+                $actor,
+            );
 
             return $session->refresh();
         });

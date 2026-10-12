@@ -18,7 +18,7 @@ class RoomAssignmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'timetable_id' => \App\Domains\Timetable\Infrastructure\Models\Timetable::factory(),
             'schedule_entry_id' => null,
             'room_id' => (string) fake()->unique()->numberBetween(1, 99999),

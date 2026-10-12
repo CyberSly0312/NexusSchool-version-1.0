@@ -19,7 +19,7 @@ class AssignmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'staff_id' => Staff::factory(),
             'employment_id' => null,
             'assignment_type' => AssignmentType::Department,

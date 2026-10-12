@@ -18,7 +18,7 @@ class SubjectGroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'name' => fake()->randomElement(['Langues', 'Sciences', 'Mathématiques', 'Arts']),
             'code' => fake()->unique()->bothify('SG##'),
             'sort_order' => fake()->numberBetween(0, 10),

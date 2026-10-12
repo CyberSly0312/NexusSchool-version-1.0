@@ -43,6 +43,8 @@ test('every ClassCouncil adapter implements one of the domain contracts', functi
         App\Domains\ClassCouncil\Domain\Contracts\AcademicFrameworkContract::class,
         App\Domains\ClassCouncil\Domain\Contracts\EnrollmentContract::class,
         App\Domains\ClassCouncil\Domain\Contracts\GradebookContract::class,
+        App\Domains\ClassCouncil\Domain\Contracts\AcademicPoliciesContract::class,
+        App\Domains\ClassCouncil\Domain\Contracts\RecordsLifecycleContract::class,
     ];
 
     foreach (File::files(app_path('Domains/ClassCouncil/Infrastructure/Contracts')) as $file) {
@@ -70,6 +72,8 @@ test('every ClassCouncil domain contract is bound in the container', function ()
         App\Domains\ClassCouncil\Domain\Contracts\AcademicFrameworkContract::class,
         App\Domains\ClassCouncil\Domain\Contracts\EnrollmentContract::class,
         App\Domains\ClassCouncil\Domain\Contracts\GradebookContract::class,
+        App\Domains\ClassCouncil\Domain\Contracts\AcademicPoliciesContract::class,
+        App\Domains\ClassCouncil\Domain\Contracts\RecordsLifecycleContract::class,
     ];
 
     foreach ($contracts as $contract) {

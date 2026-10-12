@@ -17,7 +17,7 @@ class TeachingPeriodFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'day_of_week' => fake()->numberBetween(0, 4),
             'period_number' => fake()->numberBetween(1, 8),
             'starts_at' => '08:00',

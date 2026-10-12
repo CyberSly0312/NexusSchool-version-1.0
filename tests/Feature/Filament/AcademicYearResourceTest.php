@@ -43,23 +43,28 @@ class AcademicYearResourceTest extends TestCase
             'school_id' => $this->schoolId,
         ]);
 
-        $this->actingAs($this->admin);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_academic_year_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/academic-years')
+            ->get('/school-admin/academic-years')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_academic_year_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/academic-years/create')
+            ->get('/school-admin/academic-years/create')
             ->assertSuccessful();
     }
 
@@ -68,7 +73,7 @@ class AcademicYearResourceTest extends TestCase
         $academicYear = AcademicYear::factory()->create(['school_id' => $this->schoolId]);
 
         $this->actingAs($this->admin)
-            ->get('/admin/academic-years/'.$academicYear->id.'/edit')
+            ->get('/school-admin/academic-years/'.$academicYear->id.'/edit')
             ->assertSuccessful();
     }
 

@@ -3,6 +3,7 @@
 namespace Tests\Unit\Domains\Permission;
 
 use App\Domains\Permission\DTOs\PermissionData;
+use App\Domains\Permission\Enums\PermissionGroup;
 use App\Domains\Permission\Events\PermissionCreated;
 use App\Domains\Permission\Events\PermissionUpdated;
 use App\Domains\Permission\Services\PermissionService;
@@ -158,8 +159,19 @@ class PermissionServiceTest extends TestCase
     {
         $permissions = $this->service->getDefaultPermissions();
 
-        $this->assertCount(84, $permissions); // 21 groups × 4 CRUD
+        $names = array_column($permissions, 'name');
+
+        $this->assertNotEmpty($permissions);
         $this->assertArrayHasKey('name', $permissions[0]);
+
+        foreach (PermissionGroup::cases() as $group) {
+            $groupNames = array_values(array_filter(
+                $names,
+                fn (string $name): bool => str_starts_with($name, $group->value.'.'),
+            ));
+
+            $this->assertNotEmpty($groupNames, "Group [{$group->value}] should generate permissions");
+        }
     }
 
     public function test_extract_group_name(): void

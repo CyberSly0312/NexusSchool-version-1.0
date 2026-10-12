@@ -18,7 +18,7 @@ class TeacherProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'staff_id' => Staff::factory(),
             'teaching_license_number' => fake()->optional()->numerify('LIC-########'),
             'teaching_license_valid_until' => fake()->optional()->dateTimeBetween('now', '+5 years')->format('Y-m-d'),

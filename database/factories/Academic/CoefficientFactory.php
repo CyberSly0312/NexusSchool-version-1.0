@@ -17,7 +17,7 @@ class CoefficientFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'school_class_id' => null,
             'academic_subject_id' => null,
             'coefficient' => fake()->randomFloat(2, 1, 6),

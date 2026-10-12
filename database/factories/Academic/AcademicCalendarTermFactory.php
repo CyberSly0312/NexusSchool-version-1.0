@@ -19,7 +19,7 @@ class AcademicCalendarTermFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'calendar_year_id' => AcademicCalendarYear::factory(),
             'name' => fake()->randomElement(['Trimestre 1', 'Trimestre 2', 'Trimestre 3']),
             'code' => fake()->unique()->bothify('T##'),

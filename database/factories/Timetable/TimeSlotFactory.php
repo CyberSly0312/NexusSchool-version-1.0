@@ -17,7 +17,7 @@ class TimeSlotFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'timetable_id' => \App\Domains\Timetable\Infrastructure\Models\Timetable::factory(),
             'teaching_period_id' => null,
             'day_of_week' => 0,

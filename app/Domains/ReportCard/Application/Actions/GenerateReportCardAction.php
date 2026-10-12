@@ -8,6 +8,7 @@ use App\Domains\ReportCard\Application\Services\ReportCardContentComposer;
 use App\Domains\ReportCard\Domain\Contracts\AcademicCommunicationContract;
 use App\Domains\ReportCard\Domain\Contracts\AcademicFrameworkContract;
 use App\Domains\ReportCard\Domain\Contracts\EnrollmentContract;
+use App\Domains\ReportCard\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\ReportCard\Domain\Enums\ReportCardEntryStatus;
 use App\Domains\ReportCard\Domain\Enums\ReportCardStatus;
 use App\Domains\ReportCard\Domain\Events\ReportCardGenerated;
@@ -34,6 +35,7 @@ final class GenerateReportCardAction
         private readonly EnrollmentContract $enrollment,
         private readonly ReportCardContentComposer $composer,
         private readonly AcademicCommunicationContract $communication,
+        private readonly RecordsLifecycleContract $lifecycle,
     ) {
     }
 
@@ -63,6 +65,21 @@ final class GenerateReportCardAction
             $reportCard->status = ReportCardStatus::Generated;
             $reportCard->generated_at = now();
             $reportCard->save();
+
+            $this->lifecycle->register(
+                $reportCard->school_id,
+                $reportCard->getKey(),
+                $reportCard->uuid,
+                [
+                    'year_id' => $reportCard->academic_calendar_year_id,
+                    'term_id' => $reportCard->academic_calendar_term_id,
+                    'class_id' => $reportCard->school_class_id,
+                    'section_id' => $reportCard->class_section_id,
+                ],
+                $actor?->getKey(),
+                'ReportCardGenerated',
+                $actor,
+            );
 
             ReportCardGenerated::dispatch(
                 $reportCard,

@@ -18,7 +18,7 @@ class AssessmentTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'name' => fake()->unique()->randomElement([
                 'Quiz', 'Devoir maison', 'Devoir', 'Projet', 'Oral',
                 'Examen partiel', 'Examen final', 'Évaluation continue',

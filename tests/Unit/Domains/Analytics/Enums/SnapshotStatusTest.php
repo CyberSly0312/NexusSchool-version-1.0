@@ -20,17 +20,17 @@ class SnapshotStatusTest extends TestCase
 
     public function test_label_pending(): void
     {
-        $this->assertSame('Pending', SnapshotStatus::Pending->label());
+        $this->assertSame('En attente', SnapshotStatus::Pending->label());
     }
 
     public function test_label_generated(): void
     {
-        $this->assertSame('Generated', SnapshotStatus::Generated->label());
+        $this->assertSame('Généré', SnapshotStatus::Generated->label());
     }
 
     public function test_label_failed(): void
     {
-        $this->assertSame('Failed', SnapshotStatus::Failed->label());
+        $this->assertSame('Échoué', SnapshotStatus::Failed->label());
     }
 
     public function test_color_pending(): void
@@ -57,8 +57,8 @@ class SnapshotStatusTest extends TestCase
         $this->assertArrayHasKey(SnapshotStatus::Generated->value, $labels);
         $this->assertArrayHasKey(SnapshotStatus::Failed->value, $labels);
 
-        $this->assertSame('Pending', $labels[SnapshotStatus::Pending->value]);
-        $this->assertSame('Generated', $labels[SnapshotStatus::Generated->value]);
-        $this->assertSame('Failed', $labels[SnapshotStatus::Failed->value]);
+        $this->assertSame('En attente', $labels[SnapshotStatus::Pending->value]);
+        $this->assertSame('Généré', $labels[SnapshotStatus::Generated->value]);
+        $this->assertSame('Échoué', $labels[SnapshotStatus::Failed->value]);
     }
 }

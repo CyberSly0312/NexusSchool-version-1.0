@@ -42,9 +42,9 @@ final class AssessmentService
         return $this->createAssessment->execute($data, $actor);
     }
 
-    public function updateAssessment(Assessment $assessment, UpdateAssessmentData $data, ?User $actor = null): Assessment
+    public function updateAssessment(UpdateAssessmentData $data, ?User $actor = null): Assessment
     {
-        return $this->updateAssessment->execute($assessment, $data, $actor);
+        return $this->updateAssessment->execute($data, $actor);
     }
 
     public function publishAssessment(Assessment $assessment, ?User $actor = null): Assessment
@@ -52,9 +52,9 @@ final class AssessmentService
         return $this->publishAssessment->execute($assessment, $actor);
     }
 
-    public function archiveAssessment(Assessment $assessment, ?User $actor = null): void
+    public function archiveAssessment(Assessment $assessment, ?User $actor = null): Assessment
     {
-        $this->archiveAssessment->execute($assessment, $actor);
+        return $this->archiveAssessment->execute($assessment, $actor);
     }
 
     public function recordScore(RecordScoreData $data, ?User $actor = null): void

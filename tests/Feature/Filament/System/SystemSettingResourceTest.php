@@ -46,10 +46,13 @@ class SystemSettingResourceTest extends TestCase
             'school_id' => $this->schoolId,
         ]);
 
+        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);
+        $this->admin->assignRole('super_admin');
+
         $this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('super-admin');
     }
 
     public function test_can_list_system_settings(): void

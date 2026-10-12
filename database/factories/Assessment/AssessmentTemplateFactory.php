@@ -17,7 +17,7 @@ class AssessmentTemplateFactory extends Factory
     public function definition(): array
     {
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'name' => fake()->unique()->words(3, true),
             'assessment_type_id' => AssessmentTypeFactory::new(),
             'description' => fake()->sentence(),

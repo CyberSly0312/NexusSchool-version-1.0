@@ -10,6 +10,7 @@ use App\Domains\AcademicCommunication\Application\Services\PublicationDispatcher
 use App\Domains\AcademicCommunication\Application\Services\PublicationRecipientResolver;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
 use App\Domains\AcademicCommunication\Domain\Contracts\PublicationChannelContract;
+use App\Domains\AcademicCommunication\Domain\Contracts\RecordsLifecycleContract;
 use App\Domains\AcademicCommunication\Domain\Enums\ApprovalStatus;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentChannel;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentStatus;
@@ -42,6 +43,7 @@ final class PublishDocumentAction
         private readonly PublicationDispatcher $dispatcher,
         private readonly PublicationRecipientResolver $recipientResolver,
         private readonly DocumentRendererContract $renderer,
+        private readonly RecordsLifecycleContract $lifecycle,
     ) {
     }
 
@@ -142,6 +144,13 @@ final class PublishDocumentAction
             ]);
 
             $document->refresh();
+
+            $this->lifecycle->publish(
+                $data->schoolId,
+                (string) $document->getAttributes()['document_type'],
+                $document->getKey(),
+                $actor,
+            );
 
             DocumentPublished::dispatch($document, $version->refresh(), $actor);
 

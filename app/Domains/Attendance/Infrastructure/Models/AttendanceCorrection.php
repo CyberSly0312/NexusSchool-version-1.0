@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Attendance\Infrastructure\Models;
 
+use App\Contracts\SchoolOwned;
 use App\Domains\Attendance\Domain\Enums\AttendanceStatus;
 use App\Traits\HasSchoolId;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Corrections are append-only audit entries: they never overwrite the record's
  * history, and they require explicit authorization before they take effect.
  */
-class AttendanceCorrection extends Model
+class AttendanceCorrection extends Model implements SchoolOwned
 {
     use HasFactory;
     use HasSchoolId;

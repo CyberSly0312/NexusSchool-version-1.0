@@ -23,25 +23,31 @@ class GradeLevelResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
+            'school_id' => (string) Str::ulid(),
         ]);
 
-        $this->actingAs($this->admin);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_grade_level_list_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/grade-levels')
+            ->get('/school-admin/grade-levels')
             ->assertSuccessful();
     }
 
     public function test_can_render_create_grade_level_page(): void
     {
         $this->actingAs($this->admin)
-            ->get('/admin/grade-levels/create')
+            ->get('/school-admin/grade-levels/create')
             ->assertSuccessful();
     }
 
@@ -69,7 +75,7 @@ class GradeLevelResourceTest extends TestCase
             ->create();
 
         $this->actingAs($this->admin)
-            ->get('/admin/grade-levels/'.$gradeLevel->id.'/edit')
+            ->get('/school-admin/grade-levels/'.$gradeLevel->id.'/edit')
             ->assertSuccessful();
     }
 }

@@ -24,37 +24,37 @@ class DashboardTypeTest extends TestCase
 
     public function test_label_school(): void
     {
-        $this->assertSame('School Overview', DashboardType::School->label());
+        $this->assertSame('Vue d\'ensemble de l\'école', DashboardType::School->label());
     }
 
     public function test_label_academic(): void
     {
-        $this->assertSame('Academic Dashboard', DashboardType::Academic->label());
+        $this->assertSame('Tableau de bord académique', DashboardType::Academic->label());
     }
 
     public function test_label_finance(): void
     {
-        $this->assertSame('Finance Dashboard', DashboardType::Finance->label());
+        $this->assertSame('Tableau de bord financier', DashboardType::Finance->label());
     }
 
     public function test_label_hr(): void
     {
-        $this->assertSame('HR Dashboard', DashboardType::HR->label());
+        $this->assertSame('Tableau de bord RH', DashboardType::HR->label());
     }
 
     public function test_label_library(): void
     {
-        $this->assertSame('Library Dashboard', DashboardType::Library->label());
+        $this->assertSame('Tableau de bord bibliothèque', DashboardType::Library->label());
     }
 
     public function test_label_transport(): void
     {
-        $this->assertSame('Transport Dashboard', DashboardType::Transport->label());
+        $this->assertSame('Tableau de bord transport', DashboardType::Transport->label());
     }
 
     public function test_label_custom(): void
     {
-        $this->assertSame('Custom Dashboard', DashboardType::Custom->label());
+        $this->assertSame('Tableau de bord personnalisé', DashboardType::Custom->label());
     }
 
     public function test_color_school(): void
@@ -105,12 +105,12 @@ class DashboardTypeTest extends TestCase
         $this->assertArrayHasKey(DashboardType::Transport->value, $labels);
         $this->assertArrayHasKey(DashboardType::Custom->value, $labels);
 
-        $this->assertSame('School Overview', $labels[DashboardType::School->value]);
-        $this->assertSame('Academic Dashboard', $labels[DashboardType::Academic->value]);
-        $this->assertSame('Finance Dashboard', $labels[DashboardType::Finance->value]);
-        $this->assertSame('HR Dashboard', $labels[DashboardType::HR->value]);
-        $this->assertSame('Library Dashboard', $labels[DashboardType::Library->value]);
-        $this->assertSame('Transport Dashboard', $labels[DashboardType::Transport->value]);
-        $this->assertSame('Custom Dashboard', $labels[DashboardType::Custom->value]);
+        $this->assertSame('Vue d\'ensemble de l\'école', $labels[DashboardType::School->value]);
+        $this->assertSame('Tableau de bord académique', $labels[DashboardType::Academic->value]);
+        $this->assertSame('Tableau de bord financier', $labels[DashboardType::Finance->value]);
+        $this->assertSame('Tableau de bord RH', $labels[DashboardType::HR->value]);
+        $this->assertSame('Tableau de bord bibliothèque', $labels[DashboardType::Library->value]);
+        $this->assertSame('Tableau de bord transport', $labels[DashboardType::Transport->value]);
+        $this->assertSame('Tableau de bord personnalisé', $labels[DashboardType::Custom->value]);
     }
 }

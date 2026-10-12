@@ -20,22 +20,27 @@ class MessageResourceTest extends TestCase
     {
         parent::setUp();
 
-        $this->admin = User::factory()->create(['status' => 'active']);
-        $this->actingAs($this->admin);
+        $this->admin = User::factory()->create(['status' => 'active', 'school_id' => (string) Str::ulid()]);
+        
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
+        $role->syncPermissions(\Spatie\Permission\Models\Permission::all());
+        $this->admin->assignRole($role);
+$this->actingAs($this->admin);
 
         Filament::setServingStatus();
-        Filament::setCurrentPanel('admin');
+        Filament::setCurrentPanel('school-admin');
     }
 
     public function test_can_render_messages_list_page(): void
     {
-        $this->get(route('filament.admin.resources.messages.index'))
+        $this->get(route('filament.school-admin.resources.messages.index'))
             ->assertSuccessful();
     }
 
     public function test_can_render_create_message_page(): void
     {
-        $this->get(route('filament.admin.resources.messages.create'))
+        $this->get(route('filament.school-admin.resources.messages.create'))
             ->assertSuccessful();
     }
 
@@ -58,7 +63,7 @@ class MessageResourceTest extends TestCase
             'sender_id' => $this->admin->id,
         ]);
 
-        $this->get(route('filament.admin.resources.messages.edit', ['record' => $message]))
+        $this->get(route('filament.school-admin.resources.messages.edit', ['record' => $message]))
             ->assertSuccessful();
     }
 }

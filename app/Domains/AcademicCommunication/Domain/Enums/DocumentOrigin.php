@@ -19,6 +19,8 @@ enum DocumentOrigin: string
     case TeacherSummary = 'teacher_summary';
     case StudentSummary = 'student_summary';
     case SchoolChronicle = 'school_chronicle';
+    case Transcript = 'transcript';
+    case Certificate = 'certificate';
 
     public function label(): string
     {
@@ -31,6 +33,8 @@ enum DocumentOrigin: string
             self::TeacherSummary => 'Synthèse enseignants',
             self::StudentSummary => 'Synthèse élève',
             self::SchoolChronicle => 'Chronique scolaire',
+            self::Transcript => 'Relevé de notes',
+            self::Certificate => 'Certificat de fin d\'études',
         };
     }
 

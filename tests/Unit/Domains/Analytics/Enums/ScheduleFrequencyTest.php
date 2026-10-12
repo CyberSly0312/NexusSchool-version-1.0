@@ -22,27 +22,27 @@ class ScheduleFrequencyTest extends TestCase
 
     public function test_label_daily(): void
     {
-        $this->assertSame('Daily', ScheduleFrequency::Daily->label());
+        $this->assertSame('Quotidien', ScheduleFrequency::Daily->label());
     }
 
     public function test_label_weekly(): void
     {
-        $this->assertSame('Weekly', ScheduleFrequency::Weekly->label());
+        $this->assertSame('Hebdomadaire', ScheduleFrequency::Weekly->label());
     }
 
     public function test_label_monthly(): void
     {
-        $this->assertSame('Monthly', ScheduleFrequency::Monthly->label());
+        $this->assertSame('Mensuel', ScheduleFrequency::Monthly->label());
     }
 
     public function test_label_quarterly(): void
     {
-        $this->assertSame('Quarterly', ScheduleFrequency::Quarterly->label());
+        $this->assertSame('Trimestriel', ScheduleFrequency::Quarterly->label());
     }
 
     public function test_label_yearly(): void
     {
-        $this->assertSame('Yearly', ScheduleFrequency::Yearly->label());
+        $this->assertSame('Annuel', ScheduleFrequency::Yearly->label());
     }
 
     public function test_labels(): void
@@ -56,10 +56,10 @@ class ScheduleFrequencyTest extends TestCase
         $this->assertArrayHasKey(ScheduleFrequency::Quarterly->value, $labels);
         $this->assertArrayHasKey(ScheduleFrequency::Yearly->value, $labels);
 
-        $this->assertSame('Daily', $labels[ScheduleFrequency::Daily->value]);
-        $this->assertSame('Weekly', $labels[ScheduleFrequency::Weekly->value]);
-        $this->assertSame('Monthly', $labels[ScheduleFrequency::Monthly->value]);
-        $this->assertSame('Quarterly', $labels[ScheduleFrequency::Quarterly->value]);
-        $this->assertSame('Yearly', $labels[ScheduleFrequency::Yearly->value]);
+        $this->assertSame('Quotidien', $labels[ScheduleFrequency::Daily->value]);
+        $this->assertSame('Hebdomadaire', $labels[ScheduleFrequency::Weekly->value]);
+        $this->assertSame('Mensuel', $labels[ScheduleFrequency::Monthly->value]);
+        $this->assertSame('Trimestriel', $labels[ScheduleFrequency::Quarterly->value]);
+        $this->assertSame('Annuel', $labels[ScheduleFrequency::Yearly->value]);
     }
 }

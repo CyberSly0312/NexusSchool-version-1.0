@@ -51,6 +51,7 @@ final class BulkRecordScoresAction
 
             $allowed = $this->allowedEnrollmentIds($assessment);
             $recorded = $this->recordedEnrollmentKeys($assessment);
+            $added = [];
 
             $chunkSize = (int) config('nexus-assessment.bulk.chunk_size', 200);
             $inserted = 0;
@@ -66,22 +67,23 @@ final class BulkRecordScoresAction
                     continue;
                 }
 
-                $componentKey = $item->componentId ?? 0;
-                $scoreKey = "{$componentKey}|{$item->enrollmentId}";
-
-                if (isset($recorded[$scoreKey])) {
-                    $skipped++;
-
-                    continue;
-                }
-
                 if (! $this->isRangeValid($assessment, $item)) {
                     $rejected++;
 
                     continue;
                 }
 
+                $componentKey = $item->componentId ?? 0;
+                $scoreKey = "{$componentKey}|{$item->enrollmentId}";
+
+                if (isset($recorded[$scoreKey]) || isset($added[$scoreKey])) {
+                    $skipped++;
+
+                    continue;
+                }
+
                 $rows[] = $this->toRow($assessment, $item, $actor);
+                $added[$scoreKey] = true;
 
                 if (count($rows) >= $chunkSize) {
                     $inserted += $this->flush($assessment, $rows, $actor);
@@ -137,7 +139,14 @@ final class BulkRecordScoresAction
     {
         $maximum = $this->resolvedMaximum($assessment, $item->componentId);
 
-        return ! $this->validation->validate($item->score, $maximum)->isInvalid();
+        return ! $this->validation->validate($item->score, $maximum, $this->passingScore($assessment))->isInvalid();
+    }
+
+    private function passingScore(Assessment $assessment): ?float
+    {
+        return $assessment->passing_score !== null
+            ? (float) $assessment->passing_score
+            : null;
     }
 
     private function resolvedMaximum(Assessment $assessment, int|string|null $componentId): float
@@ -167,7 +176,7 @@ final class BulkRecordScoresAction
             'score' => $item->score,
             'percentage' => ScorePercentage::fromScore($item->score, $maximum)->value,
             'status' => ScoreStatus::Draft->value,
-            'validation_status' => $this->validation->validate($item->score, $maximum)->value,
+            'validation_status' => $this->validation->validate($item->score, $maximum, $this->passingScore($assessment))->value,
             'feedback' => $item->feedback,
             'graded_by' => $actor?->getKey(),
             'graded_at' => now(),

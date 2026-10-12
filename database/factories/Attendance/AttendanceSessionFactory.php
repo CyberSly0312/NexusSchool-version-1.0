@@ -28,7 +28,7 @@ class AttendanceSessionFactory extends Factory
         $academicSchoolId = 'acad-'.(string) \Illuminate\Support\Str::ulid();
 
         return [
-            'school_id' => null,
+            'school_id' => 'fac-'.(string) \Illuminate\Support\Str::ulid(),
             'school_class_id' => SchoolClassFactory::new()
                 ->state([
                     'school_id' => $academicSchoolId,

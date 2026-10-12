@@ -49,7 +49,7 @@ final class RecordScoreAction
             $maximum = $this->resolvedMaximum($assessment, $data->componentId);
 
             $this->assertEnrollmentInClass($assessment, $data->enrollmentId);
-            $this->assertScoreRange($data->score, $maximum);
+            $this->assertScoreRange($data->score, $maximum, $assessment->passing_score);
             $this->assertTeacherAssignment($assessment, $actor);
 
             $existing = $this->existingScore($assessment, $data);
@@ -73,9 +73,9 @@ final class RecordScoreAction
         }
     }
 
-    private function assertScoreRange(float $score, float $maximum): void
+    private function assertScoreRange(float $score, float $maximum, ?float $passing): void
     {
-        $status = $this->validation->validate($score, $maximum);
+        $status = $this->validation->validate($score, $maximum, $passing);
 
         if ($status->isInvalid()) {
             throw ScoreOutOfRangeException::forValue($score, $maximum);
@@ -133,7 +133,7 @@ final class RecordScoreAction
             'score' => $data->score,
             'percentage' => ScorePercentage::fromScore($data->score, $maximum)->value,
             'status' => ScoreStatus::Draft,
-            'validation_status' => $this->validation->validate($data->score, $maximum),
+            'validation_status' => $this->validation->validate($data->score, $maximum, $assessment->passing_score),
             'feedback' => $data->feedback,
             'graded_by' => $actor?->getKey(),
             'graded_at' => now(),
@@ -158,7 +158,7 @@ final class RecordScoreAction
         $score->update([
             'score' => $data->score,
             'percentage' => ScorePercentage::fromScore($data->score, $maximum)->value,
-            'validation_status' => $this->validation->validate($data->score, $maximum),
+            'validation_status' => $this->validation->validate($data->score, $maximum, $assessment->passing_score),
             'feedback' => $data->feedback,
             'graded_by' => $actor?->getKey(),
             'graded_at' => now(),

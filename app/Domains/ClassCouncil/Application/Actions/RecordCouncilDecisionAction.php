@@ -131,7 +131,7 @@ final class RecordCouncilDecisionAction
             $session->academic_calendar_term_id,
         );
 
-        return $this->automatic->propose($standing);
+        return $this->automatic->propose($standing, $data->schoolId);
     }
 
     private function nextCode(CouncilSession $session): string

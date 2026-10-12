@@ -6,12 +6,14 @@ namespace App\Domains\AcademicCommunication\Presentation\Filament\Resources;
 
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocument;
 use App\Domains\AcademicCommunication\Presentation\Filament\Resources\AcademicDocumentResource\Pages;
+use App\Domains\IdentityAndVerification\Domain\Enums\VerificationStatus;
 use App\Traits\ScopedByTenant;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Filament resource for the aggregate root of the Academic Communication
@@ -63,6 +65,7 @@ class AcademicDocumentResource extends Resource
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('verificationIdentity'))
             ->columns([
                 Tables\Columns\TextColumn::make('document_number')
                     ->label('N° de document')
@@ -84,6 +87,12 @@ class AcademicDocumentResource extends Resource
                 Tables\Columns\TextColumn::make('approval_status')
                     ->label('Approbation')
                     ->badge(),
+                Tables\Columns\TextColumn::make('verificationIdentity.status')
+                    ->label('Vérification')
+                    ->badge()
+                    ->placeholder('Aucune')
+                    ->formatStateUsing(fn (?VerificationStatus $state): string => $state?->label() ?? 'Aucune')
+                    ->color(fn (?VerificationStatus $state): ?string => $state?->color()),
                 Tables\Columns\TextColumn::make('generated_at')
                     ->label('Généré le')
                     ->dateTime('d/m/Y H:i')
