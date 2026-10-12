@@ -1,5 +1,6 @@
 # Nexus School ERP
 
+
 > A modern, scalable, AI-ready School Management ERP built for African educational institutions.
 
 Nexus School is a next-generation multi-tenant SaaS platform that helps schools manage academics, students, finances, transport, library, communication, and more from a single application. Built with Domain-Driven Design, event-driven architecture, and security-first principles.
