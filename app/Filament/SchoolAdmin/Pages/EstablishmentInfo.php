@@ -8,9 +8,10 @@ use App\Domains\School\Models\School;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas;
+use Filament\Schemas\Schema;
 
 class EstablishmentInfo extends Page implements HasForms
 {
@@ -58,11 +59,11 @@ class EstablishmentInfo extends Page implements HasForms
         ]);
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\Section::make('Identité de l\'établissement')
+                Schemas\Components\Section::make('Identité de l\'établissement')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('Nom de l\'établissement')
@@ -83,7 +84,7 @@ class EstablishmentInfo extends Page implements HasForms
                             ->required(),
                     ])->columns(3),
 
-                Forms\Components\Section::make('Coordonnées')
+                Schemas\Components\Section::make('Coordonnées')
                     ->schema([
                         Forms\Components\TextInput::make('address')
                             ->label('Adresse')
@@ -113,7 +114,7 @@ class EstablishmentInfo extends Page implements HasForms
                             ->nullable(),
                     ])->columns(3),
 
-                Forms\Components\Section::make('Identité visuelle')
+                Schemas\Components\Section::make('Identité visuelle')
                     ->schema([
                         Forms\Components\FileUpload::make('logo_url')
                             ->label('Logo')
@@ -135,7 +136,7 @@ class EstablishmentInfo extends Page implements HasForms
                             ->nullable(),
                     ])->columns(3),
 
-                Forms\Components\Section::make('Paramètres régionaux')
+                Schemas\Components\Section::make('Paramètres régionaux')
                     ->schema([
                         Forms\Components\Select::make('currency')
                             ->label('Devise')
@@ -170,7 +171,7 @@ class EstablishmentInfo extends Page implements HasForms
                             ->required(),
                     ])->columns(3),
 
-                Forms\Components\Section::make('Format et horaires')
+                Schemas\Components\Section::make('Format et horaires')
                     ->schema([
                         Forms\Components\Select::make('date_format')
                             ->label('Format de la date')

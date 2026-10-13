@@ -53,7 +53,8 @@ class DocumentApproval extends Model
 
     public function document(): BelongsTo
     {
-        return $this->belongsTo(AcademicDocument::class, 'academic_document_id');
+        return $this->belongsTo(AcademicDocument::class, 'academic_document_id')
+            ->where('academic_documents.school_id', $this->school_id);
     }
 
     public function approver(): BelongsTo

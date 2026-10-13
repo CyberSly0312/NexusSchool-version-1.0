@@ -132,7 +132,8 @@ class AcademicDocument extends Model
 
     public function approvals(): HasMany
     {
-        return $this->hasMany(DocumentApproval::class, 'academic_document_id');
+        return $this->hasMany(DocumentApproval::class, 'academic_document_id')
+            ->where('document_approvals.school_id', $this->school_id);
     }
 
     public function signatures(): HasMany

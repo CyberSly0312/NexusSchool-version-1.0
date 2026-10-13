@@ -8,9 +8,10 @@ use App\Domains\School\Models\School;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas;
+use Filament\Schemas\Schema;
 
 class SchoolWizard extends Page implements HasForms
 {
@@ -74,11 +75,11 @@ class SchoolWizard extends Page implements HasForms
         ]);
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form->schema([
-            Forms\Components\Group::make([
-                Forms\Components\Section::make('Informations générales')
+        return $schema->schema([
+            Schemas\Components\Group::make([
+                Schemas\Components\Section::make('Informations générales')
                     ->icon('heroicon-o-building-office-2')
                     ->schema([
                         Forms\Components\TextInput::make('name')
@@ -102,8 +103,8 @@ class SchoolWizard extends Page implements HasForms
                     ])->columns(2),
             ])->visible(fn () => $this->currentStep === 1),
 
-            Forms\Components\Group::make([
-                Forms\Components\Section::make('Configuration académique')
+            Schemas\Components\Group::make([
+                Schemas\Components\Section::make('Configuration académique')
                     ->icon('heroicon-o-academic-cap')
                     ->schema([
                         Forms\Components\TextInput::make('current_academic_year')
@@ -125,8 +126,8 @@ class SchoolWizard extends Page implements HasForms
                     ])->columns(3),
             ])->visible(fn () => $this->currentStep === 2),
 
-            Forms\Components\Group::make([
-                Forms\Components\Section::make('Configuration financière')
+            Schemas\Components\Group::make([
+                Schemas\Components\Section::make('Configuration financière')
                     ->icon('heroicon-o-banknotes')
                     ->schema([
                         Forms\Components\TextInput::make('currency')
@@ -149,8 +150,8 @@ class SchoolWizard extends Page implements HasForms
                     ])->columns(3),
             ])->visible(fn () => $this->currentStep === 3),
 
-            Forms\Components\Group::make([
-                Forms\Components\Section::make('Identité visuelle')
+            Schemas\Components\Group::make([
+                Schemas\Components\Section::make('Identité visuelle')
                     ->icon('heroicon-o-paint-brush')
                     ->schema([
                         Forms\Components\TextInput::make('motto')
@@ -168,8 +169,8 @@ class SchoolWizard extends Page implements HasForms
                     ])->columns(2),
             ])->visible(fn () => $this->currentStep === 4),
 
-            Forms\Components\Group::make([
-                Forms\Components\Section::make('Récapitulatif')
+            Schemas\Components\Group::make([
+                Schemas\Components\Section::make('Récapitulatif')
                     ->icon('heroicon-o-clipboard-document-check')
                     ->schema([
                         Forms\Components\Placeholder::make('review_name')

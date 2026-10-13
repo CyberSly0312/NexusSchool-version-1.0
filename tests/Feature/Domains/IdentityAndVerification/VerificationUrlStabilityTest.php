@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Domains\AcademicCommunication\Application\AcademicCommunicationService;
+use App\Domains\AcademicCommunication\Application\DTOs\ArchiveDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\RegenerateDocumentData;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentStatus;
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocument;
@@ -46,7 +48,11 @@ test('regeneration and version creation keep the identity, token and canonical U
         ->where('academic_document_id', $document->getKey())
         ->first()->token_hash;
 
-    $version = $this->communication->regenerate($document, ['student' => ['full_name' => 'Corrected holder']]);
+    $version = $this->communication->regenerate(RegenerateDocumentData::fromArray([
+        'school_id' => $school,
+        'document_id' => $document->id,
+        'content' => ['student' => ['full_name' => 'Corrected holder']],
+    ]));
 
     expect($document->refresh()->versions()->count())->toBe(1)
         ->and($version->version_number)->toBe(1)
@@ -64,7 +70,10 @@ test('archival keeps the canonical URL stable and only the verdict changes', fun
     $urlBefore = $this->identities->verificationUrlForToken($token)->toString();
     $hashBefore = VerificationIdentity::forSchool($school)->where('academic_document_id', $document->getKey())->first()->token_hash;
 
-    $this->communication->archive($document);
+    $this->communication->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $school,
+        'document_id' => $document->id,
+    ]));
 
     expect($document->refresh()->status)->toBe(DocumentStatus::Archived)
         ->and(VerificationIdentity::forSchool($school)->where('academic_document_id', $document->getKey())->first()->token_hash)->toBe($hashBefore)

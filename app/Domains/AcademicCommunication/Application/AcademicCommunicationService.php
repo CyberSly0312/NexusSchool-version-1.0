@@ -17,8 +17,11 @@ use App\Domains\AcademicCommunication\Application\Actions\PublishDocumentAction;
 use App\Domains\AcademicCommunication\Application\Actions\RegenerateDocumentAction;
 use App\Domains\AcademicCommunication\Application\Actions\ReviewDocumentAction;
 use App\Domains\AcademicCommunication\Application\DTOs\ApproveDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\ArchiveDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\GenerateDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\PublishDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\RegenerateDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\ReviewDocumentData;
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocument;
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocumentVersion;
 use App\Models\User;
@@ -81,9 +84,9 @@ final class AcademicCommunicationService
         return $this->generateChronicle->execute($data, $actor);
     }
 
-    public function review(AcademicDocument $document, ?User $actor = null): AcademicDocument
+    public function review(ReviewDocumentData $data, ?User $actor = null): AcademicDocument
     {
-        return $this->reviewDocument->execute($document, $actor);
+        return $this->reviewDocument->execute($data, $actor);
     }
 
     public function approve(ApproveDocumentData $data, ?User $actor = null): AcademicDocument
@@ -96,16 +99,13 @@ final class AcademicCommunicationService
         return $this->publishDocument->execute($data, $actor);
     }
 
-    public function archive(AcademicDocument $document, ?User $actor = null): AcademicDocument
+    public function archive(ArchiveDocumentData $data, ?User $actor = null): AcademicDocument
     {
-        return $this->archiveDocument->execute($document, $actor);
+        return $this->archiveDocument->execute($data, $actor);
     }
 
-    /**
-     * @param  array<string, mixed>  $content
-     */
-    public function regenerate(AcademicDocument $document, array $content, ?User $actor = null): AcademicDocumentVersion
+    public function regenerate(RegenerateDocumentData $data, ?User $actor = null): AcademicDocumentVersion
     {
-        return $this->regenerateDocument->execute($document, $content, $actor);
+        return $this->regenerateDocument->execute($data, $actor);
     }
 }

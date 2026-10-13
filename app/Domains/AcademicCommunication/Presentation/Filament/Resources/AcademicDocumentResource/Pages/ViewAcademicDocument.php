@@ -6,7 +6,9 @@ namespace App\Domains\AcademicCommunication\Presentation\Filament\Resources\Acad
 
 use App\Domains\AcademicCommunication\Application\AcademicCommunicationService;
 use App\Domains\AcademicCommunication\Application\DTOs\ApproveDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\ArchiveDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\PublishDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\ReviewDocumentData;
 use App\Domains\AcademicCommunication\Domain\Enums\ApprovalStatus;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentStatus;
 use App\Domains\AcademicCommunication\Infrastructure\Models\AcademicDocument;
@@ -47,7 +49,13 @@ class ViewAcademicDocument extends ViewRecord
                     try {
                         $document = $this->document();
 
-                        app(AcademicCommunicationService::class)->review($document, auth()->user());
+                        app(AcademicCommunicationService::class)->review(
+                            ReviewDocumentData::fromArray([
+                                'school_id' => $document->school_id,
+                                'document_id' => $document->getKey(),
+                            ]),
+                            auth()->user(),
+                        );
 
                         $document->refresh();
 
@@ -143,7 +151,13 @@ class ViewAcademicDocument extends ViewRecord
                     try {
                         $document = $this->document();
 
-                        app(AcademicCommunicationService::class)->archive($document, auth()->user());
+                        app(AcademicCommunicationService::class)->archive(
+                            ArchiveDocumentData::fromArray([
+                                'school_id' => $document->school_id,
+                                'document_id' => $document->getKey(),
+                            ]),
+                            auth()->user(),
+                        );
 
                         $document->refresh();
 

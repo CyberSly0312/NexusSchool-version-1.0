@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Domains\AcademicCommunication\Application\AcademicCommunicationService;
+use App\Domains\AcademicCommunication\Application\DTOs\ArchiveDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\GenerateDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\PublishDocumentData;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
@@ -85,7 +86,10 @@ test('document archival transitions the lifecycle envelope to archived', functio
         'context' => ['student' => ['full_name' => 'Jean Dupont']],
     ]));
 
-    $this->service->archive($document);
+    $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+    ]));
 
     $lifecycle = RecordLifecycle::query()
         ->forSchool($this->schoolId)
@@ -117,7 +121,10 @@ test('document publish-then-archive transitions lifecycle through published to a
         'channels' => [DocumentChannel::InternalPortal->value],
     ]));
 
-    $this->service->archive($document->refresh());
+    $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+    ]));
 
     $lifecycle = RecordLifecycle::query()
         ->forSchool($this->schoolId)

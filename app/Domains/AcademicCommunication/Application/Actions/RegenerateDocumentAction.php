@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\AcademicCommunication\Application\Actions;
 
+use App\Domains\AcademicCommunication\Application\DTOs\RegenerateDocumentData;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentChannel;
 use App\Domains\AcademicCommunication\Domain\Events\DocumentVersionCreated;
@@ -34,9 +35,15 @@ final class RegenerateDocumentAction
     ) {
     }
 
-    public function execute(AcademicDocument $document, array $content, ?User $actor = null): AcademicDocumentVersion
+    public function execute(RegenerateDocumentData $data, ?User $actor = null): AcademicDocumentVersion
     {
-        return DB::transaction(function () use ($document, $content, $actor): AcademicDocumentVersion {
+        return DB::transaction(function () use ($data, $actor): AcademicDocumentVersion {
+            $document = AcademicDocument::query()
+                ->forSchool($data->schoolId)
+                ->findOrFail($data->documentId);
+
+            $content = $data->content;
+
             if ($document->isArchived()) {
                 throw DocumentImmutableException::forDocument($document->getKey(), $document->status->value);
             }

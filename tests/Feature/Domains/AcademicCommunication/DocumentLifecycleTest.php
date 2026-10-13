@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 use App\Domains\AcademicCommunication\Application\AcademicCommunicationService;
 use App\Domains\AcademicCommunication\Application\DTOs\ApproveDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\ArchiveDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\GenerateDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\PublishDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\ReviewDocumentData;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
 use App\Domains\AcademicCommunication\Domain\Enums\ApprovalStatus;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentChannel;
@@ -100,7 +102,10 @@ test('generation issues sequential numbers scoped per document type', function (
 test('a generated document can be reviewed', function (): void {
     $document = $this->service->generateDocument(generateData($this->schoolId, $this->context['template'], $this->context['policy']));
 
-    $reviewed = $this->service->review($document);
+    $reviewed = $this->service->review(ReviewDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+    ]));
 
     expect($reviewed->status)->toBe(DocumentStatus::Reviewed)
         ->and($reviewed->reviewed_at)->not->toBeNull();
@@ -108,9 +113,15 @@ test('a generated document can be reviewed', function (): void {
 
 test('a generated document cannot be reviewed twice', function (): void {
     $document = $this->service->generateDocument(generateData($this->schoolId, $this->context['template'], $this->context['policy']));
-    $this->service->review($document);
+    $this->service->review(ReviewDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+    ]));
 
-    $this->service->review($document->refresh());
+    $this->service->review(ReviewDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+    ]));
 })->throws(\App\Domains\AcademicCommunication\Domain\Exceptions\InvalidStatusTransitionException::class);
 
 test('a document without approval requirement publishes directly', function (): void {
@@ -321,7 +332,10 @@ test('a published document can be archived', function (): void {
         'channels' => [DocumentChannel::InternalPortal->value],
     ]));
 
-    $archived = $this->service->archive($document->refresh());
+    $archived = $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+    ]));
 
     expect($archived->status)->toBe(DocumentStatus::Archived)
         ->and($archived->archived_at)->not->toBeNull();
@@ -363,7 +377,10 @@ test('an archived document cannot be published', function (): void {
         'channels' => [DocumentChannel::InternalPortal->value],
     ]));
 
-    $this->service->archive($document->refresh());
+    $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+    ]));
 
     expect(fn () => $this->service->publish(PublishDocumentData::fromArray([
         'school_id' => $this->schoolId,
@@ -385,11 +402,17 @@ test('archiving an already archived document is rejected without mutating it', f
         'channels' => [DocumentChannel::InternalPortal->value],
     ]));
 
-    $this->service->archive($document->refresh());
+    $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+    ]));
 
     $archivedAt = $document->refresh()->archived_at;
 
-    expect(fn () => $this->service->archive($document))->toThrow(InvalidStatusTransitionException::class);
+    expect(fn () => $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->id,
+    ])))->toThrow(InvalidStatusTransitionException::class);
 
     expect($document->refresh()->status)->toBe(DocumentStatus::Archived)
         ->and($document->archived_at->equalTo($archivedAt))->toBeTrue();
@@ -398,7 +421,10 @@ test('archiving an already archived document is rejected without mutating it', f
 test('a draft document cannot be archived', function (): void {
     $draft = AcademicDocument::factory()->forSchool($this->schoolId)->create();
 
-    expect(fn () => $this->service->archive($draft))->toThrow(InvalidStatusTransitionException::class);
+    expect(fn () => $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $draft->id,
+    ])))->toThrow(InvalidStatusTransitionException::class);
 
     expect($draft->refresh()->status)->toBe(DocumentStatus::Draft)
         ->and($draft->archived_at)->toBeNull();

@@ -8,9 +8,10 @@ use App\Domains\School\Models\School;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas;
+use Filament\Schemas\Schema;
 
 class SchoolIdentity extends Page implements HasForms
 {
@@ -54,10 +55,10 @@ class SchoolIdentity extends Page implements HasForms
         ]);
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form->schema([
-            Forms\Components\Section::make('Informations générales')
+        return $schema->schema([
+            Schemas\Components\Section::make('Informations générales')
                 ->icon('heroicon-o-building-office-2')
                 ->schema([
                     Forms\Components\TextInput::make('school_name')
@@ -80,7 +81,7 @@ class SchoolIdentity extends Page implements HasForms
                         ->maxLength(255),
                 ])->columns(2),
 
-            Forms\Components\Section::make('Localisation')
+            Schemas\Components\Section::make('Localisation')
                 ->icon('heroicon-o-map-pin')
                 ->schema([
                     Forms\Components\TextInput::make('school_region')
@@ -94,7 +95,7 @@ class SchoolIdentity extends Page implements HasForms
                         ->maxLength(255),
                 ])->columns(3),
 
-            Forms\Components\Section::make('Direction')
+            Schemas\Components\Section::make('Direction')
                 ->icon('heroicon-o-user-circle')
                 ->schema([
                     Forms\Components\TextInput::make('school_director_name')

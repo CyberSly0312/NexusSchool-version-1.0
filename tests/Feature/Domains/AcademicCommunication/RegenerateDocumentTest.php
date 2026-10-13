@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 use App\Domains\AcademicCommunication\Application\AcademicCommunicationService;
+use App\Domains\AcademicCommunication\Application\DTOs\ArchiveDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\GenerateDocumentData;
 use App\Domains\AcademicCommunication\Application\DTOs\PublishDocumentData;
+use App\Domains\AcademicCommunication\Application\DTOs\RegenerateDocumentData;
 use App\Domains\AcademicCommunication\Domain\Contracts\DocumentRendererContract;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentChannel;
 use App\Domains\AcademicCommunication\Domain\Enums\DocumentStatus;
@@ -88,7 +90,11 @@ test('regenerating a published document creates a new immutable version', functi
 
     $corrected = array_merge($document->content(), ['results' => ['math' => 16]]);
 
-    $version = $this->service->regenerate($document->refresh(), $corrected);
+    $version = $this->service->regenerate(RegenerateDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+        'content' => $corrected,
+    ]));
 
     expect($version->version_number)->toBe(2)
         ->and($version->is_published)->toBeTrue()
@@ -115,7 +121,11 @@ test('regeneration re-renders the official file and rotates is_current', functio
     $document = $this->service->generateDocument(regenerateData($this->schoolId, $this->template, $this->policy));
     publishDocument($this->service, $this->schoolId, $document->id);
 
-    $this->service->regenerate($document->refresh(), ['student' => ['full_name' => 'Jean Dupont'], 'results' => ['math' => 16]]);
+    $this->service->regenerate(RegenerateDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+        'content' => ['student' => ['full_name' => 'Jean Dupont'], 'results' => ['math' => 16]],
+    ]));
 
     $files = GeneratedFile::query()
         ->forSchool($this->schoolId)
@@ -134,7 +144,11 @@ test('regeneration keeps the permanent document identity', function (): void {
     $identity = $document->document_number;
     publishDocument($this->service, $this->schoolId, $document->id);
 
-    $this->service->regenerate($document->refresh(), ['student' => ['full_name' => 'Jean Dupont']]);
+    $this->service->regenerate(RegenerateDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+        'content' => ['student' => ['full_name' => 'Jean Dupont']],
+    ]));
 
     expect($document->refresh()->document_number)->toBe($identity);
 });
@@ -142,7 +156,14 @@ test('regeneration keeps the permanent document identity', function (): void {
 test('an archived document cannot be regenerated', function (): void {
     $document = $this->service->generateDocument(regenerateData($this->schoolId, $this->template, $this->policy));
     publishDocument($this->service, $this->schoolId, $document->id);
-    $this->service->archive($document->refresh());
+    $this->service->archive(ArchiveDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+    ]));
 
-    $this->service->regenerate($document->refresh(), ['student' => ['full_name' => 'Jean Dupont']]);
+    $this->service->regenerate(RegenerateDocumentData::fromArray([
+        'school_id' => $this->schoolId,
+        'document_id' => $document->refresh()->id,
+        'content' => ['student' => ['full_name' => 'Jean Dupont']],
+    ]));
 })->throws(DocumentImmutableException::class);

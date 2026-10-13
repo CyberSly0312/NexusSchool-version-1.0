@@ -1,8 +1,4 @@
-<x-filament-panels::page
-    @if (method_exists($this, 'getFormActions'))
-        :form-actions="$this->getFormActions()"
-    @endif
->
+<x-filament-panels::page>
     <form wire:submit="save">
         {{ $this->form }}
 
