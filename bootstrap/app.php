@@ -17,6 +17,25 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        /*
+         * Forwarded headers are honored only when the immediate sender is an
+         * explicitly configured reverse proxy. An empty TRUSTED_PROXIES value
+         * leaves every proxy untrusted, so forged X-Forwarded-Host/Proto/Port
+         * headers cannot affect tenant resolution.
+         */
+        $trustedProxies = array_values(array_filter(array_map(
+            'trim',
+            explode(',', (string) env('TRUSTED_PROXIES', '')),
+        )));
+
+        if ($trustedProxies !== []) {
+            $middleware->trustProxies(at: $trustedProxies);
+        }
+
+        // This runs after TrustProxies, so getHost() can use forwarded host
+        // information only from an explicitly trusted immediate proxy.
+        $middleware->append(\App\Http\Middleware\ValidateTrustedHost::class);
+
         $middleware->statefulApi();
         $middleware->append(\Illuminate\Http\Middleware\HandleCors::class);
     })

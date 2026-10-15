@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Domains\School\Enums\SchoolStatus;
 use App\Domains\School\Models\School;
 use App\Domains\User\Enums\UserStatus;
 use App\Models\User;
@@ -13,24 +14,9 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = School::firstOrCreate(
-            ['slug' => 'nexus-demo'],
-            [
-                'name' => 'Nexus Demo Academy',
-                'database' => 'school_nexus_demo',
-                'email' => 'admin@nexusdemo.edu',
-                'phone' => '+225 01 00 00 00',
-                'address' => '123 Avenue de l\'Éducation',
-                'city' => 'Ouagadougou',
-                'state' => 'Centre',
-                'country' => 'Burkina Faso',
-                'timezone' => 'Africa/Ouagadougou',
-                'currency' => 'XOF',
-                'locale' => 'fr',
-                'school_type' => 'secondary',
-                'status' => SchoolStatus::Active,
-            ]
-        );
+        // SchoolSeeder owns demo-school provisioning through SchoolService.
+        // This seeder must not create a tenant outside that transactional path.
+        $school = School::where('slug', 'nexus-demo')->firstOrFail();
 
         $admin = User::updateOrCreate(
             ['email' => 'admin@nexusschool.local'],
@@ -44,7 +30,7 @@ class UserSeeder extends Seeder
             ]
         );
 
-        if (!$admin->hasRole('super_admin')) {
+        if (! $admin->hasRole('super_admin')) {
             $admin->assignRole('super_admin');
         }
 
@@ -60,7 +46,7 @@ class UserSeeder extends Seeder
             ]
         );
 
-        if (!$teacher->hasRole('teacher')) {
+        if (! $teacher->hasRole('teacher')) {
             $teacher->assignRole('teacher');
         }
     }

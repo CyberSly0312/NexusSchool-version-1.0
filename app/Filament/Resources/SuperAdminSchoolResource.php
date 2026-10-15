@@ -7,12 +7,10 @@ namespace App\Filament\Resources;
 use App\Domains\School\Enums\SchoolStatus;
 use App\Domains\School\Models\School;
 use App\Filament\Resources\SuperAdminSchoolResource\Pages;
-use App\Models\User;
 use Filament\Forms;
+use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -98,7 +96,9 @@ class SuperAdminSchoolResource extends Resource
                         ->disabled(),
                     Forms\Components\TextInput::make('domain')
                         ->label('Domaine')
-                        ->maxLength(255),
+                        ->helperText('Généré automatiquement à partir du slug et conservé lors des renommages.')
+                        ->disabled()
+                        ->dehydrated(false),
                     Forms\Components\TextInput::make('timezone')
                         ->label('Fuseau horaire')
                         ->default('Africa/Ouagadougou')

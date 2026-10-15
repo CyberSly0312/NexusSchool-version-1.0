@@ -246,6 +246,25 @@ test('a guest cannot reach a school login on an unregistered host', function ():
         ->assertNotFound();
 });
 
+test('an untrusted forwarded host cannot select a tenant', function (): void {
+    $schoolA = makeTenant('School A');
+    $schoolB = makeTenant('School B');
+
+    $this->withHeader('X-Forwarded-Host', tenantHost($schoolB))
+        ->get('http://'.tenantHost($schoolA).'/school-admin/login')
+        ->assertSuccessful();
+
+    expect(tenant()?->getKey())->toBe($schoolA);
+});
+
+test('an untrusted forwarded host cannot make an unknown host resolve', function (): void {
+    $school = makeTenant('Forwarded Host School');
+
+    $this->withHeader('X-Forwarded-Host', tenantHost($school))
+        ->get('http://unknown.school.test/school-admin/login')
+        ->assertNotFound();
+});
+
 // ---------------------------------------------------------------------------
 // Enforced security properties (Phase 1A)
 // ---------------------------------------------------------------------------

@@ -130,6 +130,51 @@ every remaining (authorised) request and remains authoritative.
 
 ## Remaining gaps / notes
 
+### Creation-time hostname provisioning (2026-10-15)
+
+`SchoolService::create()` is the canonical school-provisioning workflow. It
+normalizes the chosen school slug, rejects reserved or invalid labels, derives
+`{slug}.{TENANT_BASE_DOMAIN}`, and creates both the `tenants` row and its
+canonical Stancl `domains` row in a single database transaction. The database
+unique constraints remain the concurrency backstop; an unavailable slug returns
+a user-visible validation error and never receives an automatic suffix.
+
+The Super Admin creation page and `SchoolSeeder` use this workflow. Existing
+school renames (including slug edits) retain their domain; suspension and
+reactivation retain it but the routing middleware denies non-active schools;
+soft deletion retains the registry row while the soft-deleted tenant cannot
+resolve. A domain is never reassigned by this workflow.
+
+### Host and proxy hardening (2026-10-15)
+
+`ValidateTrustedHost` is enabled outside local/test environments. It accepts
+only `tenancy.central_domains` and hostnames found in the canonical Stancl
+`domains` registry, returning `404` before routing for unknown valid hosts.
+This application-level control is used instead of Laravel `TrustHosts`, whose
+rejection path was not reliably rendered as a safe HTTP response here. Local
+development and the framework test client remain intentionally exempt, keeping
+the documented hosts-file workflow functional; school-panel middleware still
+fails closed for unknown local hosts.
+
+`TRUSTED_PROXIES` is empty by default. Forwarded host, protocol, port, and
+client-IP headers are therefore ignored unless the immediate sender matches an
+explicit IP/CIDR in that environment variable. Never configure `*`; deployment
+must list only TLS-terminating ingress proxies that preserve the original Host.
+The application does not configure DNS, TLS, proxy allowlists, or host-header
+filtering at the edge; those remain deployment responsibilities.
+
+### Local-domain convention
+
+- The canonical local development convention is now `*.nexusschool.test`
+  (`TENANT_BASE_DOMAIN=nexusschool.test`), created automatically by
+  `SchoolService::create()` together with its Stancl `domains` row.
+- A pre-existing local record using `nexus-demo.nexus.school` is left untouched.
+  If a developer chooses to move to the current convention, they must re-provision
+  the demo school from a clean development database (for example
+  `php artisan migrate:fresh --seed` on a local database) — never rewrite or
+  reassign domain ownership automatically. Re-provisioning creates a new school
+  identity and users; existing dev data is not migrated silently.
+
 - Session cookies are currently host-scoped (host-only). Cross-host SSO is **not**
   implemented and was deliberately not introduced; a shared parent-domain cookie
   would need `SESSION_DOMAIN` plus dedicated cross-host session tests before use.

@@ -13,6 +13,22 @@ return [
     'tenant_model' => School::class,
     'id_generator' => UUIDGenerator::class,
 
+    /**
+     * Base domain used for platform-managed school hostnames. This is kept
+     * separate from central_domains: the former builds tenant hosts while the
+     * latter protects hosts that must never resolve to a tenant.
+     */
+    'tenant_base_domain' => env(
+        'TENANT_BASE_DOMAIN',
+        env('APP_ENV', 'production') === 'production' ? 'nexusschool.com' : 'nexusschool.test',
+    ),
+
+    /** @var list<string> */
+    'reserved_subdomains' => [
+        'www', 'admin', 'super-admin', 'platform', 'api', 'mail', 'docs',
+        'support', 'status', 'cdn', 'app', 'auth', 'login', 'localhost',
+    ],
+
     'domain_model' => Domain::class,
 
     /**

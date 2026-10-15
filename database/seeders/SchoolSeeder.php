@@ -1,24 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+use App\Domains\School\DTOs\SchoolData;
 use App\Domains\School\Enums\SchoolStatus;
 use App\Domains\School\Enums\SchoolType;
 use App\Domains\School\Models\School;
+use App\Domains\School\Services\SchoolService;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class SchoolSeeder extends Seeder
 {
     public function run(): void
     {
-        School::updateOrCreate(
-            ['slug' => 'nexus-demo'],
-            [
-                'uuid' => Str::ulid()->toString(),
+        $attributes = [
                 'name' => 'Nexus Demo Academy',
                 'database' => 'school_nexus_demo',
-                'domain' => 'nexus-demo.nexus.school',
                 'email' => 'admin@nexusdemo.nexus.school',
                 'phone' => '+226 01 00 00 00',
                 'address' => '123 Avenue de l\'Éducation',
@@ -37,7 +36,19 @@ class SchoolSeeder extends Seeder
                     'max_students_per_class' => 40,
                     'academic_week_starts' => 'monday',
                 ],
-            ],
-        );
+            ];
+
+        $school = School::where('slug', 'nexus-demo')->first();
+
+        if (! $school instanceof School) {
+            app(SchoolService::class)->create(SchoolData::fromArray([
+                ...$attributes,
+                'slug' => 'nexus-demo',
+            ]));
+
+            return;
+        }
+
+        $school->update($attributes);
     }
 }

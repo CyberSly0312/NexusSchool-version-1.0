@@ -18,15 +18,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
-use Stancl\Tenancy\Contracts\TenantWithDatabase;
-use Stancl\Tenancy\Database\Concerns\HasDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDomains;
 use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant;
 
-class School extends Tenant implements TenantWithDatabase
+class School extends Tenant
 {
-    use HasDatabase;
     use HasDomains;
     use HasFactory;
     use HasUlids;

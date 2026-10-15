@@ -16,9 +16,9 @@ class SchoolRules
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['nullable', 'string', 'max:255', 'unique:schools,slug'],
-            'database' => ['nullable', 'string', 'max:255', 'unique:schools,database'],
-            'domain' => ['nullable', 'string', 'max:255', 'unique:schools,domain'],
+            'slug' => ['required', 'string', 'max:63', 'unique:tenants,slug'],
+            'database' => ['required', 'string', 'max:255', 'unique:tenants,database'],
+            'domain' => ['required', 'string', 'max:255', 'unique:tenants,domain'],
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:50'],
             'address' => ['nullable', 'string', 'max:1000'],
@@ -30,7 +30,7 @@ class SchoolRules
             'currency' => ['nullable', 'string', 'size:3'],
             'locale' => ['nullable', 'string', 'max:10'],
             'logo_url' => ['nullable', 'url', 'max:2048'],
-            'registration_number' => ['nullable', 'string', 'max:100', 'unique:schools,registration_number'],
+            'registration_number' => ['nullable', 'string', 'max:100', 'unique:tenants,registration_number'],
             'school_type' => ['nullable', Rule::enum(SchoolType::class)],
             'status' => ['nullable', Rule::enum(SchoolStatus::class)],
             'settings' => ['nullable', 'array'],
@@ -42,9 +42,9 @@ class SchoolRules
     {
         return [
             'name' => ['sometimes', 'required', 'string', 'max:255'],
-            'slug' => ['sometimes', 'nullable', 'string', 'max:255', Rule::unique('schools', 'slug')->ignore($schoolId)],
-            'database' => ['sometimes', 'nullable', 'string', 'max:255', Rule::unique('schools', 'database')->ignore($schoolId)],
-            'domain' => ['sometimes', 'nullable', 'string', 'max:255', Rule::unique('schools', 'domain')->ignore($schoolId)],
+            'slug' => ['sometimes', 'nullable', 'string', 'max:63', Rule::unique('tenants', 'slug')->ignore($schoolId)],
+            'database' => ['sometimes', 'nullable', 'string', 'max:255', Rule::unique('tenants', 'database')->ignore($schoolId)],
+            'domain' => ['sometimes', 'nullable', 'string', 'max:255', Rule::unique('tenants', 'domain')->ignore($schoolId)],
             'email' => ['sometimes', 'nullable', 'email', 'max:255'],
             'phone' => ['sometimes', 'nullable', 'string', 'max:50'],
             'address' => ['sometimes', 'nullable', 'string', 'max:1000'],
@@ -56,7 +56,7 @@ class SchoolRules
             'currency' => ['sometimes', 'nullable', 'string', 'size:3'],
             'locale' => ['sometimes', 'nullable', 'string', 'max:10'],
             'logo_url' => ['sometimes', 'nullable', 'url', 'max:2048'],
-            'registration_number' => ['sometimes', 'nullable', 'string', 'max:100', Rule::unique('schools', 'registration_number')->ignore($schoolId)],
+            'registration_number' => ['sometimes', 'nullable', 'string', 'max:100', Rule::unique('tenants', 'registration_number')->ignore($schoolId)],
             'school_type' => ['sometimes', 'nullable', Rule::enum(SchoolType::class)],
             'status' => ['sometimes', 'nullable', Rule::enum(SchoolStatus::class)],
             'settings' => ['sometimes', 'nullable', 'array'],

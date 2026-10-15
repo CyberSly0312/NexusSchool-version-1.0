@@ -12,7 +12,10 @@ use App\Domains\School\Events\SchoolUpdated;
 use App\Domains\School\Models\School;
 use App\Domains\School\Rules\SchoolRules;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class SchoolService
 {
@@ -27,7 +30,37 @@ class SchoolService
     public function create(SchoolData $data): School
     {
         return DB::transaction(function () use ($data) {
-            $school = $this->model->create($data->toArray());
+            $attributes = $data->toArray();
+            $slug = $this->canonicalSlug($attributes['slug'] ?? $attributes['name']);
+            $domain = $this->canonicalDomain($slug);
+
+            // A platform hostname is assigned once at provisioning time. A
+            // rename does not alter it; changing domains is an explicit future
+            // domain-lifecycle operation, never an incidental school update.
+            if (($attributes['domain'] ?? null) !== null && $attributes['domain'] !== $domain) {
+                throw ValidationException::withMessages([
+                    'domain' => 'The school domain is generated from its slug and cannot be chosen separately.',
+                ]);
+            }
+
+            $attributes['slug'] = $slug;
+            $attributes['domain'] = $domain;
+            $attributes['database'] ??= 'school_'.$slug;
+
+            $validated = SchoolRules::validate($attributes);
+
+            try {
+                $school = $this->model->newQuery()->create($validated);
+                $school->domains()->create(['domain' => $domain]);
+            } catch (QueryException $exception) {
+                if ($this->isUniqueConstraintViolation($exception)) {
+                    throw ValidationException::withMessages([
+                        'slug' => "The subdomain '{$slug}' is unavailable. Choose a different school slug.",
+                    ]);
+                }
+
+                throw $exception;
+            }
 
             SchoolCreated::dispatch($school);
 
@@ -40,6 +73,14 @@ class SchoolService
      */
     public function update(School $school, array $data): School
     {
+        // The canonical hostname is immutable through ordinary school edits.
+        // Domain lifecycle changes must preserve registry ownership explicitly.
+        unset($data['domain']);
+
+        if (array_key_exists('slug', $data) && $data['slug'] !== null) {
+            $data['slug'] = $this->canonicalSlug($data['slug']);
+        }
+
         $validated = SchoolRules::validate(
             $data,
             'update',
@@ -118,7 +159,9 @@ class SchoolService
      */
     public function findByDomain(string $domain): School
     {
-        return $this->model->where('domain', $domain)->firstOrFail();
+        return $this->model
+            ->whereHas('domains', fn ($query) => $query->where('domain', Str::lower($domain)))
+            ->firstOrFail();
     }
 
     /**
@@ -150,5 +193,40 @@ class SchoolService
         }
 
         return $query->orderBy('name')->paginate($perPage);
+    }
+
+    private function canonicalSlug(string $value): string
+    {
+        $slug = Str::lower(Str::slug($value));
+
+        if ($slug === '' || strlen($slug) > 63 || ! preg_match('/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/', $slug)) {
+            throw ValidationException::withMessages([
+                'slug' => 'The school slug must produce a valid DNS subdomain (letters, numbers, and internal hyphens only).',
+            ]);
+        }
+
+        if (in_array($slug, config('tenancy.reserved_subdomains', []), true)) {
+            throw ValidationException::withMessages([
+                'slug' => "The subdomain '{$slug}' is reserved by the platform.",
+            ]);
+        }
+
+        return $slug;
+    }
+
+    private function canonicalDomain(string $slug): string
+    {
+        $baseDomain = Str::lower(trim((string) config('tenancy.tenant_base_domain')));
+
+        if (! preg_match('/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/', $baseDomain)) {
+            throw new \LogicException('TENANT_BASE_DOMAIN must be a valid DNS domain.');
+        }
+
+        return "{$slug}.{$baseDomain}";
+    }
+
+    private function isUniqueConstraintViolation(QueryException $exception): bool
+    {
+        return in_array((string) $exception->getCode(), ['23000', '23505', '19'], true);
     }
 }

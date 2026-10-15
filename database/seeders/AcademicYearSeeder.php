@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Domains\School\Models\School;
@@ -10,14 +12,8 @@ class AcademicYearSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = School::firstOrCreate(
-            ['slug' => 'nexus-demo'],
-            [
-                'name' => 'Nexus Demo Academy',
-                'database' => 'school_nexus_demo',
-                'status' => 'active',
-            ],
-        );
+        // SchoolSeeder owns demo-school provisioning and domain registration.
+        $school = School::where('slug', 'nexus-demo')->firstOrFail();
 
         AcademicYear::firstOrCreate(
             ['school_id' => $school->id, 'name' => '2025-2026'],
