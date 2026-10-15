@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->ulid('uuid')->unique()->nullable();
             $table->string('school_id', 36);
 
-            $table->foreignId('student_guardian_id')->constrained('student_guardians')->cascadeOnDelete();
+            $table->foreignId('student_guardian_id')->constrained('student_guardians', 'id', 'sg_history_student_guardian_foreign')->cascadeOnDelete();
             $table->foreignId('student_id')->nullable()->constrained('students')->nullOnDelete();
             $table->foreignId('guardian_id')->nullable()->constrained('guardians')->nullOnDelete();
 
@@ -28,10 +28,10 @@ return new class () extends Migration {
             $table->json('payload')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('user_type', 255)->nullable();
-            $table->timestamp('occurred_at');
+            $table->dateTime('occurred_at');
 
-            $table->index(['student_guardian_id', 'occurred_at']);
-            $table->index(['school_id', 'student_guardian_id']);
+            $table->index(['student_guardian_id', 'occurred_at'], 'sg_history_guardian_occurred_index');
+            $table->index(['school_id', 'student_guardian_id'], 'sg_history_school_guardian_index');
         });
     }
 

@@ -131,14 +131,19 @@ class User extends Authenticatable implements FilamentUser, HasName
             return false;
         }
 
+        // The platform administrator is a central user: it may only use the
+        // central panel and must never enter a school (tenant) panel.
         if ($this->hasRole('super_admin')) {
-            return true;
+            return $panel->getId() === 'super-admin';
+        }
+
+        // The central panel is reserved for platform administrators.
+        if ($panel->getId() === 'super-admin') {
+            return false;
         }
 
         $panelRoles = match ($panel->getId()) {
-            'super-admin' => ['super_admin'],
-            'admin' => ['school_admin'],
-            'school-admin' => ['school_admin'],
+            'admin', 'school-admin' => ['school_admin'],
             'director' => ['director'],
             'teacher' => ['teacher'],
             'student' => ['student'],
@@ -148,16 +153,23 @@ class User extends Authenticatable implements FilamentUser, HasName
             default => [],
         };
 
-        if (empty($panelRoles)) {
+        if (empty($panelRoles) || ! $this->hasAnyRole($panelRoles)) {
             return false;
         }
 
-        $hasRole = $this->hasAnyRole($panelRoles);
+        // School panels require a valid, active school relationship. A missing,
+        // deleted or non-active school must never grant panel access.
+        return $this->hasActiveSchool();
+    }
 
-        if (! $hasRole) {
+    public function hasActiveSchool(): bool
+    {
+        $school = $this->school;
+
+        if (! $school instanceof School) {
             return false;
         }
 
-        return $this->school_id !== null;
+        return $school->isActive();
     }
 }

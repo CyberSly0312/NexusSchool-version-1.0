@@ -7,6 +7,7 @@ namespace App\Filament\Resources;
 use App\Domains\Campus\Enums\CampusStatus;
 use App\Filament\Resources\CampusResource\Pages;
 use App\Models\Campus;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -131,11 +132,11 @@ class CampusResource extends Resource
                     ->options(CampusStatus::class),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Actions\DeleteBulkAction::make(),
             ]);
     }
 

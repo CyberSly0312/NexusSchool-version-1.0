@@ -21,7 +21,7 @@ return new class () extends Migration {
             $table->string('member', 255)->nullable();
             $table->string('topic', 255)->default('Général');
             $table->text('summary');
-            $table->timestamp('noted_at');
+            $table->dateTime('noted_at');
 
             $table->unsignedBigInteger('recorded_by')->nullable();
 

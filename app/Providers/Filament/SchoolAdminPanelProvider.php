@@ -151,12 +151,12 @@ class SchoolAdminPanelProvider extends PanelProvider
                 \App\Domains\Academic\Presentation\Filament\Widgets\CalendarOverviewWidget::class,
             ])
             ->middleware([
-                \App\Http\Middleware\InitializeTenancyForPanel::class,
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
                 \Filament\Http\Middleware\AuthenticateSession::class,
                 ShareErrorsFromSession::class,
+                \App\Http\Middleware\InitializeTenancyForPanel::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 \Filament\Http\Middleware\DisableBladeIconComponents::class,

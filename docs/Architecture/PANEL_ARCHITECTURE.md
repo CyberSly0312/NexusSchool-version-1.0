@@ -19,11 +19,31 @@ NexusSchool utilise **8 panels Filament** pour séparer les responsabilités sel
 
 ## Isolation des données
 
-### Architecture Database-per-Tenant
+### Schéma partagé + discriminateur `school_id`
 
-- Chaque école (tenant) a sa propre base de données nommée `tenant{id}`
-- Le middleware `InitializeTenancyForPanel` initialise le contexte tenant via la session
-- Toutes les requêtes Eloquent des modèles tenant sont automatiquement isolées
+- Les écoles (tenant) partagent le même schéma ; chaque table tenant porte une
+  colonne `school_id` (voir `App\Traits\HasSchoolId` et `App\Traits\ScopedByTenant`)
+- La base par tenant (`tenant{id}`) de stancl n'est pas utilisée : les
+  bootstrappers de base de données sont désactivés (`config/tenancy.php`)
+- Toutes les requêtes Eloquent des modèles tenant sont isolées via `ScopedByTenant`
+
+### Résolution du tenant par le host (Phase 2)
+
+Le host de la requête est **autoritaire** pour les panels école. Le middleware
+`InitializeTenancyForPanel` résout l'école depuis la table `domains`
+(`domain = host`), en excluant les écoles supprimées, puis n'initialise le
+contexte tenant que si l'école est `Active`.
+
+| Situation | Réponse |
+|-----------|---------|
+| Host dans `central_domains` | `404` |
+| Host non enregistré | `404` |
+| École supprimée (soft delete) | `404` |
+| École non `Active` (pending/inactive/suspended) | `403` |
+| Utilisateur authentifié d'une autre école | `403` |
+| Invité sur un host école valide | page de connexion |
+
+Il n'y a **aucun repli** sur l'école de l'utilisateur authentifié : le host décide.
 
 ### Défense en profondeur
 

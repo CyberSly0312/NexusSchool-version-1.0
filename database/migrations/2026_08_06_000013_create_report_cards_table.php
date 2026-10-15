@@ -43,7 +43,7 @@ return new class () extends Migration {
                 'report_cards_scope_unique',
             );
             $table->index(['school_id', 'status']);
-            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id']);
+            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id'], 'report_cards_school_year_term_index');
         });
     }
 

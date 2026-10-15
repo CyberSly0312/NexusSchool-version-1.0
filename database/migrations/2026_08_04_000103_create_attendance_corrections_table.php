@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->unsignedBigInteger('authorized_by')->nullable();
             $table->timestamp('authorized_at')->nullable();
 
-            $table->timestamp('corrected_at');
+            $table->dateTime('corrected_at');
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

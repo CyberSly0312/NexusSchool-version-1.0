@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Guardian\Presentation\Filament\Resources\GuardianResource\RelationManagers;
 
+use Filament\Actions;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -31,7 +32,7 @@ class StudentsRelationManager extends RelationManager
                 Tables\Filters\TrashedFilter::make()->label('Archivés'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Actions\EditAction::make(),
             ]);
     }
 }

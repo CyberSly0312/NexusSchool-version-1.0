@@ -23,7 +23,7 @@ class SubjectResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
-            'school_id' => (string) Str::ulid(),
+            'school_id' => makeTenant(),
         ]);
 
         
@@ -53,17 +53,7 @@ $this->actingAs($this->admin);
 
     public function test_can_render_edit_subject_page(): void
     {
-        $schoolId = 'test-school-'.uniqid();
-        DB::table('tenants')->insert([
-            'id' => $schoolId,
-            'uuid' => Str::ulid(),
-            'name' => 'Test School',
-            'slug' => 'test-school-'.uniqid(),
-            'database' => 'school_test',
-            'status' => 'active',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $schoolId = $this->admin->school_id;
 
         $subject = Subject::factory()
             ->forSchool($schoolId)

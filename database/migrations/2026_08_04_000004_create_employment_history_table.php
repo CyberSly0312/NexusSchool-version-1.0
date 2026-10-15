@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->json('payload')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('user_type', 255)->nullable();
-            $table->timestamp('occurred_at');
+            $table->dateTime('occurred_at');
 
             // ── Constraints ───────────────────────────────────────────
             $table->foreign('school_id')->references('id')->on('tenants')->cascadeOnDelete();

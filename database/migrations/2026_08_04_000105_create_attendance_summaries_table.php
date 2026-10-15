@@ -35,7 +35,7 @@ return new class () extends Migration {
             $table->float('trend')->default(0);
             $table->json('breakdown')->nullable();
 
-            $table->timestamp('calculated_at');
+            $table->dateTime('calculated_at');
             $table->unsignedBigInteger('calculated_by')->nullable();
 
             $table->timestamps();
@@ -45,7 +45,7 @@ return new class () extends Migration {
             $table->foreign('enrollment_id')->references('id')->on('enrollments')->cascadeOnDelete();
             $table->foreign('calculated_by')->references('id')->on('users')->nullOnDelete();
             $table->unique(['enrollment_id', 'period_type', 'period_start', 'period_end'], 'attendance_summaries_period_unique');
-            $table->index(['school_id', 'period_type', 'period_start', 'period_end']);
+            $table->index(['school_id', 'period_type', 'period_start', 'period_end'], 'attendance_summaries_school_period_index');
         });
     }
 

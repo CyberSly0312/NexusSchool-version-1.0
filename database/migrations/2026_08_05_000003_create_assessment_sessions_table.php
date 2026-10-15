@@ -29,7 +29,6 @@ return new class () extends Migration {
             $table->softDeletes();
 
             $table->foreign('school_id')->references('id')->on('tenants')->cascadeOnDelete();
-            $table->foreign('assessment_id')->references('id')->on('assessments')->cascadeOnDelete();
             $table->foreign('room_id')->references('id')->on('classrooms')->nullOnDelete();
             $table->foreign('staff_id')->references('id')->on('staffs')->nullOnDelete();
 

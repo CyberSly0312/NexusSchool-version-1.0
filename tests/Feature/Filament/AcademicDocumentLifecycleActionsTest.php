@@ -63,6 +63,8 @@ class AcademicDocumentLifecycleActionsTest extends TestCase
         Filament::setServingStatus();
         Filament::setCurrentPanel('school-admin');
 
+        \Stancl\Tenancy\Facades\Tenancy::initialize(\App\Domains\School\Models\School::find($this->schoolId));
+
         $this->app->instance(DocumentRendererContract::class, new FakeRenderer());
 
         $this->context = makeCommunicationContext($this->schoolId, [

@@ -30,7 +30,7 @@ return new class () extends Migration {
             $table->foreign('academic_document_id')->references('id')->on('academic_documents')->cascadeOnDelete();
             $table->foreign('created_by')->references('id')->on('users')->nullOnDelete();
 
-            $table->unique(['academic_document_id', 'version_number']);
+            $table->unique(['academic_document_id', 'version_number'], 'academic_document_versions_doc_version_unique');
             $table->index(['school_id', 'academic_document_id']);
             $table->index(['school_id', 'is_published']);
         });

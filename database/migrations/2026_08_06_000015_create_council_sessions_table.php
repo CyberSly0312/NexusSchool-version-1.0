@@ -40,7 +40,7 @@ return new class () extends Migration {
 
             $table->unique(['school_id', 'reference'], 'council_sessions_reference_unique');
             $table->index(['school_id', 'status']);
-            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id', 'school_class_id']);
+            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id', 'school_class_id'], 'council_sessions_school_year_term_class_index');
         });
     }
 

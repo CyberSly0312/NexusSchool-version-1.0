@@ -21,6 +21,7 @@ use Illuminate\Support\Str;
 use Stancl\Tenancy\Contracts\TenantWithDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDomains;
+use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant;
 
 class School extends Tenant implements TenantWithDatabase
@@ -125,6 +126,14 @@ class School extends Tenant implements TenantWithDatabase
     | Relationships
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return HasMany<Domain, $this>
+     */
+    public function domains(): HasMany
+    {
+        return $this->hasMany(Domain::class, 'tenant_id');
+    }
 
     public function academicYears(): HasMany
     {

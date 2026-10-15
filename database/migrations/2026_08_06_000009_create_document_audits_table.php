@@ -29,7 +29,6 @@ return new class () extends Migration {
             $table->foreign('academic_document_id')->references('id')->on('academic_documents')->cascadeOnDelete();
             $table->foreign('document_version_id')->references('id')->on('academic_document_versions')->cascadeOnDelete();
             $table->foreign('actor_user_id')->references('id')->on('users')->nullOnDelete();
-            $table->foreign('publication_record_id')->references('id')->on('publication_records')->nullOnDelete();
 
             $table->index(['school_id', 'academic_document_id']);
             $table->index(['school_id', 'action']);

@@ -42,6 +42,8 @@ class VerificationIdentityResourceTest extends TestCase
 
         Filament::setServingStatus();
         Filament::setCurrentPanel('school-admin');
+
+        \Stancl\Tenancy\Facades\Tenancy::initialize(\App\Domains\School\Models\School::find($this->schoolId));
     }
 
     private function makePublishedIdentity(): VerificationIdentity

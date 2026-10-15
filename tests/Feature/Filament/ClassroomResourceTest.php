@@ -21,7 +21,7 @@ class ClassroomResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
-            'school_id' => (string) Str::ulid(),
+            'school_id' => makeTenant(),
         ]);
 
         
@@ -51,7 +51,7 @@ $this->actingAs($this->admin);
 
     public function test_can_render_edit_classroom_page(): void
     {
-        $classroom = Classroom::factory()->create();
+        $classroom = Classroom::factory()->create(['school_id' => $this->admin->school_id]);
 
         $this->actingAs($this->admin)
             ->get('/school-admin/classrooms/'.$classroom->id.'/edit')

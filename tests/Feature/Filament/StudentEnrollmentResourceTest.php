@@ -40,9 +40,11 @@ class StudentEnrollmentResourceTest extends TestCase
     {
         parent::setUp();
 
+        $this->schoolId = makeTenant();
+
         $this->admin = User::factory()->create([
             'status' => 'active',
-            'school_id' => (string) Str::ulid(),
+            'school_id' => $this->schoolId,
         ]);
 
         
@@ -55,18 +57,6 @@ $this->actingAs($this->admin);
         Filament::setServingStatus();
         Filament::setCurrentPanel('school-admin');
 
-        $this->schoolId = 'test-school-'.uniqid();
-        DB::table('tenants')->insert([
-            'id' => $this->schoolId,
-            'uuid' => Str::ulid(),
-            'name' => 'Test School',
-            'slug' => 'test-school-'.uniqid(),
-            'database' => 'school_test',
-            'status' => 'active',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
         $this->student = Student::factory()
             ->forSchool($this->schoolId)
             ->create(['status' => 'active']);
@@ -78,10 +68,10 @@ $this->actingAs($this->admin);
             ->create(['school_id' => $this->schoolId]);
 
         $this->gradeLevel = GradeLevel::factory()
-            ->create(['program_id' => $this->program->id]);
+            ->create(['program_id' => $this->program->id, 'school_id' => $this->schoolId]);
 
         $this->section = Section::factory()
-            ->create(['grade_level_id' => $this->gradeLevel->id]);
+            ->create(['grade_level_id' => $this->gradeLevel->id, 'school_id' => $this->schoolId]);
 
         $this->academicClass = AcademicClass::factory()
             ->create([
@@ -89,6 +79,7 @@ $this->actingAs($this->admin);
                 'program_id' => $this->program->id,
                 'grade_level_id' => $this->gradeLevel->id,
                 'section_id' => $this->section->id,
+                'school_id' => $this->schoolId,
             ]);
     }
 

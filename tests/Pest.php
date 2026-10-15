@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -46,10 +47,18 @@ uses(TestCase::class, RefreshDatabase::class)
 /**
  * Insert a tenant row and return its id. Engine entities reference school_id
  * through the tenants table, so a tenant must exist before records are created.
+ *
+ * A matching row is registered in the stancl `domains` table (the canonical
+ * hostname registry) so the tenant is reachable through domain-based routing.
+ * The first tenant created in a test also becomes the default request host, so
+ * path-only panel requests (e.g. `$this->get('/school-admin')`) resolve to the
+ * acting tenant without per-test wiring. Use {@see useTenantHost()} to switch
+ * the default host explicitly (e.g. cross-tenant tests).
  */
-function makeTenant(string $name = 'Test School'): string
+function makeTenant(string $name = 'Test School', string $status = 'active', ?string $domain = null): string
 {
     $id = 'test-'.Str::ulid()->toBase32();
+    $domain ??= Str::lower($id).'.nexusschool.test';
 
     DB::table('tenants')->insert([
         'id' => $id,
@@ -57,12 +66,41 @@ function makeTenant(string $name = 'Test School'): string
         'name' => $name,
         'slug' => Str::slug($name).'-'.Str::lower(Str::random(4)),
         'database' => 'school_'.Str::slug($name).'_'.Str::random(4),
-        'status' => 'active',
+        'status' => $status,
         'created_at' => now(),
         'updated_at' => now(),
     ]);
 
+    DB::table('domains')->insert([
+        'domain' => $domain,
+        'tenant_id' => $id,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    if (! app()->bound('testing.default_tenant_host')) {
+        useTenantHost($id);
+        app()->instance('testing.default_tenant_host', $domain);
+    }
+
     return $id;
+}
+
+/**
+ * Force generated URLs (and therefore path-only test requests) onto the
+ * registered domain host of the given tenant.
+ */
+function useTenantHost(string $schoolId): void
+{
+    URL::forceRootUrl('http://'.tenantHost($schoolId));
+}
+
+/**
+ * The registered domain host of a tenant (empty string when none).
+ */
+function tenantHost(string $schoolId): string
+{
+    return (string) DB::table('domains')->where('tenant_id', $schoolId)->value('domain');
 }
 
 /**

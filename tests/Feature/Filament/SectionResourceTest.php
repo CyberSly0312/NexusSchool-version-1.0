@@ -24,7 +24,7 @@ class SectionResourceTest extends TestCase
 
         $this->admin = User::factory()->create([
             'status' => 'active',
-            'school_id' => (string) Str::ulid(),
+            'school_id' => makeTenant(),
         ]);
 
         
@@ -54,17 +54,7 @@ $this->actingAs($this->admin);
 
     public function test_can_render_edit_section_page(): void
     {
-        $schoolId = 'test-school-'.uniqid();
-        DB::table('tenants')->insert([
-            'id' => $schoolId,
-            'uuid' => Str::ulid(),
-            'name' => 'Test School',
-            'slug' => 'test-school-'.uniqid(),
-            'database' => 'school_test',
-            'status' => 'active',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $schoolId = $this->admin->school_id;
 
         $program = Program::factory()
             ->forSchool($schoolId)
@@ -73,11 +63,11 @@ $this->actingAs($this->admin);
         $gradeLevel = GradeLevel::factory()
             ->forProgram($program->id)
             ->withOrder(1)
-            ->create();
+            ->create(['school_id' => $schoolId]);
 
         $section = Section::factory()
             ->forGradeLevel($gradeLevel->id)
-            ->create();
+            ->create(['school_id' => $schoolId]);
 
         $this->actingAs($this->admin)
             ->get('/school-admin/sections/'.$section->id.'/edit')

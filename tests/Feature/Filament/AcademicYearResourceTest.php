@@ -9,8 +9,6 @@ use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -25,18 +23,7 @@ class AcademicYearResourceTest extends TestCase
     {
         parent::setUp();
 
-        $this->schoolId = (string) Str::ulid();
-        DB::table('tenants')->insert([
-            'id' => $this->schoolId,
-            'uuid' => Str::ulid(),
-            'name' => 'Test School',
-            'slug' => 'test-school',
-            'database' => 'test-school-db',
-            'domain' => 'test.nexus.school',
-            'status' => 'active',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $this->schoolId = makeTenant('Test School');
 
         $this->admin = User::factory()->create([
             'status' => 'active',
@@ -52,6 +39,8 @@ $this->actingAs($this->admin);
 
         Filament::setServingStatus();
         Filament::setCurrentPanel('school-admin');
+
+        \Stancl\Tenancy\Facades\Tenancy::initialize(\App\Domains\School\Models\School::find($this->schoolId));
     }
 
     public function test_can_render_academic_year_list_page(): void

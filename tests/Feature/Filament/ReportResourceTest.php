@@ -20,7 +20,7 @@ class ReportResourceTest extends TestCase
     {
         parent::setUp();
 
-        $this->admin = User::factory()->create(['status' => 'active', 'school_id' => (string) Str::ulid()]);
+        $this->admin = User::factory()->create(['status' => 'active', 'school_id' => makeTenant()]);
         
         $this->seed(\Database\Seeders\PermissionSeeder::class);
         $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'school_admin', 'guard_name' => 'web']);
@@ -43,12 +43,7 @@ $this->actingAs($this->admin);
 
     public function test_can_render_edit_report_page(): void
     {
-        $schoolId = 'test-school-'.uniqid();
-        DB::table('tenants')->insert([
-            'id' => $schoolId, 'uuid' => Str::ulid(), 'name' => 'Test School',
-            'slug' => 'test-school-'.uniqid(), 'database' => 'school_test',
-            'status' => 'active', 'created_at' => now(), 'updated_at' => now(),
-        ]);
+        $schoolId = $this->admin->school_id;
 
         $report = Report::factory()->forSchool($schoolId)->create();
 
@@ -59,12 +54,7 @@ $this->actingAs($this->admin);
 
     public function test_can_render_view_report_page(): void
     {
-        $schoolId = 'test-school-'.uniqid();
-        DB::table('tenants')->insert([
-            'id' => $schoolId, 'uuid' => Str::ulid(), 'name' => 'Test School',
-            'slug' => 'test-school-'.uniqid(), 'database' => 'school_test',
-            'status' => 'active', 'created_at' => now(), 'updated_at' => now(),
-        ]);
+        $schoolId = $this->admin->school_id;
 
         $report = Report::factory()->forSchool($schoolId)->create();
 

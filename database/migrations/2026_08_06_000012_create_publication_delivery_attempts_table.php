@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->foreign('school_id')->references('id')->on('tenants')->cascadeOnDelete();
             $table->foreign('publication_record_id')->references('id')->on('publication_records')->cascadeOnDelete();
 
-            $table->index(['school_id', 'publication_record_id', 'status']);
+            $table->index(['school_id', 'publication_record_id', 'status'], 'pda_school_record_status_index');
         });
     }
 

@@ -57,7 +57,7 @@ return new class () extends Migration {
 
             $table->index(['school_id', 'status']);
             $table->index(['school_id', 'document_type']);
-            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id']);
+            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id'], 'academic_documents_school_year_term_index');
             $table->index(['school_id', 'student_id']);
             $table->index(['school_id', 'staff_id']);
         });

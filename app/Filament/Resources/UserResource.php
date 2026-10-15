@@ -192,6 +192,10 @@ class UserResource extends Resource
             $tenantId = tenant()?->id;
             if ($tenantId) {
                 $query->where('school_id', $tenantId);
+            } else {
+                // Fail closed: never expose every school's users when the
+                // school-admin panel runs without an initialized tenant.
+                $query->whereRaw('1 = 0');
             }
         }
 

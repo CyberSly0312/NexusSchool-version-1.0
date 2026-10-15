@@ -56,7 +56,7 @@ return new class () extends Migration {
             $table->foreign('created_by')->references('id')->on('users')->nullOnDelete();
 
             $table->index(['school_id', 'status']);
-            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id']);
+            $table->index(['school_id', 'academic_calendar_year_id', 'academic_calendar_term_id'], 'assessments_school_year_term_index');
             $table->index(['school_id', 'academic_subject_id']);
             $table->index(['school_id', 'school_class_id']);
             $table->index(['school_id', 'staff_id']);

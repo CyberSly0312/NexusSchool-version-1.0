@@ -42,7 +42,7 @@ return new class () extends Migration {
             $table->unique(['attendance_session_id', 'enrollment_id'], 'attendance_records_session_enrollment_unique');
             $table->index('status');
             $table->index(['school_id', 'attendance_session_id']);
-            $table->index(['school_id', 'enrollment_id', 'recorded_at']);
+            $table->index(['school_id', 'enrollment_id', 'recorded_at'], 'attendance_records_school_enrollment_recorded_index');
         });
     }
 

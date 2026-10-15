@@ -37,14 +37,14 @@ return new class () extends Migration {
 
             $table->text('notes')->nullable()->after('relationship_end_date');
 
-            $table->unique(['school_id', 'guardian_id', 'student_id', 'deleted_at']);
+            $table->unique(['school_id', 'guardian_id', 'student_id', 'deleted_at'], 'student_guardians_school_guardian_student_deleted_unique');
         });
     }
 
     public function down(): void
     {
         Schema::table('student_guardians', function (Blueprint $table) {
-            $table->dropUnique(['school_id', 'guardian_id', 'student_id', 'deleted_at']);
+            $table->dropUnique('student_guardians_school_guardian_student_deleted_unique');
             $table->dropConstrainedForeignId('relationship_type_id');
             $table->dropColumn([
                 'is_emergency_contact',

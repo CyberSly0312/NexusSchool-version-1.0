@@ -3,10 +3,6 @@
 declare(strict_types=1);
 
 use App\Domains\School\Models\School;
-use Stancl\Tenancy\Bootstrappers\CacheTenancyBootstrapper;
-use Stancl\Tenancy\Bootstrappers\DatabaseTenancyBootstrapper;
-use Stancl\Tenancy\Bootstrappers\FilesystemTenancyBootstrapper;
-use Stancl\Tenancy\Bootstrappers\QueueTenancyBootstrapper;
 use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\TenantDatabaseManagers\MySQLDatabaseManager;
 use Stancl\Tenancy\TenantDatabaseManagers\PostgreSQLDatabaseManager;
@@ -24,10 +20,13 @@ return [
      *
      * Only relevant if you're using the domain or subdomain identification middleware.
      */
-    'central_domains' => [
-        '127.0.0.1',
-        'localhost',
-    ],
+    'central_domains' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env(
+            'CENTRAL_DOMAINS',
+            'nexusschool.com,www.nexusschool.com,nexusschool.test,www.nexusschool.test,127.0.0.1,localhost',
+        )),
+    ))),
 
     /**
      * Tenancy bootstrappers are executed when tenancy is initialized.
@@ -35,12 +34,24 @@ return [
      *
      * To configure their behavior, see the config keys below.
      */
+    /**
+     * This application uses a single shared schema with an explicit
+     * `school_id` discriminator on every tenant-owned table (see
+     * `App\Traits\HasSchoolId` and `App\Traits\ScopedByTenant`) rather than
+     * stancl's database-per-tenant model. The tenant database migrations
+     * directory (`database/migrations/tenant`) is empty, so enabling the
+     * DatabaseTenancyBootstrapper would switch the connection to an
+     * uninitialized tenant database and crash every tenant request.
+     *
+     * Initializing tenancy therefore only establishes the current tenant
+     * context (so `tenant()` resolves to the School), without switching the
+     * database, cache or filesystem.
+     */
     'bootstrappers' => [
-        DatabaseTenancyBootstrapper::class,
-        CacheTenancyBootstrapper::class,
-        FilesystemTenancyBootstrapper::class,
-        QueueTenancyBootstrapper::class,
-        // Stancl\Tenancy\Bootstrappers\RedisTenancyBootstrapper::class, // Note: phpredis is needed
+        // DatabaseTenancyBootstrapper::class,
+        // CacheTenancyBootstrapper::class,
+        // FilesystemTenancyBootstrapper::class,
+        // QueueTenancyBootstrapper::class,
     ],
 
     /**

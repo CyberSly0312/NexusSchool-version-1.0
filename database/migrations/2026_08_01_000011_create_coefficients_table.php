@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['school_id', 'school_class_id', 'academic_subject_id']);
+            $table->unique(['school_id', 'school_class_id', 'academic_subject_id'], 'coefficients_school_class_subject_unique');
             $table->index(['school_id', 'academic_subject_id']);
         });
     }

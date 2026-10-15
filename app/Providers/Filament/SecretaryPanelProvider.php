@@ -31,12 +31,12 @@ class SecretaryPanelProvider extends PanelProvider
                 \App\Filament\Secretary\Pages\SecretaryDashboard::class,
             ])
             ->middleware([
-                \App\Http\Middleware\InitializeTenancyForPanel::class,
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
                 \Filament\Http\Middleware\AuthenticateSession::class,
                 ShareErrorsFromSession::class,
+                \App\Http\Middleware\InitializeTenancyForPanel::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 \Filament\Http\Middleware\DisableBladeIconComponents::class,

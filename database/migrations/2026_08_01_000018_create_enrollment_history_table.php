@@ -20,7 +20,7 @@ return new class () extends Migration {
             $table->json('payload')->nullable();
             $table->string('user_id')->nullable();
             $table->string('user_type')->nullable();
-            $table->timestamp('occurred_at');
+            $table->dateTime('occurred_at');
             $table->timestamps();
             $table->softDeletes();
 

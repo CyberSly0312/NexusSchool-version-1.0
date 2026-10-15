@@ -23,7 +23,7 @@ return new class () extends Migration {
             $table->float('observed_value')->nullable();
             $table->json('payload')->nullable();
 
-            $table->timestamp('detected_at');
+            $table->dateTime('detected_at');
             $table->string('status', 20)->default('open');
             $table->unsignedBigInteger('acknowledged_by')->nullable();
             $table->timestamp('acknowledged_at')->nullable();
