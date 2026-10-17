@@ -337,7 +337,6 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ php artisan ab
   Panel Components .............................. NOT CACHED  
   Version .......................................... v5.10.2  
   Views ...................................... NOT PUBLISHED  
-
   Livewire .................................................  
   Livewire .......................................... v4.4.7  
 
