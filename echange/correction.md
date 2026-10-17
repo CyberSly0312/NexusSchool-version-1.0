@@ -480,4 +480,38 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ test -w bootst
 bootstrap/cache NON modifiable par vboxuser
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ test -r vendor/autoload.php && echo "autoload Composer lisible" || echo "autoload Composer NON lisible"
 autoload Composer lisible
-vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$
+
+
+
+
+
+
+
+cd /var/www/html/NexusSchool-version-1.0-main
+
+echo "=== 1. TESTS D'ECRITURE ==="
+test -w storage/logs && echo "vboxuser peut ecrire dans storage/logs" || echo "vboxuser ne peut PAS ecrire dans storage/logs"
+test -w bootstrap/cache && echo "vboxuser peut ecrire dans bootstrap/cache" || echo "vboxuser ne peut PAS ecrire dans bootstrap/cache"
+test -w . && echo "vboxuser peut modifier le dossier projet" || echo "vboxuser ne peut PAS modifier le dossier projet"
+
+echo
+echo "=== 2. CONFIGURATION APACHE ==="
+sudo apache2ctl configtest
+
+echo
+echo "=== 3. LIEN SYMBOLIQUE STORAGE ==="
+ls -ld public/storage 2>&1
+
+echo
+echo "=== 4. CONSTRUCTION FRONTEND ==="
+ls -ld public/build 2>&1
+
+echo
+echo "=== 5. DERNIERES ERREURS LARAVEL ==="
+sudo tail -n 60 storage/logs/laravel.log
+
+echo
+echo "=== 6. DERNIERES ERREURS APACHE ==="
+sudo tail -n 40 /var/log/apache2/nexusschool-error.log
+
