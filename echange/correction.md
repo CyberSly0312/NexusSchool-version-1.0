@@ -204,49 +204,7 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo tail -n 8
 #28 /var/www/html/NexusSchool-version-1.0-main/artisan(16): Illuminate\\Foundation\\Application->handleCommand()
 #29 {main}
 
-[previous exception] [object] (PDOException(code: 1698): SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' at /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:67)
-[stacktrace]
-#0 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(67): PDO::connect()
-#1 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(44): Illuminate\\Database\\Connectors\\Connector->createPdoConnection()
-#2 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connectors/MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection()
-#3 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php(186): Illuminate\\Database\\Connectors\\MySqlConnector->connect()
-#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->{closure:Illuminate\\Database\\Connectors\\ConnectionFactory::createPdoResolverWithHosts():181}()
-#5 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1257): call_user_func()
-#6 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(1295): Illuminate\\Database\\Connection->getPdo()
-#7 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(525): Illuminate\\Database\\Connection->getReadPdo()
-#8 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(420): Illuminate\\Database\\Connection->getPdoForSelect()
-#9 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(827): Illuminate\\Database\\Connection->{closure:Illuminate\\Database\\Connection::select():411}()
-#10 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(794): Illuminate\\Database\\Connection->runQueryCallback()
-#11 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(411): Illuminate\\Database\\Connection->run()
-#12 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(357): Illuminate\\Database\\Connection->select()
-#13 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Connection.php(374): Illuminate\\Database\\Connection->selectOne()
-#14 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(176): Illuminate\\Database\\Connection->scalar()
-#15 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Migrations/DatabaseMigrationRepository.php(185): Illuminate\\Database\\Schema\\Builder->hasTable()
-#16 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(758): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
-#17 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(164): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
-#18 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Support/helpers.php(328): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->{closure:Illuminate\\Database\\Console\\Migrations\\MigrateCommand::repositoryExists():164}()
-#19 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(164): retry()
-#20 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(140): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->repositoryExists()
-#21 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(110): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
-#22 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(671): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->{closure:Illuminate\\Database\\Console\\Migrations\\MigrateCommand::runMigrations():109}()
-#23 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(109): Illuminate\\Database\\Migrations\\Migrator->usingConnection()
-#24 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(88): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
-#25 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
-#26 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
-#27 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure()
-#28 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
-#29 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(799): Illuminate\\Container\\BoundMethod::call()
-#30 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Console/Command.php(211): Illuminate\\Container\\Container->call()
-#31 /var/www/html/NexusSchool-version-1.0-main/vendor/symfony/console/Command/Command.php(341): Illuminate\\Console\\Command->execute()
-#32 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
-#33 /var/www/html/NexusSchool-version-1.0-main/vendor/symfony/console/Application.php(1125): Illuminate\\Console\\Command->run()
-#34 /var/www/html/NexusSchool-version-1.0-main/vendor/symfony/console/Application.php(357): Symfony\\Component\\Console\\Application->doRunCommand()
-#35 /var/www/html/NexusSchool-version-1.0-main/vendor/symfony/console/Application.php(196): Symfony\\Component\\Console\\Application->doRun()
-#36 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony\\Component\\Console\\Application->run()
-#37 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle()
-#38 /var/www/html/NexusSchool-version-1.0-main/artisan(16): Illuminate\\Foundation\\Application->handleCommand()
-#39 {main}
-"} 
+
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ ls -ld storage storage/logs bootstrap/cache
 drwxr-xr-x 2 www-data root 4096 Oct 17 00:15 bootstrap/cache
 drwxr-xr-x 5 www-data root 4096 Oct 16 16:12 storage
