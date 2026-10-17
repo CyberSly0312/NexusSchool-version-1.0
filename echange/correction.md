@@ -347,3 +347,9 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ php artisan ab
 
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
 
+
+
+
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R u+rwX,g+rwX storage bootstrap/cache
+
