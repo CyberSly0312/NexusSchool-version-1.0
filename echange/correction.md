@@ -92,3 +92,20 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo ss -lntup
 udp   UNCONN 0      0                              100.123.173.99:53         0.0.0.0:*    users:(("dnsmasq",pid=855,fd=7))                                                                                                                                        
 tcp   LISTEN 0      32                             100.123.173.99:53         0.0.0.0:*    users:(("dnsmasq",pid=855,fd=8))                                                                                                                                        
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+
+
+
+cd /var/www/html/NexusSchool-version-1.0-main
+
+echo "=== ASSETS PUBLICS ==="
+ls -la public
+ls -la public/build 2>/dev/null
+
+echo "=== DEPENDANCES COMPOSER ==="
+test -f vendor/autoload.php && echo "vendor présent" || echo "vendor absent"
+
+echo "=== FICHIERS FRONTEND ==="
+ls -la package.json package-lock.json vite.config.* 2>/dev/null
+
+echo "=== ROUTES FILAMENT ==="
+php artisan route:list --path=super-admin
