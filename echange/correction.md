@@ -352,3 +352,63 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$
 sudo chown -R www-data:www-data storage bootstrap/cache
 sudo chmod -R u+rwX,g+rwX storage bootstrap/cache
 
+
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ ls -ld storage storage/logs bootstrap/cache
+drwxr-xr-x 2 www-data root 4096 Oct 17 00:15 bootstrap/cache
+drwxr-xr-x 5 www-data root 4096 Oct 16 16:12 storage
+drwxr-xr-x 2 www-data root 4096 Oct 17 01:44 storage/logs
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ ls -l storage/logs/laravel.log 2>/dev/null
+-rw-r--r-- 1 root root 13257 Oct 17 01:44 storage/logs/laravel.log
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+echo "=== 4. ETAT DE LA CONFIGURATION LARAVEL ==="
+=== 4. ETAT DE LA CONFIGURATION LARAVEL ===
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ php artisan about
+
+  Environment ..............................................  
+  Application Name ............................ Nexus School  
+  Laravel Version .................................. 12.70.0  
+  PHP Version ....................................... 8.4.26  
+  Composer Version ................................... 2.8.8  
+  Environment ................................... production  
+  Debug Mode ........................................... OFF  
+  URL ....................................... 100.123.173.99  
+  Maintenance Mode ..................................... OFF  
+  Timezone .............................. Africa/Ouagadougou  
+  Locale ................................................ en  
+
+  Cache ....................................................  
+  Config ........................................ NOT CACHED  
+  Events ........................................ NOT CACHED  
+  Routes ........................................ NOT CACHED  
+  Views ............................................. CACHED  
+
+  Drivers ..................................................  
+  Broadcasting ......................................... log  
+  Cache ........................................... database  
+  Database ........................................... mysql  
+  Logs ...................................... stack / single  
+  Mail ................................................. log  
+  Queue ........................................... database  
+  Session ......................................... database  
+
+  Storage ..................................................  
+  public/storage ................................ NOT LINKED  
+
+  Filament .................................................  
+  Blade Icons ................................... NOT CACHED  
+  Packages  filament, forms, notifications, support, tables, actions, infolists, schemas, widgets  
+  Panel Components .............................. NOT CACHED  
+  Version .......................................... v5.10.2  
+  Views ...................................... NOT PUBLISHED  
+
+  Livewire .................................................  
+  Livewire .......................................... v4.4.7  
+
+  Spatie Permissions .......................................  
+  Features Enabled ................................. Default  
+  Version ........................................... 6.25.0  
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+
+
