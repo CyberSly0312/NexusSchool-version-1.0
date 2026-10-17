@@ -525,3 +525,32 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo chmod -R 
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo systemctl reload apache2
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
 
+
+
+
+
+
+cd /var/www/html/NexusSchool-version-1.0-main
+
+echo "=== 1. IDENTITE ET GROUPES ==="
+id
+
+echo "=== 2. DOSSIER DU PROJET ==="
+ls -ld /var/www/html
+ls -ld .
+namei -l "$PWD"
+
+echo "=== 3. PROPRIETAIRES DES DOSSIERS IMPORTANTS ==="
+ls -ld app bootstrap bootstrap/cache config public resources routes storage vendor
+
+echo "=== 4. PERMISSIONS LARAVEL ==="
+find storage bootstrap/cache -maxdepth 2 -printf '%M %u:%g %p\n' | head -n 60
+
+echo "=== 5. FICHIERS CRITIQUES ==="
+ls -l artisan .env composer.json public/index.php
+
+echo "=== 6. TESTS DE DROITS ==="
+test -r .env && echo ".env lisible par vboxuser" || echo ".env NON lisible par vboxuser"
+test -w storage/logs && echo "storage/logs modifiable par vboxuser" || echo "storage/logs NON modifiable par vboxuser"
+test -w bootstrap/cache && echo "bootstrap/cache modifiable par vboxuser" || echo "bootstrap/cache NON modifiable par vboxuser"
+test -r vendor/autoload.php && echo "autoload Composer lisible" || echo "autoload Composer NON lisible"
