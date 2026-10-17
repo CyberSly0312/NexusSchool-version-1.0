@@ -178,3 +178,18 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ php artisan ro
                                          Showing [32] routes
 
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+
+cd /var/www/html/NexusSchool-version-1.0-main
+
+echo "=== 1. ERREURS APACHE ==="
+sudo tail -n 60 /var/log/apache2/nexusschool-error.log
+
+echo "=== 2. ERREURS LARAVEL ==="
+sudo tail -n 80 storage/logs/laravel.log
+
+echo "=== 3. PERMISSIONS ==="
+ls -ld storage storage/logs bootstrap/cache
+ls -l storage/logs/laravel.log 2>/dev/null
+
+echo "=== 4. ETAT DE LA CONFIGURATION LARAVEL ==="
+php artisan about
