@@ -126,3 +126,85 @@ echo
 echo "=== 6. DERNIERES ERREURS APACHE ==="
 sudo tail -n 40 /var/log/apache2/nexusschool-error.log
 
+
+
+
+
+
+
+boxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ test -w bootstrap/cache && echo "vboxuser peut ecrire dans bootstrap/cache" || echo "vboxuser ne peut PAS ecrire dans bootstrap/cache"
+vboxuser ne peut PAS ecrire dans bootstrap/cache
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ test -w . && echo "vboxuser peut modifier le dossier projet" || echo "vboxuser ne peut PAS modifier le dossier projet"
+vboxuser ne peut PAS modifier le dossier projet
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo apache2ctl configtest
+[sudo] password for vboxuser: 
+Syntax OK
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ ls -ld public/storage 2>&1
+ls: cannot access 'public/storage': No such file or directory
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ ls -ld public/build 2>&1
+ls: cannot access 'public/build': No such file or directory
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo tail -n 60 storage/logs/laravel.log
+#15 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Filament\\Http\\Middleware\\SetUpPanel->handle()
+#16 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#17 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\\Pipeline\\Pipeline->then()
+#18 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack()
+#19 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\\Routing\\Router->runRoute()
+#20 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute()
+#21 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch()
+#22 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}()
+#23 /var/www/html/NexusSchool-version-1.0-main/vendor/livewire/livewire/src/Features/SupportDisablingBackButtonCache/DisableBackButtonCacheMiddleware.php(19): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}()
+#24 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Livewire\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware->handle()
+#25 /var/www/html/NexusSchool-version-1.0-main/app/Http/Middleware/ValidateTrustedHost.php(29): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#26 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): App\\Http\\Middleware\\ValidateTrustedHost->handle()
+#27 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#28 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#29 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#30 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#31 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#32 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#33 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#34 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#35 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#36 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#37 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(61): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#38 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#39 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#40 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#41 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#42 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#43 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#44 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle()
+#45 /var/www/html/NexusSchool-version-1.0-main/vendor/filament/notifications/src/Http/Middleware/PublishNotifications.php(16): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#46 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Filament\\Notifications\\Http\\Middleware\\PublishNotifications->handle()
+#47 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}()
+#48 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then()
+#49 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#50 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle()
+#51 /var/www/html/NexusSchool-version-1.0-main/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest()
+#52 {main}
+"} 
+[2026-10-17 19:14:08] production.ERROR: Unsupported cipher or incorrect key length. Supported ciphers are: aes-128-cbc, aes-256-cbc, aes-128-gcm, aes-256-gcm. {"exception":"[object] (RuntimeException(code: 0): Unsupported cipher or incorrect key length. Supported ciphers are: aes-128-cbc, aes-256-cbc, aes-128-gcm, aes-256-gcm. at /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:61)
+[stacktrace]
+#0 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php(32): Illuminate\\Encryption\\Encrypter->__construct()
+#1 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(1115): Illuminate\\Encryption\\EncryptionServiceProvider->{closure:Illuminate\\Encryption\\EncryptionServiceProvider::registerEncrypter():29}()
+#2 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(933): Illuminate\\Container\\Container->build()
+#3 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate\\Container\\Container->resolve()
+#4 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate\\Foundation\\Application->resolve()
+#5 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate\\Container\\Container->make()
+#6 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(1336): Illuminate\\Foundation\\Application->make()
+#7 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(1237): Illuminate\\Container\\Container->resolveClass()
+#8 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(1162): Illuminate\\Container\\Container->resolveDependencies()
+#9 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(933): Illuminate\\Container\\Container->build()
+#10 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate\\Container\\Container->resolve()
+#11 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate\\Foundation\\Application->resolve()
+#12 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate\\Container\\Container->make()
+#13 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(257): Illuminate\\Foundation\\Application->make()
+#14 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(215): Illuminate\\Foundation\\Http\\Kernel->terminateMiddleware()
+#15 /var/www/html/NexusSchool-version-1.0-main/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1222): Illuminate\\Foundation\\Http\\Kernel->terminate()
+#16 /var/www/html/NexusSchool-version-1.0-main/public/index.php(20): Illuminate\\Foundation\\Application->handleRequest()
+#17 {main}
+"} 
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo tail -n 40 /var/log/apache2/nexusschool-error.log
+tail: cannot open '/var/log/apache2/nexusschool-error.log' for reading: No such file or directory
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+
