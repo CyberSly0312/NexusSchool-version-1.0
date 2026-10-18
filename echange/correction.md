@@ -272,3 +272,81 @@ Le résultat attendu est le nom d’un chiffrement pris en charge, puis `true`.
 Si `key:generate` ou l’une de ces commandes renvoie une erreur, arrête-toi et envoie-moi le message exact, sans publier ton `.env` ni ta clé.
 
 Une fois le chiffrement validé, nous traiterons séparément les permissions de `vboxuser` et les ressources frontend absentes (`public/build`).
+
+
+
+
+
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo php artisan config:clear
+[sudo] password for vboxuser: 
+
+   INFO  Configuration cache cleared successfully.  
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ grep -n "'cipher'" config/app.php
+98:    'cipher' => 'AES-256-CBC',
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ grep '^APP_CIPHER=' .env || true
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo php artisan config:clear
+[sudo] password for vboxuser: 
+
+   INFO  Configuration cache cleared successfully.  
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo php artisan key:generate --force
+
+   INFO  Application key set successfully.  
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo php artisan config:clear
+
+   INFO  Configuration cache cleared successfully.  
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo php artisan about
+
+  Environment .................................................  
+  Application Name ............................... Nexus School  
+  Laravel Version ..................................... 12.70.0  
+  PHP Version .......................................... 8.4.26  
+  Composer Version ...................................... 2.8.8  
+  Environment ...................................... production  
+  Debug Mode .......................................... ENABLED  
+  URL .......................................... 100.123.173.99  
+  Maintenance Mode ........................................ OFF  
+  Timezone ................................. Africa/Ouagadougou  
+  Locale ................................................... en  
+
+  Cache .......................................................  
+  Config ........................................... NOT CACHED  
+  Events ........................................... NOT CACHED  
+  Routes ........................................... NOT CACHED  
+  Views ................................................ CACHED  
+
+  Drivers .....................................................  
+  Broadcasting ............................................ log  
+  Cache .............................................. database  
+  Database .............................................. mysql  
+  Logs ......................................... stack / single  
+  Mail .................................................... log  
+  Queue .............................................. database  
+  Session ............................................ database  
+
+  Storage .....................................................  
+  public/storage ................................... NOT LINKED  
+
+  Filament ....................................................  
+  Blade Icons ...................................... NOT CACHED  
+  Packages  filament, forms, notifications, support, tables, actions, infolists, schemas, widgets  
+  Panel Components ................................. NOT CACHED  
+  Version ............................................. v5.10.2  
+  Views ......................................... NOT PUBLISHED  
+
+  Livewire ....................................................  
+  Livewire ............................................. v4.4.7  
+
+  Spatie Permissions ..........................................  
+  Features Enabled .................................... Default  
+  Version .............................................. 6.25.0  
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo php artisan tinker --execute="dump(config('app.cipher')); dump(strlen(\Illuminate\Support\Facades\Crypt::encryptString('nexus-test')) > 0);"
+[sudo] password for vboxuser: 
+"AES-256-CBC" // vendor/psy/psysh/src/ExecutionClosure.php(41) : eval()'d code:1
+true // vendor/psy/psysh/src/ExecutionClosure.php(41) : eval()'d code:2
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
