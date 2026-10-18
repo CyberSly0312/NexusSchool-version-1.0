@@ -209,3 +209,66 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo tail -n 4
 tail: cannot open '/var/log/apache2/nexusschool-error.log' for reading: No such file or directory
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
 
+
+
+
+
+On va corriger ça. Il y a probablement deux problèmes distincts : la clé de chiffrement utilisée par Laravel n’est pas valide pour le chiffrement configuré, et les permissions du serveur compliquent les commandes de correction.
+
+### ⚠️ D’abord, un point important sur ta nouvelle clé
+
+La valeur que tu as collée après `APP_KEY=base64:` semble anormalement longue pour une clé Laravel standard. Laravel attend normalement :
+
+- `AES-128-CBC` : une clé de 16 octets ;
+- `AES-256-CBC` : une clé de 32 octets.
+
+Avec le préfixe `base64:`, Laravel décode la valeur avant de vérifier sa longueur. Une clé simplement longue en apparence ne sera donc pas nécessairement valide.
+
+Ne partage plus ta clé complète : c’est un secret de sécurité. Comme tu l’as exposée dans cette conversation, il faudra la remplacer par une nouvelle clé valide une fois le diagnostic terminé.
+
+## 1. Générer une vraie clé Laravel
+
+Dans ton terminal Debian, exécute ces commandes dans cet ordre :
+
+```
+
+cd /var/www/html/NexusSchool-version-1.0-main
+
+# 1. Vérifier le chiffrement configuré sans afficher APP_KEY
+grep -n "'cipher'" config/app.php
+grep '^APP_CIPHER=' .env || true
+
+# 2. Supprimer l'ancienne configuration mise en cache
+sudo php artisan config:clear
+
+# 3. Générer et enregistrer une clé Laravel valide
+sudo php artisan key:generate --force
+
+# 4. Effacer de nouveau le cache de configuration
+sudo php artisan config:clear
+
+```
+
+La commande `key:generate` génère elle-même une clé valide et met à jour `.env`. Ne copie pas manuellement la longue valeur que tu avais collée.
+
+Attention : si l’application contient des données chiffrées avec une ancienne clé, leur déchiffrement peut échouer après le changement. Puisque tu as déjà régénéré la clé, évite d’en changer davantage sans vérifier les conséquences.
+
+## 2. Vérifier que Laravel démarre correctement
+
+Exécute ensuite :
+
+```
+sudo php artisan about
+```
+
+Si la commande réussit, teste aussi la configuration du chiffrement sans révéler la clé :
+
+```
+sudo php artisan tinker --execute="dump(config('app.cipher')); dump(strlen(\Illuminate\Support\Facades\Crypt::encryptString('nexus-test')) > 0);"
+```
+
+Le résultat attendu est le nom d’un chiffrement pris en charge, puis `true`.
+
+Si `key:generate` ou l’une de ces commandes renvoie une erreur, arrête-toi et envoie-moi le message exact, sans publier ton `.env` ni ta clé.
+
+Une fois le chiffrement validé, nous traiterons séparément les permissions de `vboxuser` et les ressources frontend absentes (`public/build`).
