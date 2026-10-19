@@ -184,3 +184,54 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sed -n '180,24
     }
 }
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+
+
+
+
+
+vboxuser@debianserver:~$ sudo apt install dnsmasq
+[sudo] password for vboxuser: 
+dnsmasq is already the newest version (2.91-1+deb13u2).
+The following package was automatically installed and is no longer required:
+  linux-image-6.12.107+deb13-amd64
+Use 'sudo apt autoremove' to remove it.
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
+vboxuser@debianserver:~$ sudo apt autoremove
+REMOVING:                       
+  linux-image-6.12.107+deb13-amd64
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 1, Not Upgrading: 0
+  Freed space: 111 MB
+
+Continue? [Y/n] y
+(Reading database ... 148132 files and directories currently installed.)
+Removing linux-image-6.12.107+deb13-amd64 (6.12.107-1) ...
+/etc/kernel/postrm.d/initramfs-tools:
+update-initramfs: Deleting /boot/initrd.img-6.12.107+deb13-amd64
+/etc/kernel/postrm.d/zz-update-grub:
+Generating grub configuration file ...
+Found background image: /usr/share/images/desktop-base/desktop-grub.png
+Found linux image: /boot/vmlinuz-6.12.113+deb13-amd64
+Found initrd image: /boot/initrd.img-6.12.113+deb13-amd64
+Found linux image: /boot/vmlinuz-6.12.111+deb13-amd64
+Found initrd image: /boot/initrd.img-6.12.111+deb13-amd64
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+vboxuser@debianserver:~$ sudo ss -lunp | grep ':53'
+UNCONN 0      0      100.123.173.99:53         0.0.0.0:*    users:(("dnsmasq",pid=857,fd=7))      
+UNCONN 0      0             0.0.0.0:5353       0.0.0.0:*    users:(("avahi-daemon",pid=627,fd=12))
+UNCONN 0      0                [::]:5353          [::]:*    users:(("avahi-daemon",pid=627,fd=13))
+vboxuser@debianserver:~$ sudo code /etc/dnsmasq.d/nexusschool.conf 
+You are trying to start Visual Studio Code as a super user which isn't recommended. If this was intended, please add the argument `--no-sandbox` and specify an alternate user data directory using the `--user-data-dir` argument.
+vboxuser@debianserver:~$ code /etc/dnsmasq.d/nexusschool.conf 
+vboxuser@debianserver:~$ sudo systemctl restart dnsmasq.
+Failed to restart dnsmasq..service: Unit dnsmasq..service not found.
+vboxuser@debianserver:~$ sudo systemctl restart dnsmasq
+vboxuser@debianserver:~$ 
+
