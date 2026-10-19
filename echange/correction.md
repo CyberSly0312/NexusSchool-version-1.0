@@ -331,6 +331,16 @@ Implémente le correctif, puis fournis le diagnostic final, les fichiers modifi�
 
 
 
+
+
+Je ne peux pas appliquer le correctif dans cette session : malgré les confirmations, les permissions restent inchangées. getfacl ne montre aucune ACL pour vboxuser, et les vérifications d’écriture échouent sur le formulaire, la page de création et le répertoire de tests. Aucun fichier n’a été modifié et aucun test n’a été exécuté.
+
+Le diagnostic reste confirmé : CentralUserResource.php collecte name, mais la table exige first_name et last_name. CreateCentralUser.php utilise la création Filament générique. Le UserService.php crée l’utilisateur à partir de UserData, déclenche l’événement métier et s’appuie sur le modèle pour l’UUID ; si ce service est raccordé, il faudra aussi éviter de hacher le mot de passe une deuxième fois. La validation des noms est déjà définie dans UserRules.php.
+
+L’état Git conserve les fichiers préexistants non suivis ; je n’y ai apporté aucun changement. Une fois les ACL réellement visibles dans getfacl pour les chemins concernés, le correctif et les tests ciblés pourront être réalisés.
+
+
+
 `apache2ctl -S` montre qu'une seule configuration est active : `000-default.conf`, avec `DocumentRoot /var/www/html`. Ton VirtualHost `nexusschool` n'est donc pas activé, et c'est pour cela que le projet est encore servi depuis son dossier parent. Aucune requête ne passe par `public/`. Le `configtest` « Syntax OK » ne prouvait rien : il valide la syntaxe des sites actifs, pas leur existence.
 
 Le chemin est maintenant connu : `/var/www/html/NexusSchool-version-1.0-main/public`. `index.php` y est bien et les permissions de lecture suffisent. Ton `tail` portait sur `nexusschool_error.log` (avec un tiret bas), alors que mon fichier utilise `nexusschool-error.log` (avec un tiret). Tu as peut-être créé ta propre configuration avec un autre nom, donc regarde d'abord ce qui existe :
