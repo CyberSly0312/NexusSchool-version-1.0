@@ -120,3 +120,67 @@ No route parameter data available.
 * mysql - select * from `users` where `id` = 1 and `users`.`deleted_at` is null limit 1 (0.69 ms)
 * mysql - select `roles`.*, `model_has_roles`.`model_id` as `pivot_model_id`, `model_has_roles`.`role_id` as `pivot_role_id`, `model_has_roles`.`model_type` as `pivot_model_type` from `roles` inner join `model_has_roles` on `roles`.`id` = `model_has_roles`.`role_id` where `model_has_roles`.`model_id` in (1) and `model_has_roles`.`model_type` = 'App\Models\User' (0.79 ms)
 * mysql - select * from `cache` where `key` in ('nexus-school-cache-spatie.permission.cache') (0.56 ms)
+
+
+
+
+
+
+
+
+
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sed -n '180,245p' app/Domains/School/Services/SchoolService.php
+        }
+
+        if (isset($filters['country'])) {
+            $query->where('country', $filters['country']);
+        }
+
+        if (isset($filters['search'])) {
+            $search = $filters['search'];
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('registration_number', 'like', "%{$search}%");
+            });
+        }
+
+        return $query->orderBy('name')->paginate($perPage);
+    }
+
+    private function canonicalSlug(string $value): string
+    {
+        $slug = Str::lower(Str::slug($value));
+
+        if ($slug === '' || strlen($slug) > 63 || ! preg_match('/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/', $slug)) {
+            throw ValidationException::withMessages([
+                'slug' => 'The school slug must produce a valid DNS subdomain (letters, numbers, and internal hyphens only).',
+            ]);
+        }
+
+        if (in_array($slug, config('tenancy.reserved_subdomains', []), true)) {
+            throw ValidationException::withMessages([
+                'slug' => "The subdomain '{$slug}' is reserved by the platform.",
+            ]);
+        }
+
+        return $slug;
+    }
+
+    private function canonicalDomain(string $slug): string
+    {
+        $baseDomain = Str::lower(trim((string) config('tenancy.tenant_base_domain')));
+
+        if (! preg_match('/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/', $baseDomain)) {
+            throw new \LogicException('TENANT_BASE_DOMAIN must be a valid DNS domain.');
+        }
+
+        return "{$slug}.{$baseDomain}";
+    }
+
+    private function isUniqueConstraintViolation(QueryException $exception): bool
+    {
+        return in_array((string) $exception->getCode(), ['23000', '23505', '19'], true);
+    }
+}
+vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
