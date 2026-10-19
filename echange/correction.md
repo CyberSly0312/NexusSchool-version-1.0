@@ -1,56 +1,115 @@
 
-Ce comportement est peut-être normal : avec le nouveau VirtualHost, l'ancienne URL ne doit plus fonctionner.
+# NexusSchool — Fix Central User Creation: Missing `first_name` and `last_name`
 
-## Pourquoi l'ancienne URL casse
+You are working directly inside the existing NexusSchool ERP codebase on Debian.
 
-Avant, Apache servait un dossier parent, et tu entrais dans le projet par `/NexusSchool-version-1.0-main/public/`. Maintenant la racine d'Apache **est** `public/`, donc ce même chemin est cherché *à l'intérieur* de `public/` (`public/NexusSchool-version-1.0-main/public/`), qui n'existe pas. Les nouvelles adresses sont :
+## Environment
 
-- `http://nexusschool.test/` et `http://nexusschool.test/super-admin`
-- `http://100.123.173.99/` aussi, puisque `000-default` est désactivé et que ton vhost reçoit donc les requêtes par IP.
+- Laravel 12.70.0
+- PHP 8.4.26
+- Filament 5.10.2
+- Livewire 4.4.7
+- MariaDB/MySQL
+- Database: `Nexusschool`
+- Current route: `/super-admin/central-users/create`
+- Current hostname: `www.nexusschool.test`
 
-Teste ces trois adresses d'abord. Si elles marchent, il n'y a rien à réparer, tu utilises simplement les nouvelles URL.
+## Reported error
 
-## Si ça ne marche pas non plus
+When creating a school administrator for testing through the Super Admin interface, Laravel throws:
 
-Vérifie d'abord que tu as bien remplacé `/CHEMIN` dans le fichier de configuration. Si tu l'as collé tel quel, Apache pointe vers un dossier qui n'existe pas et tout renvoie une erreur (la vérification `configtest` ne bloque pas dans ce cas). Je ne connais pas le chemin réel de ton projet : d'après ta première capture, il est probablement sous `/var/www/html/`, mais c'est une supposition à confirmer. Lance ceci sur le serveur et colle-moi la sortie :
+`Illuminate\Database\QueryException: SQLSTATE[HY000]: General error: 1364 Field 'first_name' doesn't have a default value`
 
-```
-sudo apache2ctl -S
-grep -n -E "DocumentRoot|<Directory" /etc/apache2/sites-enabled/*.conf
-ls -ld /var/www/html/NexusSchool-version-1.0-main/public
-ls /var/www/html/NexusSchool-version-1.0-main/public/index.php
-sudo tail -n 15 /var/log/apache2/nexusschool-error.log
-```
+The failed SQL statement is equivalent to:
 
-Selon le résultat :
-
-| Symptôme | Cause probable |
-|---|---|
-| 404 d'Apache | `DocumentRoot` faux (placeholder `/CHEMIN` ou mauvais dossier) |
-| 403 Forbidden | Permissions : `www-data` doit pouvoir traverser chaque dossier parent du projet. Un projet sous `/home/vboxuser` pose souvent ce problème. |
-| Page blanche ou erreur 500 de Laravel | Permissions sur `storage` et `bootstrap/cache`, ou `.env` manquant |
-| Affichage sans style, Livewire qui ne répond pas | `APP_URL` encore sur l'ancien sous-chemin. Mets `APP_URL=http://nexusschool.test`, puis `php artisan config:clear`. |
-
-## Retour arrière temporaire
-
-Si tu as besoin de l'accès en urgence, tu peux revenir à l'ancien état :
-
-```
-sudo a2dissite nexusschool && sudo a2ensite 000-default && sudo systemctl reload apache2
+```sql
+INSERT INTO users (
+    email,
+    phone,
+    school_id,
+    password,
+    uuid,
+    updated_at,
+    created_at
+) VALUES (...);
 ```
 
-Mais l'ancien état expose tout le projet (y compris `.env`) dans le navigateur. Fais-le seulement le temps de me renvoyer les diagnostics ci-dessus, et n'oublie pas de réactiver `nexusschool` ensuite.
+The SQL does not include `first_name` or `last_name`, even though the database requires `first_name`.
 
+The failure occurs during Filament's `CreateRecord` process.
 
+## Objective
 
+Identify and fix the actual root cause so that a Super Admin can create a school administrator successfully, while preserving NexusSchool's existing architecture and business rules.
 
-sudo chown -R www-data:www-data storage bootstrap/cache
-sudo chmod -R ug+rwX storage bootstrap/cache
+## Mandatory investigation
 
+1. Inspect the existing Central Users Filament resource, its Create page, form schema, and any related actions or services.
+2. Trace the complete user-creation flow from the submitted Filament form through validation, data transformation, service calls, and Eloquent model persistence.
+3. Inspect the `User` model, its fillable/guarded attributes, casts, observers, model events, and any creation services or actions.
+4. Inspect the users table migration history and current schema, particularly `first_name`, `last_name`, `email`, `school_id`, `phone`, `uuid`, and `password`.
+5. Compare this flow with the existing school-administrator creation flow elsewhere in the application, if one exists.
+6. Determine whether the fields are missing from the form, omitted during data transformation, discarded by mass assignment, or lost when calling a service or creating the model.
+7. Check whether the current implementation uses a canonical user-creation service or other architectural contract that must be reused.
 
+Do not assume that adding fields to `$fillable` alone will solve the problem. Verify the actual cause first.
 
+## Implementation requirements
 
+- Ensure that `first_name` and `last_name` are collected and validated wherever required by the existing domain rules.
+- Ensure both values reach the persistence layer and are stored correctly.
+- If the Central Users form already collects these values, fix the transformation or persistence layer that drops them.
+- If the form is missing them, add the appropriate fields using the existing Filament conventions, labels, validation rules, and layout.
+- Preserve password hashing, UUID generation, role assignment, school association, tenant isolation, and authorization behavior.
+- Respect the distinction between central users and school-scoped users. Do not remove or weaken existing authorization or tenant-isolation protections.
+- Follow the project's existing DDD/Clean Architecture boundaries and reuse the established user-creation service or action where appropriate.
+- Check whether other creation flows share the same defect. Fix the shared root cause if justified, without introducing unrelated refactoring.
+- Do not make `first_name` or `last_name` nullable, add fake default values, or modify database constraints merely to suppress this exception.
+- Do not delete data, reset the database, run fresh migrations, or use destructive migration commands.
+- Do not modify `.env` or unrelated DNS, Apache, tenancy, or deployment configuration.
 
+## Tests
+
+Add or update focused automated tests using the project's existing Pest conventions.
+
+At minimum, verify that:
+
+1. A valid central user can be created with first name, last name, email, and the appropriate school association.
+2. The persisted record contains the correct `first_name` and `last_name`.
+3. Password hashing, UUID generation, and role assignment still work as expected.
+4. Invalid or missing required names are rejected through validation.
+5. Existing authorization and school/tenant isolation rules remain enforced.
+6. Existing relevant tests continue to pass.
+
+Use existing factories, test helpers, and database setup. Do not weaken assertions or tests just to obtain a passing result.
+
+## Verification and reporting
+
+After implementing the fix:
+
+1. Run the focused tests.
+2. Run the relevant additional tests and the project's available static analysis or code-quality checks, where practical.
+3. Review the final diff and ensure no unrelated files or behavior were changed.
+4. Do not claim that a test passed unless it was actually executed and passed.
+
+Report:
+- The confirmed root cause.
+- The exact files changed and why.
+- The fix implemented.
+- The tests executed and their actual results.
+- Any remaining issue or follow-up needed.
+
+## Working-tree safety
+
+This is an existing project with potentially important pre-existing modifications.
+
+Before editing:
+- Inspect `git status --short`.
+- Do not reset, stash, discard, overwrite, or revert pre-existing changes.
+- Do not revert unrelated work.
+- Keep the patch minimal and consistent with existing project conventions.
+
+Implement the fix, not just a diagnosis. Stop and report if you discover a conflicting architectural decision or a change that would require a destructive database operation.
 
 
 
