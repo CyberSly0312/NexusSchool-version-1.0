@@ -306,6 +306,27 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$
 
 
 
+Reprends le correctif NexusSchool à partir du diagnostic déjà établi.
+
+Cause confirmée : `CentralUserResource.php` collecte `name`, alors que la table `users` exige `first_name` et `last_name`. La page `CreateCentralUser.php` utilise la création générique de Filament et contourne le service métier `UserService.php`.
+
+Avant toute modification :
+- Vérifie que les permissions permettent l'écriture.
+- Vérifie `git status --short` et préserve toutes les modifications préexistantes.
+- Relis les fichiers concernés pour confirmer que le diagnostic est toujours valable.
+
+Correctif attendu :
+1. Remplacer le champ générique `name` par les champs appropriés `first_name` et `last_name`, en respectant les conventions de formulaire existantes.
+2. Vérifier la validation et la persistance des deux champs.
+3. Vérifier si la création d'un utilisateur central doit passer par `UserService` ou une action métier existante. Réutiliser cette logique si cela respecte l'architecture du projet, sans introduire de refactorisation générale.
+4. Préserver la génération UUID, le hachage du mot de passe, l'association scolaire, les rôles, les autorisations et l'isolation des tenants.
+5. Ajouter ou adapter des tests ciblés pour la création d'un utilisateur central et la persistance des noms.
+6. Exécuter les tests pertinents et rapporter leurs résultats réels.
+7. Examiner le diff final et ne modifier aucun fichier sans rapport avec ce défaut.
+
+Ne modifie pas le schéma de la base de données pour masquer l'erreur. N'exécute aucune migration destructive et ne touche pas au fichier `.env`.
+
+Implémente le correctif, puis fournis le diagnostic final, les fichiers modifiés et les résultats des tests.
 
 
 
