@@ -1,93 +1,4 @@
 
-
-vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sed -n '180,245p' app/Domains/School/Services/SchoolService.php
-        }
-
-        if (isset($filters['country'])) {
-            $query->where('country', $filters['country']);
-        }
-
-        if (isset($filters['search'])) {
-            $search = $filters['search'];
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%")
-                    ->orWhere('registration_number', 'like', "%{$search}%");
-            });
-        }
-
-        return $query->orderBy('name')->paginate($perPage);
-    }
-
-    private function canonicalSlug(string $value): string
-    {
-        $slug = Str::lower(Str::slug($value));
-
-        if ($slug === '' || strlen($slug) > 63 || ! preg_match('/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/', $slug)) {
-            throw ValidationException::withMessages([
-                'slug' => 'The school slug must produce a valid DNS subdomain (letters, numbers, and internal hyphens only).',
-            ]);
-        }
-
-        if (in_array($slug, config('tenancy.reserved_subdomains', []), true)) {
-            throw ValidationException::withMessages([
-                'slug' => "The subdomain '{$slug}' is reserved by the platform.",
-            ]);
-        }
-
-        return $slug;
-    }
-
-    private function canonicalDomain(string $slug): string
-    {
-        $baseDomain = Str::lower(trim((string) config('tenancy.tenant_base_domain')));
-
-        if (! preg_match('/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/', $baseDomain)) {
-            throw new \LogicException('TENANT_BASE_DOMAIN must be a valid DNS domain.');
-        }
-
-        return "{$slug}.{$baseDomain}";
-    }
-
-    private function isUniqueConstraintViolation(QueryException $exception): bool
-    {
-        return in_array((string) $exception->getCode(), ['23000', '23505', '19'], true);
-    }
-}
-vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
-
-
-
-
-
-vboxuser@debianserver:~$ sudo apt install dnsmasq
-[sudo] password for vboxuser: 
-dnsmasq is already the newest version (2.91-1+deb13u2).
-The following package was automatically installed and is no longer required:
-  linux-image-6.12.107+deb13-amd64
-Use 'sudo apt autoremove' to remove it.
-
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
-vboxuser@debianserver:~$ sudo apt autoremove
-REMOVING:                       
-  linux-image-6.12.107+deb13-amd64
-
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 1, Not Upgrading: 0
-  Freed space: 111 MB
-
-Continue? [Y/n] y
-(Reading database ... 148132 files and directories currently installed.)
-Removing linux-image-6.12.107+deb13-amd64 (6.12.107-1) ...
-/etc/kernel/postrm.d/initramfs-tools:
-update-initramfs: Deleting /boot/initrd.img-6.12.107+deb13-amd64
-/etc/kernel/postrm.d/zz-update-grub:
-Generating grub configuration file ...
-
-
-
-
 Ce comportement est peut-être normal : avec le nouveau VirtualHost, l'ancienne URL ne doit plus fonctionner.
 
 ## Pourquoi l'ancienne URL casse
@@ -175,3 +86,64 @@ vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ ls /var/www/ht
 /var/www/html/NexusSchool-version-1.0-main/public/index.php
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ sudo tail -n 15 /var/log/apache2/nexusschool_error.log
 vboxuser@debianserver:/var/www/html/NexusSchool-version-1.0-main$ 
+
+
+
+
+
+
+
+`apache2ctl -S` montre qu'une seule configuration est active : `000-default.conf`, avec `DocumentRoot /var/www/html`. Ton VirtualHost `nexusschool` n'est donc pas activé, et c'est pour cela que le projet est encore servi depuis son dossier parent. Aucune requête ne passe par `public/`. Le `configtest` « Syntax OK » ne prouvait rien : il valide la syntaxe des sites actifs, pas leur existence.
+
+Le chemin est maintenant connu : `/var/www/html/NexusSchool-version-1.0-main/public`. `index.php` y est bien et les permissions de lecture suffisent. Ton `tail` portait sur `nexusschool_error.log` (avec un tiret bas), alors que mon fichier utilise `nexusschool-error.log` (avec un tiret). Tu as peut-être créé ta propre configuration avec un autre nom, donc regarde d'abord ce qui existe :
+
+```
+ls -l /etc/apache2/sites-available/ /etc/apache2/sites-enabled/
+```
+
+**Si tu vois un fichier `nexusschool*.conf` dans `sites-available`**, vérifie son contenu (`cat`) : le `DocumentRoot` doit se terminer par `/public`. Active-le avec son vrai nom.
+
+**S'il n'existe pas**, crée-le avec le chemin réel :
+
+```
+sudo a2enmod rewrite
+sudo tee /etc/apache2/sites-available/nexusschool.conf <<'EOF'
+<VirtualHost *:80>
+    ServerName nexusschool.test
+    ServerAlias *.nexusschool.test
+    DocumentRoot /var/www/html/NexusSchool-version-1.0-main/public
+
+    <Directory /var/www/html/NexusSchool-version-1.0-main/public>
+        AllowOverride All
+        Require all granted
+        Options -Indexes +FollowSymLinks
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/nexusschool-error.log
+    CustomLog ${APACHE_LOG_DIR}/nexusschool-access.log combined
+</VirtualHost>
+EOF
+```
+
+Dans les deux cas, active le site, désactive celui par défaut, puis recharge :
+
+```
+sudo a2ensite nexusschool
+sudo a2dissite 000-default
+sudo apache2ctl configtest && sudo systemctl reload apache2
+sudo apache2ctl -S
+```
+
+Cette fois `apache2ctl -S` doit afficher `nexusschool.test` avec le bon fichier. Si `a2ensite` répond « does not exist », le nom du fichier est différent : prends celui que `ls` t'a montré.
+
+Ensuite, teste `http://nexusschool.test/super-admin` et `http://100.123.173.99/`. Si le résultat n'est pas bon, envoie-moi :
+
+```
+sudo tail -n 20 /var/log/apache2/nexusschool-error.log
+sudo tail -n 20 /var/www/html/NexusSchool-version-1.0-main/storage/logs/laravel.log
+ls -l /var/www/html/NexusSchool-version-1.0-main/.env
+```
+
+Le dernier fichier (le `.env`) doit exister et être lisible par `www-data`. S'il est en `600` et appartient à `vboxuser`, Laravel ne pourra pas le lire, et il faudra ajuster le propriétaire ou le groupe.
+
+**Rappel de sécurité :** tant que `000-default` reste actif, `http://nexusschool.test/NexusSchool-version-1.0-main/.env` est téléchargeable par n'importe quel appareil du tailnet. Un `curl -I` sur cette URL te dira si c'est le cas. Dès que le nouveau vhost est actif, cette URL doit renvoyer 404. Si elle a répondu `200` à un moment, change `APP_KEY` et le mot de passe de la base de données.
