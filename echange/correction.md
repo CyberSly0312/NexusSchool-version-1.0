@@ -235,3 +235,9 @@ Failed to restart dnsmasq..service: Unit dnsmasq..service not found.
 vboxuser@debianserver:~$ sudo systemctl restart dnsmasq
 vboxuser@debianserver:~$ 
 
+
+
+
+
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R ug+rwX storage bootstrap/cache
