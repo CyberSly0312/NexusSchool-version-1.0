@@ -213,28 +213,51 @@ Removing linux-image-6.12.107+deb13-amd64 (6.12.107-1) ...
 update-initramfs: Deleting /boot/initrd.img-6.12.107+deb13-amd64
 /etc/kernel/postrm.d/zz-update-grub:
 Generating grub configuration file ...
-Found background image: /usr/share/images/desktop-base/desktop-grub.png
-Found linux image: /boot/vmlinuz-6.12.113+deb13-amd64
-Found initrd image: /boot/initrd.img-6.12.113+deb13-amd64
-Found linux image: /boot/vmlinuz-6.12.111+deb13-amd64
-Found initrd image: /boot/initrd.img-6.12.111+deb13-amd64
-Warning: os-prober will not be executed to detect other bootable partitions.
-Systems on them will not be added to the GRUB boot configuration.
-Check GRUB_DISABLE_OS_PROBER documentation entry.
-Adding boot menu entry for UEFI Firmware Settings ...
-done
-vboxuser@debianserver:~$ sudo ss -lunp | grep ':53'
-UNCONN 0      0      100.123.173.99:53         0.0.0.0:*    users:(("dnsmasq",pid=857,fd=7))      
-UNCONN 0      0             0.0.0.0:5353       0.0.0.0:*    users:(("avahi-daemon",pid=627,fd=12))
-UNCONN 0      0                [::]:5353          [::]:*    users:(("avahi-daemon",pid=627,fd=13))
-vboxuser@debianserver:~$ sudo code /etc/dnsmasq.d/nexusschool.conf 
-You are trying to start Visual Studio Code as a super user which isn't recommended. If this was intended, please add the argument `--no-sandbox` and specify an alternate user data directory using the `--user-data-dir` argument.
-vboxuser@debianserver:~$ code /etc/dnsmasq.d/nexusschool.conf 
-vboxuser@debianserver:~$ sudo systemctl restart dnsmasq.
-Failed to restart dnsmasq..service: Unit dnsmasq..service not found.
-vboxuser@debianserver:~$ sudo systemctl restart dnsmasq
-vboxuser@debianserver:~$ 
 
+
+
+
+Ce comportement est peut-être normal : avec le nouveau VirtualHost, l'ancienne URL ne doit plus fonctionner.
+
+## Pourquoi l'ancienne URL casse
+
+Avant, Apache servait un dossier parent, et tu entrais dans le projet par `/NexusSchool-version-1.0-main/public/`. Maintenant la racine d'Apache **est** `public/`, donc ce même chemin est cherché *à l'intérieur* de `public/` (`public/NexusSchool-version-1.0-main/public/`), qui n'existe pas. Les nouvelles adresses sont :
+
+- `http://nexusschool.test/` et `http://nexusschool.test/super-admin`
+- `http://100.123.173.99/` aussi, puisque `000-default` est désactivé et que ton vhost reçoit donc les requêtes par IP.
+
+Teste ces trois adresses d'abord. Si elles marchent, il n'y a rien à réparer, tu utilises simplement les nouvelles URL.
+
+## Si ça ne marche pas non plus
+
+Vérifie d'abord que tu as bien remplacé `/CHEMIN` dans le fichier de configuration. Si tu l'as collé tel quel, Apache pointe vers un dossier qui n'existe pas et tout renvoie une erreur (la vérification `configtest` ne bloque pas dans ce cas). Je ne connais pas le chemin réel de ton projet : d'après ta première capture, il est probablement sous `/var/www/html/`, mais c'est une supposition à confirmer. Lance ceci sur le serveur et colle-moi la sortie :
+
+```
+sudo apache2ctl -S
+grep -n -E "DocumentRoot|<Directory" /etc/apache2/sites-enabled/*.conf
+ls -ld /var/www/html/NexusSchool-version-1.0-main/public
+ls /var/www/html/NexusSchool-version-1.0-main/public/index.php
+sudo tail -n 15 /var/log/apache2/nexusschool-error.log
+```
+
+Selon le résultat :
+
+| Symptôme | Cause probable |
+|---|---|
+| 404 d'Apache | `DocumentRoot` faux (placeholder `/CHEMIN` ou mauvais dossier) |
+| 403 Forbidden | Permissions : `www-data` doit pouvoir traverser chaque dossier parent du projet. Un projet sous `/home/vboxuser` pose souvent ce problème. |
+| Page blanche ou erreur 500 de Laravel | Permissions sur `storage` et `bootstrap/cache`, ou `.env` manquant |
+| Affichage sans style, Livewire qui ne répond pas | `APP_URL` encore sur l'ancien sous-chemin. Mets `APP_URL=http://nexusschool.test`, puis `php artisan config:clear`. |
+
+## Retour arrière temporaire
+
+Si tu as besoin de l'accès en urgence, tu peux revenir à l'ancien état :
+
+```
+sudo a2dissite nexusschool && sudo a2ensite 000-default && sudo systemctl reload apache2
+```
+
+Mais l'ancien état expose tout le projet (y compris `.env`) dans le navigateur. Fais-le seulement le temps de me renvoyer les diagnostics ci-dessus, et n'oublie pas de réactiver `nexusschool` ensuite.
 
 
 
