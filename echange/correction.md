@@ -153,68 +153,6 @@ L’état Git conserve les fichiers préexistants non suivis ; je n’y ai appor
 
 Le chemin est maintenant connu : `/var/www/html/NexusSchool-version-1.0-main/public`. `index.php` y est bien et les permissions de lecture suffisent. Ton `tail` portait sur `nexusschool_error.log` (avec un tiret bas), alors que mon fichier utilise `nexusschool-error.log` (avec un tiret). Tu as peut-être créé ta propre configuration avec un autre nom, donc regarde d'abord ce qui existe :
 
-```
-ls -l /etc/apache2/sites-available/ /etc/apache2/sites-enabled/
-```
-
-**Si tu vois un fichier `nexusschool*.conf` dans `sites-available`**, vérifie son contenu (`cat`) : le `DocumentRoot` doit se terminer par `/public`. Active-le avec son vrai nom.
-
-**S'il n'existe pas**, crée-le avec le chemin réel :
-
-```
-sudo a2enmod rewrite
-sudo tee /etc/apache2/sites-available/nexusschool.conf <<'EOF'
-<VirtualHost *:80>
-    ServerName nexusschool.test
-    ServerAlias *.nexusschool.test
-    DocumentRoot /var/www/html/NexusSchool-version-1.0-main/public
-
-    <Directory /var/www/html/NexusSchool-version-1.0-main/public>
-        AllowOverride All
-        Require all granted
-        Options -Indexes +FollowSymLinks
-    </Directory>
-
-    ErrorLog ${APACHE_LOG_DIR}/nexusschool-error.log
-    CustomLog ${APACHE_LOG_DIR}/nexusschool-access.log combined
-</VirtualHost>
-EOF
-```
-
-Dans les deux cas, active le site, désactive celui par défaut, puis recharge :
-
-```
-sudo a2ensite nexusschool
-sudo a2dissite 000-default
-sudo apache2ctl configtest && sudo systemctl reload apache2
-sudo apache2ctl -S
-```
-
-Cette fois `apache2ctl -S` doit afficher `nexusschool.test` avec le bon fichier. Si `a2ensite` répond « does not exist », le nom du fichier est différent : prends celui que `ls` t'a montré.
-
-Ensuite, teste `http://nexusschool.test/super-admin` et `http://100.123.173.99/`. Si le résultat n'est pas bon, envoie-moi :
-
-```
-sudo tail -n 20 /var/log/apache2/nexusschool-error.log
-sudo tail -n 20 /var/www/html/NexusSchool-version-1.0-main/storage/logs/laravel.log
-ls -l /var/www/html/NexusSchool-version-1.0-main/.env
-```
-
-Le dernier fichier (le `.env`) doit exister et être lisible par `www-data`. S'il est en `600` et appartient à `vboxuser`, Laravel ne pourra pas le lire, et il faudra ajuster le propriétaire ou le groupe.
-
-**Rappel de sécurité :** tant que `000-default` reste actif, `http://nexusschool.test/NexusSchool-version-1.0-main/.env` est téléchargeable par n'importe quel appareil du tailnet. Un `curl -I` sur cette URL te dira si c'est le cas. Dès que le nouveau vhost est actif, cette URL doit renvoyer 404. Si elle a répondu `200` à un moment, change `APP_KEY` et le mot de passe de la base de données.
-
-
-
-
-
-Je ne peux pas appliquer le correctif dans cette session : malgré les confirmations, les permissions restent inchangées. getfacl ne montre aucune ACL pour vboxuser, et les vérifications d’écriture échouent sur le formulaire, la page de création et le répertoire de tests. Aucun fichier n’a été modifié et aucun test n’a été exécuté.
-
-Le diagnostic reste confirmé : CentralUserResource.php collecte name, mais la table exige first_name et last_name. CreateCentralUser.php utilise la création Filament générique. Le UserService.php crée l’utilisateur à partir de UserData, déclenche l’événement métier et s’appuie sur le modèle pour l’UUID ; si ce service est raccordé, il faudra aussi éviter de hacher le mot de passe une deuxième fois. La validation des noms est déjà définie dans UserRules.php.
-
-L’état Git conserve les fichiers préexistants non suivis ; je n’y ai apporté aucun changement. Une fois les ACL réellement visibles dans getfacl pour les chemins concernés, le correctif et les tests ciblés pourront être réalisés.
-
-
 
 
 
