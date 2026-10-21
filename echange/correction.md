@@ -1,5 +1,4 @@
 
-
 Reprends le correctif NexusSchool à partir du diagnostic déjà établi.
 
 Cause confirmée : `CentralUserResource.php` collecte `name`, alors que la table `users` exige `first_name` et `last_name`. La page `CreateCentralUser.php` utilise la création générique de Filament et contourne le service métier `UserService.php`.
