@@ -1,9 +1,4 @@
 
-Ne modifie pas le schéma de la base de données pour masquer l'erreur. N'exécute aucune migration destructive et ne touche pas au fichier `.env`.
-
-Implémente le correctif, puis fournis le diagnostic final, les fichiers modifiés et les résultats des tests.
-
-
 
 
 
