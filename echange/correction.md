@@ -1,8 +1,4 @@
 
-Le diagnostic reste confirmé : CentralUserResource.php collecte name, mais la table exige first_name et last_name. CreateCentralUser.php utilise la création Filament générique. Le UserService.php crée l’utilisateur à partir de UserData, déclenche l’événement métier et s’appuie sur le modèle pour l’UUID ; si ce service est raccordé, il faudra aussi éviter de hacher le mot de passe une deuxième fois. La validation des noms est déjà définie dans UserRules.php.
-
-L’état Git conserve les fichiers préexistants non suivis ; je n’y ai apporté aucun changement. Une fois les ACL réellement visibles dans getfacl pour les chemins concernés, le correctif et les tests ciblés pourront être réalisés.
-
 
 
 `apache2ctl -S` montre qu'une seule configuration est active : `000-default.conf`, avec `DocumentRoot /var/www/html`. Ton VirtualHost `nexusschool` n'est donc pas activé, et c'est pour cela que le projet est encore servi depuis son dossier parent. Aucune requête ne passe par `public/`. Le `configtest` « Syntax OK » ne prouvait rien : il valide la syntaxe des sites actifs, pas leur existence.
