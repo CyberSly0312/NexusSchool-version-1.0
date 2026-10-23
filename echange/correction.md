@@ -1,16 +1,4 @@
 
-Le chemin est maintenant connu : `/var/www/html/NexusSchool-version-1.0-main/public`. `index.php` y est bien et les permissions de lecture suffisent. Ton `tail` portait sur `nexusschool_error.log` (avec un tiret bas), alors que mon fichier utilise `nexusschool-error.log` (avec un tiret). Tu as peut-être créé ta propre configuration avec un autre nom, donc regarde d'abord ce qui existe :
-
-
-
-
-
-
-
-
-
-
-
 Oui. Puisque le diagnostic est déjà établi, tu peux commencer par modifier un seul fichier principal :
 
 `app/Filament/Resources/CentralUserResource.php`
