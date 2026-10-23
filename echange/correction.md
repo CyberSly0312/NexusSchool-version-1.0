@@ -1,8 +1,5 @@
 
 
-
-Cause confirmée : `CentralUserResource.php` collecte `name`, alors que la table `users` exige `first_name` et `last_name`. La page `CreateCentralUser.php` utilise la création générique de Filament et contourne le service métier `UserService.php`.
-
 Avant toute modification :
 - Vérifie que les permissions permettent l'écriture.
 - Vérifie `git status --short` et préserve toutes les modifications préexistantes.
