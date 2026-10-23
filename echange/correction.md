@@ -1,8 +1,4 @@
 
-
-Avant toute modification :
-- Vérifie que les permissions permettent l'écriture.
-- Vérifie `git status --short` et préserve toutes les modifications préexistantes.
 - Relis les fichiers concernés pour confirmer que le diagnostic est toujours valable.
 
 Correctif attendu :
