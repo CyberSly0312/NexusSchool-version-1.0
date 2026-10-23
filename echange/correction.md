@@ -1,5 +1,5 @@
 
-Oui. Puisque le diagnostic est déjà établi, tu peux commencer par modifier un seul fichier principal :
+
 
 `app/Filament/Resources/CentralUserResource.php`
 
