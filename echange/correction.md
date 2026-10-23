@@ -1,7 +1,4 @@
 
-Correctif attendu :
-1. Remplacer le champ générique `name` par les champs appropriés `first_name` et `last_name`, en respectant les conventions de formulaire existantes.
-2. Vérifier la validation et la persistance des deux champs.
 3. Vérifier si la création d'un utilisateur central doit passer par `UserService` ou une action métier existante. Réutiliser cette logique si cela respecte l'architecture du projet, sans introduire de refactorisation générale.
 4. Préserver la génération UUID, le hachage du mot de passe, l'association scolaire, les rôles, les autorisations et l'isolation des tenants.
 5. Ajouter ou adapter des tests ciblés pour la création d'un utilisateur central et la persistance des noms.
