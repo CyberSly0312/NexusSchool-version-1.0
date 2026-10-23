@@ -1,6 +1,4 @@
 
-- Relis les fichiers concernés pour confirmer que le diagnostic est toujours valable.
-
 Correctif attendu :
 1. Remplacer le champ générique `name` par les champs appropriés `first_name` et `last_name`, en respectant les conventions de formulaire existantes.
 2. Vérifier la validation et la persistance des deux champs.
