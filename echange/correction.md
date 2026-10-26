@@ -1,25 +1,4 @@
-.
 
-## Modification à effectuer
-
-Dans ce fichier, recherche le champ :
-
-```
-TextInput::make('name')
-```
-
-Remplace-le par deux champs :
-
-```
-TextInput::make('first_name')
-    ->label('First name')
-    ->required()
-    ->maxLength(255),
-
-TextInput::make('last_name')
-    ->label('Last name')
-    ->required()
-    ->maxLength(255),
 ```
 
 Ces champs doivent être placés dans le schéma du formulaire, à l'endroit où se trouvait le champ `name`.
