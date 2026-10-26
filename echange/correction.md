@@ -1,7 +1,4 @@
 
-```
-
-Ces champs doivent être placés dans le schéma du formulaire, à l'endroit où se trouvait le champ `name`.
 
 Attention : les règles `maxLength(255)` sont un exemple à confirmer par rapport aux migrations et à `UserRules.php`. Si `UserResource.php` utilise déjà des règles spécifiques pour ces champs, reprends-les pour assurer la cohérence.
 
