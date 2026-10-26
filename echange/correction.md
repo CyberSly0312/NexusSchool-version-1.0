@@ -1,11 +1,4 @@
-
-
-
-`app/Filament/Resources/CentralUserResource.php`
-
-C'est le formulaire de création des utilisateurs centraux qui collecte actuellement `name`, alors que la table `users` attend `first_name` et `last_name`.
-
-Le correctif consiste à remplacer le champ `name` par deux champs distincts, en conservant les règles de validation existantes. Il n'est pas nécessaire de modifier la base de données pour résoudre cette erreur.
+.
 
 ## Modification à effectuer
 
