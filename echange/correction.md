@@ -1,4 +1,3 @@
-
 Attention : les règles `maxLength(255)` sont un exemple à confirmer par rapport aux migrations et à `UserRules.php`. Si `UserResource.php` utilise déjà des règles spécifiques pour ces champs, reprends-les pour assurer la cohérence.
 
 ## Faut-il modifier d'autres fichiers ?
