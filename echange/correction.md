@@ -19,4 +19,4 @@
 
 Si l'erreur persiste, il faudra vérifier la transformation des données dans `CreateCentralUser.php` et le traitement de la création. Le simple ajout des champs ne garantit pas la correction si une autre couche supprime les valeurs.
 
-Pour que je te donne un correctif exact, adapté à ton code et prêt à copier-coller, envoie-moi le contenu actuel de `CentralUserResource.php`. Je pourrai alors te montrer précisément quoi remplacer, sans toucher au reste 
+Pour que je te donne un correctif exact, adapté à ton code et prêt à copier-coller, envoie-moi le contenu actuel de `CentralUserResource.php`. Je pourrai alors te montrer précisément quoi remplacer, sans toucher au 
