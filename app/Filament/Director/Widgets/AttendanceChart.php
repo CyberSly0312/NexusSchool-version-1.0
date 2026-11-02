@@ -22,6 +22,7 @@ class AttendanceChart extends ChartWidget
 
     protected function getData(): array
     {
+        $tenantId = tenant()?->getKey();
         $days = collect(range(0, 6))->map(fn ($d) => now()->startOfWeek()->addDays($d)->toDateString());
         $labels = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
         $present = [];
@@ -29,9 +30,9 @@ class AttendanceChart extends ChartWidget
         $late = [];
 
         foreach ($days as $i => $day) {
-            $present[$i] = AttendanceRecord::where('date', $day)->where('status', 'present')->count();
-            $absent[$i] = AttendanceRecord::where('date', $day)->where('status', 'absent')->count();
-            $late[$i] = AttendanceRecord::where('date', $day)->where('status', 'late')->count();
+            $present[$i] = $tenantId === null ? 0 : AttendanceRecord::where('school_id', $tenantId)->where('date', $day)->where('status', 'present')->count();
+            $absent[$i] = $tenantId === null ? 0 : AttendanceRecord::where('school_id', $tenantId)->where('date', $day)->where('status', 'absent')->count();
+            $late[$i] = $tenantId === null ? 0 : AttendanceRecord::where('school_id', $tenantId)->where('date', $day)->where('status', 'late')->count();
         }
 
         return [

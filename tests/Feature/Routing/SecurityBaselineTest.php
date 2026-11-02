@@ -28,7 +28,7 @@ use Tests\TestCase;
 | unregistered hosts fail closed; inactive schools are denied; an authenticated
 | user may only use the panel of the school they belong to.
 |
-| The platform (super-admin) panel stays central and is reachable on any host.
+| The platform (super-admin) panel is central-domain only.
 |
 */
 
@@ -133,7 +133,7 @@ test('a super admin can reach the central panel', function (): void {
     $superAdmin = routingUser($school, 'super_admin');
 
     $this->actingAs($superAdmin)
-        ->get('/super-admin')
+        ->get('http://localhost/super-admin')
         ->assertSuccessful();
 });
 
@@ -148,7 +148,7 @@ test('an authenticated school user is denied (not redirected) on the central pan
     // A 403 (rather than a redirect to /super-admin/login) proves the same
     // session cookie is recognised by both panels; only panel access is gated.
     $this->actingAs($admin)
-        ->get('/super-admin')
+        ->get('http://localhost/super-admin')
         ->assertForbidden();
 });
 
@@ -262,6 +262,65 @@ test('an untrusted forwarded host cannot make an unknown host resolve', function
 
     $this->withHeader('X-Forwarded-Host', tenantHost($school))
         ->get('http://unknown.school.test/school-admin/login')
+        ->assertNotFound();
+});
+
+test('a super admin cannot access the central panel through a registered school domain', function (): void {
+    $school = makeTenant('Super Admin Host Isolation School');
+    $superAdmin = routingUser($school, 'super_admin');
+
+    $this->actingAs($superAdmin)
+        ->get('http://'.tenantHost($school).'/super-admin')
+        ->assertNotFound();
+});
+
+test('a school admin cannot access the central panel through their school domain', function (): void {
+    $school = makeTenant('School Admin Host Isolation School');
+    $admin = routingUser($school, 'school_admin');
+
+    $this->actingAs($admin)
+        ->get('http://'.tenantHost($school).'/super-admin')
+        ->assertNotFound();
+});
+
+test('an unknown host cannot access the central panel', function (): void {
+    $school = makeTenant('Unknown Central Host School');
+    $superAdmin = routingUser($school, 'super_admin');
+
+    $this->actingAs($superAdmin)
+        ->get('http://unknown.school.test/super-admin')
+        ->assertNotFound();
+});
+
+test('an untrusted forwarded central host cannot bypass the central panel domain restriction', function (): void {
+    $school = makeTenant('Forwarded Central Host School');
+    $superAdmin = routingUser($school, 'super_admin');
+
+    $this->actingAs($superAdmin)
+        ->withHeader('X-Forwarded-Host', 'localhost')
+        ->get('http://'.tenantHost($school).'/super-admin')
+        ->assertNotFound();
+});
+
+test('the central panel fails closed when central domains are missing', function (): void {
+    $school = makeTenant('Missing Central Domain School');
+    $superAdmin = routingUser($school, 'super_admin');
+
+    config()->set('tenancy.central_domains', []);
+
+    $this->actingAs($superAdmin)
+        ->get('http://localhost/super-admin')
+        ->assertNotFound();
+});
+
+test('the central panel fails closed when central domains are invalid', function (): void {
+    $school = makeTenant('Invalid Central Domain School');
+    $superAdmin = routingUser($school, 'super_admin');
+
+    config()->set('tenancy.central_domains', 'localhost');
+
+    $this->actingAs($superAdmin)
+        ->get('http://localhost/super-admin')
         ->assertNotFound();
 });
 

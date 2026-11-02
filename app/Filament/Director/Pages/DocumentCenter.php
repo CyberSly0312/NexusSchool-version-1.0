@@ -56,8 +56,11 @@ class DocumentCenter extends Page implements HasForms
     public function generateDocument(): void
     {
         $data = $this->form->getState();
+        $tenantId = tenant()?->getKey();
 
-        $student = Student::find($data['student_id']);
+        $student = $tenantId === null
+            ? null
+            : Student::where('school_id', $tenantId)->find($data['student_id']);
         if (! $student) {
             Notification::make()->title('Élève introuvable')->danger()->send();
 
@@ -85,7 +88,13 @@ class DocumentCenter extends Page implements HasForms
 
     public function getRecentDocuments(): \Illuminate\Support\Collection
     {
-        return GeneratedDocument::where('school_id', tenant('id'))
+        $tenantId = tenant()?->getKey();
+
+        if ($tenantId === null) {
+            return collect();
+        }
+
+        return GeneratedDocument::where('school_id', $tenantId)
             ->latest()
             ->limit(10)
             ->get();

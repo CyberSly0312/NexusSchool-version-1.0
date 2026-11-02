@@ -22,11 +22,16 @@ class EnrollmentChart extends ChartWidget
 
     protected function getData(): array
     {
-        $data = StudentEnrollment::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-            ->whereYear('created_at', now()->year)
-            ->groupByRaw('MONTH(created_at)')
-            ->pluck('count', 'month')
-            ->toArray();
+        $tenantId = tenant()?->getKey();
+
+        $data = $tenantId === null
+            ? []
+            : StudentEnrollment::where('school_id', $tenantId)
+                ->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+                ->whereYear('created_at', now()->year)
+                ->groupByRaw('MONTH(created_at)')
+                ->pluck('count', 'month')
+                ->toArray();
 
         $labels = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
         $values = array_map(fn ($m) => $data[$m] ?? 0, range(1, 12));
