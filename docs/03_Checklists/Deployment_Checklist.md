@@ -8,18 +8,20 @@
 
 5. Install Dependencies
 
-6. Run Migrations
+6. Publish Filament Assets (`php artisan filament:assets`)
 
-7. Clear Cache
+7. Run Migrations
 
-8. Rebuild Cache
+8. Clear Cache
 
-9. Restart Queue
+9. Rebuild Cache
 
-10. Verify Storage Links
+10. Restart Queue
 
-11. Verify Permissions
+11. Verify Storage Links
 
-12. Smoke Testing
+12. Verify Permissions
 
-13. Production Validation
+13. Smoke Testing
+
+14. Production Validation

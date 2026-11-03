@@ -448,6 +448,19 @@ test('role to panel authorization matrix is enforced', function (): void {
     }
 });
 
+test('a user holding several authorized roles may access each corresponding panel', function (): void {
+    $school = makeTenant();
+
+    $user = routingUser($school, 'teacher');
+    $user->assignRole(Role::firstOrCreate(['name' => 'parent', 'guard_name' => 'web']));
+
+    // A multi-role user is authorized for every panel matching one of their
+    // roles, and still denied for panels outside their role set.
+    expect($user->canAccessPanel(Filament::getPanel('teacher')))->toBeTrue()
+        ->and($user->canAccessPanel(Filament::getPanel('parent')))->toBeTrue()
+        ->and($user->canAccessPanel(Filament::getPanel('school-admin')))->toBeFalse();
+});
+
 test('school panel access requires an active school', function (string $status): void {
     $school = makeTenant('Status School', $status);
     $admin = routingUser($school, 'school_admin');

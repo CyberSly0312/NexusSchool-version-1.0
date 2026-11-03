@@ -69,6 +69,28 @@ Never commit secrets to Git.
 
 ---
 
+# Filament Assets
+
+Filament serves precompiled JS/CSS from `public/`. Those files must match the
+installed Filament packages. After every `composer install` or `composer update`,
+republish them before serving traffic:
+
+```bash
+php artisan filament:assets
+php artisan optimize:clear
+```
+
+Never deploy a Filament version change without this step. Stale published
+assets can stop Alpine from booting on every panel page, which breaks the
+password reveal toggle and can make the login form report
+"The password field is required." even though the password was entered.
+
+Asset URLs are versioned with the package version. When republishing the same
+version, purge any browser or CDN cache (or hard-refresh) so clients do not
+keep serving the previous copy of the file.
+
+---
+
 # Scaling
 
 Support:
