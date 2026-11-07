@@ -10,7 +10,7 @@
 
 **Owner:** Architecture Team
 
-**Last Updated:** 10 October 2026
+**Last Updated:** 05 November 2026
 
 ---
 
@@ -43,19 +43,22 @@ Phase 3 — Academic Records
 
 Current Sprint
 
-SPR-014 — Records Lifecycle Management (In Progress — Class Council Integration Complete)
+None — governance reconciliation only. SPR-016 remains IN PROGRESS at Phases 1–5.
 
 Current Status
 
-✅ SPR-009.5 Academic Policies Engine implemented — architectural prerequisite
-(AD §6) lifted. ✅ SPR-014 first slice implemented (metadata envelope, state
-machine, actions, policy, 12 tests / 38 assertions, PHPStan + Pint clean).
-✅ Report Card integration complete (RecordsLifecycleContract + Adapter, 5 integration tests).
-✅ Academic Communication integration complete (RecordsLifecycleContract + Adapter, 5 integration tests).
-✅ Class Council integration complete (RecordsLifecycleContract + Adapter, 5 integration tests).
-All three domains register lifecycle metadata through the contract/adapter pattern.
-27 tests / 97 assertions total for the RecordsLifecycle integration surface.
-Full suite: 1,889 tests / 4,507 assertions.
+✅ SPR-009.5 Academic Policies Engine implemented — architectural prerequisite lifted.
+✅ SPR-014 implemented and targeted-tested (metadata envelope, state machine, actions,
+policy, three source-domain contract/adapter integrations). Remains governance-DEFERRED
+pending the closure decision.
+✅ SPR-015 Certificate & Transcript Engine implemented and targeted-tested.
+🟡 SPR-016 Identity & Verification Engine — Phases 1–5 implemented; Phase 6B
+production issuance DEFERRED; QR DEFERRED.
+🔲 SPR-017 Archive & Cloud Storage — DOCUMENTED ONLY; ADR-024 Proposed; not implemented.
+
+Working tree is clean at HEAD `d42dbef` (2026-11-03) except the two pre-existing
+untracked ZIP files. See the 2026-11-05 handoff note below and
+`GOVERNANCE_RECONCILIATION_2026-11-05.md`.
 
 ---
 
@@ -168,35 +171,33 @@ reconciliation time — it was Planned / Not Started. It has since been
 
 # 5. Work In Progress
 
-SPR-014 Records Lifecycle Management — first slice is implemented and validated
-(metadata envelope, state machine, 3 actions, policy, factory, 12 tests / 38
-assertions, PHPStan exit 0, Pint clean). The source-domain integration seams
-are not wired: neither Report Card nor Academic Communication currently
-registers lifecycle metadata through the RecordsLifecycle envelope. The working
-tree also carries a large **pre-existing uncommitted refonte**, the ESP-002
-changes, and the SPR-009.5 additions (~300+ files vs HEAD `ac8acc2`) —
-**UNCOMMITTED REFACTORING / UNCLASSIFIED** until a separate forensic review.
+No implementation is in progress. SPR-014 is implemented and targeted-tested with
+all three source-domain seams wired (Report Card, Academic Communication, Class
+Council), but it remains governance-DEFERRED pending the closure decision. SPR-016
+Phases 1–5 are implemented and targeted-tested; Phase 6B production issuance and QR
+remain deferred. SPR-017 is documented only.
+
+The working tree is clean at HEAD `d42dbef` except two pre-existing untracked ZIP
+files. The earlier ~300-file uncommitted-refonte statement is historical; that work
+is now committed.
 
 ---
 
 # 6. Immediate Next Sprint
 
-SPR-014
+SPR-017
 
-Records Lifecycle Management Engine
+Archive & Cloud Storage Platform — planning / ADR-024 architecture review
 
 Status
 
-In Progress — first slice implemented and validated.
+Not started. ADR-024 is **Proposed**; no implementation is authorized yet.
 
-Next Increment
+Next Decision
 
-Wire the source-domain integration seam: when Report Card generates / publishes /
-archives a run, register a lifecycle record via `RecordLifecycleService`. When
-Academic Communication publishes / archives a document, register a lifecycle
-record. This requires a new `RecordsLifecycleContract` in the ReportCard and
-AcademicCommunication domain contract layers, adapters in the infrastructure
-layer, and event listeners in the service providers.
+Convene the architecture review of ADR-024 and record the SPR-014 closure decision
+as an interlock. Do not start SPR-017 implementation until ADR-024 is accepted or
+revised.
 
 ---
 
@@ -204,20 +205,23 @@ layer, and event listeners in the service providers.
 
 SPR-014
 
-Records Lifecycle Management (must wait for the SPR-009.5 dependency decision)
+Records Lifecycle Management — implemented and targeted-tested; **DEFERRED**
+pending closure (do not mark COMPLETE)
 
 SPR-015
 
-Certificate & Transcript Engine
+Certificate & Transcript Engine — implemented and targeted-tested; reported
+COMPLETED. ADR-021 remains Proposed.
 
 SPR-016
 
-Identity & Verification Engine
+Identity & Verification Engine — **IN PROGRESS** (Phases 1–5 implemented;
+Phase 6B issuance deferred; QR deferred)
 
 SPR-017
 
 Archive & Cloud Storage Platform — **Phase 9 Enterprise Services** (ADR-024
-Proposed, 2026-10-10; see the 2026-10-10 handoff note below)
+Proposed, 2026-10-10; see the 2026-10-10 and 2026-11-05 handoff notes below)
 
 ---
 
@@ -356,12 +360,15 @@ Current Quality Gates
 * Missing sprint reports for completed engines: SPR-005 (Guardian), SPR-007
   (Timetable), SPR-008 (Attendance), SPR-009 (Assessment). SPR-009.5 now has a
   report (SPR-009.5_Academic_Policies_Engine_Report.md).
-* Repository is uncommitted (~300 files vs HEAD `ac8acc2`): pre-existing refonte
-  + ESP-002 + SPR-009.5 changes are not anchored to a commit.
-* Full-repository Pint reports 419 pre-existing failing files (legacy
+* Repository baseline (2026-11-05): clean at HEAD `d42dbef`, except two pre-existing
+  untracked ZIP files. The earlier ~300-file uncommitted-refonte statement is
+  historical.
+* Full-repository Pint historically reported 419 pre-existing failing files (legacy
   `app/Models`, `app/Filament`, Plugin/Assessment legacy pages, seeders,
-  migrations, legacy tests) — untouched, tracked in TECHNICAL_DEBT. All
-  SPR-009.5-touched files are Pint-clean.
+  migrations, legacy tests) — untouched, tracked in TECHNICAL_DEBT. Full-repository
+  Pint was not re-run in the 2026-11-05 reconciliation; scoped Pint passed.
+* ADR-021 remains Proposed despite SPR-015 implementation; ADR-024 remains Proposed;
+  ADR-023 is absent/reserved; ADR-001 and several related ADRs are 0 bytes.
 
 No regression introduced by current work.
 
@@ -582,3 +589,46 @@ The pre-existing, unrelated MariaDB `coefficients` index identifier-length defec
 (65 chars > 64) remains tracked separately and was not touched. The working tree
 continues to carry the large pre-existing uncommitted refonte; this session added
 only `ADR-024.md` and the documented governance notes above.
+
+## 2026-11-05 — Governance reconciliation (pre-SPR-017)
+
+Full evidence and status taxonomy:
+`GOVERNANCE_RECONCILIATION_2026-11-05.md`.
+
+**Baseline recorded before edits:** branch `main`, HEAD `d42dbef` (2026-11-03),
+`git status --short` showing only `?? 2_NexusSchool.zip` and `?? NexusSchool.zip`.
+No tracked modifications, no staged changes, no reset/restore/clean performed.
+
+**Verified status:**
+
+* **SPR-014** — implemented and targeted-tested. RecordsLifecycle unit: 6 tests /
+  19 assertions. Combined targeted run (RecordsLifecycle feature +
+  CertificateAndTranscript unit/feature + IdentityAndVerification unit/feature):
+  143 tests / 981 assertions, 89.14 s. Governance **DEFERRED**. Full DoD is not
+  satisfied because review approval, staging deployment and the closure decision are
+  not evidenced. Do not mark COMPLETE.
+* **SPR-015** — implemented and targeted-tested; report says COMPLETED. ADR-021 is
+  still **Proposed** and needs architecture review (do not silently promote it).
+* **SPR-016** — Phases 1–5 implemented and targeted-tested; Phase 6B production
+  issuance **DEFERRED**; QR **DEFERRED**. `issueForDocument()` has no production
+  caller. SPR-016 remains IN PROGRESS.
+* **SPR-017** — **DOCUMENTED ONLY / NOT IMPLEMENTED**. ADR-024 remains **Proposed**.
+  No `App\Domains\Archive`, archive migration, archive route or dedicated archive
+  config exists. The legacy `backups` table/config is a System artifact, not
+  SPR-017. ADR-023 remains absent/reserved.
+
+**Quality gates (targeted only):** scoped PHPStan exit 0 (`[OK] No errors`);
+scoped Pint passed. Full-repository Pest/PHPStan/Pint were not re-executed.
+
+**MariaDB `coefficients`:** the historical 65-character index defect is resolved in
+code by commit `1696851`, which explicitly names the index
+`coefficients_school_class_subject_unique` (40 characters). Historical blocker
+references in older reports are stale. No migration was modified.
+
+**Documentation updated:** `MASTER_ROADMAP.md`, `CURRENT_POSITION.md`,
+`PROJECT_STATE.md`, this handoff, plus the new reconciliation report. No application
+code, migration, route, config, dependency, ADR or business logic was changed.
+
+**Next action:** convene the ADR-024 architecture review, recording the SPR-014
+closure decision as an interlock. Do not start SPR-017 implementation until ADR-024
+is accepted or revised.

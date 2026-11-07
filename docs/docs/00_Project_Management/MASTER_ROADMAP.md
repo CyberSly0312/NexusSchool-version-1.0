@@ -10,7 +10,7 @@
 
 **Owner:** NexusSchool Architecture Team
 
-**Last Updated:** 10 October 2026
+**Last Updated:** 05 November 2026
 
 ---
 
@@ -135,13 +135,13 @@ Transform academic data into validated educational decisions.
 
 Status
 
-🔲 Planned — Not Started
+🟡 In Progress — implemented slices; SPR-014 closure pending
 
 Sprints
 
-* SPR-014 Records Lifecycle Management Engine — 🔲 PLANNED / NOT STARTED
-* SPR-015 Certificate & Transcript Engine
-* SPR-016 Identity & Verification Engine
+* SPR-014 Records Lifecycle Management Engine — 🟡 IMPLEMENTED / DEFERRED (closure pending)
+* SPR-015 Certificate & Transcript Engine — ✅ COMPLETED
+* SPR-016 Identity & Verification Engine — 🟡 IN PROGRESS (Phases 1–5 implemented; Phase 6B deferred)
 
 Objective
 
@@ -276,20 +276,21 @@ SPR-015 — Certificate & Transcript Engine (COMPLETED)
 
 ESP-002
 
-Completed (hardening activity — working tree, uncommitted)
+Completed (hardening activity; committed in repository history)
 
 Current Sprint
 
-SPR-016 — Identity & Verification Engine — ARCHITECTURE DECISION / INITIALIZATION
-(ADR-022, 2026-09-07); NOT IMPLEMENTED
+None — governance reconciliation only. SPR-016 remains IN PROGRESS at Phases 1–5
+(ADR-022 governs); Phase 6B production issuance is DEFERRED.
 
 Next Sprint
 
-SPR-016 — Identity & Verification Engine (implementation phase, ADR-022 governs)
+SPR-017 planning / ADR-024 architecture review (Phase 9 — Enterprise Services).
+SPR-014 closure decision is an interlock.
 
 SPR-014
 
-Planned — Not Started
+IMPLEMENTED — VERIFIED; governance-DEFERRED pending closure decision
 
 Overall Progress
 
@@ -409,3 +410,40 @@ INITIALIZATION; NOT IMPLEMENTED**, while later handoffs (`SESSION_HANDOFF.md`
 2026-09-07 … 2026-09-08) show SPR-016 Phases 1–5 implemented. Current reality:
 **SPR-016 IN PROGRESS (Phases 1–5 implemented, ADR-022 governs)**. This
 reconciliation records that by reference without rewriting the phase body above.
+
+## 2026-11-05 — Governance reconciliation (pre-SPR-017)
+
+Full evidence and status taxonomy:
+`GOVERNANCE_RECONCILIATION_2026-11-05.md`.
+
+**Repository baseline:** branch `main`, HEAD `d42dbef` (2026-11-03), clean working
+tree except two pre-existing untracked ZIP files. Older references to HEAD
+`ac8acc2` and a large uncommitted refonte are historical.
+
+**Sprint status:**
+
+* **SPR-014** — implemented and targeted-tested; governance-**DEFERRED** pending
+  the closure decision. It must not be marked COMPLETE.
+* **SPR-015** — implemented and targeted-tested; reported COMPLETED. ADR-021 remains
+  **Proposed** and requires architecture review.
+* **SPR-016** — Phases 1–5 implemented and targeted-tested; Phase 6B production
+  issuance **DEFERRED**; QR **DEFERRED**. No production caller of
+  `issueForDocument()` exists.
+* **SPR-017** — **DOCUMENTED ONLY / NOT IMPLEMENTED**. ADR-024 remains **Proposed**;
+  no `App\Domains\Archive`, archive migration, route or dedicated config exists.
+  ADR-023 remains absent/reserved.
+
+**Quality evidence from this reconciliation (targeted only):** RecordsLifecycle unit
+6 tests / 19 assertions; combined RecordsLifecycle feature + CertificateAndTranscript
+unit/feature + IdentityAndVerification unit/feature 143 tests / 981 assertions.
+Scoped PHPStan exit 0; scoped Pint passed. Full-repository Pest/PHPStan/Pint were not
+re-executed.
+
+**MariaDB `coefficients`:** the historical 65-character index defect is resolved in
+code by commit `1696851`, which explicitly names the index
+`coefficients_school_class_subject_unique` (40 characters). The migration was not
+modified by this reconciliation.
+
+**Next action:** convene the architecture review of ADR-024 (Proposed), recording the
+SPR-014 closure decision as an interlock. Do not start SPR-017 implementation until
+ADR-024 is accepted or revised.

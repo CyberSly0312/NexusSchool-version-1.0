@@ -15,6 +15,9 @@ enum AuditAction: string
     case Login = 'login';
     case Logout = 'logout';
     case FailedLogin = 'failed_login';
+    case Provisioned = 'provisioned';
+    case SetupLinkIssued = 'setup_link_issued';
+    case PasswordSet = 'password_set';
 
     public function label(): string
     {
@@ -28,6 +31,9 @@ enum AuditAction: string
             self::Login => 'Connexion',
             self::Logout => 'Déconnexion',
             self::FailedLogin => 'Échec de connexion',
+            self::Provisioned => 'Provisionné',
+            self::SetupLinkIssued => 'Lien de configuration émis',
+            self::PasswordSet => 'Mot de passe défini',
         };
     }
 
@@ -43,6 +49,9 @@ enum AuditAction: string
             self::Login => 'success',
             self::Logout => 'secondary',
             self::FailedLogin => 'danger',
+            self::Provisioned => 'success',
+            self::SetupLinkIssued => 'warning',
+            self::PasswordSet => 'info',
         };
     }
 

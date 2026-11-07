@@ -22,6 +22,12 @@ use Stancl\Tenancy\Database\Concerns\HasDomains;
 use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant;
 
+/**
+ * @property \App\Domains\School\Enums\SchoolStatus $status
+ * @property \App\Domains\School\Enums\SchoolType $school_type
+ * @property array<string, mixed>|null $settings
+ * @property array<string, mixed>|null $metadata
+ */
 class School extends Tenant
 {
     use HasDomains;

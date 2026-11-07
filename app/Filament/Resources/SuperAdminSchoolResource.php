@@ -117,21 +117,20 @@ class SuperAdminSchoolResource extends Resource
                 ])->columns(3),
 
             Section::make('Administrateur de l\'école')
+                ->description('Un compte School Admin est créé avec un lien de configuration à usage unique. Aucun mot de passe n\'est généré ni affiché.')
                 ->schema([
-                    Forms\Components\Toggle::make('create_admin')
-                        ->label('Créer un administrateur')
-                        ->default(false)
-                        ->reactive(),
                     Forms\Components\TextInput::make('admin_name')
                         ->label('Nom complet')
-                        ->maxLength(255)
-                        ->visible(fn ($get) => $get('create_admin')),
+                        ->required(fn (string $operation): bool => $operation === 'create')
+                        ->maxLength(255),
                     Forms\Components\TextInput::make('admin_email')
                         ->label('Email')
                         ->email()
-                        ->maxLength(255)
-                        ->visible(fn ($get) => $get('create_admin')),
-                ])->collapsible(),
+                        ->required(fn (string $operation): bool => $operation === 'create')
+                        ->maxLength(255),
+                ])
+                ->columns(2)
+                ->visible(fn (string $operation): bool => $operation === 'create'),
         ]);
     }
 

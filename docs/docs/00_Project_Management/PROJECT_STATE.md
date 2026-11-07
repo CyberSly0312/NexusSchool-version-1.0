@@ -10,7 +10,7 @@
 
 **Owner:** NexusSchool Architecture Team
 
-**Last Updated:** 07 September 2026
+**Last Updated:** 05 November 2026
 
 ---
 
@@ -135,22 +135,25 @@ Markdown
 | Report Card            | ✅ Complete     |
 | Academic Communication | ✅ Complete     |
 | Class Council          | ✅ Complete     |
-| Records Lifecycle      | 🟡 Deferred      |
+| Records Lifecycle      | 🟡 Deferred (verified) |
 | Certificate            | ✅ Complete     |
-| Identity Verification  | 🟡 Initialization |
+| Identity Verification  | 🟡 In Progress (Phases 1–5) |
+| Archive (SPR-017)      | 🔲 Documented only — ADR-024 Proposed |
 
-Status legend (reconciliation 2026-08-10, updated 2026-08-19)
+Status legend (reconciliation 2026-08-10, updated 2026-11-05)
 
 * ✅ Complete — implementation exists in code. Certificate & Transcript (SPR-015)
-  is implemented (bounded context, report, green suites). Academic Policies
+  is implemented (bounded context, report, targeted green suites). Academic Policies
   (SPR-009.5) is implemented (bounded context `App\Domains\AcademicPolicy`; see the
   sprint report).
-* 🟡 Initialization — architecture decision / ADR phase; no implementation
-  (Identity & Verification, SPR-016 — ADR-022, 2026-09-07).
+* 🟡 In Progress — implemented slices exist and remaining work is explicitly deferred
+  (Identity & Verification, SPR-016 — Phases 1–5 implemented; Phase 6B issuance
+  deferred; QR deferred).
 * 🟡 Deferred — validated implementation awaiting final closure decision
   (Records Lifecycle SPR-014: metadata envelope, state machine, actions, policy,
-  all three source-domain integration seams wired, 12 tests / 38 assertions,
-  PHPStan + Pint clean).
+  all three source-domain integration seams wired; targeted suites green).
+* 🔲 Documented only — architecture/decision artifacts exist without implementation
+  (Archive SPR-017 — ADR-024 Proposed, no `App\Domains\Archive`).
 * 🔲 Planned — no implementation.
 * ⏳ Planned (future) — no implementation.
 
@@ -278,6 +281,11 @@ changes, domain changes) plus the ESP-002 hardening changes — approximately
 to a new commit**. This work is **UNCOMMITTED REFACTORING / UNCLASSIFIED** until
 a separate forensic review establishes its scope and status.
 
+Repository state (reconciliation 2026-11-05): the statement above is historical.
+The working tree is clean at HEAD `d42dbef` (2026-11-03), with only the
+pre-existing untracked `2_NexusSchool.zip` and `NexusSchool.zip` present. No
+tracked modifications or staged changes exist.
+
 ---
 
 # 10. Current Weaknesses
@@ -290,7 +298,9 @@ Current limitations include
 * Library pending
 * Inventory pending
 * Mobile APIs pending
-* Public Verification Portal pending
+* Public Verification Portal pending (the public verification endpoint exists)
+* Verification identity production issuance pending (SPR-016 Phase 6B deferred)
+* Archive & Cloud Storage Platform pending (SPR-017 documented only; ADR-024 Proposed)
 * Government Integration pending
 
 These are planned and do not represent architectural defects.
@@ -412,3 +422,38 @@ awaiting the final closure decision; must not be treated as COMPLETE before that
 closure. Priority list corrected above (Priority 4 was a duplicate of Priority 3).
 
 No code was changed by this reconciliation; governance documents only.
+
+## 2026-11-05 — Governance reconciliation (pre-SPR-017)
+
+Full evidence and status taxonomy:
+`GOVERNANCE_RECONCILIATION_2026-11-05.md`.
+
+**Baseline:** branch `main`, HEAD `d42dbef` (2026-11-03), clean tree except two
+pre-existing untracked ZIP files. Earlier ~298-file uncommitted-refonte statements
+are historical.
+
+**Technical status verified:**
+
+* **SPR-014** — implemented and targeted-tested (RecordsLifecycle unit 6 tests /
+  19 assertions; combined targeted run 143 tests / 981 assertions). Remains
+  governance-**DEFERRED**. Full DoD is not satisfied because review approval,
+  staging deployment and the closure decision are not evidenced.
+* **SPR-015** — implemented and targeted-tested. ADR-021 remains **Proposed**; the
+  status discrepancy is open for architecture review.
+* **SPR-016** — Phases 1–5 implemented and targeted-tested; Phase 6B issuance
+  **DEFERRED**; QR **DEFERRED**; no production caller of `issueForDocument()`.
+* **SPR-017** — **DOCUMENTED ONLY / NOT IMPLEMENTED**; ADR-024 **Proposed**. No
+  Archive bounded context, archive migration, route or dedicated config exists.
+  The legacy `backups` table/config is a System artifact, not SPR-017.
+* **ADR-023** — absent/reserved; not created.
+
+**Quality evidence (targeted only):** scoped PHPStan exit 0; scoped Pint passed.
+Full-repository Pest/PHPStan/Pint were not re-executed.
+
+**MariaDB `coefficients`:** resolved in code by commit `1696851` (explicit
+40-character index name `coefficients_school_class_subject_unique`). Historical
+blocker references are stale.
+
+**Next action:** architecture review of ADR-024, with the SPR-014 closure decision
+recorded as an interlock. Do not start SPR-017 implementation until ADR-024 is
+accepted or revised.
