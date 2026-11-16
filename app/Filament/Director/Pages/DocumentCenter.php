@@ -13,6 +13,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Schema;
 
 class DocumentCenter extends Page implements HasForms
 {
@@ -30,13 +31,15 @@ class DocumentCenter extends Page implements HasForms
 
     protected string $view = 'filament.director.pages.document-center';
 
-    public ?string $selectedDocumentType = null;
+    public ?string $document_type = null;
 
-    public ?string $selectedStudentId = null;
+    public ?string $student_id = null;
 
-    public function form(Forms\Form $form): Forms\Form
+    public ?string $destination = null;
+
+    public function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->schema([
             Forms\Components\Select::make('document_type')
                 ->label('Type de document')
                 ->options(collect(DocumentType::cases())->mapWithKeys(fn ($c) => [$c->value => $c->label()])->toArray())
@@ -44,7 +47,18 @@ class DocumentCenter extends Page implements HasForms
                 ->reactive(),
             Forms\Components\Select::make('student_id')
                 ->label('Élève')
-                ->options(fn () => Student::where('school_id', tenant('id'))->get()->mapWithKeys(fn ($s) => [$s->id => ($s->student_number ?? $s->id) . ' — ' . ($s->first_name ?? '') . ' ' . ($s->last_name ?? '')])->toArray())
+                ->options(function (): array {
+                    $tenantId = tenant()?->getKey();
+
+                    if ($tenantId === null) {
+                        return [];
+                    }
+
+                    return Student::where('school_id', $tenantId)
+                        ->get()
+                        ->mapWithKeys(fn ($s) => [$s->id => ($s->student_number ?? $s->id) . ' — ' . ($s->first_name ?? '') . ' ' . ($s->last_name ?? '')])
+                        ->toArray();
+                })
                 ->searchable()
                 ->preload()
                 ->required(),

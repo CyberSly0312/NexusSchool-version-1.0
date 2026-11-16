@@ -6,6 +6,7 @@ namespace App\Filament\Director\Widgets;
 
 use App\Models\Payment;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Carbon;
 
 class PaymentsChart extends ChartWidget
 {
@@ -26,13 +27,14 @@ class PaymentsChart extends ChartWidget
 
         $data = $tenantId === null
             ? []
-            : Payment::where('school_id', $tenantId)
+            : Payment::query()
+                ->where('school_id', $tenantId)
                 ->where('status', 'paid')
-                ->selectRaw('MONTH(paid_at) as month, SUM(amount) as total')
                 ->whereYear('paid_at', now()->year)
-                ->groupByRaw('MONTH(paid_at)')
-                ->pluck('total', 'month')
-                ->toArray();
+                ->get(['paid_at', 'amount'])
+                ->groupBy(fn (Payment $payment): int => (int) Carbon::parse($payment->paid_at)->month)
+                ->map(fn ($payments): float => (float) $payments->sum(fn (Payment $payment): float => (float) $payment->amount))
+                ->all();
 
         $labels = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
         $values = array_map(fn ($m) => round($data[$m] ?? 0), range(1, 12));

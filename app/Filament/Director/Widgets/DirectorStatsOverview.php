@@ -32,12 +32,12 @@ class DirectorStatsOverview extends StatsOverviewWidget
         $totalStaff = User::where('school_id', $tenantId)->count();
 
         $today = now()->toDateString();
-        $presentToday = AttendanceRecord::where('school_id', $tenantId)->where('date', $today)->where('status', 'present')->count();
-        $absentToday = AttendanceRecord::where('school_id', $tenantId)->where('date', $today)->where('status', 'absent')->count();
-        $lateToday = AttendanceRecord::where('school_id', $tenantId)->where('date', $today)->where('status', 'late')->count();
+        $presentToday = AttendanceRecord::where('school_id', $tenantId)->whereDate('date', $today)->where('status', 'present')->count();
+        $absentToday = AttendanceRecord::where('school_id', $tenantId)->whereDate('date', $today)->where('status', 'absent')->count();
+        $lateToday = AttendanceRecord::where('school_id', $tenantId)->whereDate('date', $today)->where('status', 'late')->count();
 
         $pendingPayments = Payment::where('school_id', $tenantId)->where('status', 'pending')->count();
-        $todayPayments = Payment::where('school_id', $tenantId)->where('paid_at', $today)->sum('amount');
+        $todayPayments = Payment::where('school_id', $tenantId)->whereDate('paid_at', $today)->sum('amount');
 
         $pendingDocuments = GeneratedDocument::where('school_id', $tenantId)->whereNull('signed_at')->count();
         $openIncidents = Incident::where('school_id', $tenantId)->where('status', 'open')->count();

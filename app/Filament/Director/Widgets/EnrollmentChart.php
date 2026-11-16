@@ -26,12 +26,12 @@ class EnrollmentChart extends ChartWidget
 
         $data = $tenantId === null
             ? []
-            : StudentEnrollment::where('school_id', $tenantId)
-                ->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            : StudentEnrollment::query()
+                ->where('school_id', $tenantId)
                 ->whereYear('created_at', now()->year)
-                ->groupByRaw('MONTH(created_at)')
-                ->pluck('count', 'month')
-                ->toArray();
+                ->get(['created_at'])
+                ->countBy(fn (StudentEnrollment $enrollment): int => $enrollment->created_at->month)
+                ->all();
 
         $labels = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
         $values = array_map(fn ($m) => $data[$m] ?? 0, range(1, 12));

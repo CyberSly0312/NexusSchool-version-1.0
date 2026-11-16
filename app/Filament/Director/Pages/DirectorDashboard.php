@@ -21,7 +21,6 @@ class DirectorDashboard extends Dashboard
             \App\Filament\Director\Widgets\EnrollmentChart::class,
             \App\Filament\Director\Widgets\AttendanceChart::class,
             \App\Filament\Director\Widgets\PaymentsChart::class,
-            \App\Filament\Director\Widgets\AcademicResultsChart::class,
         ];
     }
 }
