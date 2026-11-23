@@ -24,6 +24,20 @@ class ApiTokenService
     public function create(ApiClient $client, array $data): ApiTokenData
     {
         $validated = ApiTokenRules::validate($data, 'create');
+
+        if (isset($validated['user_id'])) {
+            $user = \App\Models\User::query()
+                ->whereKey($validated['user_id'])
+                ->where('school_id', $client->school_id)
+                ->first();
+
+            if (! $user || ! $user->isActive()) {
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'user_id' => ['Invalid user.'],
+                ]);
+            }
+        }
+
         $plainTextToken = Str::random(80);
         $validated['token'] = hash('sha256', $plainTextToken);
         $validated['api_client_id'] = $client->id;

@@ -132,39 +132,7 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     public function canAccessPanel(Panel $panel): bool
     {
-        if (! $this->isActive()) {
-            return false;
-        }
-
-        // The platform administrator is a central user: it may only use the
-        // central panel and must never enter a school (tenant) panel.
-        if ($this->hasRole('super_admin')) {
-            return $panel->getId() === 'super-admin';
-        }
-
-        // The central panel is reserved for platform administrators.
-        if ($panel->getId() === 'super-admin') {
-            return false;
-        }
-
-        $panelRoles = match ($panel->getId()) {
-            'admin', 'school-admin' => ['school_admin'],
-            'director' => ['director'],
-            'teacher' => ['teacher'],
-            'student' => ['student'],
-            'parent' => ['parent'],
-            'accountant' => ['accountant'],
-            'secretary' => ['secretary'],
-            default => [],
-        };
-
-        if (empty($panelRoles) || ! $this->hasAnyRole($panelRoles)) {
-            return false;
-        }
-
-        // School panels require a valid, active school relationship. A missing,
-        // deleted or non-active school must never grant panel access.
-        return $this->hasActiveSchool();
+        return app(\App\Services\PanelAccessRegistry::class)->canUserAccessPanel($this, $panel);
     }
 
     public function hasActiveSchool(): bool

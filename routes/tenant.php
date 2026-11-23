@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Domains\School\Presentation\Http\SchoolAccessPortalController;
 use App\Domains\School\Presentation\Http\SchoolAdminSetupController;
+use App\Http\Controllers\Auth\SchoolGatewayAuthController;
 use App\Http\Middleware\InitializeTenancyForSchoolSetup;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
@@ -46,6 +47,14 @@ Route::middleware([
     \App\Http\Middleware\InitializeTenancyForPanel::class,
 ])->group(function () {
     Route::get('/', SchoolAccessPortalController::class)->name('school.portal');
+
+    Route::get('/login', [SchoolGatewayAuthController::class, 'showLogin'])->name('school.gateway.login');
+    Route::post('/login', [SchoolGatewayAuthController::class, 'login'])->middleware('throttle:20,1')->name('school.gateway.login.submit');
+    Route::post('/logout', [SchoolGatewayAuthController::class, 'logout'])->name('school.gateway.logout');
+
+    Route::get('/panel-select', [SchoolGatewayAuthController::class, 'selectPanel'])->name('school.gateway.select-panel');
+    Route::post('/panel-select', [SchoolGatewayAuthController::class, 'enterPanel'])->name('school.gateway.enter-panel');
+    Route::get('/no-panel-access', [SchoolGatewayAuthController::class, 'selectPanel'])->name('school.gateway.no-access');
 });
 
 /*

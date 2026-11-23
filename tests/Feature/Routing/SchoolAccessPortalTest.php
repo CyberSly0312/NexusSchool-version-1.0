@@ -15,9 +15,10 @@ use Tests\TestCase;
 |--------------------------------------------------------------------------
 |
 | The root URL (`/`) on a registered school domain resolves to the School
-| Access Portal. The portal is a navigation / access-entry page only: the
-| profile cards link to the existing Filament panel login routes, where the
-| existing `User::canAccessPanel()` authorization stays authoritative.
+| Access Portal. The portal is a navigation / access-entry page only: it
+| exposes a single centralized gateway sign-in entry point. Panel access is
+| resolved server-side after authentication; `User::canAccessPanel()` remains
+| authoritative.
 |
 */
 
@@ -77,17 +78,19 @@ test('one school portal never displays another school identity', function (): vo
     $this->get('/')->assertDontSee('Beta School');
 });
 
-test('the school access portal presents all seven profiles linking to their filament login routes', function (): void {
-    $schoolId = makeTenant('Portal School');
+test('the school access portal presents a centralized gateway sign-in without pre-auth role selection', function (): void {
+    makeTenant('Portal School');
 
     $response = $this->get('/');
 
-    foreach (['school-admin', 'director', 'secretary', 'accountant', 'teacher', 'student', 'parent'] as $panel) {
-        expect($response->getContent())->toContain(route("filament.{$panel}.auth.login"));
-    }
+    $response->assertSuccessful();
+    $response->assertSee(route('school.gateway.login'), false);
+    $response->assertDontSee('Select the profile', false);
+    $response->assertDontSee('name="role"', false);
+    $response->assertDontSee('name="panel"', false);
 
-    foreach (['School Admin', 'Director', 'Secretary', 'Accountant', 'Teacher', 'Student', 'Parent'] as $label) {
-        expect($response->getContent())->toContain($label);
+    foreach (['school-admin', 'director', 'secretary', 'accountant', 'teacher', 'student', 'parent'] as $panel) {
+        $response->assertDontSee(route("filament.{$panel}.auth.login"), false);
     }
 });
 

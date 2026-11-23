@@ -11,7 +11,6 @@
     "System Administration": "Administration système",
     "Transport": "Transport",
     "Workflow Engine": "Moteur de workflow",
-
     "Academic Year Details": "Détails de l'année scolaire",
     "Academic Term Details": "Détails du trimestre",
     "Class Details": "Détails de la classe",
@@ -54,7 +53,6 @@
     "Vehicle Information": "Informations sur le véhicule",
     "Fuel & Compliance": "Carburant et conformité",
     "Status & Notes": "Statut et notes",
-    "Personal Information": "Informations personnelles",
     "License Details": "Détails du permis",
     "Emergency Contact": "Contact d'urgence",
     "Route Information": "Informations sur l'itinéraire",
@@ -89,9 +87,7 @@
     "Conversation Details": "Détails de la conversation",
     "Context": "Contexte",
     "Summary": "Résumé",
-    "Message Details": "Détails du message",
     "Token Usage": "Utilisation des jetons",
-    "Template Details": "Détails du modèle",
     "Prompts": "Prompts",
     "Model Configuration": "Configuration du modèle",
     "Knowledge Source Details": "Détails de la source de connaissances",
@@ -113,9 +109,7 @@
     "Permission Details": "Détails de la permission",
     "Maintenance Details": "Détails de la maintenance",
     "Affected Services": "Services affectés",
-    "Channel Details": "Détails du canal",
     "Description": "Description",
-
     "Activate": "Activer",
     "Verify": "Vérifier",
     "Add Action": "Ajouter une action",
@@ -123,7 +117,6 @@
     "Add Service": "Ajouter un service",
     "System Permission": "Permission système",
     "System Role": "Rôle système",
-
     "Academic Year": "Année scolaire",
     "Academic Term": "Trimestre",
     "Program": "Programme",
@@ -179,7 +172,6 @@
     "Fine": "Amende",
     "Reservation": "Réservation",
     "Assessment Result": "Résultat d'évaluation",
-
     "e.g., 2025-2026": "ex., 2025-2026",
     "Optional short code (e.g., AY-2526)": "Code court optionnel (ex., AN-2526)",
     "Optional short code (e.g., S1)": "Code court optionnel (ex., T1)",
@@ -208,7 +200,6 @@
     "Format: module.action (e.g., school.view)": "Format : module.action (ex., school.view)",
     "Building name": "Nom du bâtiment",
     "Floor number or name": "Numéro ou nom de l'étage",
-
     "Active": "Actif",
     "Inactive": "Inactif",
     "Pending": "En attente",
@@ -219,37 +210,30 @@
     "Completed": "Terminé",
     "Enabled": "Activé",
     "Disabled": "Désactivé",
-
     "Male": "Masculin",
     "Female": "Féminin",
     "Other": "Autre",
     "Yes": "Oui",
     "No": "Non",
-
     "Diesel": "Diesel",
     "Petrol": "Essence",
     "Electric": "Électrique",
     "Hybrid": "Hybride",
     "CNG": "GNC",
-
     "To School": "Vers l'école",
     "From School": "De l'école",
-
     "Email": "E-mail",
     "SMS": "SMS",
     "Push Notification": "Notification push",
     "Webhook": "Webhook",
     "Database": "Base de données",
-
     "Cash": "Espèces",
     "Bank Transfer": "Virement bancaire",
     "Carte": "Carte",
     "Card": "Carte",
     "Mobile Money": "Mobile Money",
-
     "Local": "Local",
     "S3": "S3",
-
     "Conversation": "Conversation",
     "In": "Entrée",
     "Out": "Sortie",
@@ -309,43 +293,53 @@
     "User Prompt Template": "Modèle de prompt utilisateur",
     "Template Variables": "Variables du modèle",
     "Table": "Table",
-
     "Low": "Faible",
     "Normal": "Normal",
     "High": "Élevé",
     "Urgent": "Urgent",
-
     "A - Motorcycle": "A - Moto",
     "B - Light Vehicle": "B - Véhicule léger",
     "C - Heavy Vehicle": "C - Véhicule lourd",
     "D - Passenger Vehicle": "D - Véhicule de passagers",
     "E - Trailer": "E - Remorque",
-
     "Primary Guardian": "Tuteur principal",
-
     "Overdue": "En retard",
     "Available": "Disponible",
-
     "Enrollment": "Inscription",
     "Attendance": "Présence",
     "Finance": "Finance",
     "General": "Général",
-
     "Pickup Stop": "Arrêt de montée",
     "Drop-off Stop": "Arrêt de descente",
     "Drop-off": "Descente",
-
     "Dashboard Title": "Tableau de bord",
     "Dashboard Description": "Vue d'ensemble de l'école",
     "Welcome to Nexus School": "Bienvenue sur Nexus School",
     "Nexus School Administration": "Administration Nexus School",
-
     ":resource Record": "Enregistrement :resource",
     "Create :resource": "Créer :resource",
     "Edit :resource": "Modifier :resource",
     "Delete :resource": "Supprimer :resource",
     "View :resource": "Voir :resource",
-
     "Filament": "Filament",
-    "All rights reserved.": "Tous droits réservés."
+    "All rights reserved.": "Tous droits réservés.",
+    "Sign in": "Se connecter",
+    "Sign out": "Se déconnecter",
+    "Sign in to your school": "Se connecter à votre école",
+    "School portal": "Portail scolaire",
+    "Use your school account credentials. Your authorized panel will be determined after authentication.": "Utilisez les identifiants de votre compte scolaire. Votre panneau autorisé sera déterminé après l’authentification.",
+    "Remember me": "Se souvenir de moi",
+    "Select a panel": "Sélectionner un panneau",
+    "Your account has access to multiple panels. Select one to continue.": "Votre compte a accès à plusieurs panneaux. Sélectionnez-en un pour continuer.",
+    "Available panels": "Panneaux disponibles",
+    "Continue": "Continuer",
+    "Access unavailable": "Accès indisponible",
+    "Your account is authenticated, but no authorized panel is available for this school.": "Votre compte est authentifié, mais aucun panneau autorisé n’est disponible pour cette école.",
+    "If you believe this is an error, contact your school administrator.": "Si vous pensez qu’il s’agit d’une erreur, contactez l’administrateur de votre école.",
+    "Welcome to :school": "Bienvenue à :school",
+    "Sign in with your school account. Your available panels are determined from your assigned roles after authentication.": "Connectez-vous avec votre compte scolaire. Vos panneaux disponibles sont déterminés à partir des rôles qui vous sont attribués après l’authentification.",
+    "Access is validated against your account, roles and school. Unauthorized panels are never granted entry.": "L’accès est validé en fonction de votre compte, de vos rôles et de votre école. Les panneaux non autorisés ne sont jamais accessibles.",
+    "These credentials do not match our records.": "Ces identifiants ne correspondent pas à nos enregistrements.",
+    "Your account is not active.": "Votre compte n’est pas actif.",
+    "Too many login attempts. Please try again in :seconds seconds.": "Trop de tentatives de connexion. Veuillez réessayer dans :seconds secondes."
 }
