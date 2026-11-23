@@ -1,5 +1,4 @@
 
-
 last prompt Nous avons terminé l’audit architectural complet de SPR-014.
 
 IMPORTANT :
