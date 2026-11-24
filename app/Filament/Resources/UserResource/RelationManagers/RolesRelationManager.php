@@ -17,7 +17,7 @@ class RolesRelationManager extends RelationManager
 {
     protected static string $relationship = 'roles';
 
-    protected static ?string $title = 'Roles';
+    protected static ?string $title = 'Rôles';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -52,7 +52,7 @@ class RolesRelationManager extends RelationManager
         return $schema
             ->schema([
                 Forms\Components\Select::make('name')
-                    ->label('Role')
+                    ->label('Rôle')
                     ->options(fn () => $query->pluck('name', 'name'))
                     ->required()
                     ->searchable()
@@ -81,7 +81,7 @@ class RolesRelationManager extends RelationManager
             ])
             ->headerActions([
                 Actions\CreateAction::make()
-                    ->label('Assign Role')
+                    ->label('Attribuer un rôle')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['guard_name'] = $data['guard_name'] ?? 'web';
 
@@ -89,7 +89,7 @@ class RolesRelationManager extends RelationManager
                     })
                     ->visible(! self::isSchoolAdminPanel()),
                 Actions\AssociateAction::make()
-                    ->label('Link Existing Role')
+                    ->label('Lier un rôle existant')
                     ->recordSelect(function (Forms\Components\Select $select) {
                         return $select
                             ->options(fn () => self::isSchoolAdminPanel()
@@ -105,10 +105,11 @@ class RolesRelationManager extends RelationManager
             ])
             ->actions([
                 Actions\DissociateAction::make()
-                    ->label('Remove'),
+                    ->label('Retirer'),
             ])
             ->bulkActions([
-                Actions\DissociateBulkAction::make(),
+                Actions\DissociateBulkAction::make()
+                    ->label('Retirer la sélection'),
             ]);
     }
 }

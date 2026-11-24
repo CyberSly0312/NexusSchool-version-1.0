@@ -42,6 +42,8 @@ uses(TestCase::class, RefreshDatabase::class)
         'Feature/Domains/CertificateAndTranscript',
         'Unit/Domains/IdentityAndVerification',
         'Feature/Domains/IdentityAndVerification',
+        'Unit/Domains/User',
+        'Feature/Domains/User',
     );
 
 /**

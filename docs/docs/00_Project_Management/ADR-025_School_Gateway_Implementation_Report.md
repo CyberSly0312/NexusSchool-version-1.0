@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | **IMPLEMENTED (focused first milestone) — TARGETED AUTOMATED TESTS PASS — NOT BROWSER-VALIDATED — NOT PRODUCTION-APPROVED** |
-| Date | 2026-11-23 |
+| Status | **Gateway: first implementation milestone completed with focused automated tests — OAuth tenant-binding: remediation implemented and focused tests passed — Existing API infrastructure resource isolation: focused tests passed — NOT BROWSER-VALIDATED — NOT PRODUCTION-APPROVED** |
+| Date | 2026-11-23 (updated 2026-11-24 for OAuth/API security verification documentation) |
 | Related ADR | `docs/ADR/ADR-025.md` — **PROPOSED** (not accepted; no implementation/production authorization granted by this report) |
-| Branch / HEAD | `main` / `dfc11f1e354ae6e4627597c62e6634ccee461d23` |
-| Scope | Documentation of completed focused implementation and focused validation for the centralized tenant-host-scoped school authentication gateway |
+| Branch / HEAD | `main` / `fab58b6dd93ebc7d0ebaeabfb8d1f81ac0a800d6` |
+| Scope | Documentation of completed focused gateway milestone, OAuth tenant-binding remediation, and API infrastructure tenant-isolation verification |
 | Application code modified by this documentation task | **None** |
 
 ---
@@ -57,11 +57,13 @@ This report does **not** accept ADR-025, authorize production use, authorize add
 | Trusted hosts/proxies/rate-limit store configuration | Expected to use existing deployment configuration; no deployment validation performed. | Configuration-dependent; not production-validated |
 | Back-button/browser history behavior after logout | HTTP session invalidation/regeneration verified; real browser back-button/cache/history behavior not validated. | HTTP-level pass; not browser-validated |
 
-## 5. Not Implemented
+## 5. Not Implemented / Not Fully Completed
 
 - MFA.
 - Family/Parent/Student relation-based authorization and family data ownership substrate.
-- API OAuth tenant/client/user binding remediation.
+- Refresh-token flow (none exists currently); any future implementation must include tenant-binding revalidation.
+- API tenant-host/domain resolution middleware for API routes (current protection relies on token binding and resource-level ownership enforcement).
+- Domain-record API endpoints for students/parents/classes/enrolments/grades/attendance/fees/payments (not present in inspected API routes; future endpoints must implement and test equivalent tenant scoping).
 - Session, remember-token, API-token, and Spatie permission-cache revocation on role/school/status changes.
 - Dedicated audit persistence verification/monitoring workflow beyond best-effort writes.
 - Production environment hardening enforcement/verification (cookies, trusted hosts, proxies, distributed rate-limit store).
@@ -76,7 +78,7 @@ This report does **not** accept ADR-025, authorize production use, authorize add
 
 ## 7. Not Approved for Production
 
-This milestone is **not approved for production**. Reasons include: ADR-025 remains PROPOSED; unresolved security/governance items remain; no real browser/mobile validation; no production env hardening verification; OAuth tenant-binding gap unresolved; revocation/MFA/family authorization not implemented.
+This milestone is **not approved for production**. Reasons include: ADR-025 remains PROPOSED; unresolved security/governance items remain; no real browser/mobile validation; no production env hardening verification; OAuth refresh-token flow is absent and broader API tenancy hardening remains limited; revocation/MFA/family authorization not implemented; audit persistence and production env hardening not verified. No broader sprint or production authorization is implied.
 
 ## 8. Gateway Implementation Details
 
@@ -138,7 +140,101 @@ Flow:
 - No new Filament panels created.
 - No panel ID/path changes.
 
-## 9. Automated Test Evidence
+## 9. OAuth Tenant-Binding Remediation
+
+### 9.1 Root cause
+
+OAuth issuance and validation previously lacked consistent client/user/token/school binding. In particular, token issuance could resolve a user globally by email without enforcing `user.school_id === client.school_id`, and token validation did not consistently enforce `token.school_id == client.school_id == user.school_id` or initialized-tenant context consistency. This created a tenant-binding/data-isolation risk.
+
+### 9.2 Remediation
+
+Remediation was implemented in:
+- `app/Domains/Api/Services/OAuthService.php`
+- `app/Domains/Api/Services/ApiTokenService.php`
+
+The remediation is data/token-level binding for the current OAuth flow. No public API contract change was intended.
+
+### 9.3 Issuance checks
+
+Token issuance now enforces:
+- **Active client and school**: client must have a valid `school_id`; client school must exist and be active. If tenancy is initialized, current tenant key must match client school.
+- **User belongs to client's school**: user lookup is scoped by `email` and `client.school_id`; user school must match client school.
+- **Active user and school**: user must be active and have an active school (`hasActiveSchool()`).
+- **Generic failure behavior**: invalid credentials/client/tenant-binding failures return generic validation errors (no tenant/user/client existence oracle).
+- **Token creation binding**: `ApiTokenService::create()` sets token `school_id` from client and, when `user_id` is provided, requires the user to exist in the same school and be active.
+
+### 9.4 Token validation checks
+
+Token validation now fails closed unless:
+- Token is found by hash and is active/unexpired.
+- Client and user exist and are expected model types.
+- Client is active and client school exists/is active.
+- `token.school_id == client.school_id == user.school_id` and IDs are non-empty.
+- User is active, has active school, and `user.school_id` matches token school.
+- If tenancy is initialized, current tenant key matches token school.
+
+Invalid/mismatched/inactive context returns `null`, resulting in 401 invalid/expired token behavior.
+
+### 9.5 Refresh-token flow
+
+**No refresh-token flow currently exists** in the inspected codebase (no refresh endpoint/model/columns). Cross-tenant refresh validation is not applicable to the current implementation. Any future refresh-token flow must persist tenant binding and revalidate client/user/token/tenant consistency on refresh.
+
+## 10. API Resource Tenant Isolation Verification
+
+### 10.1 Investigation
+
+Inspected:
+- `routes/api.php`
+- `app/Http/Middleware/ValidateApiToken.php`
+- `app/Http/Controllers/Api/V1/OAuthController.php`
+- `app/Http/Controllers/Api/V1/ApiClientController.php`
+- `app/Http/Controllers/Api/V1/ApiTokenController.php`
+- `app/Http/Controllers/Api/V1/WebhookController.php`
+- `app/Http/Controllers/Api/V1/AuditLogController.php`
+- `app/Domains/Api/Services/OAuthService.php`
+- `app/Domains/Api/Services/ApiTokenService.php`
+- `app/Domains/Api/Services/ApiClientService.php`
+- `app/Domains/Api/Services/WebhookService.php`
+
+Current exposed API v1 routes are infrastructure/OAuth resources only: OAuth token/me/revoke, API clients, client tokens, webhooks/deliveries, and audit logs. **No domain-record API endpoints for students, parents, classes, enrolments, grades, attendance, or fees/payments currently exist in the inspected API routes.**
+
+### 10.2 Query-scoping behavior
+
+- **`ValidateApiToken`**: authenticates bearer token through `OAuthService::validateToken()` and injects `api_token`, `api_client`, `api_user`; missing/invalid token fails closed with 401.
+- **`ApiClientController`**: collection scoped by authenticated `api_client.school_id`; resource show/update/delete/disable/enable/regenerate-secret enforce `ensureSchoolAccess()` against `api_client.school_id`; create forces `school_id` from authenticated client.
+- **`ApiTokenController`**: client access checked via `ensureSchoolAccess()`; token operations scoped through client ownership checks; token creation bound to client.
+- **`WebhookController`/`WebhookService`**: client/resource ownership checked via `ensureSchoolAccess()`; webhook creation binds `api_client_id` and `school_id` from client.
+- **`AuditLogController`**: base query always scoped by `client.school_id`; detail lookup uses `where('school_id', $client->school_id)->findOrFail($id)`.
+
+For currently exposed infrastructure API resources, query scoping/ownership checks are anchored to the authenticated token's client school. This is representative evidence for exposed resources, not proof for unexposed domain-record endpoints.
+
+### 10.3 Focused regression test
+
+Added: `tests/Feature/Api/ApiTenantIsolationTest.php`.
+
+The test uses isolated School A/B data and exercises actual API endpoints against an exposed school-owned resource (`ApiClient`) to verify:
+- Valid School A token can access School A resource.
+- Same token cannot retrieve School B record by ID.
+- Same token cannot list School B records.
+- Same token cannot modify School B record.
+- Same token cannot delete School B record.
+- Request payload cannot override token school ownership on create.
+- Missing/invalid token context fails closed.
+- Existing legitimate API behavior remains functional.
+
+**Exact results:**
+- `php artisan test tests/Feature/Api/ApiTenantIsolationTest.php --compact` — **PASS — 8 passed (17 assertions)**
+- `php artisan test tests/Feature/Api --compact` — **PASS — 33 passed (57 assertions)**
+- `vendor/bin/pint --test tests/Feature/Api/ApiTenantIsolationTest.php` — **PASS**
+
+### 10.4 Limitations
+
+- **No domain-record API endpoints** for students/parents/classes/enrolments/grades/attendance/fees/payments currently exist in inspected API routes. Their future endpoints must implement and test equivalent tenant scoping.
+- The isolation tests are **representative, not exhaustive** across every token/webhook/audit-log endpoint permutation.
+- API routes do **not** currently use tenant-host/domain resolution middleware; current protection relies on token binding and resource-level ownership enforcement.
+- No browser/production validation performed.
+
+## 11. Automated Test Evidence
 
 | Command | Result |
 |---|---|
@@ -147,13 +243,20 @@ Flow:
 | `php artisan test tests/Feature/Routing --compact` | **PASS — 89 passed (323 assertions)** |
 | `php artisan test tests/Feature/Filament/DirectorTenantIsolationTest.php --compact` | **PASS — 10 passed (71 assertions)** |
 | `php artisan test tests/Feature/Routing/SchoolAccessPortalTest.php tests/Feature/Routing/SuperAdminLoginTest.php --compact` (after i18n fix) | **PASS — 16 passed (45 assertions)** |
-| `vendor/bin/pint --test` on changed PHP files (implementation pass) | **PASS** |
+| `vendor/bin/pint --test` on changed PHP files (gateway implementation pass) | **PASS** |
 | `vendor/bin/pint --test` on changed PHP/views/lang-relevant files (validation pass) | **PASS** |
 | `vendor/bin/phpstan analyse app/Services/PanelAccessRegistry.php app/Http/Controllers/Auth/SchoolGatewayAuthController.php app/Models/User.php app/Domains/School/Presentation/Http/SchoolAccessPortalController.php --memory-limit=512M --no-progress` | **PASS — no errors** (project phpstan.neon, level 5) |
+| `php artisan test tests/Feature/Api/OAuthApiTest.php --compact` | **PASS — 11 passed (22 assertions)** |
+| `php artisan test tests/Feature/Api --compact` | **PASS — 33 passed (57 assertions)** |
+| `php artisan test tests/Unit/Domains/Api --compact` | **PASS — 64 passed (119 assertions)** |
+| `vendor/bin/pint app/Domains/Api/Services/OAuthService.php app/Domains/Api/Services/ApiTokenService.php tests/Feature/Api/OAuthApiTest.php` | **PASS** |
+| `vendor/bin/phpstan analyse app/Domains/Api/Services/OAuthService.php app/Domains/Api/Services/ApiTokenService.php --memory-limit=512M --no-progress` | **PASS — no errors** (project phpstan.neon, level 5) |
+| `php artisan test tests/Feature/Api/ApiTenantIsolationTest.php --compact` | **PASS — 8 passed (17 assertions)** |
+| `vendor/bin/pint --test tests/Feature/Api/ApiTenantIsolationTest.php` | **PASS** |
 
 Focused automated tests do not provide real-browser validation, production security assurance, or full regression coverage.
 
-## 10. Files Created / Modified (Implementation Evidence)
+## 12. Files Created / Modified (Implementation Evidence)
 
 ### Created
 - `app/Services/PanelAccessRegistry.php`
@@ -162,6 +265,7 @@ Focused automated tests do not provide real-browser validation, production secur
 - `resources/views/auth/school-gateway-select-panel.blade.php`
 - `resources/views/auth/school-gateway-no-access.blade.php`
 - `tests/Feature/Auth/SchoolGatewayAuthenticationTest.php`
+- `tests/Feature/Api/ApiTenantIsolationTest.php` (API tenant-isolation regression coverage; currently untracked in working tree)
 
 ### Modified
 - `app/Models/User.php`
@@ -170,16 +274,19 @@ Focused automated tests do not provide real-browser validation, production secur
 - `resources/views/school-access/portal.blade.php`
 - `tests/Feature/Routing/SchoolAccessPortalTest.php`
 - `lang/fr.json` (gateway-related FR translation keys; file re-encoded by JSON pretty-print)
+- `app/Domains/Api/Services/OAuthService.php` (OAuth tenant-binding remediation; in HEAD)
+- `app/Domains/Api/Services/ApiTokenService.php` (token creation user/school binding guard; in HEAD)
+- `tests/Feature/Api/OAuthApiTest.php` (OAuth tenant-binding regression coverage; in HEAD)
 
 ### Preserved / not modified
 - `docs/ADR/ADR-025.md` — remains **untracked** and **PROPOSED**.
 - No governance status files changed by this documentation task.
 
-## 11. Explicit Unresolved Risks (Not Fixed)
+## 13. Explicit Unresolved Risks (Not Fixed / Still Open)
 
 | Risk | Status | Notes / next step |
 |---|---|---|
-| OAuth tenant/client/user binding vulnerability | **Unresolved / not fixed** | `OAuthController` issues tokens by email/password without visible tenant binding validation. Requires dedicated approved security fix, tenant/client/user binding model, API contract review, and regression tests. |
+| OAuth tenant/client/user binding vulnerability (original gap) | **Remediated for current OAuth flow; residual gaps remain** | Data/token-level tenant binding enforced in `OAuthService`/`ApiTokenService`; focused tests pass. No refresh-token flow exists today. API routes do not use tenant-host/domain resolution middleware; protection relies on token binding + resource-level ownership checks. Future API/domain endpoints must enforce equivalent scoping. |
 | Session, remember-token, API-token, and permission-cache revocation | **Unresolved / not implemented** | Role/school/status changes have no centralized revocation/invalidation flow. Needs approved design covering sessions, remember-me tokens, API tokens, and Spatie permission cache. |
 | MFA | **Not implemented** | Follow-up decision/implementation only; not part of this milestone. |
 | Parent/Student relationship-based authorization | **Not implemented** | Family data must not be exposed without relation-based authorization and policy coverage. No Family portal is claimed as production-ready. |
@@ -187,9 +294,10 @@ Focused automated tests do not provide real-browser validation, production secur
 | Production cookie, trusted-host, proxy and rate-limit configuration | **Not production-validated** | Requires env/deployment hardening verification: secure/httponly/samesite cookies, trusted hosts/proxies, distributed rate-limit store, HTTPS. No wildcard cross-subdomain session cookie. |
 | Real browser and mobile validation | **Not performed** | No real browser/E2E/mobile/device validation; no screenshots. |
 
-## 12. Confirmation
+## 14. Confirmation
 
-- This documentation task created/updated documentation only: `docs/docs/00_Project_Management/ADR-025_School_Gateway_Implementation_Report.md`.
-- **No application code was modified by this documentation task.** (Application code/files listed above were modified in prior implementation/validation tasks and are reported here as evidence only.)
+- This documentation task updated documentation only: `docs/docs/00_Project_Management/ADR-025_School_Gateway_Implementation_Report.md`.
+- **No application code or tests were modified by this documentation task.** `tests/Feature/Api/ApiTenantIsolationTest.php` was created in a prior verification step and remains an existing working-tree change; this documentation update did not modify it.
 - No Git staging, commit, push, reset, stash, checkout, or clean performed.
 - ADR-025 remains **PROPOSED** and untracked.
+- No broader sprint or production authorization is implied.

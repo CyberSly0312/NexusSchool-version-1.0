@@ -43,6 +43,55 @@ class UserResource extends Resource
         return filament()->getCurrentPanel()->getId() === 'school-admin';
     }
 
+    /**
+     * Dedicated schema for the school-admin staff invitation flow.
+     *
+     * This is deliberately not the generic create form: the actor never sees
+     * or supplies a school, status, password or password confirmation. The role
+     * list is derived from the service allowlist but is only a UI aid; the
+     * service remains the authoritative server-side guard.
+     *
+     * @return Schema
+     */
+    public static function schoolAdminProvisioningForm(Schema $schema): Schema
+    {
+        $roles = [
+            'teacher' => 'Enseignant',
+            'secretary' => 'Secrétaire',
+            'accountant' => 'Comptable',
+        ];
+
+        return $schema
+            ->schema([
+                Forms\Components\TextInput::make('first_name')
+                    ->label('Prénom')
+                    ->required()
+                    ->maxLength(100),
+                Forms\Components\TextInput::make('last_name')
+                    ->label('Nom')
+                    ->required()
+                    ->maxLength(100),
+                Forms\Components\TextInput::make('email')
+                    ->label('Adresse e-mail')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->label('Téléphone')
+                    ->tel()
+                    ->maxLength(50)
+                    ->nullable(),
+                Forms\Components\Select::make('role')
+                    ->label('Rôle')
+                    ->options($roles)
+                    ->in(array_keys($roles))
+                    ->required()
+                    ->searchable()
+                    ->preload(),
+            ])
+            ->columns(2);
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\SuperAdminSchoolResource\Pages;
 
+use App\Domains\School\DTOs\InitialSchoolAdminProvisioningResult;
+use App\Domains\School\Exceptions\InitialSchoolAdminProvisioningException;
 use App\Domains\School\Models\School;
+use App\Domains\School\Services\InitialSchoolAdminProvisioningService;
 use App\Domains\School\Services\SchoolAdminProvisioningService;
 use App\Filament\Resources\SuperAdminSchoolResource;
 use App\Models\User;
@@ -15,6 +18,7 @@ use Filament\Actions\RestoreAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Validation\ValidationException;
 
 class EditSuperAdminSchool extends EditRecord
 {
@@ -24,17 +28,24 @@ class EditSuperAdminSchool extends EditRecord
     {
         return [
             Action::make('provision_school_admin')
-                ->label('Créer l\'administrateur')
+                ->label('Créer l’administrateur de l’établissement')
                 ->icon('heroicon-o-user-plus')
                 ->color('success')
-                ->visible(fn (): bool => $this->schoolAdmin() === null)
+                ->modalHeading('Créer l’administrateur de l’établissement')
+                ->modalDescription('Le compte sera créé en attente d’activation. Aucun mot de passe ne sera demandé ni envoyé. Un lien d’activation à usage unique sera affiché une seule fois à l’opérateur autorisé.')
+                ->modalSubmitActionLabel('Créer le compte')
+                ->visible(fn (): bool => $this->canProvisionSchoolAdmin())
                 ->schema([
-                    TextInput::make('name')
-                        ->label('Nom complet')
+                    TextInput::make('first_name')
+                        ->label('Prénom')
+                        ->required()
+                        ->maxLength(255),
+                    TextInput::make('last_name')
+                        ->label('Nom')
                         ->required()
                         ->maxLength(255),
                     TextInput::make('email')
-                        ->label('Email')
+                        ->label('Adresse e-mail')
                         ->email()
                         ->required()
                         ->maxLength(255),
@@ -43,17 +54,40 @@ class EditSuperAdminSchool extends EditRecord
                     $school = $this->school();
 
                     if (! $school instanceof School) {
+                        $this->notifyProvisioningFailure('Cet établissement n’est pas disponible pour cette opération.');
+
                         return;
                     }
 
-                    $result = app(SchoolAdminProvisioningService::class)->provision(
-                        $school,
-                        (string) $data['name'],
-                        (string) $data['email'],
-                        $this->actor(),
-                    );
+                    $firstName = trim((string) ($data['first_name'] ?? ''));
+                    $lastName = trim((string) ($data['last_name'] ?? ''));
+                    $email = trim((string) ($data['email'] ?? ''));
 
-                    $this->notifySetupLink($result->setupUrl, $result->created);
+                    try {
+                        $result = app(InitialSchoolAdminProvisioningService::class)->provision(
+                            $school,
+                            $firstName,
+                            $lastName,
+                            $email,
+                            $this->actor(),
+                        );
+                    } catch (InitialSchoolAdminProvisioningException $exception) {
+                        if ($exception->reason === InitialSchoolAdminProvisioningException::REASON_DUPLICATE_EMAIL) {
+                            throw ValidationException::withMessages([
+                                'email' => $exception->getMessage(),
+                            ]);
+                        }
+
+                        $this->notifyProvisioningFailure($exception->getMessage());
+
+                        return;
+                    } catch (\Throwable) {
+                        $this->notifyProvisioningFailure('Le compte n’a pas pu être créé. Aucune modification n’a été conservée.');
+
+                        return;
+                    }
+
+                    $this->notifyActivationLink($result);
                 }),
 
             Action::make('issue_school_admin_setup_link')
@@ -119,6 +153,57 @@ class EditSuperAdminSchool extends EditRecord
         $actor = auth()->user();
 
         return $actor instanceof User ? $actor : null;
+    }
+
+    private function canProvisionSchoolAdmin(): bool
+    {
+        $actor = $this->actor();
+        $school = $this->school();
+
+        if (! $actor instanceof User
+            || $actor->trashed()
+            || ! $actor->isActive()
+            || ! $actor->hasRole('super_admin')) {
+            return false;
+        }
+
+        if (! $school instanceof School || $school->trashed() || ! $school->isActive()) {
+            return false;
+        }
+
+        return $this->schoolAdmin() === null;
+    }
+
+    private function notifyProvisioningFailure(string $message): void
+    {
+        Notification::make()
+            ->title('Création impossible')
+            ->body($message)
+            ->danger()
+            ->send();
+    }
+
+    private function notifyActivationLink(InitialSchoolAdminProvisioningResult $result): void
+    {
+        if (! $result->created || $result->activationUrl === null) {
+            Notification::make()
+                ->title('Administrateur déjà présent')
+                ->body('Un administrateur existe déjà pour cet établissement. Aucun doublon n’a été créé.')
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        Notification::make()
+            ->title('Lien d’activation')
+            ->body(
+                'Lien d’activation à usage unique valable 48 h : '.$result->activationUrl.
+                '. Transmettre ce lien de manière sécurisée. Aucun e-mail ni SMS n’a été envoyé.'.
+                ' Le compte restera inaccessible jusqu’à son activation. L’administrateur devra ensuite se connecter normalement.'
+            )
+            ->success()
+            ->send();
     }
 
     private function notifySetupLink(?string $url, bool $created): void

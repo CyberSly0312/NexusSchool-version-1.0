@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Domains\School\Presentation\Http\SchoolAccessPortalController;
 use App\Domains\School\Presentation\Http\SchoolAdminSetupController;
+use App\Domains\User\Presentation\Http\AccountInvitationActivationController;
 use App\Http\Controllers\Auth\SchoolGatewayAuthController;
 use App\Http\Middleware\InitializeTenancyForSchoolSetup;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,20 @@ Route::middleware([
     Route::get('/panel-select', [SchoolGatewayAuthController::class, 'selectPanel'])->name('school.gateway.select-panel');
     Route::post('/panel-select', [SchoolGatewayAuthController::class, 'enterPanel'])->name('school.gateway.enter-panel');
     Route::get('/no-panel-access', [SchoolGatewayAuthController::class, 'selectPanel'])->name('school.gateway.no-access');
+
+    /*
+     * Public account activation. The host is authoritative: the invitation
+     * token must belong to the school resolved by InitializeTenancyForPanel,
+     * and the activation service rechecks that binding inside its transaction.
+     * No authentication, auto-login or token issuance occurs here.
+     */
+    Route::get('/account/activate/{token}', [AccountInvitationActivationController::class, 'show'])
+        ->middleware('throttle:invitation-activation')
+        ->name('school.account.activation.show');
+
+    Route::post('/account/activate/{token}', [AccountInvitationActivationController::class, 'store'])
+        ->middleware('throttle:invitation-activation')
+        ->name('school.account.activation.store');
 });
 
 /*

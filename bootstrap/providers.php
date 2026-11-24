@@ -25,6 +25,7 @@ return [
     \App\Domains\AcademicPolicy\AcademicPolicyServiceProvider::class,
     \App\Domains\RecordsLifecycle\RecordsLifecycleServiceProvider::class,
     \App\Domains\IdentityAndVerification\IdentityAndVerificationServiceProvider::class,
+    \App\Domains\User\UserServiceProvider::class,
 
     // Filament Panel Providers
     \App\Providers\Filament\SuperAdminPanelProvider::class,

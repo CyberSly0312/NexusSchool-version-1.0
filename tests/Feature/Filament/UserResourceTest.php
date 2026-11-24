@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Filament;
 
+use App\Domains\User\Enums\UserStatus;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Models\User;
+use App\Models\UserInvitation;
 use Filament\Actions\DeleteAction;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -81,22 +85,32 @@ class UserResourceTest extends TestCase
 
     public function test_can_create_user(): void
     {
+        // The school-admin creation form now provisions through an invitation
+        // instead of accepting a password and an active status directly.
+        \Spatie\Permission\Models\Role::findOrCreate('teacher', 'web');
+
         Livewire::test(CreateUser::class)
             ->fillForm([
-                'school_id' => $this->schoolId,
                 'first_name' => 'Test',
                 'last_name' => 'User',
                 'email' => 'test-user-unique@example.com',
-                'password' => 'password123',
-                'password_confirmation' => 'password123',
-                'status' => 'active',
+                'phone' => '+33123456789',
+                'role' => 'teacher',
             ])
-            ->call('create');
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $user = User::query()->where('email', 'test-user-unique@example.com')->firstOrFail();
 
         $this->assertDatabaseHas('users', [
-            'email' => 'test-user-unique@example.com',
+            'id' => $user->id,
             'first_name' => 'Test',
+            'school_id' => $this->schoolId,
+            'status' => UserStatus::Pending->value,
         ]);
+
+        $this->assertSame(['teacher'], $user->getRoleNames()->all());
+        $this->assertSame(1, UserInvitation::query()->where('user_id', $user->id)->count());
     }
 
     public function test_can_update_user(): void
