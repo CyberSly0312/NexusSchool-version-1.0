@@ -4,16 +4,23 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use App\Domains\Role\DTOs\RoleChangeCommand;
+use App\Domains\Role\DTOs\RoleChangeContext;
+use App\Domains\Role\Enums\RoleChangeOperation;
+use App\Domains\Role\Exceptions\RoleChangeException;
+use App\Domains\Role\Services\UserRoleChangeService;
+use App\Domains\School\Models\School;
 use App\Filament\Resources\CentralUserResource\Pages;
 use App\Models\User;
-use App\Domains\School\Models\School;
 use Filament\Forms;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class CentralUserResource extends Resource
@@ -64,13 +71,21 @@ class CentralUserResource extends Resource
                         ->preload()
                         ->nullable(),
                     Forms\Components\Select::make('roles')
-                        ->label('Rôle')
-                        ->relationship('roles', 'name')
+                        ->label('Rôles')
+                        ->options(Role::query()->orderBy('name')->pluck('name', 'id'))
+                        ->formatStateUsing(fn (?User $record): array => $record?->roles->pluck('id')->all() ?? [])
+                        ->multiple()
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->dehydrated(false),
                 ])->columns(2),
 
             Section::make('Mot de passe')
+                ->visible(function (Get $get, ?User $record): bool {
+                    $roles = $get('roles');
+
+                    return ! self::isSchoolAdminTarget(is_array($roles) ? $roles : [], $record);
+                })
                 ->schema([
                     Forms\Components\TextInput::make('password')
                         ->label('Mot de passe')
@@ -80,6 +95,92 @@ class CentralUserResource extends Resource
                         ->required(fn ($context) => $context === 'create'),
                 ]),
         ]);
+    }
+
+    /**
+     * A Super Admin must never define or transmit a School Admin plaintext
+     * password. The field is hidden for those accounts and any injected form
+     * state is stripped again before persistence.
+     *
+     * @param  array<int, int|string>  $roleIds
+     */
+    public static function isSchoolAdminTarget(array $roleIds, ?User $record): bool
+    {
+        if ($record instanceof User && $record->hasRole('school_admin')) {
+            return true;
+        }
+
+        if (in_array('school_admin', $roleIds, true)) {
+            return true;
+        }
+
+        $ids = array_values(array_filter(
+            array_map(static fn (int|string $id): int => (int) $id, $roleIds),
+            static fn (int $id): bool => $id > 0,
+        ));
+
+        if ($ids === []) {
+            return false;
+        }
+
+        return Role::query()
+            ->whereIn('id', $ids)
+            ->where('name', 'school_admin')
+            ->exists();
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @param  array<int, int|string>  $roleIds
+     * @return array<string, mixed>
+     */
+    public static function stripPasswordForSchoolAdmin(array $data, array $roleIds, ?User $record): array
+    {
+        if (self::isSchoolAdminTarget($roleIds, $record)) {
+            unset($data['password'], $data['password_confirmation']);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Reconcile submitted role IDs through the authoritative role-change
+     * service. The form field is intentionally not a Filament relationship,
+     * which prevents automatic unrestricted pivot writes.
+     *
+     * @param  array<int, int|string>  $roleIds
+     */
+    public static function syncRolesFromFormState(User $user, array $roleIds): void
+    {
+        $actor = auth()->user();
+        if (! $actor instanceof User) {
+            throw new RoleChangeException('Aucun administrateur actif n’est connecté.');
+        }
+
+        $context = RoleChangeContext::forActor($actor, null);
+        $desired = array_values(array_unique(array_map('intval', $roleIds)));
+        $current = $user->roles()->pluck('id')->all();
+
+        $toAssign = array_values(array_diff($desired, $current));
+        $toRemove = array_values(array_diff($current, $desired));
+
+        DB::transaction(function () use ($user, $context, $toAssign, $toRemove): void {
+            $service = app(UserRoleChangeService::class);
+
+            if ($toAssign !== []) {
+                $service->apply(
+                    new RoleChangeCommand((string) $user->getKey(), $toAssign, null, RoleChangeOperation::Assign),
+                    $context,
+                );
+            }
+
+            if ($toRemove !== []) {
+                $service->apply(
+                    new RoleChangeCommand((string) $user->getKey(), $toRemove, null, RoleChangeOperation::Remove),
+                    $context,
+                );
+            }
+        });
     }
 
     public static function table(Table $table): Table

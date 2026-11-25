@@ -29,6 +29,7 @@ class SecretaryPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->pages([
                 \App\Filament\Secretary\Pages\SecretaryDashboard::class,
+                \App\Filament\Pages\ChangePassword::class,
             ])
             ->middleware([
                 EncryptCookies::class,

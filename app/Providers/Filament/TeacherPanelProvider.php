@@ -29,6 +29,7 @@ class TeacherPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->pages([
                 \App\Filament\Teacher\Pages\TeacherDashboard::class,
+                \App\Filament\Pages\ChangePassword::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -15,9 +15,11 @@ use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
 use App\Models\User;
 use App\Models\UserInvitation;
+use Filament\Actions\AttachAction;
+use Filament\Actions\DetachAction;
+use Filament\Actions\DetachBulkAction;
 use Filament\Facades\Filament;
 use Filament\Notifications\Livewire\Notifications;
-use Filament\Schemas\Schema;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -510,26 +512,22 @@ class SchoolAdminStaffProvisioningTest extends TestCase
             ->get('/school-admin/users/'.$user->getRouteKey().'/edit')
             ->assertSuccessful();
 
-        $manager = new RolesRelationManager();
         $title = new ReflectionProperty(RolesRelationManager::class, 'title');
-
         $this->assertSame('Rôles', $title->getValue());
 
-        $formComponents = array_values($manager->form(Schema::make($manager))->getComponents());
-        $this->assertSame(['name'], array_map(fn ($component): string => (string) $component->getName(), $formComponents));
-        $this->assertSame('Rôle', (string) $formComponents[0]->getLabel());
-        $this->assertContains('teacher', array_keys($formComponents[0]->getOptions()));
-        $this->assertContains('school_admin', array_keys($formComponents[0]->getOptions()));
+        $component = Livewire::test(RolesRelationManager::class, [
+            'ownerRecord' => $user,
+            'pageClass' => \App\Filament\Resources\UserResource\Pages\EditUser::class,
+        ])->assertSuccessful();
 
-        // The table actions cannot be built outside a mounted relation manager
-        // because the pre-existing association callback relies on runtime
-        // wiring. The label regression is therefore guarded at source level.
-        $source = (string) file_get_contents((new \ReflectionClass(RolesRelationManager::class))->getFileName());
+        $table = $component->instance()->getTable();
 
-        $this->assertStringContainsString("->label('Attribuer un rôle')", $source);
-        $this->assertStringContainsString("->label('Lier un rôle existant')", $source);
-        $this->assertStringContainsString("->label('Retirer')", $source);
-        $this->assertStringContainsString("->label('Retirer la sélection')", $source);
+        $this->assertInstanceOf(AttachAction::class, $table->getHeaderActions()[0]);
+        $this->assertInstanceOf(DetachAction::class, $table->getActions()[0]);
+        $this->assertInstanceOf(DetachBulkAction::class, $table->getBulkActions()[0]);
+        $this->assertSame('Attribuer un rôle existant', $table->getHeaderActions()[0]->getLabel());
+        $this->assertSame('Retirer', $table->getActions()[0]->getLabel());
+        $this->assertSame('Retirer la sélection', $table->getBulkActions()[0]->getLabel());
         $this->assertSame(['teacher'], $user->fresh()->getRoleNames()->all());
     }
 }

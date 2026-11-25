@@ -18,6 +18,16 @@ enum AuditAction: string
     case Provisioned = 'provisioned';
     case SetupLinkIssued = 'setup_link_issued';
     case PasswordSet = 'password_set';
+    case RoleAssigned = 'role_assigned';
+    case RoleRemoved = 'role_removed';
+    case RoleChangeRejected = 'role_change_rejected';
+    case PasswordChanged = 'password_changed';
+    case PasswordResetRequested = 'password_reset_requested';
+    case PasswordResetCompleted = 'password_reset_completed';
+    case PasswordResetRejected = 'password_reset_rejected';
+    case AccessSuspended = 'access_suspended';
+    case SchoolAdminReplaced = 'school_admin_replaced';
+    case SensitiveOperationRejected = 'sensitive_operation_rejected';
 
     public function label(): string
     {
@@ -34,6 +44,16 @@ enum AuditAction: string
             self::Provisioned => 'Provisionné',
             self::SetupLinkIssued => 'Lien de configuration émis',
             self::PasswordSet => 'Mot de passe défini',
+            self::RoleAssigned => 'Rôle attribué',
+            self::RoleRemoved => 'Rôle retiré',
+            self::RoleChangeRejected => 'Modification de rôle refusée',
+            self::PasswordChanged => 'Mot de passe modifié',
+            self::PasswordResetRequested => 'Réinitialisation du mot de passe demandée',
+            self::PasswordResetCompleted => 'Réinitialisation du mot de passe terminée',
+            self::PasswordResetRejected => 'Réinitialisation du mot de passe refusée',
+            self::AccessSuspended => 'Accès suspendu',
+            self::SchoolAdminReplaced => 'Administrateur d’établissement remplacé',
+            self::SensitiveOperationRejected => 'Opération sensible refusée',
         };
     }
 
@@ -52,6 +72,16 @@ enum AuditAction: string
             self::Provisioned => 'success',
             self::SetupLinkIssued => 'warning',
             self::PasswordSet => 'info',
+            self::RoleAssigned => 'success',
+            self::RoleRemoved => 'warning',
+            self::RoleChangeRejected => 'danger',
+            self::PasswordChanged => 'info',
+            self::PasswordResetRequested => 'warning',
+            self::PasswordResetCompleted => 'success',
+            self::PasswordResetRejected => 'danger',
+            self::AccessSuspended => 'danger',
+            self::SchoolAdminReplaced => 'success',
+            self::SensitiveOperationRejected => 'danger',
         };
     }
 

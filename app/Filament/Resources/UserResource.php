@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use App\Domains\Role\Policies\SchoolAdminRolePolicy;
 use App\Domains\User\Enums\UserStatus;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
@@ -55,11 +56,7 @@ class UserResource extends Resource
      */
     public static function schoolAdminProvisioningForm(Schema $schema): Schema
     {
-        $roles = [
-            'teacher' => 'Enseignant',
-            'secretary' => 'Secrétaire',
-            'accountant' => 'Comptable',
-        ];
+        $roles = SchoolAdminRolePolicy::allowedRolesWithLabels();
 
         return $schema
             ->schema([
@@ -144,6 +141,7 @@ class UserResource extends Resource
                     ])->columns(2),
 
                 Section::make('Mot de passe')
+                    ->visible(fn (?User $record): bool => ! $record instanceof User || ! $record->hasRole('school_admin'))
                     ->schema([
                         Forms\Components\TextInput::make('password')
                             ->password()

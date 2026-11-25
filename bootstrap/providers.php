@@ -26,6 +26,7 @@ return [
     \App\Domains\RecordsLifecycle\RecordsLifecycleServiceProvider::class,
     \App\Domains\IdentityAndVerification\IdentityAndVerificationServiceProvider::class,
     \App\Domains\User\UserServiceProvider::class,
+    \App\Domains\Role\RoleServiceProvider::class,
 
     // Filament Panel Providers
     \App\Providers\Filament\SuperAdminPanelProvider::class,

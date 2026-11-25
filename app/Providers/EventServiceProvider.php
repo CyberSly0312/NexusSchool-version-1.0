@@ -141,9 +141,11 @@ use App\Domains\Program\Listeners\LogProgramArchived;
 use App\Domains\Program\Listeners\LogProgramCreated;
 use App\Domains\Program\Listeners\LogProgramUpdated;
 use App\Domains\Role\Events\RoleAssignedToUser;
+use App\Domains\Role\Events\RoleChangeRejected;
 use App\Domains\Role\Events\RoleCreated;
 use App\Domains\Role\Events\RoleRevokedFromUser;
 use App\Domains\Role\Events\RoleUpdated;
+use App\Domains\Role\Listeners\AuditRoleChange;
 use App\Domains\Section\Events\SectionArchived;
 use App\Domains\Section\Events\SectionCreated;
 use App\Domains\Section\Events\SectionUpdated;
@@ -258,8 +260,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         RoleCreated::class => [],
         RoleUpdated::class => [],
-        RoleAssignedToUser::class => [],
-        RoleRevokedFromUser::class => [],
+        RoleAssignedToUser::class => [
+            AuditRoleChange::class.'@handleRoleAssigned',
+        ],
+        RoleRevokedFromUser::class => [
+            AuditRoleChange::class.'@handleRoleRevoked',
+        ],
+        RoleChangeRejected::class => [
+            AuditRoleChange::class.'@handleRoleChangeRejected',
+        ],
 
         PermissionCreated::class => [
             LogPermissionCreated::class,

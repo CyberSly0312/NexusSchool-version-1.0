@@ -29,6 +29,7 @@ class ParentPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->pages([
                 \App\Filament\Parent\Pages\ParentDashboard::class,
+                \App\Filament\Pages\ChangePassword::class,
             ])
             ->middleware([
                 EncryptCookies::class,

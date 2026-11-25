@@ -32,6 +32,7 @@ class SchoolAdminPanelProvider extends PanelProvider
                 \App\Filament\SchoolAdmin\Pages\EstablishmentInfo::class,
                 \App\Filament\SchoolAdmin\Pages\PDFSettings::class,
                 \App\Filament\SchoolAdmin\Pages\FeeConfiguration::class,
+                \App\Filament\Pages\ChangePassword::class,
             ])
             ->resources([
                 // ── Établissement ──

@@ -69,6 +69,12 @@ class InitializeTenancyForPanel
             abort(403);
         }
 
+        // Already-authenticated sessions must not survive a suspension or a
+        // status change: every panel request re-checks the persisted status.
+        if ($user instanceof User && ! $user->isActive()) {
+            abort(403, 'Ce compte n’est pas actif.');
+        }
+
         return $next($request);
     }
 }

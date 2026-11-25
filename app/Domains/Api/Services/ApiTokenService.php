@@ -10,6 +10,7 @@ use App\Domains\Api\Events\ApiTokenRevoked;
 use App\Domains\Api\Rules\ApiTokenRules;
 use App\Models\ApiClient;
 use App\Models\ApiToken;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ class ApiTokenService
         $validated = ApiTokenRules::validate($data, 'create');
 
         if (isset($validated['user_id'])) {
-            $user = \App\Models\User::query()
+            $user = User::query()
                 ->whereKey($validated['user_id'])
                 ->where('school_id', $client->school_id)
                 ->first();
@@ -59,6 +60,27 @@ class ApiTokenService
     {
         $token->delete();
         ApiTokenRevoked::dispatch($token);
+    }
+
+    /**
+     * Revoke every active API token owned by a user. The query is scoped by
+     * both the user and the user's school so a crafted identifier cannot
+     * revoke a token belonging to another tenant.
+     */
+    public function revokeAllForUser(User $user): int
+    {
+        $query = $this->model->query()->where('user_id', $user->getKey());
+
+        if ($user->school_id !== null && trim((string) $user->school_id) !== '') {
+            $query->where('school_id', (string) $user->school_id);
+        }
+
+        $tokens = $query->get();
+        foreach ($tokens as $token) {
+            $this->revoke($token);
+        }
+
+        return $tokens->count();
     }
 
     public function findByToken(string $hashedToken): ?ApiToken

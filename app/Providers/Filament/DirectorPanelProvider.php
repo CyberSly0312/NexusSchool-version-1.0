@@ -33,6 +33,7 @@ class DirectorPanelProvider extends PanelProvider
                 \App\Filament\Director\Pages\DocumentCenter::class,
                 \App\Filament\Director\Pages\SchoolIdentity::class,
                 \App\Filament\Director\Pages\SchoolWizard::class,
+                \App\Filament\Pages\ChangePassword::class,
             ])
             ->widgets([
                 \App\Filament\Director\Widgets\DirectorStatsOverview::class,

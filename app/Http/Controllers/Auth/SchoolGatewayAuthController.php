@@ -44,6 +44,20 @@ final class SchoolGatewayAuthController
 
         $this->ensureIsNotRateLimited($request, $credentials['email']);
 
+        $candidate = User::query()
+            ->where('email', Str::lower(trim($credentials['email'])))
+            ->where('school_id', tenant()?->getKey())
+            ->first();
+
+        if ($candidate instanceof User && ! $candidate->isActive()) {
+            RateLimiter::hit($this->accountThrottleKey($request, $credentials['email']));
+            $this->audit($request, 'auth.login_inactive_rejected', $candidate, 'Compte inactif refusé avant authentification.');
+
+            throw ValidationException::withMessages([
+                'email' => 'Ce compte n’est pas actif.',
+            ]);
+        }
+
         if (! Auth::guard('web')->attempt([
             'email' => $credentials['email'],
             'password' => $credentials['password'],
@@ -157,7 +171,7 @@ final class SchoolGatewayAuthController
             $request->session()->regenerateToken();
 
             throw ValidationException::withMessages([
-                'email' => __('Your account is not active.'),
+                'email' => 'Ce compte n’est pas actif.',
             ]);
         }
 

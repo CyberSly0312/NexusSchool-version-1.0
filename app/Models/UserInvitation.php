@@ -19,11 +19,18 @@ class UserInvitation extends Model
     use HasFactory;
 
     public const PURPOSE_SCHOOL_ADMIN_INITIAL = 'school_admin_initial';
+    public const PURPOSE_SCHOOL_ADMIN_RESET = 'school_admin_reset';
     public const PURPOSE_STAFF_INITIAL = 'staff_initial';
     public const PURPOSE_GUARDIAN_INITIAL = 'guardian_initial';
     public const PURPOSE_STUDENT_INITIAL = 'student_initial';
 
     public const EXPIRATION_HOURS = 48;
+
+    /**
+     * Administrative recovery links are deliberately shorter-lived than the
+     * initial activation links (24 h instead of 48 h).
+     */
+    public const RESET_EXPIRATION_HOURS = 24;
 
     public $incrementing = false;
 
@@ -212,11 +219,19 @@ class UserInvitation extends Model
         return hash('sha256', $plainToken);
     }
 
-    public static function findUsableByPlainToken(string $plainToken, ?Carbon $at = null): ?self
+    public static function findByPlainToken(string $plainToken): ?self
     {
+        /** @var self|null $invitation */
         $invitation = static::query()
             ->where('token_hash', self::hashToken($plainToken))
             ->first();
+
+        return $invitation;
+    }
+
+    public static function findUsableByPlainToken(string $plainToken, ?Carbon $at = null): ?self
+    {
+        $invitation = static::findByPlainToken($plainToken);
 
         if (! $invitation instanceof self || ! $invitation->isUsable($at)) {
             return null;

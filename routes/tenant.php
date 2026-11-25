@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Domains\AccountRecovery\Presentation\Http\SchoolAdminPasswordResetController;
 use App\Domains\School\Presentation\Http\SchoolAccessPortalController;
 use App\Domains\School\Presentation\Http\SchoolAdminSetupController;
 use App\Domains\User\Presentation\Http\AccountInvitationActivationController;
@@ -70,6 +71,22 @@ Route::middleware([
     Route::post('/account/activate/{token}', [AccountInvitationActivationController::class, 'store'])
         ->middleware('throttle:invitation-activation')
         ->name('school.account.activation.store');
+
+    /*
+     * Super Admin initiated School Admin recovery. The token is a hashed,
+     * short-lived, single-use capability bound to the tenant resolved from the
+     * request host. The School Admin alone defines the new password here.
+     */
+    Route::get('/account/password-reset/{token}', [SchoolAdminPasswordResetController::class, 'show'])
+        ->middleware('throttle:invitation-activation')
+        ->name('school.account.password-reset.show');
+
+    Route::post('/account/password-reset/{token}', [SchoolAdminPasswordResetController::class, 'store'])
+        ->middleware('throttle:invitation-activation')
+        ->name('school.account.password-reset.store');
+
+    Route::get('/account/password-reset-termine', [SchoolAdminPasswordResetController::class, 'done'])
+        ->name('school.account.password-reset.done');
 });
 
 /*

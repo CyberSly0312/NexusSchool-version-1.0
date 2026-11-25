@@ -29,6 +29,7 @@ class StudentPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->pages([
                 \App\Filament\Student\Pages\StudentDashboard::class,
+                \App\Filament\Pages\ChangePassword::class,
             ])
             ->middleware([
                 EncryptCookies::class,

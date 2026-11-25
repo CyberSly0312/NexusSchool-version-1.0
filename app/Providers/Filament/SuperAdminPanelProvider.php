@@ -30,6 +30,7 @@ class SuperAdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->pages([
                 \App\Filament\SuperAdmin\Pages\SuperAdminDashboard::class,
+                \App\Filament\Pages\ChangePassword::class,
             ])
             ->resources([
                 // Plateforme

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\User\Services;
 
+use App\Domains\Role\Policies\SchoolAdminRolePolicy;
 use App\Domains\School\Models\School;
 use App\Domains\User\DTOs\AccountProvisioningCommand;
 use App\Domains\User\DTOs\AccountProvisioningContext;
@@ -26,11 +27,7 @@ class AccountProvisioningService
      *
      * @var list<string>
      */
-    public const SCHOOL_ADMIN_ALLOWED_ROLES = [
-        'teacher',
-        'secretary',
-        'accountant',
-    ];
+    public const SCHOOL_ADMIN_ALLOWED_ROLES = SchoolAdminRolePolicy::ALLOWED_ROLES;
 
     /**
      * Platform provisioning in Slice 2 is limited to the explicitly specified case.

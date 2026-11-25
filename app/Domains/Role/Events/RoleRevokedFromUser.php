@@ -17,6 +17,9 @@ class RoleRevokedFromUser
     public function __construct(
         public readonly User $user,
         public readonly Role $role,
+        public readonly ?User $actor = null,
+        public readonly ?string $schoolId = null,
+        public readonly string $outcome = 'removed',
     ) {
     }
 }
