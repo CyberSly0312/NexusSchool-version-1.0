@@ -142,7 +142,7 @@ final class SchoolAdminPasswordResetService
         $school = School::query()->find($command->school->getKey());
 
         if (! $school instanceof School || $school->trashed() || ! $school->isActive()) {
-            throw new PasswordResetException(PasswordResetFailure::School);
+            $this->reject($command->school, null, null, PasswordResetFailure::School, 'school_admin.password_reset.school_rejected');
         }
 
         $token = trim($command->token);
@@ -199,8 +199,8 @@ final class SchoolAdminPasswordResetService
         }
 
         try {
-            return DB::transaction(function () use ($school, $invitation, $target, $command): CompletedPasswordResetResult {
-                $freshInvitation = UserInvitation::findByPlainToken($command->token);
+            return DB::transaction(function () use ($school, $invitation, $target, $token, $command): CompletedPasswordResetResult {
+                $freshInvitation = UserInvitation::findByPlainToken($token);
 
                 if (! $freshInvitation instanceof UserInvitation
                     || ! $freshInvitation->isUsable()
@@ -243,6 +243,7 @@ final class SchoolAdminPasswordResetService
             $this->auditResetRejection($school, $target, $exception->failure, 'school_admin.password_reset.token_rejected');
             throw $exception;
         } catch (Throwable) {
+            $this->auditResetRejection($school, $target, PasswordResetFailure::Persistence, 'school_admin.password_reset.failed');
             throw new PasswordResetException(PasswordResetFailure::Persistence);
         }
     }

@@ -128,6 +128,20 @@ function lifecycleUiNotification(array $notifications, string $title): array
     test()->fail("Notification [{$title}] not found.");
 }
 
+function lifecycleUiRedirectToken($component): string
+{
+    $redirect = (string) ($component->effects['redirect'] ?? '');
+    $fragment = parse_url($redirect, PHP_URL_FRAGMENT);
+
+    if (! is_string($fragment)) {
+        test()->fail('Aucun jeton trouvé dans le fragment de redirection.');
+    }
+
+    parse_str($fragment, $parts);
+
+    return (string) ($parts['jeton'] ?? '');
+}
+
 test('recovery actions are visible only to an active super admin with an existing school admin', function (): void {
     $school = lifecycleUiSchool();
     $admin = lifecycleUiAdmin($school, 'ui-admin@example.test');
@@ -153,17 +167,22 @@ test('the super admin panel is forbidden for a non super admin actor', function 
         ->assertForbidden();
 });
 
-test('initiating a reset from the page exposes only a one-time link notification', function (): void {
+test('initiating a reset redirects to a one-time delivery page without persisting the token', function (): void {
     $school = lifecycleUiSchool();
     $admin = lifecycleUiAdmin($school, 'ui-reset@example.test');
-    lifecycleUiEnterPanel(lifecycleUiActor());
+    $actor = lifecycleUiActor();
+    lifecycleUiEnterPanel($actor);
 
-    lifecycleUiPage($school)->callAction('initiate_school_admin_reset');
+    $page = lifecycleUiPage($school);
+    $page->callAction('initiate_school_admin_reset')
+        ->assertRedirectContains('#jeton=');
 
-    [$body, $duration] = lifecycleUiNotification(lifecycleUiNotifications(), 'Lien de réinitialisation');
-
-    preg_match('/account\/password-reset\/([a-f0-9]{64})/', $body, $matches);
-    $token = $matches[1] ?? '';
+    $deliveryUrl = route('central.capability.delivery', [
+        'school' => $school->getKey(),
+        'user' => $admin->getKey(),
+        'purpose' => 'reset',
+    ], false);
+    $token = lifecycleUiRedirectToken($page);
 
     $invitation = UserInvitation::findByPlainToken($token);
 
@@ -171,12 +190,14 @@ test('initiating a reset from the page exposes only a one-time link notification
         ->and($invitation)->not->toBeNull()
         ->and($invitation->purpose)->toBe(UserInvitation::PURPOSE_SCHOOL_ADMIN_RESET)
         ->and($invitation->token_hash)->toBe(hash('sha256', $token))
-        ->and($body)->toContain('24 heures')
-        ->toContain('Aucun e-mail ni SMS n’a été envoyé')
-        ->toContain('Transmettez-le de manière sécurisée')
-        ->not->toContain('AncienMotDePasse1!')
-        ->and($duration)->toBe('persistent')
         ->and(lifecycleUiNotifications())->toBe([]);
+
+    $delivery = $this->actingAs($actor)->get('http://localhost'.$deliveryUrl);
+    $delivery->assertOk()
+        ->assertSee('Lien à usage unique — Réinitialisation du mot de passe')
+        ->assertSee('Aucun e-mail ni SMS n’a été envoyé')
+        ->assertDontSee($token)
+        ->assertDontSee('AncienMotDePasse1!');
 
     $audit = AuditLog::query()->where('action', AuditAction::PasswordResetRequested->value)->firstOrFail();
     $serialized = json_encode($audit->toArray(), JSON_THROW_ON_ERROR);
@@ -198,22 +219,37 @@ test('the page blocks the last active suspension and replaces the admin with a d
     expect($refusal)->toContain('dernier administrateur d’établissement actif')
         ->and($former->fresh()->status)->toBe(UserStatus::Active);
 
-    lifecycleUiPage($school)->callAction('replace_school_admin', data: [
+    $actor = lifecycleUiActor();
+    lifecycleUiEnterPanel($actor);
+
+    $page = lifecycleUiPage($school);
+    $page->callAction('replace_school_admin', data: [
         'first_name' => 'Nouvelle',
         'last_name' => 'Responsable',
         'email' => 'ui-replacement@example.test',
-    ]);
+    ])->assertRedirectContains('#jeton=');
 
-    [$body, $duration] = lifecycleUiNotification(lifecycleUiNotifications(), 'Remplacement effectué');
+    $token = lifecycleUiRedirectToken($page);
     $replacement = User::query()->where('email', 'ui-replacement@example.test')->firstOrFail();
+    $deliveryUrl = route('central.capability.delivery', [
+        'school' => $school->getKey(),
+        'user' => $replacement->getKey(),
+        'purpose' => 'activation',
+    ], false);
 
     expect($former->fresh()->status)->toBe(UserStatus::Suspended)
         ->and($replacement->status)->toBe(UserStatus::Pending)
         ->and((string) $replacement->getKey())->not->toBe((string) $former->getKey())
-        ->and($body)->toContain('/account/activate/')
-        ->toContain('Aucun e-mail ni SMS n’a été envoyé')
-        ->not->toContain('AncienMotDePasse1!')
-        ->and($duration)->toBe('persistent')
-        ->and(AuditLog::query()->where('action', AuditAction::AccessSuspended->value)->count())->toBe(1)
+        ->and(UserInvitation::findByPlainToken($token)?->purpose)->toBe(UserInvitation::PURPOSE_SCHOOL_ADMIN_INITIAL)
+        ->and(lifecycleUiNotifications())->toBe([]);
+
+    $this->actingAs($actor)->get('http://localhost'.$deliveryUrl)
+        ->assertOk()
+        ->assertSee('Lien à usage unique — Activation du compte')
+        ->assertSee('Aucun e-mail ni SMS n’a été envoyé')
+        ->assertDontSee($token)
+        ->assertDontSee('AncienMotDePasse1!');
+
+    expect(AuditLog::query()->where('action', AuditAction::AccessSuspended->value)->count())->toBe(1)
         ->and(AuditLog::query()->where('action', AuditAction::SchoolAdminReplaced->value)->count())->toBe(1);
 });

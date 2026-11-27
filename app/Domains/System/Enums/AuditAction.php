@@ -16,6 +16,10 @@ enum AuditAction: string
     case Logout = 'logout';
     case FailedLogin = 'failed_login';
     case Provisioned = 'provisioned';
+    case ProvisioningRequested = 'provisioning_requested';
+    case ProvisioningBlocked = 'provisioning_blocked';
+    case InvitationReused = 'invitation_reused';
+    case InvitationReissued = 'invitation_reissued';
     case SetupLinkIssued = 'setup_link_issued';
     case PasswordSet = 'password_set';
     case RoleAssigned = 'role_assigned';
@@ -42,6 +46,10 @@ enum AuditAction: string
             self::Logout => 'Déconnexion',
             self::FailedLogin => 'Échec de connexion',
             self::Provisioned => 'Provisionné',
+            self::ProvisioningRequested => 'Provisionnement demandé',
+            self::ProvisioningBlocked => 'Provisionnement bloqué',
+            self::InvitationReused => 'Invitation réutilisée',
+            self::InvitationReissued => 'Invitation réémise',
             self::SetupLinkIssued => 'Lien de configuration émis',
             self::PasswordSet => 'Mot de passe défini',
             self::RoleAssigned => 'Rôle attribué',
@@ -70,6 +78,10 @@ enum AuditAction: string
             self::Logout => 'secondary',
             self::FailedLogin => 'danger',
             self::Provisioned => 'success',
+            self::ProvisioningRequested => 'info',
+            self::ProvisioningBlocked => 'danger',
+            self::InvitationReused => 'success',
+            self::InvitationReissued => 'warning',
             self::SetupLinkIssued => 'warning',
             self::PasswordSet => 'info',
             self::RoleAssigned => 'success',

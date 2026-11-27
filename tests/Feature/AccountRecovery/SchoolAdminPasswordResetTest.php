@@ -224,7 +224,26 @@ test('weak passwords are rejected with French validation messages', function ():
     }
 
     expect(UserInvitation::findByPlainToken($result->plainToken)->isUsable())->toBeTrue()
-        ->and(Hash::check('AncienMotDePasse1!', $this->admin->fresh()->password))->toBeTrue();
+        ->and(Hash::check('AncienMotDePasse1!', $this->admin->fresh()->password))->toBeTrue()
+        ->and(AuditLog::query()->where('action', AuditAction::PasswordResetRejected->value)->count())->toBe(1);
+});
+
+test('a reset token presented on another school host is rejected without changing the password', function (): void {
+    $result = issueResetFor($this->superAdmin, $this->school, $this->admin);
+    $otherId = makeTenant('Cross Host Reset School', 'active', 'cross-reset.nexusschool.test');
+    $otherHost = tenantHost($otherId);
+
+    $this->get("http://{$otherHost}/account/password-reset/{$result->plainToken}")
+        ->assertNotFound()
+        ->assertSee('Lien invalide');
+
+    $this->post("http://{$otherHost}/account/password-reset/{$result->plainToken}", [
+        'password' => 'MotDePasseFort4!',
+        'password_confirmation' => 'MotDePasseFort4!',
+    ])->assertNotFound();
+
+    expect(Hash::check('AncienMotDePasse1!', $this->admin->fresh()->password))->toBeTrue()
+        ->and(UserInvitation::findByPlainToken($result->plainToken)->isUsable())->toBeTrue();
 });
 
 test('the tenant reset page validates and completes in French without leaking secrets', function (): void {

@@ -9,8 +9,10 @@ use App\Domains\School\Models\School;
 use App\Domains\User\DTOs\AccountProvisioningCommand;
 use App\Domains\User\DTOs\AccountProvisioningContext;
 use App\Domains\User\DTOs\AccountProvisioningResult;
+use App\Domains\User\Enums\EnrollmentProvisioningKind;
 use App\Domains\User\Enums\UserStatus;
 use App\Domains\User\Exceptions\AccountProvisioningException;
+use App\Domains\User\Policies\EnrollmentLinkedProvisioningPolicy;
 use App\Models\User;
 use App\Models\UserInvitation;
 use Illuminate\Support\Facades\DB;
@@ -70,6 +72,49 @@ class AccountProvisioningService
             );
 
             return new AccountProvisioningResult($user->refresh(), $invitationIssue);
+        });
+    }
+
+    /**
+     * Create only the authentication shell for an approved enrollment-linked
+     * student/parent workflow. No usable invitation, password or active status
+     * is exposed here. The caller owns the enrollment, identity and lifecycle
+     * checks and never supplies a client-controlled role.
+     */
+    public function provisionEnrollmentLinkedAccount(
+        AccountProvisioningCommand $command,
+        AccountProvisioningContext $context,
+        EnrollmentProvisioningKind $kind,
+    ): User {
+        if (! $context->isSchoolAdminProvisioning()) {
+            throw new AccountProvisioningException(
+                'Only a school administrator may use enrollment-linked provisioning.',
+                AccountProvisioningException::REASON_ACTOR,
+            );
+        }
+
+        $email = Str::lower(trim($command->email));
+
+        $this->assertActorIsActive($context->actor);
+        $school = $this->resolveAndValidateSchool($command, $context);
+        $this->assertEmailAvailable($email);
+        $role = $this->resolveAndValidateEnrollmentRole($command->roleName, $kind);
+
+        return DB::transaction(function () use ($command, $school, $role, $email): User {
+            /** @var User $user */
+            $user = User::query()->create([
+                'school_id' => $school->getKey(),
+                'first_name' => $command->firstName,
+                'last_name' => $command->lastName,
+                'email' => $email,
+                'phone' => $command->phone,
+                'password' => Hash::make(Str::random(64)),
+                'status' => UserStatus::Pending,
+            ]);
+
+            $user->assignRole($role);
+
+            return $user->refresh();
         });
     }
 
@@ -203,6 +248,30 @@ class AccountProvisioningService
         if (! in_array($normalized, self::SCHOOL_ADMIN_ALLOWED_ROLES, true)) {
             throw new AccountProvisioningException(
                 'This role is not allowed for school-admin provisioning in the current Slice 2 scope.',
+                AccountProvisioningException::REASON_ROLE,
+            );
+        }
+
+        return $role;
+    }
+
+    private function resolveAndValidateEnrollmentRole(
+        string $roleName,
+        EnrollmentProvisioningKind $kind,
+    ): Role {
+        $normalized = Str::lower(trim($roleName));
+
+        if (! EnrollmentLinkedProvisioningPolicy::allowsRoleFor($kind, $normalized)) {
+            throw new AccountProvisioningException(
+                'This role is not allowed for the approved enrollment-linked workflow.',
+                AccountProvisioningException::REASON_ROLE,
+            );
+        }
+
+        $role = Role::query()->where('name', $normalized)->where('guard_name', 'web')->first();
+        if (! $role instanceof Role) {
+            throw new AccountProvisioningException(
+                "Role [{$normalized}] does not exist.",
                 AccountProvisioningException::REASON_ROLE,
             );
         }

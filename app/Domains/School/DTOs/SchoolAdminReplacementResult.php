@@ -13,6 +13,11 @@ final readonly class SchoolAdminReplacementResult
         public User $formerAdmin,
         public User $replacement,
         public string $activationUrl,
+        /**
+         * Plaintext capability handed to the operator exactly once. It is never
+         * persisted, audited or included in an exception.
+         */
+        public string $plainToken,
         public AccessRevocationResult $revocation,
     ) {
     }

@@ -32,7 +32,7 @@ final class UserPasswordChangeService
 
     public function change(PasswordChangeCommand $command): PasswordChangeResult
     {
-        $actor = $this->resolveActor($command->actor);
+        $actor = $this->resolveActor($command);
 
         $validator = Validator::make([
             'current_password' => $command->currentPassword,
@@ -52,6 +52,7 @@ final class UserPasswordChangeService
         if ($validator->fails()) {
             /** @var list<string> $messages */
             $messages = $validator->errors()->all();
+            $this->auditRejection($actor, PasswordChangeFailure::Validation, $messages);
 
             throw new PasswordChangeException(PasswordChangeFailure::Validation, null, $messages);
         }
@@ -104,24 +105,35 @@ final class UserPasswordChangeService
         } catch (PasswordChangeException $exception) {
             throw $exception;
         } catch (Throwable) {
+            $this->auditRejection($actor, PasswordChangeFailure::Persistence);
             throw new PasswordChangeException(PasswordChangeFailure::Persistence);
         }
     }
 
-    private function resolveActor(User $actor): User
+    private function resolveActor(PasswordChangeCommand $command): User
     {
         /** @var User|null $fresh */
-        $fresh = User::query()->find($actor->getKey());
+        $fresh = User::query()->find($command->actor->getKey());
 
         if (! $fresh instanceof User || $fresh->trashed() || ! $fresh->isActive()) {
+            $this->auditRejection($command->actor, PasswordChangeFailure::Actor);
             throw new PasswordChangeException(PasswordChangeFailure::Actor);
         }
 
         return $fresh;
     }
 
-    private function auditRejection(User $actor, PasswordChangeFailure $failure): void
+    /**
+     * @param  list<string>  $validationMessages
+     */
+    private function auditRejection(User $actor, PasswordChangeFailure $failure, array $validationMessages = []): void
     {
+        $values = ['reason' => $failure->value, 'scope' => 'self'];
+        if ($validationMessages !== []) {
+            // Validation messages are French policy text, never submitted values.
+            $values['validation_messages'] = $validationMessages;
+        }
+
         $this->auditService->record([
             'school_id' => $actor->school_id,
             'auditable_type' => User::class,
@@ -129,7 +141,7 @@ final class UserPasswordChangeService
             'action' => AuditAction::SensitiveOperationRejected->value,
             'event' => 'user.password.change_rejected',
             'description' => 'Modification du mot de passe refusée.',
-            'new_values' => ['reason' => $failure->value, 'scope' => 'self'],
+            'new_values' => $values,
             'user_id' => (string) $actor->getKey(),
             'user_type' => User::class,
         ]);

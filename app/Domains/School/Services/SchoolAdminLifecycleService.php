@@ -58,6 +58,12 @@ final class SchoolAdminLifecycleService
             return DB::transaction(function () use ($actor, $school, $target): SchoolAdminLifecycleResult {
                 $freshTarget = User::query()->whereKey($target->getKey())->lockForUpdate()->firstOrFail();
 
+                // Re-check under the row lock so two concurrent departures cannot
+                // leave the school without any active School Admin.
+                if ($this->activeSchoolAdminCount($school) <= 1) {
+                    throw new SchoolAdminLifecycleException(SchoolAdminLifecycleFailure::LastActive);
+                }
+
                 $freshTarget->status = UserStatus::Suspended;
                 $freshTarget->save();
 
@@ -84,8 +90,11 @@ final class SchoolAdminLifecycleService
                 return new SchoolAdminLifecycleResult($freshTarget->refresh(), $revocation);
             });
         } catch (SchoolAdminLifecycleException $exception) {
+            $this->auditRejection($school, $target, $actor, $exception->failure, 'school_admin.suspension.rejected');
+
             throw $exception;
         } catch (Throwable) {
+            $this->auditRejection($school, $target, $actor, SchoolAdminLifecycleFailure::Persistence, 'school_admin.suspension.failed');
             throw new SchoolAdminLifecycleException(SchoolAdminLifecycleFailure::Persistence);
         }
     }
@@ -117,6 +126,12 @@ final class SchoolAdminLifecycleService
                 /** @var School $freshSchool */
                 $freshSchool = School::query()->whereKey($school->getKey())->lockForUpdate()->firstOrFail();
                 $freshTarget = User::query()->whereKey($target->getKey())->lockForUpdate()->firstOrFail();
+
+                // The outer check provides an auditable rejection; this locked
+                // re-check closes the race with a concurrent replacement.
+                if (User::withTrashed()->where('email', $email)->exists()) {
+                    throw new SchoolAdminLifecycleException(SchoolAdminLifecycleFailure::Email);
+                }
 
                 $role = Role::findOrCreate(SchoolAdminProvisioningService::ROLE, 'web');
 
@@ -180,6 +195,7 @@ final class SchoolAdminLifecycleService
                     $freshTarget->refresh(),
                     $provisioning->user->refresh(),
                     $this->buildActivationUrl($freshSchool, $provisioning->invitationIssue->plainToken),
+                    $provisioning->invitationIssue->plainToken,
                     $revocation,
                 );
             });
@@ -193,6 +209,7 @@ final class SchoolAdminLifecycleService
 
             throw new SchoolAdminLifecycleException($failure);
         } catch (Throwable) {
+            $this->auditRejection($school, $target, $actor, SchoolAdminLifecycleFailure::Persistence, 'school_admin.replacement.failed');
             throw new SchoolAdminLifecycleException(SchoolAdminLifecycleFailure::Persistence);
         }
     }

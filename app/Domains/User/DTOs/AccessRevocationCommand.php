@@ -29,7 +29,10 @@ final readonly class AccessRevocationCommand
             trigger: AccessRevocationTrigger::PasswordChange,
             revokeSessions: true,
             revokeRememberToken: true,
-            revokeApiTokens: false,
+            // A password change invalidates API credentials as well: a bearer
+            // token must not remain usable after the password that protects
+            // the account has been replaced.
+            revokeApiTokens: true,
             revokeInvitations: true,
             revokePermissionCache: true,
             expectedSchoolId: $user->school_id === null ? null : (string) $user->school_id,

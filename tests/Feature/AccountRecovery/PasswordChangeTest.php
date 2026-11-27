@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
+use App\Domains\Api\Services\ApiTokenService;
 use App\Domains\System\Enums\AuditAction;
 use App\Domains\User\DTOs\PasswordChangeCommand;
 use App\Domains\User\Enums\PasswordChangeFailure;
 use App\Domains\User\Exceptions\PasswordChangeException;
 use App\Domains\User\Services\UserPasswordChangeService;
 use App\Filament\Pages\ChangePassword;
+use App\Models\ApiClient;
+use App\Models\ApiToken;
 use App\Models\AuditLog;
 use App\Models\User;
 use Filament\Facades\Filament;
@@ -47,6 +50,14 @@ test('a user can change their own password after providing the current password'
     insertSessionFor($this->user, 'current-session');
     insertSessionFor($this->user, 'other-session');
 
+    $client = ApiClient::factory()->forSchool($this->schoolId)->create();
+    $apiToken = app(ApiTokenService::class)->create($client, [
+        'name' => 'Jetons de test',
+        'user_id' => $this->user->getKey(),
+        'abilities' => ['*'],
+        'expires_at' => now()->addDay()->toDateTimeString(),
+    ]);
+
     $result = app(UserPasswordChangeService::class)->change(new PasswordChangeCommand(
         actor: $this->user,
         currentPassword: 'AncienMotDePasse1!',
@@ -59,6 +70,7 @@ test('a user can change their own password after providing the current password'
         ->and(DB::table('sessions')->where('id', 'other-session')->exists())->toBeFalse()
         ->and(DB::table('sessions')->where('id', 'current-session')->exists())->toBeTrue()
         ->and($this->user->fresh()->remember_token)->toBeNull()
+        ->and(ApiToken::withTrashed()->findOrFail($apiToken->id)->trashed())->toBeTrue()
         ->and(AuditLog::query()->where('action', AuditAction::PasswordChanged->value)->count())->toBe(1);
 });
 
@@ -97,7 +109,9 @@ test('password confirmation and minimum length failures are rejected', function 
             ->toContain('confirmation du nouveau mot de passe ne correspond pas');
     }
 
-    expect(Hash::check('AncienMotDePasse1!', $this->user->fresh()->password))->toBeTrue();
+    expect(Hash::check('AncienMotDePasse1!', $this->user->fresh()->password))->toBeTrue()
+        ->and(AuditLog::query()->where('action', AuditAction::SensitiveOperationRejected->value)->count())->toBe(1)
+        ->and(AuditLog::query()->where('action', AuditAction::PasswordChanged->value)->count())->toBe(0);
 });
 
 test('the personal password change feature cannot target another user', function (): void {

@@ -19,11 +19,25 @@ use Illuminate\Validation\ValidationException;
 class AccountInvitationActivationService
 {
     /**
+     * Staff and school-admin purposes only.
+     *
+     * Student/parent activation is intentionally withheld until Task 11.3
+     * establishes child-level relationship authorization. The invitation
+     * foundation may prepare and rotate these records, but neither the
+     * activation page nor the activation service may turn them into active
+     * panel credentials before that gate is implemented.
+     *
      * @var list<string>
      */
     private const ALLOWED_PURPOSES = [
         UserInvitation::PURPOSE_SCHOOL_ADMIN_INITIAL,
         UserInvitation::PURPOSE_STAFF_INITIAL,
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const TASK_11_3_BLOCKED_PURPOSES = [
         UserInvitation::PURPOSE_GUARDIAN_INITIAL,
         UserInvitation::PURPOSE_STUDENT_INITIAL,
     ];
@@ -120,7 +134,7 @@ class AccountInvitationActivationService
         }
 
         $invitation = UserInvitation::findUsableByPlainToken($plainToken);
-        if (! $invitation instanceof UserInvitation) {
+        if (! $invitation instanceof UserInvitation || $this->isTask113Blocked($invitation)) {
             return null;
         }
 
@@ -148,6 +162,10 @@ class AccountInvitationActivationService
 
     private function assertInvitationIsActivatable(UserInvitation $invitation, Carbon $now): void
     {
+        if ($this->isTask113Blocked($invitation)) {
+            throw AccountInvitationActivationException::familyActivationBlocked();
+        }
+
         if (! in_array($invitation->purpose, self::ALLOWED_PURPOSES, true)) {
             throw AccountInvitationActivationException::invalidInvitation();
         }
@@ -155,6 +173,11 @@ class AccountInvitationActivationService
         if ($invitation->isConsumed() || $invitation->isRevoked() || $invitation->isExpired($now)) {
             throw AccountInvitationActivationException::invalidInvitation();
         }
+    }
+
+    private function isTask113Blocked(UserInvitation $invitation): bool
+    {
+        return in_array($invitation->purpose, self::TASK_11_3_BLOCKED_PURPOSES, true);
     }
 
     private function assertUserIsActivatable(User $user, UserInvitation $invitation): void

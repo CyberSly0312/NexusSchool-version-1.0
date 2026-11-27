@@ -17,6 +17,7 @@ use App\Domains\School\Models\School;
 use App\Domains\School\Services\InitialSchoolAdminProvisioningService;
 use App\Domains\School\Services\SchoolAdminLifecycleService;
 use App\Domains\School\Services\SchoolAdminProvisioningService;
+use App\Domains\User\Enums\UserStatus;
 use App\Filament\Resources\SuperAdminSchoolResource;
 use App\Models\User;
 use Filament\Actions\Action;
@@ -105,11 +106,11 @@ class EditSuperAdminSchool extends EditRecord
                 ->requiresConfirmation()
                 ->modalHeading('Générer un lien de configuration')
                 ->modalDescription('Aucun mot de passe existant ne sera affiché ni modifié. Tout lien précédent non utilisé sera révoqué.')
-                ->visible(fn (): bool => $this->recoverableSchoolAdmin() !== null)
+                ->visible(fn (): bool => $this->isSuperAdminActor() && $this->recoverableSchoolAdmin() !== null)
                 ->action(function (): void {
                     $school = $this->school();
 
-                    if (! $school instanceof School) {
+                    if (! $school instanceof School || ! $this->isSuperAdminActor()) {
                         return;
                     }
 
@@ -127,13 +128,13 @@ class EditSuperAdminSchool extends EditRecord
                 ->color('warning')
                 ->requiresConfirmation()
                 ->modalHeading('Réinitialiser le mot de passe de l’administrateur')
-                ->modalDescription('Le Super Admin ne choisit aucun mot de passe. Un lien à usage unique valable 24 heures sera affiché une seule fois ; l’administrateur définira lui-même son nouveau mot de passe. Aucun e-mail ni SMS n’a été envoyé.')
+                ->modalDescription('Le Super Admin ne choisit aucun mot de passe. Un lien à usage unique valable 24 heures sera affiché une seule fois sur une page dédiée ; l’administrateur définira lui-même son nouveau mot de passe. Aucun e-mail ni SMS n’a été envoyé.')
                 ->modalSubmitActionLabel('Générer le lien de réinitialisation')
-                ->visible(fn (): bool => $this->isSuperAdminActor() && $this->recoverableSchoolAdmin() !== null)
+                ->visible(fn (): bool => $this->isSuperAdminActor() && $this->activeSchoolAdmin() !== null)
                 ->action(function (): void {
                     $school = $this->school();
                     $actor = $this->actor();
-                    $target = $this->recoverableSchoolAdmin();
+                    $target = $this->activeSchoolAdmin();
 
                     if (! $school instanceof School || ! $actor instanceof User || ! $target instanceof User) {
                         $this->notifyLifecycleFailure('La réinitialisation n’a pas pu être demandée.');
@@ -155,16 +156,16 @@ class EditSuperAdminSchool extends EditRecord
                         return;
                     }
 
-                    Notification::make()
-                        ->title('Lien de réinitialisation')
-                        ->body(
-                            'Lien à usage unique valable 24 heures : '.$result->resetUrl.
-                            '. Transmettez-le de manière sécurisée. Aucun e-mail ni SMS n’a été envoyé.'.
-                            ' Tout lien précédent non utilisé a été révoqué.'
-                        )
-                        ->success()
-                        ->persistent()
-                        ->send();
+                    // The token travels only in the fragment of this redirect:
+                    // fragments are never sent in HTTP requests or stored in
+                    // the database-backed session.
+                    $this->redirect(
+                        route('central.capability.delivery', [
+                            'school' => $school->getKey(),
+                            'user' => $target->getKey(),
+                            'purpose' => 'reset',
+                        ], false).'#jeton='.rawurlencode($result->plainToken)
+                    );
                 }),
 
             Action::make('suspend_school_admin')
@@ -175,11 +176,11 @@ class EditSuperAdminSchool extends EditRecord
                 ->modalHeading('Suspendre l’administrateur d’établissement')
                 ->modalDescription('Le compte sera conservé avec son historique, mais l’authentification et tous les accès actifs seront révoqués. Le dernier administrateur actif ne peut pas être suspendu sans remplacement.')
                 ->modalSubmitActionLabel('Suspendre le compte')
-                ->visible(fn (): bool => $this->isSuperAdminActor() && $this->schoolAdmin() !== null)
+                ->visible(fn (): bool => $this->isSuperAdminActor() && $this->activeSchoolAdmin() !== null)
                 ->action(function (): void {
                     $school = $this->school();
                     $actor = $this->actor();
-                    $target = $this->schoolAdmin();
+                    $target = $this->activeSchoolAdmin();
 
                     if (! $school instanceof School || ! $actor instanceof User || ! $target instanceof User) {
                         $this->notifyLifecycleFailure('La suspension n’a pas pu être effectuée.');
@@ -214,9 +215,9 @@ class EditSuperAdminSchool extends EditRecord
                 ->color('success')
                 ->requiresConfirmation()
                 ->modalHeading('Remplacer l’administrateur d’établissement')
-                ->modalDescription('Un nouveau compte sera créé avec une adresse e-mail différente. L’ancien compte sera suspendu et conservé. Aucun mot de passe ne sera défini par le Super Admin. Aucun e-mail ni SMS n’a été envoyé.')
+                ->modalDescription('Un nouveau compte sera créé avec une adresse e-mail différente. L’ancien compte sera suspendu et conservé. Aucun mot de passe ne sera défini par le Super Admin. Le lien d’activation sera affiché une seule fois sur une page dédiée. Aucun e-mail ni SMS n’a été envoyé.')
                 ->modalSubmitActionLabel('Créer le remplaçant')
-                ->visible(fn (): bool => $this->isSuperAdminActor() && $this->schoolAdmin() !== null)
+                ->visible(fn (): bool => $this->isSuperAdminActor() && $this->activeSchoolAdmin() !== null)
                 ->schema([
                     TextInput::make('first_name')
                         ->label('Prénom du remplaçant')
@@ -240,7 +241,7 @@ class EditSuperAdminSchool extends EditRecord
                 ->action(function (array $data): void {
                     $school = $this->school();
                     $actor = $this->actor();
-                    $target = $this->schoolAdmin();
+                    $target = $this->activeSchoolAdmin();
 
                     if (! $school instanceof School || ! $actor instanceof User || ! $target instanceof User) {
                         $this->notifyLifecycleFailure('Le remplacement n’a pas pu être effectué.');
@@ -270,16 +271,13 @@ class EditSuperAdminSchool extends EditRecord
                         return;
                     }
 
-                    Notification::make()
-                        ->title('Remplacement effectué')
-                        ->body(
-                            'Lien d’activation personnel à usage unique valable 48 heures : '.$result->activationUrl.
-                            '. Le remplaçant définira son propre mot de passe. L’ancien compte est suspendu et conservé.'.
-                            ' Aucun e-mail ni SMS n’a été envoyé.'
-                        )
-                        ->success()
-                        ->persistent()
-                        ->send();
+                    $this->redirect(
+                        route('central.capability.delivery', [
+                            'school' => $school->getKey(),
+                            'user' => $result->replacement->getKey(),
+                            'purpose' => 'activation',
+                        ], false).'#jeton='.rawurlencode($result->plainToken)
+                    );
                 }),
 
             DeleteAction::make(),
@@ -304,6 +302,24 @@ class EditSuperAdminSchool extends EditRecord
         }
 
         return app(SchoolAdminProvisioningService::class)->findSchoolAdmin($school);
+    }
+
+    private function activeSchoolAdmin(): ?User
+    {
+        $school = $this->school();
+
+        if (! $school instanceof School) {
+            return null;
+        }
+
+        /** @var User|null $admin */
+        $admin = User::query()
+            ->where('school_id', $school->getKey())
+            ->where('status', UserStatus::Active)
+            ->whereHas('roles', fn ($query) => $query->where('name', SchoolAdminProvisioningService::ROLE))
+            ->first();
+
+        return $admin;
     }
 
     private function recoverableSchoolAdmin(): ?User

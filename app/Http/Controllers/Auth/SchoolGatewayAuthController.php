@@ -44,8 +44,10 @@ final class SchoolGatewayAuthController
 
         $this->ensureIsNotRateLimited($request, $credentials['email']);
 
+        $normalizedEmail = Str::lower(trim($credentials['email']));
+
         $candidate = User::query()
-            ->where('email', Str::lower(trim($credentials['email'])))
+            ->where('email', $normalizedEmail)
             ->where('school_id', tenant()?->getKey())
             ->first();
 
@@ -59,18 +61,18 @@ final class SchoolGatewayAuthController
         }
 
         if (! Auth::guard('web')->attempt([
-            'email' => $credentials['email'],
+            'email' => $normalizedEmail,
             'password' => $credentials['password'],
         ], $request->boolean('remember'))) {
             RateLimiter::hit($this->ipThrottleKey($request));
             RateLimiter::hit($this->accountThrottleKey($request, $credentials['email']));
 
-            $this->audit($request, 'auth.login_failed', null, 'Failed school gateway login attempt.', [
-                'email' => $credentials['email'],
+            $this->audit($request, 'auth.login_failed', null, 'Tentative de connexion à la passerelle scolaire refusée.', [
+                'email' => $normalizedEmail,
             ]);
 
             throw ValidationException::withMessages([
-                'email' => __('These credentials do not match our records.'),
+                'email' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
             ]);
         }
 
