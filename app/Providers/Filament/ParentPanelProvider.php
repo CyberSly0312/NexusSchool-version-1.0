@@ -31,6 +31,9 @@ class ParentPanelProvider extends PanelProvider
                 \App\Filament\Parent\Pages\ParentDashboard::class,
                 \App\Filament\Pages\ChangePassword::class,
             ])
+            ->resources([
+                \App\Filament\Parent\Resources\ParentChildResource::class,
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

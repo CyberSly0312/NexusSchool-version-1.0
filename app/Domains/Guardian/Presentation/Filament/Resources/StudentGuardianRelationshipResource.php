@@ -4,20 +4,31 @@ declare(strict_types=1);
 
 namespace App\Domains\Guardian\Presentation\Filament\Resources;
 
+use App\Domains\Guardian\Application\Actions\UnlinkGuardianAction;
+use App\Domains\Guardian\Application\DTOs\GuardianRelationshipRevocationData;
+use App\Domains\Guardian\Application\DTOs\GuardianRelationshipVerificationData;
+use App\Domains\Guardian\Application\Services\GuardianRelationshipVerificationService;
+use App\Domains\Guardian\Domain\Enums\GuardianAccessDenialReason;
+use App\Domains\Guardian\Domain\Enums\RelationshipPortalAccessStatus;
+use App\Domains\Guardian\Domain\Enums\RelationshipVerificationStatus;
+use App\Domains\Guardian\Domain\Exceptions\GuardianRelationshipVerificationException;
 use App\Domains\Guardian\Infrastructure\Models\RelationshipType;
 use App\Domains\Guardian\Infrastructure\Models\StudentGuardianRelationship;
 use App\Domains\Guardian\Presentation\Filament\Resources\StudentGuardianRelationshipResource\Pages;
 use App\Domains\Guardian\Presentation\Filament\Resources\StudentGuardianRelationshipResource\RelationManagers\HistoryRelationManager;
+use App\Models\User;
 use App\Traits\ScopedByTenant;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class StudentGuardianRelationshipResource extends Resource
 {
@@ -101,12 +112,79 @@ class StudentGuardianRelationshipResource extends Resource
                 Tables\Filters\TrashedFilter::make()->label('Archivés'),
             ])
             ->actions([
+                Action::make('request_portal_access')
+                    ->label('Demander l’accès au portail')
+                    ->visible(fn (StudentGuardianRelationship $record): bool => $record->verification_status === RelationshipVerificationStatus::Unverified
+                        && $record->portal_access_status === RelationshipPortalAccessStatus::NotAuthorized
+                        && Gate::allows('verify', $record))
+                    ->action(function (StudentGuardianRelationship $record): void {
+                        self::runRelationshipAction(
+                            fn (GuardianRelationshipVerificationService $service): StudentGuardianRelationship => $service->request(
+                                GuardianRelationshipVerificationData::fromRelationship($record),
+                            ),
+                            'Demande enregistrée',
+                        );
+                    }),
+                Action::make('approve_portal_access')
+                    ->label('Approuver l’accès au portail')
+                    ->visible(fn (StudentGuardianRelationship $record): bool => $record->verification_status === RelationshipVerificationStatus::Unverified
+                        && $record->portal_access_status === RelationshipPortalAccessStatus::NotAuthorized
+                        && Gate::allows('verify', $record))
+                    ->action(function (StudentGuardianRelationship $record): void {
+                        self::runRelationshipAction(
+                            fn (GuardianRelationshipVerificationService $service): StudentGuardianRelationship => $service->verifyAndAuthorize(
+                                GuardianRelationshipVerificationData::fromRelationship($record),
+                            ),
+                            'Accès au portail approuvé',
+                        );
+                    }),
+                Action::make('reject_portal_access')
+                    ->label('Refuser l’accès au portail')
+                    ->visible(fn (StudentGuardianRelationship $record): bool => $record->verification_status === RelationshipVerificationStatus::Unverified
+                        && $record->portal_access_status === RelationshipPortalAccessStatus::NotAuthorized
+                        && Gate::allows('verify', $record))
+                    ->action(function (StudentGuardianRelationship $record): void {
+                        self::runRelationshipAction(
+                            fn (GuardianRelationshipVerificationService $service): StudentGuardianRelationship => $service->reject(
+                                GuardianRelationshipVerificationData::fromRelationship($record),
+                            ),
+                            'Demande refusée',
+                        );
+                    }),
+                Action::make('revoke_portal_access')
+                    ->label('Révoquer l’accès au portail')
+                    ->visible(fn (StudentGuardianRelationship $record): bool => $record->portal_access_status === RelationshipPortalAccessStatus::Authorized
+                        && Gate::allows('revoke', $record))
+                    ->action(function (StudentGuardianRelationship $record): void {
+                        self::runRelationshipAction(
+                            fn (GuardianRelationshipVerificationService $service): StudentGuardianRelationship => $service->revoke(
+                                GuardianRelationshipRevocationData::fromRelationship(
+                                    $record,
+                                    GuardianAccessDenialReason::RelationshipRevoked,
+                                ),
+                            ),
+                            'Accès au portail révoqué',
+                        );
+                    }),
                 EditAction::make()->label('Modifier'),
-                DeleteAction::make()->label('Supprimer'),
+                Action::make('unlink_relationship')
+                    ->label('Supprimer')
+                    ->visible(fn (StudentGuardianRelationship $record): bool => self::canDelete($record))
+                    ->action(function (StudentGuardianRelationship $record): void {
+                        $actor = Auth::user();
+
+                        if (! $actor instanceof User || ! self::canDelete($record)) {
+                            abort(403);
+                        }
+
+                        app(UnlinkGuardianAction::class)->execute(
+                            $record,
+                            'Relation supprimée via l’administration',
+                            $actor,
+                        );
+                    }),
             ])
-            ->bulkActions([
-                DeleteBulkAction::make(),
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getRelations(): array
@@ -122,6 +200,27 @@ class StudentGuardianRelationshipResource extends Resource
             'index' => Pages\ListStudentGuardianRelationships::route('/'),
             'edit' => Pages\EditStudentGuardianRelationship::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * @param  callable(GuardianRelationshipVerificationService): StudentGuardianRelationship  $operation
+     */
+    private static function runRelationshipAction(callable $operation, string $successTitle): void
+    {
+        try {
+            $operation(app(GuardianRelationshipVerificationService::class));
+
+            Notification::make()
+                ->title($successTitle)
+                ->success()
+                ->send();
+        } catch (GuardianRelationshipVerificationException) {
+            Notification::make()
+                ->title('Action refusée')
+                ->body('L’acteur ou la preuve de relation n’est pas autorisé.')
+                ->danger()
+                ->send();
+        }
     }
 
     public static function canDelete($record = null): bool

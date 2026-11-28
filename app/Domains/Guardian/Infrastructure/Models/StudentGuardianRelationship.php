@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domains\Guardian\Infrastructure\Models;
 
+use App\Domains\Guardian\Application\Services\GuardianLinkProvenance;
+use App\Domains\Guardian\Domain\Enums\RelationshipPortalAccessStatus;
+use App\Domains\Guardian\Domain\Enums\RelationshipVerificationStatus;
 use App\Domains\Student\Infrastructure\Models\Student;
 use App\Traits\HasSchoolId;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -12,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * First-class link between a Guardian aggregate and a Student aggregate.
@@ -20,6 +24,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * type and role flags (primary, emergency contact, authorized pickup,
  * financial responsible, notification recipient, medical contact). Rows are
  * soft-deleted only, so past links survive as history.
+ *
+ * @property RelationshipVerificationStatus $verification_status
+ * @property RelationshipPortalAccessStatus $portal_access_status
  */
 class StudentGuardianRelationship extends Model
 {
@@ -51,6 +58,13 @@ class StudentGuardianRelationship extends Model
         'relationship_start_date',
         'relationship_end_date',
         'notes',
+        'verification_status',
+        'portal_access_status',
+        'verified_at',
+        'portal_authorized_at',
+        'portal_revoked_at',
+        'verification_evidence_code',
+        'authorization_reason_code',
     ];
 
     protected function casts(): array
@@ -66,6 +80,11 @@ class StudentGuardianRelationship extends Model
             'pickup_valid_until' => 'date',
             'relationship_start_date' => 'date',
             'relationship_end_date' => 'date',
+            'verification_status' => RelationshipVerificationStatus::class,
+            'portal_access_status' => RelationshipPortalAccessStatus::class,
+            'verified_at' => 'datetime',
+            'portal_authorized_at' => 'datetime',
+            'portal_revoked_at' => 'datetime',
         ];
     }
 
@@ -131,6 +150,38 @@ class StudentGuardianRelationship extends Model
         return $query->where('guardian_id', $guardianId);
     }
 
+    /**
+     * Only durable, independently verified, explicitly authorized and currently
+     * effective relationships can grant Parent portal access.
+     */
+    public function scopePortalAuthorized($query, ?string $date = null)
+    {
+        $target = $date !== null
+            ? \Illuminate\Support\Carbon::parse($date)->toDateString()
+            : \Illuminate\Support\Carbon::today()->toDateString();
+
+        return $query
+            ->whereNotNull('guardian_id')
+            ->where('verification_status', RelationshipVerificationStatus::Verified->value)
+            ->where('portal_access_status', RelationshipPortalAccessStatus::Authorized->value)
+            ->whereNotNull('relationship_start_date')
+            ->whereDate('relationship_start_date', '<=', $target)
+            ->where(function ($query) use ($target): void {
+                $query->whereNull('relationship_end_date')
+                    ->orWhereDate('relationship_end_date', '>=', $target);
+            })
+            ->whereExists(function ($query): void {
+                $query->select(DB::raw(1))
+                    ->from('student_guardian_relationship_history')
+                    ->whereColumn('student_guardian_relationship_history.student_guardian_id', 'student_guardians.id')
+                    ->whereColumn('student_guardian_relationship_history.school_id', 'student_guardians.school_id')
+                    ->whereColumn('student_guardian_relationship_history.student_id', 'student_guardians.student_id')
+                    ->whereColumn('student_guardian_relationship_history.guardian_id', 'student_guardians.guardian_id')
+                    ->where('student_guardian_relationship_history.event', 'linked')
+                    ->whereNotNull('student_guardian_relationship_history.user_id');
+            });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Helpers
@@ -182,6 +233,57 @@ class StudentGuardianRelationship extends Model
             : \Illuminate\Support\Carbon::today();
 
         return $target->lte($this->relationship_end_date);
+    }
+
+    /**
+     * Whether this relationship may currently authorize Parent child access.
+     * This method is intentionally strict and fails closed.
+     */
+    public function isPortalAuthorized(?string $date = null): bool
+    {
+        if ($this->trashed() || $this->guardian_id === null) {
+            return false;
+        }
+
+        if ($this->verification_status !== RelationshipVerificationStatus::Verified) {
+            return false;
+        }
+
+        if ($this->portal_access_status !== RelationshipPortalAccessStatus::Authorized) {
+            return false;
+        }
+
+        if (! $this->hasTrustedLinkProvenance()) {
+            return false;
+        }
+
+        if ($this->relationship_start_date === null) {
+            return false;
+        }
+
+        $target = $date !== null
+            ? \Illuminate\Support\Carbon::parse($date)
+            : \Illuminate\Support\Carbon::today();
+
+        return $target->gte($this->relationship_start_date) && $this->isCurrent($date);
+    }
+
+    /**
+     * A durable row is trusted only when the school-scoped link operation wrote
+     * an attributed `linked` history row with matching tenant and target IDs.
+     */
+    public function hasTrustedLinkProvenance(): bool
+    {
+        $link = $this->history()
+            ->where('event', 'linked')
+            ->whereNotNull('user_id')
+            ->where('school_id', $this->school_id)
+            ->where('student_id', $this->student_id)
+            ->where('guardian_id', $this->guardian_id)
+            ->first();
+
+        return $link instanceof StudentGuardianRelationshipHistory
+            && GuardianLinkProvenance::isTrustedHistory($link);
     }
 
     /**

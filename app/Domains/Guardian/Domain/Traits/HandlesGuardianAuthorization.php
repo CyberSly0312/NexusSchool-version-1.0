@@ -73,6 +73,16 @@ trait HandlesGuardianAuthorization
         return $this->authorizeRelationship($user, $model, 'unlink');
     }
 
+    public function verify(User $user, Model $model): bool
+    {
+        return $this->authorizeRelationship($user, $model, 'verify');
+    }
+
+    public function revoke(User $user, Model $model): bool
+    {
+        return $this->authorizeRelationship($user, $model, 'revoke');
+    }
+
     public function assignPrimary(User $user, Model $model): bool
     {
         return $this->authorizeRelationship($user, $model, 'primary');

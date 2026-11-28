@@ -5,26 +5,37 @@ declare(strict_types=1);
 namespace App\Domains\Guardian\Application\Actions;
 
 use App\Domains\Guardian\Application\DTOs\RelationshipData;
+use App\Domains\Guardian\Application\Services\GuardianLinkProvenance;
+use App\Domains\Guardian\Domain\Enums\GuardianAccessDenialReason;
 use App\Domains\Guardian\Domain\Events\GuardianLinked;
 use App\Domains\Guardian\Domain\Events\PrimaryGuardianAssigned;
 use App\Domains\Guardian\Domain\Exceptions\DuplicateRelationshipException;
+use App\Domains\Guardian\Domain\Exceptions\GuardianRelationshipVerificationException;
 use App\Domains\Guardian\Domain\Exceptions\GuardianStateException;
 use App\Domains\Guardian\Domain\Exceptions\RelationshipStateException;
 use App\Domains\Guardian\Infrastructure\Models\Guardian;
 use App\Domains\Guardian\Infrastructure\Models\RelationshipType;
 use App\Domains\Guardian\Infrastructure\Models\StudentGuardianRelationship;
+use App\Domains\School\Models\School;
 use App\Domains\Student\Infrastructure\Models\Student;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 final class LinkGuardianAction
 {
-    public function execute(RelationshipData $data, ?User $actor = null): StudentGuardianRelationship
+    public function execute(RelationshipData $data): StudentGuardianRelationship
     {
+        $actor = $this->resolveActor();
+        $school = $this->resolveSchool();
+        $this->assertTenantMatchesData($school, $data);
+        $this->assertActorSchool($actor, $school);
+
         $guardian = $this->resolveGuardian($data);
         $student = $this->resolveStudent($data);
         $this->resolveRelationshipType($data);
-
+        $this->authorizeLink($actor, $guardian);
         $this->assertNoExistingRelationship($data);
 
         return DB::transaction(function () use ($data, $guardian, $student, $actor): StudentGuardianRelationship {
@@ -57,7 +68,8 @@ final class LinkGuardianAction
                 'notes' => $data->notes,
             ]);
 
-            GuardianLinked::dispatch($relationship, $actor);
+            GuardianLinkProvenance::issueFor($relationship, $actor);
+            GuardianLinked::dispatch($relationship);
 
             if ($data->isPrimary) {
                 PrimaryGuardianAssigned::dispatch($relationship, $actor);
@@ -65,6 +77,61 @@ final class LinkGuardianAction
 
             return $relationship;
         });
+    }
+
+    private function resolveActor(): User
+    {
+        $actor = Auth::user();
+
+        if (! $actor instanceof User) {
+            $this->deny(GuardianAccessDenialReason::ActorNotAuthenticated);
+        }
+
+        if ($actor->trashed() || ! $actor->isActive()) {
+            $this->deny(GuardianAccessDenialReason::ActorNotActive);
+        }
+
+        if ($actor->hasRole('parent')) {
+            $this->deny(GuardianAccessDenialReason::ActorNotAuthorized);
+        }
+
+        return $actor;
+    }
+
+    private function resolveSchool(): School
+    {
+        $tenant = tenant();
+
+        if (! $tenant instanceof School) {
+            $this->deny(GuardianAccessDenialReason::TenantContextMissing);
+        }
+
+        if ($tenant->trashed() || ! $tenant->isActive()) {
+            $this->deny(GuardianAccessDenialReason::SchoolInactive);
+        }
+
+        return $tenant;
+    }
+
+    private function assertTenantMatchesData(School $school, RelationshipData $data): void
+    {
+        if ((string) $data->schoolId !== (string) $school->getKey()) {
+            $this->deny(GuardianAccessDenialReason::TenantContextMismatch);
+        }
+    }
+
+    private function assertActorSchool(User $actor, School $school): void
+    {
+        if ((string) $actor->school_id !== (string) $school->getKey()) {
+            $this->deny(GuardianAccessDenialReason::ActorSchoolMismatch);
+        }
+    }
+
+    private function authorizeLink(User $actor, Guardian $guardian): void
+    {
+        if (! Gate::forUser($actor)->allows('link', $guardian)) {
+            $this->deny(GuardianAccessDenialReason::ActorNotAuthorized);
+        }
     }
 
     private function resolveGuardian(RelationshipData $data): Guardian
@@ -129,5 +196,10 @@ final class LinkGuardianAction
             ->find($data->relationshipTypeId);
 
         return $type instanceof RelationshipType ? $type->code : 'other';
+    }
+
+    private function deny(GuardianAccessDenialReason $reason): never
+    {
+        throw GuardianRelationshipVerificationException::because($reason);
     }
 }

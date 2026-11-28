@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * entities carrying the business meaning (relationship type, primary flag,
  * emergency contact, authorized pickup, …). Invariants are enforced by the
  * application actions, never by the model.
+ *
+ * @property GuardianStatus $status
  */
 class Guardian extends Model
 {

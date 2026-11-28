@@ -153,7 +153,8 @@ class Student extends Model
 
     public function guardians(): HasMany
     {
-        return $this->hasMany(StudentGuardian::class, 'student_id');
+        return $this->hasMany(StudentGuardian::class, 'student_id')
+            ->whereNull('guardian_id');
     }
 
     /*

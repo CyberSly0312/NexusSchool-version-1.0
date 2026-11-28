@@ -32,6 +32,12 @@ enum AuditAction: string
     case AccessSuspended = 'access_suspended';
     case SchoolAdminReplaced = 'school_admin_replaced';
     case SensitiveOperationRejected = 'sensitive_operation_rejected';
+    case GuardianRelationshipRequested = 'guardian_relationship_requested';
+    case GuardianRelationshipVerified = 'guardian_relationship_verified';
+    case GuardianRelationshipRejected = 'guardian_relationship_rejected';
+    case GuardianRelationshipRevoked = 'guardian_relationship_revoked';
+    case GuardianChildAccessDenied = 'guardian_child_access_denied';
+    case GuardianChildViewed = 'guardian_child_viewed';
 
     public function label(): string
     {
@@ -62,6 +68,12 @@ enum AuditAction: string
             self::AccessSuspended => 'Accès suspendu',
             self::SchoolAdminReplaced => 'Administrateur d’établissement remplacé',
             self::SensitiveOperationRejected => 'Opération sensible refusée',
+            self::GuardianRelationshipRequested => 'Lien tuteur–élève demandé',
+            self::GuardianRelationshipVerified => 'Lien tuteur–élève vérifié',
+            self::GuardianRelationshipRejected => 'Lien tuteur–élève refusé',
+            self::GuardianRelationshipRevoked => 'Lien tuteur–élève révoqué',
+            self::GuardianChildAccessDenied => 'Accès à un élève refusé',
+            self::GuardianChildViewed => 'Fiche élève consultée par un tuteur',
         };
     }
 
@@ -94,6 +106,12 @@ enum AuditAction: string
             self::AccessSuspended => 'danger',
             self::SchoolAdminReplaced => 'success',
             self::SensitiveOperationRejected => 'danger',
+            self::GuardianRelationshipRequested => 'info',
+            self::GuardianRelationshipVerified => 'success',
+            self::GuardianRelationshipRejected => 'danger',
+            self::GuardianRelationshipRevoked => 'warning',
+            self::GuardianChildAccessDenied => 'danger',
+            self::GuardianChildViewed => 'info',
         };
     }
 

@@ -16,16 +16,37 @@ use App\Domains\Guardian\Infrastructure\Models\Guardian;
 use App\Domains\Guardian\Infrastructure\Models\RelationshipType;
 use App\Domains\Guardian\Infrastructure\Models\StudentGuardianRelationship;
 use App\Domains\Guardian\Infrastructure\Models\StudentGuardianRelationshipHistory;
+use App\Domains\School\Models\School;
 use App\Domains\Student\Infrastructure\Models\Student;
+use App\Domains\User\Enums\UserStatus;
 use App\Models\AuditLog;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
+use Stancl\Tenancy\Facades\Tenancy;
 
 beforeEach(function (): void {
     $this->schoolId = makeTenant();
+    if (tenancy()->initialized) {
+        Tenancy::end();
+    }
+    Tenancy::initialize(School::query()->findOrFail($this->schoolId));
+
     $this->student = Student::factory()->create(['school_id' => $this->schoolId]);
     $this->guardian = Guardian::factory()->create(['school_id' => $this->schoolId]);
     $this->relationshipType = RelationshipType::factory()->create(['school_id' => $this->schoolId]);
-    $this->actor = User::factory()->create(['school_id' => $this->schoolId]);
+
+    Permission::firstOrCreate(['name' => 'guardian.link', 'guard_name' => 'web']);
+    $this->actor = User::factory()->create([
+        'school_id' => $this->schoolId,
+        'status' => UserStatus::Active,
+    ]);
+    $this->actor->givePermissionTo('guardian.link');
+});
+
+afterEach(function (): void {
+    if (tenancy()->initialized) {
+        Tenancy::end();
+    }
 });
 
 function createAuditedGuardian(object $context): Guardian
@@ -42,13 +63,15 @@ function createAuditedGuardian(object $context): Guardian
 
 function linkAuditedRelationship(object $context, Guardian $guardian): StudentGuardianRelationship
 {
+    $context->actingAs($context->actor);
+
     return app(LinkGuardianAction::class)->execute(RelationshipData::fromArray([
         'school_id' => $context->schoolId,
         'student_id' => $context->student->id,
         'guardian_id' => $guardian->id,
         'relationship_type_id' => $context->relationshipType->id,
         'relationship_start_date' => now()->toDateString(),
-    ]), $context->actor);
+    ]));
 }
 
 test('registration writes an audit log entry', function (): void {

@@ -14,10 +14,20 @@ use App\Domains\Guardian\Domain\ValueObjects\PickupWindow;
 use App\Domains\Guardian\Infrastructure\Models\Guardian;
 use App\Domains\Guardian\Infrastructure\Models\RelationshipType;
 use App\Domains\Guardian\Infrastructure\Models\StudentGuardianRelationship;
+use App\Domains\School\Models\School;
 use App\Domains\Student\Infrastructure\Models\Student;
+use App\Domains\User\Enums\UserStatus;
+use App\Models\User;
+use Spatie\Permission\Models\Permission;
+use Stancl\Tenancy\Facades\Tenancy;
 
 beforeEach(function (): void {
     $this->schoolId = makeTenant();
+    if (tenancy()->initialized) {
+        Tenancy::end();
+    }
+    Tenancy::initialize(School::query()->findOrFail($this->schoolId));
+
     $this->student = Student::factory()->create(['school_id' => $this->schoolId]);
     $this->guardian = Guardian::factory()->create(['school_id' => $this->schoolId]);
     $this->guardianTwo = Guardian::factory()->create([
@@ -27,7 +37,21 @@ beforeEach(function (): void {
     ]);
     $this->relationshipType = RelationshipType::factory()->create(['school_id' => $this->schoolId]);
 
+    Permission::firstOrCreate(['name' => 'guardian.link', 'guard_name' => 'web']);
+    $this->actor = User::factory()->create([
+        'school_id' => $this->schoolId,
+        'status' => UserStatus::Active,
+    ]);
+    $this->actor->givePermissionTo('guardian.link');
+    $this->actingAs($this->actor);
+
     $this->link = app(LinkGuardianAction::class);
+});
+
+afterEach(function (): void {
+    if (tenancy()->initialized) {
+        Tenancy::end();
+    }
 });
 
 function relationshipData(object $context, int $guardianId, array $overrides = []): RelationshipData

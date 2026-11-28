@@ -59,7 +59,7 @@ class GuardianFactory extends Factory
         ]);
     }
 
-    public function forSchool(int $schoolId): static
+    public function forSchool(int|string $schoolId): static
     {
         return $this->state(fn (): array => ['school_id' => $schoolId]);
     }

@@ -2,16 +2,16 @@
 
 | Field | Value |
 |---|---|
-| Status | **PARTIAL OWNER APPROVAL — TASK 11.1 IMPLEMENTED — TASK 11.2 IMPLEMENTATION IN PROGRESS — OVERALL TASK 11 NOT COMPLETE** |
+| Status | **PARTIAL OWNER APPROVAL — TASK 11.1 IMPLEMENTED — TASK 11.2 IMPLEMENTED — TASK 11.3 IMPLEMENTATION IN PROGRESS — OVERALL TASK 11 NOT COMPLETE** |
 | Date | 2026-11-27 |
-| Verified HEAD | `daf4b71 account management` |
-| Scope | Ten business decisions, identity/relationship policies, architecture guidance, and the approved Task 11.1/11.2 implementation slices. Decisions 7 and 8 remain pending. |
-| Application code modified by this task | Task 11.1 identity matching and Task 11.2 approved provisioning foundation. |
-| Migrations, tests, configuration, routes modified by this task | No migrations were added. Focused tests were added for the approved slices. |
+| Verified HEAD | `cc05790 commit du 28_11` |
+| Scope | Ten business decisions, identity/relationship policies, architecture guidance, and the approved Task 11.1/11.2/11.3 implementation slices. Decision 7 is deferred; Decision 8 is approved. |
+| Application code modified by this task | Task 11.1 identity matching, Task 11.2 approved provisioning foundation, and Task 11.3 approved child-level relationship authorization foundation. |
+| Migrations, tests, configuration, routes modified by this task | Migrations were added for Task 11.3 authorization state where strictly necessary. Focused tests were added for the approved slices. |
 | Only file created by this task | `docs/docs/00_Project_Management/TASK-11_Student_Guardian_Account_Provisioning_Decisions.md` |
 | Baseline document | `docs/docs/00_Project_Management/TASK-09_Student_Guardian_Account_Provisioning_Discovery_Report.md` — verified as **DRAFT DISCOVERY — DOCUMENTATION ONLY — NO IMPLEMENTATION, NO GOVERNANCE APPROVAL** |
 | Related non-authoritative document | `docs/docs/00_Project_Management/Account_Provisioning_Foundation_Specification.md` — DRAFT, not approved |
-| Approval state | **Owner-approved:** Decisions 1, 2, 3, 4, 5, 6, 9 and 10. **Pending:** Decisions 7 and 8. The overall Task 11 workstream is not approved or complete. |
+| Approval state | **Owner-approved:** Decisions 1, 2, 3, 4, 5, 6, 8, 9 and 10. **Deferred / pending future owner review:** Decision 7. The overall Task 11 workstream is not approved or complete. |
 
 ## Owner governance update — 2026-11-27
 
@@ -25,7 +25,14 @@ The project owner explicitly approved the following decisions on **2026-11-27** 
 | Decision 6 | `### Decision 6 — What happens when an invitation has expired?` | Approved for Task 11.2: expired invitations preserve User/Guardian history and may be reissued by an authorized actor using the existing 48-hour validity period. |
 | Decision 10 | `### Decision 10 — What should School Admins be allowed to do?` | Approved for Task 11.2: School Admin account operations remain narrowly scoped to authorized enrollment-linked workflows and must not bypass tenant isolation, `SchoolAdminRolePolicy`, or `UserRoleChangeService`. |
 
-Decisions 3, 4, and 9 were already approved and implemented in Task 11.1. Their decision text is intentionally unchanged by this update. Decisions 7 and 8 remain pending owner approval. The overall Task 11 workstream is not approved or complete.
+The project owner updated the governance state for Task 11.3 on **2026-11-27**:
+
+| Decision | Decision state | Governance record |
+|---|---|---|
+| Decision 7 | **DEFERRED — PENDING FUTURE OWNER REVIEW** | The expected operational model is generally that a student is associated with their parent or tutor. Multiple distinct responsibility categories for one student are not currently a priority. No new responsibility taxonomy, guardian responsibility types, or redesign of existing responsibility flags is approved. Existing structures must be preserved except for changes strictly necessary for secure child-level authorization. Decision 7 is **not approved**. |
+| Decision 8 | **APPROVED** | One Guardian account may be associated with multiple students in the same school. Every association must be independently verified and explicitly authorized. Authorization for one student must never automatically grant access to another student, including siblings. Every relationship must be school-scoped; cross-school associations are rejected. Task 11.1 identity-matching rules remain mandatory. |
+
+Decisions 3, 4, and 9 were already approved and implemented in Task 11.1. Their decision text is intentionally unchanged by the governance updates. Decisions 1, 2, 5, 6, 9, and 10 remain approved. The overall Task 11 workstream is not approved or complete.
 
 ---
 
@@ -357,7 +364,9 @@ Example French application text: **« Lien expiré. Demandez une nouvelle invita
 
 ---
 
-### Decision 7 — Can a student have multiple legal guardians?
+### Decision 7 — Can a student have multiple legal guardians? — **DEFERRED BY OWNER ON 2026-11-27, PENDING FUTURE REVIEW**
+
+**OWNER DECISION: DEFERRED. NOT APPROVED.** The expected operational model is generally that a student is associated with their parent or tutor. Multiple distinct responsibility categories for one student are not currently a priority. Do not introduce a new responsibility taxonomy, invent additional guardian responsibility types, or redesign existing responsibility flags or relationship semantics. Preserve existing structures except where a minimal change is strictly necessary for secure child-level authorization.
 
 **Verified current behavior**
 
@@ -391,11 +400,13 @@ Adopt option 3. Multiple legal guardians are permitted. Legal authority is repre
 
 Example French application text: **« Plusieurs tuteurs peuvent être associés à cet élève. »**, **« Le tuteur principal est le contact par défaut ; les autres responsabilités sont définies séparément. »**
 
-**RECOMMENDATION — REQUIRES OWNER APPROVAL**
+**RECOMMENDATION — DEFERRED BY OWNER ON 2026-11-27; PENDING FUTURE REVIEW; NOT APPROVED**
 
 ---
 
-### Decision 8 — Can one guardian account be linked to multiple students?
+### Decision 8 — Can one guardian account be linked to multiple students? — **APPROVED BY OWNER ON 2026-11-27**
+
+**OWNER DECISION: APPROVED.** A single Guardian account may be associated with multiple students within the same school. Each association must be independently verified and explicitly authorized. Access granted for one student must never automatically grant access to another student, including a sibling. Every relationship must belong to the active school, identify the specific Guardian account and Student, have a verifiable basis, support revocation/deactivation, and preserve history where the existing architecture supports it. Cross-school associations are rejected. The Task 11.1 `SchoolScopedIdentityMatcher` outcomes and rules remain mandatory: `EXACT_MATCH`, `POSSIBLE_MATCH`, and `AMBIGUOUS_OR_CONFLICT`. Embedded `GuardianReference` rows with `guardian_id = NULL`, name-only evidence, and unverified phone evidence cannot establish portal access.
 
 **Verified current behavior**
 
@@ -430,7 +441,7 @@ Allow option 2 as the default and option 3 only with school-scoped, verified Gua
 
 Example French application text: **« Ce tuteur est déjà associé à un autre élève de l’établissement. Le même compte sera réutilisé. »**, **« L’accès à chaque enfant reste limité aux relations attribuées à ce tuteur. »**
 
-**RECOMMENDATION — REQUIRES OWNER APPROVAL**
+**OWNER DECISION — APPROVED ON 2026-11-27, subject to the independent verification, explicit authorization, school scoping, and Task 11.1 matching constraints recorded above.**
 
 ---
 
@@ -807,17 +818,17 @@ This roadmap is a planning recommendation only. No implementation is authorized 
 
 ## 10. Explicit owner approval checklist
 
-No Task 11 decision was approved by the original report. The Task 11.2 governance update recorded above approves Decisions 1, 2, 5, 6, and 10 only. The checkbox state for Decisions 3, 4, and 9 is intentionally left unchanged here because those decision texts were already approved and implemented in Task 11.1 and are not modified by this update.
+No Task 11 decision was approved by the original report. The Task 11.2 governance update recorded above approved Decisions 1, 2, 5, 6, and 10. Decisions 3, 4, and 9 were already approved and implemented in Task 11.1. The Task 11.3 governance update approves Decision 8 and defers Decision 7. The overall Task 11 workstream remains incomplete.
 
 - [x] **Decision 1:** Opt-in student accounts only with explicit school request and adequate contact/eligibility evidence. Approved by owner on 2026-11-27 for Task 11.2.
 - [x] **Decision 2:** Guardian invitations only after enrollment confirmation and explicit portal-access request for the specific guardian. Approved by owner on 2026-11-27 for Task 11.2.
-- [ ] **Decision 3:** Guardian without account remains unlinked unless exact same-school evidence or verified manual review succeeds; no account from name/phone resemblance. Pending owner approval.
-- [ ] **Decision 4:** Active parent account reuse only with same-school durable ID or exact email plus corroboration; phone alone insufficient; cross-school email blocked. Pending owner approval.
+- [x] **Decision 3:** Guardian without account remains unlinked unless exact same-school evidence or verified manual review succeeds; no account from name/phone resemblance. Approved previously; implemented in Task 11.1.
+- [x] **Decision 4:** Active parent account reuse only with same-school durable ID or exact email plus corroboration; phone alone insufficient; cross-school email blocked. Approved previously; implemented in Task 11.1.
 - [x] **Decision 5:** Reuse a still-usable same-purpose invitation; revoke before different-purpose reissue; no duplicate active invitation. Approved by owner on 2026-11-27 for Task 11.2.
 - [x] **Decision 6:** Expired invitation keeps User/Guardian history and requires authorized reissue with 48-hour TTL. Approved by owner on 2026-11-27 for Task 11.2.
-- [ ] **Decision 7:** Multiple legal guardians allowed; relationship type carries authority; flags remain per-student and date/window aware. Pending owner approval.
-- [ ] **Decision 8:** One guardian account may serve multiple same-school students via durable relationships; child-level authorization must be verified/hardened. Pending owner approval.
-- [ ] **Decision 9:** Use only `EXACT_MATCH`, `POSSIBLE_MATCH`, and `AMBIGUOUS_OR_CONFLICT`, with no automatic link from name or unverified phone. Pending owner approval.
+- [ ] **Decision 7:** **DEFERRED BY OWNER ON 2026-11-27 — PENDING FUTURE REVIEW. NOT APPROVED.** No multiple-legal-guardian responsibility taxonomy, new responsibility types, or redesign of responsibility flags is authorized by this decision.
+- [x] **Decision 8:** One guardian account may serve multiple same-school students through independently verified, explicitly authorized, revocable, school-scoped relationships; child-level authorization is mandatory; sibling and cross-school auto-access are forbidden. Approved by owner on 2026-11-27 for Task 11.3.
+- [x] **Decision 9:** Use only `EXACT_MATCH`, `POSSIBLE_MATCH`, and `AMBIGUOUS_OR_CONFLICT`, with no automatic link from name or unverified phone. Approved previously; implemented in Task 11.1.
 - [x] **Decision 10:** School Admins receive only narrow enrollment-linked account operations and cannot bypass `SchoolAdminRolePolicy`, `UserRoleChangeService`, or tenant isolation. Approved by owner on 2026-11-27 for Task 11.2.
 
 ### Out of scope until separately approved

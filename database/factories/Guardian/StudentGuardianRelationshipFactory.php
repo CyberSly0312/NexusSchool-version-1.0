@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories\Guardian;
 
+use App\Domains\Guardian\Domain\Enums\RelationshipPortalAccessStatus;
+use App\Domains\Guardian\Domain\Enums\RelationshipVerificationStatus;
 use App\Domains\Guardian\Infrastructure\Models\Guardian;
 use App\Domains\Guardian\Infrastructure\Models\RelationshipType;
 use App\Domains\Guardian\Infrastructure\Models\StudentGuardianRelationship;
@@ -40,6 +42,13 @@ class StudentGuardianRelationshipFactory extends Factory
             'relationship_start_date' => now()->toDateString(),
             'relationship_end_date' => null,
             'notes' => null,
+            'verification_status' => RelationshipVerificationStatus::Unverified,
+            'portal_access_status' => RelationshipPortalAccessStatus::NotAuthorized,
+            'verified_at' => null,
+            'portal_authorized_at' => null,
+            'portal_revoked_at' => null,
+            'verification_evidence_code' => null,
+            'authorization_reason_code' => null,
         ];
     }
 
@@ -65,7 +74,27 @@ class StudentGuardianRelationshipFactory extends Factory
         ]);
     }
 
-    public function forSchool(int $schoolId): static
+    public function verifiedForPortal(?string $evidenceCode = null): static
+    {
+        return $this->state(fn (): array => [
+            'verification_status' => RelationshipVerificationStatus::Verified,
+            'verified_at' => now(),
+            'verification_evidence_code' => $evidenceCode,
+        ]);
+    }
+
+    public function authorizedForPortal(?string $reasonCode = null): static
+    {
+        return $this->state(fn (): array => [
+            'verification_status' => RelationshipVerificationStatus::Verified,
+            'portal_access_status' => RelationshipPortalAccessStatus::Authorized,
+            'verified_at' => now(),
+            'portal_authorized_at' => now(),
+            'authorization_reason_code' => $reasonCode,
+        ]);
+    }
+
+    public function forSchool(int|string $schoolId): static
     {
         return $this->state(fn (): array => ['school_id' => $schoolId]);
     }

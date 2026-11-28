@@ -156,7 +156,7 @@ class PermissionService
         'workflow' => ['execute', 'manage', 'publish'],
         'student' => ['transfer', 'suspend', 'graduate', 'archive', 'restore'],
         'enrollment' => ['promote', 'repeat', 'transfer', 'graduate', 'withdraw', 'suspend', 'restore'],
-        'guardian' => ['link', 'unlink', 'primary', 'emergency', 'pickup'],
+        'guardian' => ['link', 'unlink', 'primary', 'emergency', 'pickup', 'verify', 'revoke'],
         'staff' => ['assign', 'transfer', 'terminate', 'suspend', 'restore', 'teach'],
         'timetable' => ['publish', 'archive', 'manage', 'generate', 'duplicate'],
         'schedule' => ['manage'],

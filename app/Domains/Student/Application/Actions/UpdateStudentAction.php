@@ -97,13 +97,28 @@ final class UpdateStudentAction
      */
     private function replaceGuardians(Student $student, array $guardians): void
     {
-        StudentGuardian::where('student_id', $student->getKey())->delete();
+        StudentGuardian::query()
+            ->forSchool((string) $student->school_id)
+            ->where('student_id', $student->getKey())
+            ->whereNull('guardian_id')
+            ->delete();
+
+        $seen = [];
 
         foreach ($guardians as $index => $guardian) {
+            $attributes = $guardian->toArray();
+            $key = mb_strtolower($attributes['name']).'|'.($attributes['phone'] ?? '').'|'.($attributes['email'] ?? '');
+
+            if (isset($seen[$key])) {
+                continue;
+            }
+
+            $seen[$key] = true;
+
             StudentGuardian::create([
                 'school_id' => $student->school_id,
                 'student_id' => $student->getKey(),
-                ...$guardian->toArray(),
+                ...$attributes,
                 'is_primary' => $this->isPrimaryGuardian($guardians, $index),
             ]);
         }

@@ -36,7 +36,13 @@ final class GuardianAuditLogger
 
     public function handleGuardianLinked(GuardianLinked $event): void
     {
-        $this->logRelationship($event->relationship, 'linked', 'Guardian linked to student', $event->actor);
+        $this->logRelationship(
+            $event->relationship,
+            'linked',
+            'Guardian linked to student',
+            $event->actor,
+            $event->provenancePayload,
+        );
     }
 
     public function handleGuardianUnlinked(GuardianUnlinked $event): void

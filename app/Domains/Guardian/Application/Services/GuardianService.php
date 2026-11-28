@@ -52,11 +52,11 @@ final class GuardianService
     /**
      * @param  array<string, mixed>  $attributes
      */
-    public function link(int $schoolId, array $attributes, ?User $actor = null): StudentGuardianRelationship
+    public function link(int $schoolId, array $attributes): StudentGuardianRelationship
     {
         $data = RelationshipData::fromArray($attributes);
 
-        return $this->linkGuardianAction->execute($data, $actor);
+        return $this->linkGuardianAction->execute($data);
     }
 
     public function unlink(
